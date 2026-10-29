@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Comprehensive IT and Tradelink Services provided by Baadam Info and Tradelink Services.">
-  <title>Baadam Info and Tradelink Services | Services</title>
+  <meta name="description" content="Explore comprehensive digital services provided by Baadam Info and Tradelink Services - Web development, mobile apps, custom software, digital marketing, e-commerce, and game development.">
+  <title>Services &amp; Digital Capabilities | Baadam Info and Tradelink Services</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/baadam-logo.png">
 </head>
 <body>
-  <!-- Header / Navigation -->
+  <!-- Floating Pill Navigation Bar -->
   <header class="site-header">
     <div class="nav-container">
       <a href="index.html" class="logo-link" aria-label="Baadam Home">
-        <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services Logo" class="logo-img">
+        <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="logo-img" width="140" height="38">
       </a>
 
-      <!-- CSS-only mobile menu toggle -->
+      <!-- CSS + JS mobile menu toggle -->
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
       <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
         <span class="hamburger-bar"></span>
@@ -23,84 +24,251 @@
         <span class="hamburger-bar"></span>
       </label>
 
-      <!-- Navigation Menu -->
+      <!-- Navigation Links -->
       <nav class="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
           <li class="nav-item">
             <a href="index.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="portfolio.html" class="nav-link">Portfolio</a>
+            <a href="services.html" class="nav-link active">Services</a>
           </li>
           <li class="nav-item">
-            <a href="services.html" class="nav-link active">Services</a>
+            <a href="portfolio.html" class="nav-link">Portfolio</a>
           </li>
           <li class="nav-item">
             <a href="about.html" class="nav-link">About Us</a>
           </li>
           <li class="nav-item">
-            <a href="contact.html" class="nav-link">Contact Us</a>
+            <a href="contact.html" class="nav-link">Contact</a>
           </li>
         </ul>
         <div class="nav-cta-wrapper">
-          <a href="contact.html" class="btn-talk">Let's Talk</a>
+          <a href="contact.html" class="btn-talk" aria-label="Start a conversation">
+            <span>Let's Talk</span>
+            <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </nav>
     </div>
   </header>
-    <!-- Main Content Container -->
-  <main class="site-main page-main">
-    <!-- Live Animated Technology Atmosphere Backdrop -->
-    <div class="page-bg-decor" aria-hidden="true">
-    </div>
-    <div class="page-container">
-    </div>
+
+  <!-- Main Content -->
+  <main class="site-main">
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="page-hero-container scroll-reveal">
+        <div class="kicker-capsule">
+          <i class="radar-dot" aria-hidden="true"></i>
+          <span>Core Capabilities &amp; Expertise</span>
+        </div>
+        <h1 class="page-title">
+          Engineering &amp; Digital Services<br>
+          <span class="text-brand-red">Engineered to Scale.</span>
+        </h1>
+        <p class="page-lead">
+          We combine robust technical architectures, human-centered UI/UX design, and strategic marketing performance to build digital products that drive measurable business outcomes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Deep-Dive Detailed Blocks -->
+    <section class="section-pad">
+      <div class="section-container">
+        <div class="services-detail-grid">
+          <!-- 01: Website Development -->
+          <article class="service-detail-block scroll-reveal" id="web-dev">
+            <div class="service-block-meta">
+              <span class="service-block-num">01</span>
+              <h2 class="service-block-heading">Website Development</h2>
+              <p class="service-desc">
+                High-performance web applications and corporate digital platforms engineered with modern frontend standards, headless CMS backbones, and responsive modular design systems.
+              </p>
+              <a href="contact.html" class="service-card-link">Request Web Proposal &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Custom Responsive Web Architecture &amp; Clean Code</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> React, Next.js, and Modern Jamstack Frameworks</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Content Management Systems (WordPress, Strapi, Custom)</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Sub-second Load Speeds &amp; 95+ Core Web Vitals</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Enterprise Security, SSL &amp; WCAG Accessibility</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 02: Application Development -->
+          <article class="service-detail-block scroll-reveal" id="app-dev">
+            <div class="service-block-meta">
+              <span class="service-block-num">02</span>
+              <h2 class="service-block-heading">Application Development</h2>
+              <p class="service-desc">
+                Native and cross-platform mobile apps built for seamless cross-device performance on iOS and Android with intuitive gestures, offline caching, and real-time backend synchronization.
+              </p>
+              <a href="contact.html" class="service-card-link">Discuss App Architecture &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Flutter &amp; React Native Cross-Platform Apps</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Native iOS (Swift) &amp; Android (Kotlin) Development</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Push Notifications, Geolocation &amp; Biometric Auth</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> High-Throughput RESTful &amp; WebSocket APIs</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> App Store &amp; Google Play Store Publishing Compliance</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03: Software Development -->
+          <article class="service-detail-block scroll-reveal" id="software-dev">
+            <div class="service-block-meta">
+              <span class="service-block-num">03</span>
+              <h2 class="service-block-heading">Software Engineering</h2>
+              <p class="service-desc">
+                Custom enterprise software systems, automated back-office workflows, ERP solutions, and SaaS products architected for long-term maintainability and high concurrency.
+              </p>
+              <a href="contact.html" class="service-card-link">Consult on Software &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Cloud-Native SaaS Platforms &amp; Multi-Tenant Logic</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> PHP, Laravel, Node.js, and Python Backends</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Relational &amp; NoSQL Database Architecture (PostgreSQL, MySQL, Redis)</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Custom Internal Dashboards &amp; Reporting Engines</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> CI/CD Automated Pipelines &amp; Containerization (Docker)</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 04: Digital Marketing & SEO -->
+          <article class="service-detail-block scroll-reveal" id="marketing-seo">
+            <div class="service-block-meta">
+              <span class="service-block-num">04</span>
+              <h2 class="service-block-heading">Digital Marketing &amp; SEO</h2>
+              <p class="service-desc">
+                Performance marketing campaigns and technical SEO strategies designed to attract qualified commercial demand, increase conversion velocity, and maximize return on ad spend.
+              </p>
+              <a href="contact.html" class="service-card-link">Review Growth Strategy &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Comprehensive Technical SEO &amp; Semantic Keyword Auditing</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Google Search &amp; Display Ads Management</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Social Media Growth &amp; Content Distribution Systems</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Conversion Rate Optimization (CRO) &amp; A/B Split Testing</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Transparent Analytics &amp; Plain-Number Monthly Reporting</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 05: E-Commerce Development -->
+          <article class="service-detail-block scroll-reveal" id="ecommerce">
+            <div class="service-block-meta">
+              <span class="service-block-num">05</span>
+              <h2 class="service-block-heading">E-Commerce Development</h2>
+              <p class="service-desc">
+                Frictionless online retail experiences engineered for transactional scale, frictionless checkout, real-time inventory management, and multi-currency international operations.
+              </p>
+              <a href="contact.html" class="service-card-link">Build Your Store &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Shopify &amp; Shopify Plus Custom Theme &amp; App Development</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> High-Volume WooCommerce &amp; Headless Commerce Setups</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Secure Payment Gateway Integrations (Stripe, Razorpay, PayPal)</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> ERP, CRM &amp; Automated Warehouse Fulfillment Sync</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Cart Abandonment Recovery &amp; Personalized Recommendations</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 06: Game Development -->
+          <article class="service-detail-block scroll-reveal" id="game-dev">
+            <div class="service-block-meta">
+              <span class="service-block-num">06</span>
+              <h2 class="service-block-heading">Game Development</h2>
+              <p class="service-desc">
+                Engaging interactive experiences, browser-based games, and gamified enterprise applications crafted with modern WebGL mechanics, physics engines, and captivating sound design.
+              </p>
+              <a href="contact.html" class="service-card-link">Explore Game Solutions &rarr;</a>
+            </div>
+            <div class="service-block-content">
+              <h3 class="footer-col-title" style="margin-bottom: 16px;">What We Deliver</h3>
+              <ul class="service-deliverables">
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Interactive 2D &amp; 3D HTML5 / WebGL Experiences</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Mobile Casual Games with Cross-Platform Mechanics</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Gamified Marketing Experiences &amp; Brand Activations</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> In-App Purchase Flows &amp; Reward System Integration</li>
+                <li class="service-deliverable-item"><span class="service-check">&check;</span> Multiplayer Server Logic &amp; Real-time Leaderboards</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width Agency CTA Banner -->
+    <section class="section-pad cta-banner-section" aria-labelledby="cta-heading">
+      <div class="section-container">
+        <div class="cta-banner-card scroll-reveal">
+          <div class="cta-banner-content">
+            <div class="cta-banner-text">
+              <div class="kicker-capsule">
+                <span>[ COLLABORATION ]</span>
+              </div>
+              <h2 class="cta-banner-heading" id="cta-heading">
+                Ready to Upgrade Your<br>Digital Infrastructure?
+              </h2>
+              <p class="cta-banner-desc">
+                Share your requirements with our technical team in Ahmedabad and receive a detailed architectural blueprint.
+              </p>
+              <div class="cta-banner-btn-wrap">
+                <a href="contact.html" class="btn-pill btn-primary-pill" aria-label="Start a Project">
+                  <span>Schedule Discovery Call</span>
+                  <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="cta-banner-visual">
+              <div class="cta-image-wrapper">
+                <img src="assets/cta-collaboration.jpg" alt="Technical discovery and planning" class="cta-collab-img" width="460" height="280">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- =====================================================================
-       Site Footer
-       Architectural 3D Red & White Ribbon Frame with 5-Column Navigation
-       ===================================================================== -->
+  <!-- Site Footer -->
   <footer class="site-footer" id="site-footer" role="contentinfo">
-    <!-- Ambient 3D Flowing Red & White Architectural Background Decor -->
-    <div class="footer-bg-decor" aria-hidden="true">
-      <!-- Top-right Dotted Matrix Accent matching reference image -->
-      <svg class="footer-dots footer-dots-right" width="120" height="130" viewBox="0 0 120 130" fill="none" aria-hidden="true">
-        <pattern id="footerDotPatternServices" width="22" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="11" cy="12" r="1.6" fill="#E7192D" fill-opacity="0.22" />
-        </pattern>
-        <rect width="120" height="130" fill="url(#footerDotPatternServices)" />
-      </svg>
-    </div>
-
-    <!-- Main Footer Content (Positioned above ribbon decor) -->
     <div class="footer-container">
       <div class="footer-grid">
-        <!-- Column 1: Brand & Bio -->
         <div class="footer-col footer-col-brand">
-          <a href="index.html" class="footer-logo-link" aria-label="Baadam Home">
-            <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="150" height="42" />
+          <a href="index.html" class="logo-link" aria-label="Baadam Home">
+            <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="140" height="38">
           </a>
           <p class="footer-brand-desc">
-            Turning ideas into impactful digital solutions through strategy, design, and technology.
+            Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.
           </p>
           <div class="footer-social-links" aria-label="Social Media Links">
             <a href="https://linkedin.com" class="footer-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect width="4" height="12" x="2" y="9"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             </a>
             <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
             </a>
-            <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Email Us">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Direct Email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
@@ -108,105 +276,75 @@
           </div>
         </div>
 
-        <!-- Column 2: Quick Links -->
-        <div class="footer-col footer-col-links">
-          <h3 class="footer-col-title">Quick Links</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Navigation</h3>
           <ul class="footer-link-list">
             <li><a href="index.html" class="footer-nav-link">Home</a></li>
-            <li><a href="portfolio.html" class="footer-nav-link">Portfolio</a></li>
-            <li><a href="services.html" class="footer-nav-link">Services</a></li>
-            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
-            <li><a href="contact.html" class="footer-nav-link">Contact Us</a></li>
+            <li><a href="services.html" class="footer-nav-link">Services &amp; Capabilities</a></li>
+            <li><a href="portfolio.html" class="footer-nav-link">Selected Work</a></li>
+            <li><a href="about.html" class="footer-nav-link">About Company</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact Studio</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Our Services -->
-        <div class="footer-col footer-col-services">
-          <h3 class="footer-col-title">Our Services</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Core Services</h3>
           <ul class="footer-link-list">
-            <li><a href="services.html" class="footer-nav-link">Website Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Application Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Software Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
-            <li><a href="services.html" class="footer-nav-link">E-commerce Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Game Development</a></li>
+            <li><a href="services.html#web-dev" class="footer-nav-link">Website Development</a></li>
+            <li><a href="services.html#app-dev" class="footer-nav-link">Application Development</a></li>
+            <li><a href="services.html#software-dev" class="footer-nav-link">Software Engineering</a></li>
+            <li><a href="services.html#marketing-seo" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
+            <li><a href="services.html#ecommerce" class="footer-nav-link">E-Commerce Platforms</a></li>
+            <li><a href="services.html#game-dev" class="footer-nav-link">Game Development</a></li>
           </ul>
         </div>
 
-        <!-- Column 4: Contact Us -->
-        <div class="footer-col footer-col-contact">
-          <h3 class="footer-col-title">Contact Us</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Headquarters</h3>
           <ul class="footer-contact-list">
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                Ahmedabad, Gujarat, India
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Ahmedabad, Gujarat, India</span>
             </li>
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                <a href="mailto:info@baadam.com" class="footer-contact-link">info@baadam.com</a>
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <a href="mailto:info@baadam.com" class="footer-nav-link">info@baadam.com</a>
             </li>
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                Mon &ndash; Sat: 9:30 AM &ndash; 6:30 PM
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 6:30 PM</span>
             </li>
           </ul>
         </div>
-
-        <!-- Column 5: Stay Connected CTA -->
-        <div class="footer-col footer-col-connected">
-          <h3 class="footer-col-title">Let's Stay Connected</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
-          <p class="footer-col-desc">
-            Get the latest insights, updates, and custom technology solutions tailored for your business.
-          </p>
-          <a href="contact.html" class="btn-footer-cta" aria-label="Connect with our team">
-            <span>Get In Touch</span>
-            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
       </div>
-    </div>
 
-    <!-- Full-Width Brand-Red Bottom Bar -->
-    <div class="footer-bottom-bar">
-      <div class="footer-bottom-container">
-        <p class="footer-copyright">
-          &copy; 2026 Baadam. All rights reserved.
-        </p>
-        <ul class="footer-legal-links" aria-label="Legal and Site Links">
-          <li><a href="contact.html" class="footer-legal-link">Privacy Policy</a></li>
-          <li class="legal-sep" aria-hidden="true">|</li>
-          <li><a href="contact.html" class="footer-legal-link">Terms &amp; Conditions</a></li>
-          <li class="legal-sep" aria-hidden="true">|</li>
-          <li><a href="index.html" class="footer-legal-link">Sitemap</a></li>
-        </ul>
+      <div class="footer-bottom-bar">
+        <div class="footer-bottom-container">
+          <p class="footer-copyright">
+            &copy; 2026 Baadam Info and Trade Link Services Pvt. Ltd. All rights reserved.
+          </p>
+          <ul class="footer-legal-links" aria-label="Legal Links">
+            <li><a href="contact.html" class="footer-legal-link">Privacy Policy</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="contact.html" class="footer-legal-link">Terms &amp; Conditions</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="index.html" class="footer-legal-link">Sitemap</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
-  <script src="tech-background.js" defer></script>
+
+  <!-- Interactive Scripts -->
+  <script src="main.js" defer></script>
 </body>
 </html>

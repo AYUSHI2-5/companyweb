@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore the portfolio of work, projects, and achievements delivered by Baadam Info and Tradelink Services.">
-  <title>Baadam Info and Tradelink Services | Portfolio</title>
+  <meta name="description" content="Explore selected case studies and engineering projects delivered by Baadam Info and Tradelink Services across web, mobile, e-commerce, and enterprise software.">
+  <title>Portfolio &amp; Case Studies | Baadam Info and Tradelink Services</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/baadam-logo.png">
 </head>
 <body>
-  <!-- Header / Navigation -->
+  <!-- Floating Pill Navigation Bar -->
   <header class="site-header">
     <div class="nav-container">
       <a href="index.html" class="logo-link" aria-label="Baadam Home">
-        <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services Logo" class="logo-img">
+        <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="logo-img" width="140" height="38">
       </a>
 
-      <!-- CSS-only mobile menu toggle -->
+      <!-- CSS + JS mobile menu toggle -->
       <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
       <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
         <span class="hamburger-bar"></span>
@@ -23,84 +24,237 @@
         <span class="hamburger-bar"></span>
       </label>
 
-      <!-- Navigation Menu -->
+      <!-- Navigation Links -->
       <nav class="nav-menu" aria-label="Main Navigation">
         <ul class="nav-list">
           <li class="nav-item">
             <a href="index.html" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="portfolio.html" class="nav-link active">Portfolio</a>
+            <a href="services.html" class="nav-link">Services</a>
           </li>
           <li class="nav-item">
-            <a href="services.html" class="nav-link">Services</a>
+            <a href="portfolio.html" class="nav-link active">Portfolio</a>
           </li>
           <li class="nav-item">
             <a href="about.html" class="nav-link">About Us</a>
           </li>
           <li class="nav-item">
-            <a href="contact.html" class="nav-link">Contact Us</a>
+            <a href="contact.html" class="nav-link">Contact</a>
           </li>
         </ul>
         <div class="nav-cta-wrapper">
-          <a href="contact.html" class="btn-talk">Let's Talk</a>
+          <a href="contact.html" class="btn-talk" aria-label="Start a conversation">
+            <span>Let's Talk</span>
+            <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </nav>
     </div>
   </header>
-    <!-- Main Content Container -->
-  <main class="site-main page-main">
-    <!-- Live Animated Technology Atmosphere Backdrop -->
-    <div class="page-bg-decor" aria-hidden="true">
-    </div>
-    <div class="page-container">
-    </div>
+
+  <!-- Main Content -->
+  <main class="site-main">
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="page-hero-container scroll-reveal">
+        <div class="kicker-capsule">
+          <i class="radar-dot" aria-hidden="true"></i>
+          <span>Proven Track Record &amp; Impact</span>
+        </div>
+        <h1 class="page-title">
+          Selected Work &amp;<br>
+          <span class="text-brand-red">Digital Case Studies.</span>
+        </h1>
+        <p class="page-lead">
+          A showcase of scalable web platforms, high-performance mobile apps, and enterprise digital solutions engineered by Baadam for growing businesses.
+        </p>
+      </div>
+    </section>
+
+    <!-- Portfolio Filter Bar & Grid -->
+    <section class="section-pad">
+      <div class="section-container">
+        <!-- Interactive Category Filters -->
+        <div class="portfolio-filter-bar scroll-reveal" role="tablist" aria-label="Filter portfolio by category">
+          <button class="portfolio-filter-btn is-active" data-filter="all" type="button" role="tab" aria-selected="true">All Works</button>
+          <button class="portfolio-filter-btn" data-filter="ecommerce" type="button" role="tab" aria-selected="false">E-Commerce</button>
+          <button class="portfolio-filter-btn" data-filter="mobile" type="button" role="tab" aria-selected="false">Mobile Applications</button>
+          <button class="portfolio-filter-btn" data-filter="web" type="button" role="tab" aria-selected="false">Web Engineering</button>
+          <button class="portfolio-filter-btn" data-filter="software" type="button" role="tab" aria-selected="false">Enterprise Software</button>
+        </div>
+
+        <!-- Case Studies 2-Column Grid -->
+        <div class="portfolio-grid">
+          <!-- Case Study 1 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="ecommerce web">
+            <div class="portfolio-card-media">
+              <img src="assets/about-digital-solutions.jpg" alt="Omnichannel Retail E-Commerce Architecture" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">E-Commerce</span>
+                <span class="portfolio-tag">Shopify Plus</span>
+                <span class="portfolio-tag">Custom APIs</span>
+              </div>
+              <h2 class="portfolio-card-title">Omnichannel Retail E-Commerce Ecosystem</h2>
+              <p class="portfolio-card-desc">
+                Engineered a headless commerce storefront with lightning-fast checkout funnels, automated inventory synchronization, and regional multi-currency support, driving a 42% lift in conversion.
+              </p>
+            </div>
+          </article>
+
+          <!-- Case Study 2 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="mobile software">
+            <div class="portfolio-card-media">
+              <img src="assets/hero-office.jpg" alt="Cross-Platform Mobile FinTech Application" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">Mobile App</span>
+                <span class="portfolio-tag">Flutter</span>
+                <span class="portfolio-tag">Biometric Auth</span>
+              </div>
+              <h2 class="portfolio-card-title">Cross-Platform Mobile FinTech Application</h2>
+              <p class="portfolio-card-desc">
+                Developed a bank-grade mobile application featuring real-time transaction tracking, biometric encryption, and offline ledger synchronization across iOS and Android.
+              </p>
+            </div>
+          </article>
+
+          <!-- Case Study 3 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="software web">
+            <div class="portfolio-card-media">
+              <img src="assets/about-office.jpg" alt="Enterprise Logistics & Fleet Telematics Platform" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">Enterprise Software</span>
+                <span class="portfolio-tag">Laravel</span>
+                <span class="portfolio-tag">PostgreSQL</span>
+              </div>
+              <h2 class="portfolio-card-title">Enterprise Logistics &amp; Fleet Telematics Platform</h2>
+              <p class="portfolio-card-desc">
+                Architected a centralized dispatch and automated inventory tracking hub processing over 100,000 daily logistics updates with sub-second response times.
+              </p>
+            </div>
+          </article>
+
+          <!-- Case Study 4 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="web">
+            <div class="portfolio-card-media">
+              <img src="assets/cta-collaboration.jpg" alt="Corporate Brand & Digital Growth Platform" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">Web Engineering</span>
+                <span class="portfolio-tag">Next.js / React</span>
+                <span class="portfolio-tag">Technical SEO</span>
+              </div>
+              <h2 class="portfolio-card-title">Corporate Brand &amp; Digital Growth Platform</h2>
+              <p class="portfolio-card-desc">
+                Redesigned and deployed a responsive corporate hub with dynamic content routing, sub-second TTFB, and structured data schemas, resulting in a 130% organic traffic surge.
+              </p>
+            </div>
+          </article>
+
+          <!-- Case Study 5 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="software ecommerce">
+            <div class="portfolio-card-media">
+              <img src="assets/hero-building.jpg" alt="B2B Wholesale Portal & Order Automation" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">B2B Portal</span>
+                <span class="portfolio-tag">Cloud Backends</span>
+                <span class="portfolio-tag">ERP Sync</span>
+              </div>
+              <h2 class="portfolio-card-title">B2B Wholesale Portal &amp; Order Automation</h2>
+              <p class="portfolio-card-desc">
+                Built a secure client portal supporting volume-tiered wholesale pricing, automated purchase order generation, and real-time ERP accounting synchronization.
+              </p>
+            </div>
+          </article>
+
+          <!-- Case Study 6 -->
+          <article class="portfolio-card portfolio-card-item scroll-reveal" data-category="mobile web">
+            <div class="portfolio-card-media">
+              <img src="assets/about-digital-solutions.jpg" alt="Interactive Gamified Loyalty Web Platform" class="portfolio-card-img" width="580" height="320">
+            </div>
+            <div class="portfolio-card-body">
+              <div class="portfolio-card-tags">
+                <span class="portfolio-tag">Interactive Tech</span>
+                <span class="portfolio-tag">WebGL</span>
+                <span class="portfolio-tag">Game Mechanics</span>
+              </div>
+              <h2 class="portfolio-card-title">Interactive Gamified Customer Loyalty Platform</h2>
+              <p class="portfolio-card-desc">
+                Created interactive 2D web mini-games and reward tracking dashboards that increased user session durations by 3.8x and drove viral brand engagement.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width Agency CTA Banner -->
+    <section class="section-pad cta-banner-section" aria-labelledby="cta-heading">
+      <div class="section-container">
+        <div class="cta-banner-card scroll-reveal">
+          <div class="cta-banner-content">
+            <div class="cta-banner-text">
+              <div class="kicker-capsule">
+                <span>[ NEXT STEPS ]</span>
+              </div>
+              <h2 class="cta-banner-heading" id="cta-heading">
+                Have a Project You'd<br>Like to Build With Us?
+              </h2>
+              <p class="cta-banner-desc">
+                Let's discuss how our technical architecture and execution methodology can bring your next product vision to life.
+              </p>
+              <div class="cta-banner-btn-wrap">
+                <a href="contact.html" class="btn-pill btn-primary-pill" aria-label="Start Consultation">
+                  <span>Start a Consultation</span>
+                  <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="cta-banner-visual">
+              <div class="cta-image-wrapper">
+                <img src="assets/cta-collaboration.jpg" alt="Technical discovery and planning" class="cta-collab-img" width="460" height="280">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- =====================================================================
-       Site Footer
-       Architectural 3D Red & White Ribbon Frame with 5-Column Navigation
-       ===================================================================== -->
+  <!-- Site Footer -->
   <footer class="site-footer" id="site-footer" role="contentinfo">
-    <!-- Ambient 3D Flowing Red & White Architectural Background Decor -->
-    <div class="footer-bg-decor" aria-hidden="true">
-      <!-- Top-right Dotted Matrix Accent matching reference image -->
-      <svg class="footer-dots footer-dots-right" width="120" height="130" viewBox="0 0 120 130" fill="none" aria-hidden="true">
-        <pattern id="footerDotPatternPortfolio" width="22" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="11" cy="12" r="1.6" fill="#E7192D" fill-opacity="0.22" />
-        </pattern>
-        <rect width="120" height="130" fill="url(#footerDotPatternPortfolio)" />
-      </svg>
-    </div>
-
-    <!-- Main Footer Content (Positioned above ribbon decor) -->
     <div class="footer-container">
       <div class="footer-grid">
-        <!-- Column 1: Brand & Bio -->
         <div class="footer-col footer-col-brand">
-          <a href="index.html" class="footer-logo-link" aria-label="Baadam Home">
-            <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="150" height="42" />
+          <a href="index.html" class="logo-link" aria-label="Baadam Home">
+            <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="140" height="38">
           </a>
           <p class="footer-brand-desc">
-            Turning ideas into impactful digital solutions through strategy, design, and technology.
+            Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.
           </p>
           <div class="footer-social-links" aria-label="Social Media Links">
             <a href="https://linkedin.com" class="footer-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect width="4" height="12" x="2" y="9"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             </a>
             <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
             </a>
-            <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Email Us">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Direct Email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
@@ -108,105 +262,75 @@
           </div>
         </div>
 
-        <!-- Column 2: Quick Links -->
-        <div class="footer-col footer-col-links">
-          <h3 class="footer-col-title">Quick Links</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Navigation</h3>
           <ul class="footer-link-list">
             <li><a href="index.html" class="footer-nav-link">Home</a></li>
-            <li><a href="portfolio.html" class="footer-nav-link">Portfolio</a></li>
-            <li><a href="services.html" class="footer-nav-link">Services</a></li>
-            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
-            <li><a href="contact.html" class="footer-nav-link">Contact Us</a></li>
+            <li><a href="services.html" class="footer-nav-link">Services &amp; Capabilities</a></li>
+            <li><a href="portfolio.html" class="footer-nav-link">Selected Work</a></li>
+            <li><a href="about.html" class="footer-nav-link">About Company</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact Studio</a></li>
           </ul>
         </div>
 
-        <!-- Column 3: Our Services -->
-        <div class="footer-col footer-col-services">
-          <h3 class="footer-col-title">Our Services</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Core Services</h3>
           <ul class="footer-link-list">
-            <li><a href="services.html" class="footer-nav-link">Website Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Application Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Software Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
-            <li><a href="services.html" class="footer-nav-link">E-commerce Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Game Development</a></li>
+            <li><a href="services.html#web-dev" class="footer-nav-link">Website Development</a></li>
+            <li><a href="services.html#app-dev" class="footer-nav-link">Application Development</a></li>
+            <li><a href="services.html#software-dev" class="footer-nav-link">Software Engineering</a></li>
+            <li><a href="services.html#marketing-seo" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
+            <li><a href="services.html#ecommerce" class="footer-nav-link">E-Commerce Platforms</a></li>
+            <li><a href="services.html#game-dev" class="footer-nav-link">Game Development</a></li>
           </ul>
         </div>
 
-        <!-- Column 4: Contact Us -->
-        <div class="footer-col footer-col-contact">
-          <h3 class="footer-col-title">Contact Us</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Headquarters</h3>
           <ul class="footer-contact-list">
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                Ahmedabad, Gujarat, India
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Ahmedabad, Gujarat, India</span>
             </li>
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                <a href="mailto:info@baadam.com" class="footer-contact-link">info@baadam.com</a>
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <a href="mailto:info@baadam.com" class="footer-nav-link">info@baadam.com</a>
             </li>
             <li class="footer-contact-item">
-              <div class="footer-contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-              </div>
-              <div class="footer-contact-text">
-                Mon &ndash; Sat: 9:30 AM &ndash; 6:30 PM
-              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 6:30 PM</span>
             </li>
           </ul>
         </div>
-
-        <!-- Column 5: Stay Connected CTA -->
-        <div class="footer-col footer-col-connected">
-          <h3 class="footer-col-title">Let's Stay Connected</h3>
-          <span class="footer-title-dash" aria-hidden="true"></span>
-          <p class="footer-col-desc">
-            Get the latest insights, updates, and custom technology solutions tailored for your business.
-          </p>
-          <a href="contact.html" class="btn-footer-cta" aria-label="Connect with our team">
-            <span>Get In Touch</span>
-            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
       </div>
-    </div>
 
-    <!-- Full-Width Brand-Red Bottom Bar -->
-    <div class="footer-bottom-bar">
-      <div class="footer-bottom-container">
-        <p class="footer-copyright">
-          &copy; 2026 Baadam. All rights reserved.
-        </p>
-        <ul class="footer-legal-links" aria-label="Legal and Site Links">
-          <li><a href="contact.html" class="footer-legal-link">Privacy Policy</a></li>
-          <li class="legal-sep" aria-hidden="true">|</li>
-          <li><a href="contact.html" class="footer-legal-link">Terms &amp; Conditions</a></li>
-          <li class="legal-sep" aria-hidden="true">|</li>
-          <li><a href="index.html" class="footer-legal-link">Sitemap</a></li>
-        </ul>
+      <div class="footer-bottom-bar">
+        <div class="footer-bottom-container">
+          <p class="footer-copyright">
+            &copy; 2026 Baadam Info and Trade Link Services Pvt. Ltd. All rights reserved.
+          </p>
+          <ul class="footer-legal-links" aria-label="Legal Links">
+            <li><a href="contact.html" class="footer-legal-link">Privacy Policy</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="contact.html" class="footer-legal-link">Terms &amp; Conditions</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="index.html" class="footer-legal-link">Sitemap</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </footer>
-  <script src="tech-background.js" defer></script>
+
+  <!-- Interactive Scripts -->
+  <script src="main.js" defer></script>
 </body>
 </html>

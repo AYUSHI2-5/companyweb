@@ -44,9 +44,16 @@
           </li>
         </ul>
         <div class="nav-cta-wrapper">
-          <a href="contact.html" class="btn-talk" aria-label="Start a conversation">
-            <span>Let's Talk</span>
-            <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+          <a href="contact.html" class="btn-talk" aria-label="Book a call">
+            <span>Book a call</span>
+            <span class="nav-arrow-circle" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </span>
           </a>
         </div>
       </nav>
@@ -56,84 +63,105 @@
   <!-- Main Content -->
   <main class="site-main">
     <!-- =====================================================================
-         Hero Section: Interactive Water Ripple Effect & Glowing Circular Lens
+         Hero Section: Interactive Water Ripple Effect & Optical Spotlight Lens
          ===================================================================== -->
     <section class="hero-section" id="hero-section" aria-label="Hero Overview">
       <!-- Real-Time Interactive Water Ripple & Liquid Refraction Canvas -->
       <canvas id="waterRippleCanvas" class="hero-water-canvas" aria-hidden="true"></canvas>
 
-      <!-- Central Glowing Circular Perimeter Lens -->
+      <!-- Central Glowing Circular Spotlight Lens -->
       <div class="hero-lens-container">
         <div class="hero-interactive-wrap">
+
+          <!-- Top Center Availability Pill -->
+          <div class="hero-top-badge" aria-label="Booking status">
+            <span class="badge-dot-pink" aria-hidden="true"></span>
+            <span>Now booking Q4 &middot; 3 spots left</span>
+          </div>
+
+          <!-- Perimeter Concentric Radar Target Indicator -->
+          <div class="circle-radar-target" aria-hidden="true">
+            <div class="radar-target-rings">
+              <span class="target-ring-outer"></span>
+              <span class="target-ring-inner"></span>
+              <span class="target-ring-dot"></span>
+            </div>
+            <span class="target-radar-text">MOVE TO REACH &middot; CLICK TO LAUNCH A CAMPAIGN</span>
+          </div>
+
+          <!-- The Translucent Optical Spotlight Lens -->
           <div class="hero-lens-circle scroll-reveal">
-            <!-- Floating Notification / Feedback Pills around Perimeter -->
-            <div class="float-pill top-left" aria-hidden="true">
-              <span class="float-pill-dot"></span>
-              <span>14k impressions per day</span>
-            </div>
-            <div class="float-pill top-right" aria-hidden="true">
-              <span class="float-pill-dot pink"></span>
-              <span>Rank #1 for target keywords</span>
-            </div>
-            <div class="float-pill bottom-left" aria-hidden="true">
-              <span class="float-pill-dot red"></span>
-              <span>Zero wasted tech debt</span>
-            </div>
-            <div class="float-pill bottom-right" aria-hidden="true">
-              <span class="float-pill-dot"></span>
-              <span>Next day, 1400+ hits</span>
+
+            <!-- Floating Notification Callout Pills Connected to Circle Perimeter -->
+            <div class="float-pill pill-left" aria-hidden="true">
+              <span class="pill-badge-icon pill-heart">&hearts;</span>
+              <span>1.2k likes on one post</span>
+              <span class="circle-ring-anchor"></span>
             </div>
 
-            <!-- Top Kicker Capsule -->
-            <div class="kicker-capsule" style="margin-bottom: 18px;">
-              <i class="radar-dot" aria-hidden="true"></i>
-              <span>Live Session: 01 &mdash; Diverse Capabilities</span>
+            <div class="float-pill pill-top-right" aria-hidden="true">
+              <span class="pill-badge-icon pill-star">&#9733;</span>
+              <span>New 5-star review</span>
+              <span class="circle-ring-anchor"></span>
             </div>
 
-            <!-- Giant Centered Editorial Headline with Highlight Pill -->
+            <div class="float-pill pill-bottom-right" aria-hidden="true">
+              <span class="pill-badge-num">#1</span>
+              <span>"dentist near me"</span>
+              <span class="circle-ring-anchor"></span>
+            </div>
+
+            <!-- Central Editorial Headline with Single-Line Lime Pill -->
             <h1 class="hero-lens-headline">
-              Building digital<br>
-              solutions for the<br>
-              <span class="hero-highlight-pill">growing businesses.</span>
+              Get seen by<br>
+              the <span class="hero-lime-tag">right crowd.</span>
             </h1>
 
             <!-- Subtitle Description -->
             <p class="hero-lens-desc">
-              Baadam is a digital marketing &amp; technology agency. We run SEO, social media, custom software and web platforms that put your brand in front of the people who buy, and we report every result in plain numbers.
+              Reachwise is a digital marketing agency. We run SEO, social media and paid ads that put your brand in front of the people who buy, and we report every result in plain numbers.
             </p>
 
-            <!-- Centered Dual Action Buttons -->
+            <!-- Dual Centered Action Buttons -->
             <div class="hero-lens-actions">
-              <a href="contact.html" class="btn-pill btn-pill-dark" aria-label="Book a strategy call">
+              <a href="contact.html" class="hero-btn-dark" aria-label="Book a strategy call">
                 <span>Book a strategy call</span>
-                <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+                <span class="hero-btn-icon-lime" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </span>
               </a>
-              <a href="portfolio.html" class="btn-pill btn-pill-glass" aria-label="View past client work">
-                <span>Past client work</span>
-                <span style="font-size: 1.1rem; margin-left: 2px;" aria-hidden="true">&nearr;</span>
+              <a href="portfolio.html" class="hero-btn-glass" aria-label="See our work">
+                <span>See our work</span>
+                <span class="hero-btn-icon-glass" aria-hidden="true">&nearr;</span>
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Hero Bottom Stats & Badges Strip -->
+      <!-- Hero Bottom Metrics & Channels Bar -->
       <div class="hero-bottom-strip scroll-reveal">
         <div class="hero-stat-block">
-          <span class="hero-stat-kicker">People Reached for Clients This Month</span>
-          <div class="hero-stat-huge stat-number" data-count="1284300" data-suffix="">1,284,300</div>
+          <span class="hero-stat-kicker"><span class="stat-kicker-dot" aria-hidden="true"></span> PEOPLE REACHED FOR CLIENTS THIS MONTH</span>
+          <div class="hero-stat-huge" data-count="1284300">1,284,300</div>
         </div>
 
         <div class="hero-tags-group">
-          <span class="hero-mini-tag"><span class="float-pill-dot"></span> SEO</span>
-          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Social Media</span>
-          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Paid Ads</span>
-          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Content</span>
+          <a href="services.html" class="hero-channel-pill"><span class="channel-num">01</span> <span>SEO</span></a>
+          <a href="services.html" class="hero-channel-pill"><span class="channel-num">02</span> <span>Social media</span></a>
+          <a href="services.html" class="hero-channel-pill"><span class="channel-num">03</span> <span>Paid ads</span></a>
+          <a href="services.html" class="hero-channel-pill"><span class="channel-num">04</span> <span>Content</span></a>
         </div>
 
         <div class="hero-reviews-block">
-          <div class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 &middot; 122+ Client Reviews</div>
-          <div class="hero-review-label">Ahmedabad &middot; India &middot; Worldwide</div>
+          <div class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="hero-review-score">4.9 &middot; 128 client reviews</div>
+          <div class="hero-review-sub">140+ brands grown</div>
         </div>
       </div>
     </section>

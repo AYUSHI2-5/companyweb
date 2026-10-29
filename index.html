@@ -56,56 +56,122 @@
   <!-- Main Content -->
   <main class="site-main">
     <!-- =====================================================================
-         Hero Section: Bold Oversized Typography & Photographic Workspace
+         Hero Section: Interactive Water Ripple Effect & Glowing Circular Lens
          ===================================================================== -->
-    <section class="hero-section" id="hero-section" aria-label="Introduction">
-      <div class="hero-container">
-        <!-- Left: Text Content -->
-        <div class="hero-content scroll-reveal">
-          <div class="kicker-capsule">
-            <i class="radar-dot" aria-hidden="true"></i>
-            <span>Ahmedabad, India &mdash; Technology Partner</span>
-          </div>
-          <h1 class="hero-headline">
-            Building Digital<br>
-            Solutions for<br>
-            <span class="text-brand-red">Growing Businesses.</span>
-          </h1>
-          <p class="hero-description">
-            Baadam Info and Trade Link Services Pvt. Ltd. is an Ahmedabad-based technology company providing bespoke digital solutions through web development, mobile applications, software engineering, e-commerce, and high-impact digital marketing.
-          </p>
-          <div class="hero-cta-group">
-            <a href="services.html" class="btn-pill btn-primary-pill" aria-label="Discover Our Services">
-              <span>Discover Our Services</span>
-              <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
-            </a>
-            <a href="contact.html" class="btn-pill btn-secondary-pill" aria-label="Contact Our Team">
-              <span>Start Consultation</span>
-            </a>
+    <section class="hero-section" id="hero-section" aria-label="Hero Overview">
+      <!-- Real-Time Interactive Water Ripple & Liquid Refraction Canvas -->
+      <canvas id="waterRippleCanvas" class="hero-water-canvas" aria-hidden="true"></canvas>
+
+      <!-- Central Glowing Circular Perimeter Lens -->
+      <div class="hero-lens-container">
+        <div class="hero-interactive-wrap">
+          <div class="hero-lens-circle scroll-reveal">
+            <!-- Floating Notification / Feedback Pills around Perimeter -->
+            <div class="float-pill top-left" aria-hidden="true">
+              <span class="float-pill-dot"></span>
+              <span>14k impressions per day</span>
+            </div>
+            <div class="float-pill top-right" aria-hidden="true">
+              <span class="float-pill-dot pink"></span>
+              <span>Rank #1 for target keywords</span>
+            </div>
+            <div class="float-pill bottom-left" aria-hidden="true">
+              <span class="float-pill-dot red"></span>
+              <span>Zero wasted tech debt</span>
+            </div>
+            <div class="float-pill bottom-right" aria-hidden="true">
+              <span class="float-pill-dot"></span>
+              <span>Next day, 1400+ hits</span>
+            </div>
+
+            <!-- Top Kicker Capsule -->
+            <div class="kicker-capsule" style="margin-bottom: 18px;">
+              <i class="radar-dot" aria-hidden="true"></i>
+              <span>Live Session: 01 &mdash; Diverse Capabilities</span>
+            </div>
+
+            <!-- Giant Centered Editorial Headline with Highlight Pill -->
+            <h1 class="hero-lens-headline">
+              Building digital<br>
+              solutions for the<br>
+              <span class="hero-highlight-pill">growing businesses.</span>
+            </h1>
+
+            <!-- Subtitle Description -->
+            <p class="hero-lens-desc">
+              Baadam is a digital marketing &amp; technology agency. We run SEO, social media, custom software and web platforms that put your brand in front of the people who buy, and we report every result in plain numbers.
+            </p>
+
+            <!-- Centered Dual Action Buttons -->
+            <div class="hero-lens-actions">
+              <a href="contact.html" class="btn-pill btn-pill-dark" aria-label="Book a strategy call">
+                <span>Book a strategy call</span>
+                <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+              </a>
+              <a href="portfolio.html" class="btn-pill btn-pill-glass" aria-label="View past client work">
+                <span>Past client work</span>
+                <span style="font-size: 1.1rem; margin-left: 2px;" aria-hidden="true">&nearr;</span>
+              </a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Right: Photographic Workspace Visual with Layered Metrics -->
-        <div class="hero-visual scroll-reveal">
-          <div class="hero-visual-card">
-            <img src="assets/hero-office.jpg" alt="Baadam Digital Solutions Modern Workspace" class="hero-visual-img" width="560" height="440" priority="high">
-            <!-- Floating Metric Capsule -->
-            <div class="hero-floating-stat" aria-label="Agency Performance Statistics">
-              <div class="stat-mini-item">
-                <div class="stat-mini-num">50+</div>
-                <div class="stat-mini-label">Projects Delivered</div>
+      <!-- Hero Bottom Stats & Badges Strip -->
+      <div class="hero-bottom-strip scroll-reveal">
+        <div class="hero-stat-block">
+          <span class="hero-stat-kicker">People Reached for Clients This Month</span>
+          <div class="hero-stat-huge stat-number" data-count="1284300" data-suffix="">1,284,300</div>
+        </div>
+
+        <div class="hero-tags-group">
+          <span class="hero-mini-tag"><span class="float-pill-dot"></span> SEO</span>
+          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Social Media</span>
+          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Paid Ads</span>
+          <span class="hero-mini-tag"><span class="float-pill-dot"></span> Content</span>
+        </div>
+
+        <div class="hero-reviews-block">
+          <div class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 &middot; 122+ Client Reviews</div>
+          <div class="hero-review-label">Ahmedabad &middot; India &middot; Worldwide</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         The Next Section: Brand Radar on Chalk Surface (#EEEEE8)
+         ===================================================================== -->
+    <section class="radar-section" id="radar-section" aria-label="Client Radar">
+      <div class="section-container">
+        <div class="radar-grid">
+          <!-- Left: Editorial Content -->
+          <div class="radar-content scroll-reveal">
+            <div class="radar-kicker-badge">
+              <span class="radar-kicker-dot"></span>
+              <span>BRAND RADAR</span>
+            </div>
+            <h2 class="radar-headline">
+              140+ brands<br>
+              <span class="radar-highlight-pill">on our radar.</span>
+            </h2>
+            <p class="radar-subtext">
+              Local clinics, cafés and online shops to national brands. Every one of them came to us to reach reality more of the right people.
+            </p>
+            <div class="radar-meta-row">
+              <div class="radar-rating">
+                <span style="color: #f59e0b; font-size: 0.95rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span style="font-weight: 700;">5.0 &middot; 120+ REVIEWS</span>
               </div>
-              <div class="stat-mini-sep" aria-hidden="true"></div>
-              <div class="stat-mini-item">
-                <div class="stat-mini-num">98%</div>
-                <div class="stat-mini-label">Client Success</div>
-              </div>
-              <div class="stat-mini-sep" aria-hidden="true"></div>
-              <div class="stat-mini-item">
-                <div class="stat-mini-num">5+ Yrs</div>
-                <div class="stat-mini-label">Proven Track Record</div>
+              <div class="radar-update-pill">
+                <i class="radar-dot" style="background: #10b981;"></i>
+                <span>LAST WEEK: NEW LEEDS DENTAL &mdash; +112% INQUIRIES</span>
               </div>
             </div>
+          </div>
+
+          <!-- Right: Interactive Polar Radar Sweeper Graphic -->
+          <div class="radar-visual-wrap scroll-reveal">
+            <canvas id="brandRadarCanvas" class="brand-radar-canvas" aria-label="Interactive Brand Radar graphic"></canvas>
           </div>
         </div>
       </div>
@@ -618,7 +684,7 @@
                 <div class="team-card-content">
                   <h3 class="team-card-name">Neha Shah</h3>
                   <div class="team-card-role">Digital Marketing Specialist</div>
-                  <p class="team-card-desc">Drives customer acquisition through targeted performance marketing and technical SEO.</p>
+                  <p class="team-card-desc">Maximizes client reach through data-backed performance marketing and technical SEO strategies.</p>
                   <div class="team-card-divider"></div>
                   <div class="team-card-socials">
                     <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="team-social-btn" aria-label="LinkedIn Profile">
@@ -731,12 +797,12 @@
         <div class="footer-col">
           <h3 class="footer-col-title">Core Services</h3>
           <ul class="footer-link-list">
-            <li><a href="services.html" class="footer-nav-link">Website Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Application Development</a></li>
-            <li><a href="services.html" class="footer-nav-link">Software Engineering</a></li>
-            <li><a href="services.html" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
-            <li><a href="services.html" class="footer-nav-link">E-Commerce Platforms</a></li>
-            <li><a href="services.html" class="footer-nav-link">Game Development</a></li>
+            <li><a href="services.html">Website Development</a></li>
+            <li><a href="services.html">Application Development</a></li>
+            <li><a href="services.html">Software Engineering</a></li>
+            <li><a href="services.html">Digital Marketing &amp; SEO</a></li>
+            <li><a href="services.html">E-Commerce Platforms</a></li>
+            <li><a href="services.html">Game Development</a></li>
           </ul>
         </div>
 
@@ -788,6 +854,8 @@
   </footer>
 
   <!-- Interactive Scripts -->
+  <script src="water-ripple.js" defer></script>
+  <script src="radar-sweep.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 </html>

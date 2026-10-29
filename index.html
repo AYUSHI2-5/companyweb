@@ -324,123 +324,517 @@
     </section>
 
     <!-- =====================================================================
-         Section 3: What We Do (6-Card Core Services Architecture)
+         Section 3: Services (Reachwise Reference Interactive Accordion)
          ===================================================================== -->
-    <section class="section-pad services-section" id="services-section" aria-labelledby="services-heading">
+    <section class="services-section" id="services-section" aria-labelledby="services-main-heading">
       <div class="section-container">
-        <div class="section-header text-center scroll-reveal">
-          <div class="kicker-capsule">
-            <span>[ 03 / CAPABILITIES ]</span>
+        <!-- Section Header: Split Editorial -->
+        <div class="services-header-split scroll-reveal">
+          <div class="services-header-left">
+            <div class="services-kicker-pill">
+              <span class="services-kicker-dot" aria-hidden="true"></span>
+              <span>(02) Services</span>
+            </div>
+            <h2 class="services-main-title" id="services-main-heading">
+              Six channels.<br>
+              <span class="lime-pill-tag">One</span> growth plan.
+            </h2>
           </div>
-          <h2 class="section-heading" id="services-heading">
-            Custom Solutions for <span class="text-brand-red">Every Business Need</span>
-          </h2>
-          <p class="section-description">
-            Comprehensive digital capabilities tailored to solve complex technical challenges and accelerate commercial success.
-          </p>
+          <div class="services-header-right">
+            <p class="services-subtext">
+              SEO, social, ads, content, web and brand under one retainer, one team and one monthly report.
+            </p>
+            <a href="services.html" class="btn-all-services" aria-label="View all agency services">
+              <span>All services</span>
+              <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+            </a>
+          </div>
         </div>
 
-        <div class="services-grid" role="list">
-          <!-- Card 1: Website Development -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">01</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                  <path d="M2 12h20" />
-                </svg>
+        <!-- Interactive Multi-Color Accordion Stack -->
+        <div class="services-accordion-stack" role="region" aria-label="Services Catalog">
+
+          <!-- Item 01: SEO (Active Card by default) -->
+          <article class="service-acc-item service-acc-white is-active" data-index="1" data-name="SEO">
+            <button class="service-acc-header" type="button" aria-expanded="true" aria-controls="acc-body-1" id="acc-header-1">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">01</span>
+                <h3 class="acc-title">SEO</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">&minus;</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-1" role="region" aria-labelledby="acc-header-1">
+              <div class="acc-body-grid">
+                <!-- Left: Interactive Search Engine Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <svg class="mockup-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    <input class="mockup-search-input" type="text" value="dentist near me" placeholder="dentist near me|" aria-label="Search preview query" readonly>
+                  </div>
+                  <div class="mockup-search-meta">
+                    About 2,140,000 results &middot; 0.42 s
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url"><span class="mockup-res-dot"></span> yoursite.com</span>
+                        <span class="mockup-res-title">Your brand - dentist near me</span>
+                      </div>
+                      <span class="mockup-res-rank">#1</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">citydentalcare.com</span>
+                      <div class="skeleton-bar"></div>
+                      <div class="skeleton-bar short"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">yelp.com &middot; dentists</span>
+                      <div class="skeleton-bar"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">smilecentre.ca</span>
+                      <div class="skeleton-bar"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">healthgrades.com</span>
+                      <div class="skeleton-bar short"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>Position 1 &middot; clicks +212%</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications & Deliverables -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      Technical fixes, content and links that move you up the page for the words your customers type.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Technical audit</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Keyword map</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> 4 articles a month</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Link building</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Monthly ranking report</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; #1 for 212 keywords</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$1,500/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">Website Development</h3>
-            <p class="service-desc">Modern, responsive, ultra-fast web architectures engineered for conversion, security, and search performance.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
 
-          <!-- Card 2: Application Development -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">02</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
-                  <path d="M12 18h.01" />
-                </svg>
+          <!-- Item 02: Social media (Dark Pill) -->
+          <article class="service-acc-item service-acc-dark" data-index="2" data-name="Social media">
+            <button class="service-acc-header" type="button" aria-expanded="false" aria-controls="acc-body-2" id="acc-header-2">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">02</span>
+                <h3 class="acc-title">Social media</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-2" role="region" aria-labelledby="acc-header-2">
+              <div class="acc-body-grid">
+                <!-- Left: Social Growth Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <span class="mockup-res-dot"></span>
+                    <span style="font-weight:700; font-size:0.92rem; color:#0D0E10;">@brand_growth &middot; Live Channels</span>
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight" style="border-color:#24c875;">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url">Active Campaign &middot; Short-Form Video</span>
+                        <span class="mockup-res-title">Viral Product Showcase + Influencer Duet</span>
+                      </div>
+                      <span class="mockup-res-rank" style="background:#24c875; color:#0D0E10;">+340%</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Engagement: 6.4% &middot; Industry Avg: 1.8%</span>
+                      <div class="skeleton-bar" style="width:90%;"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Weekly Impressions Surge</span>
+                      <div class="skeleton-bar" style="width:75%;"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>+140K Organic Reach</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      Thumb-stopping creative assets, strategic distribution, and active community engagement that turn followers into brand advocates.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Content calendar &amp; creative strategy</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Short-form Reels &amp; video production</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Active community management</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Influencer outreach &amp; vetting</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Weekly growth &amp; engagement report</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; 6.4% Engagement</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$1,200/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">Application Development</h3>
-            <p class="service-desc">Native and cross-platform mobile apps built with Flutter and React Native delivering fluid experiences.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
 
-          <!-- Card 3: Software Development -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">03</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 22 12 16 6" />
-                  <polyline points="8 6 2 12 8 18" />
-                </svg>
+          <!-- Item 03: Paid ads (White Pill) -->
+          <article class="service-acc-item service-acc-white" data-index="3" data-name="Paid ads">
+            <button class="service-acc-header" type="button" aria-expanded="false" aria-controls="acc-body-3" id="acc-header-3">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">03</span>
+                <h3 class="acc-title">Paid ads</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-3" role="region" aria-labelledby="acc-header-3">
+              <div class="acc-body-grid">
+                <!-- Left: Paid Ads ROI Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <span class="mockup-res-dot"></span>
+                    <span style="font-weight:700; font-size:0.92rem; color:#0D0E10;">Multi-Channel Ads Manager &middot; Active</span>
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight" style="border-color:#0D0E10;">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url">Google Search &middot; High Intent Funnel</span>
+                        <span class="mockup-res-title">Cost Per Acquisition: $18.40 (-42%)</span>
+                      </div>
+                      <span class="mockup-res-rank">4.8x ROAS</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Meta Retargeting Funnel &middot; 3.9x ROAS</span>
+                      <div class="skeleton-bar" style="width:80%;"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">LinkedIn Enterprise Lead Gen</span>
+                      <div class="skeleton-bar" style="width:65%;"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>4.8x Average ROAS</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      High-intent Google search, YouTube, Meta, and LinkedIn campaigns engineered for profitable customer acquisition.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Multi-channel campaign architecture</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> High-converting ad copy &amp; creative assets</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Real-time bid &amp; budget optimization</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Custom retargeting funnels</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Full conversion attribution setup</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; 4.8x ROAS</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$2,000/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">Software Development</h3>
-            <p class="service-desc">Custom enterprise platforms, ERP systems, internal tools, and microservice APIs designed for scale.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
 
-          <!-- Card 4: Digital Marketing & SEO -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">04</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="m3 11 18-5v12L3 14v-3z" />
-                  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
-                </svg>
+          <!-- Item 04: Content (Lime Pill) -->
+          <article class="service-acc-item service-acc-lime" data-index="4" data-name="Content">
+            <button class="service-acc-header" type="button" aria-expanded="false" aria-controls="acc-body-4" id="acc-header-4">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">04</span>
+                <h3 class="acc-title">Content</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-4" role="region" aria-labelledby="acc-header-4">
+              <div class="acc-body-grid">
+                <!-- Left: Content Engine Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <span class="mockup-res-dot"></span>
+                    <span style="font-weight:700; font-size:0.92rem; color:#0D0E10;">Editorial Studio &middot; Published</span>
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight" style="border-color:#D4FF3A;">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url">Thought Leadership &middot; In-Depth Whitepaper</span>
+                        <span class="mockup-res-title">The Modern Enterprise Tech Stack Guide</span>
+                      </div>
+                      <span class="mockup-res-rank">98 Score</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Organic Backlinks: +840 &middot; Avg Read Time: 6m</span>
+                      <div class="skeleton-bar" style="width:85%;"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">High-Converting Landing Copy</span>
+                      <div class="skeleton-bar" style="width:60%;"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>10x More Traffic</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      Authoritative thought leadership, keyword-driven articles, and persuasive sales copy that ranks, educates, and converts.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Editorial roadmap &amp; topic clustering</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Long-form research articles</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Lead-generating whitepapers &amp; guides</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Conversion copywriting &amp; email newsletters</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Content syndication &amp; backlink outreach</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; 10x Organic Traffic</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$1,400/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">Digital Marketing &amp; SEO</h3>
-            <p class="service-desc">Data-driven search engine optimization, paid advertising campaigns, and ROI-focused digital marketing.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
 
-          <!-- Card 5: E-Commerce Solutions -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">05</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="8" cy="21" r="1" />
-                  <circle cx="19" cy="21" r="1" />
-                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                </svg>
+          <!-- Item 05: Web design (Dark Pill) -->
+          <article class="service-acc-item service-acc-dark" data-index="5" data-name="Web design">
+            <button class="service-acc-header" type="button" aria-expanded="false" aria-controls="acc-body-5" id="acc-header-5">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">05</span>
+                <h3 class="acc-title">Web design</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-5" role="region" aria-labelledby="acc-header-5">
+              <div class="acc-body-grid">
+                <!-- Left: Web Design Viewport Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <span class="mockup-res-dot"></span>
+                    <span style="font-weight:700; font-size:0.92rem; color:#0D0E10;">Interactive Web Architecture &middot; 60 FPS</span>
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight" style="border-color:#24c875;">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url">Performance &middot; Google Lighthouse 99</span>
+                        <span class="mockup-res-title">Zero CLS &middot; Sub-Second LCP Load Speed</span>
+                      </div>
+                      <span class="mockup-res-rank" style="background:#24c875; color:#0D0E10;">99/100</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Fluid Responsive Canvas &middot; Mobile First</span>
+                      <div class="skeleton-bar" style="width:85%;"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Dynamic Interaction Physics Engine</span>
+                      <div class="skeleton-bar" style="width:65%;"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>99/100 Web Vitals</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      Bespoke digital experiences built on ultra-fast modern web standards, precision typography, and intuitive user journeys.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Bespoke UI/UX Figma design system</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> High-speed responsive frontend development</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Headless CMS &amp; modern API integration</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Smooth micro-interactions &amp; fluid scroll</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Enterprise security &amp; SSL hardening</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; 99+ Speed Score</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$2,500/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">E-Commerce Development</h3>
-            <p class="service-desc">Scalable storefronts powered by Shopify, WooCommerce, and custom headless commerce frameworks.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
 
-          <!-- Card 6: Game Development -->
-          <article class="service-card scroll-reveal" role="listitem">
-            <div class="service-card-top">
-              <span class="service-index">06</span>
-              <div class="service-icon-badge" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="6" x2="10" y1="12" y2="12" />
-                  <line x1="8" x2="8" y1="10" y2="14" />
-                  <line x1="15" x2="15.01" y1="13" y2="13" />
-                  <line x1="18" x2="18.01" y1="11" y2="11" />
-                  <rect width="20" height="12" x="2" y="6" rx="2" />
-                </svg>
+          <!-- Item 06: Branding (Light Grey Pill) -->
+          <article class="service-acc-item service-acc-light" data-index="6" data-name="Branding">
+            <button class="service-acc-header" type="button" aria-expanded="false" aria-controls="acc-body-6" id="acc-header-6">
+              <div class="acc-header-left">
+                <span class="acc-badge-index">06</span>
+                <h3 class="acc-title">Branding</h3>
+              </div>
+              <span class="acc-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="service-acc-body" id="acc-body-6" role="region" aria-labelledby="acc-header-6">
+              <div class="acc-body-grid">
+                <!-- Left: Brand Kit Mockup -->
+                <div class="mockup-viewport-card">
+                  <div class="mockup-search-bar">
+                    <span class="mockup-res-dot"></span>
+                    <span style="font-weight:700; font-size:0.92rem; color:#0D0E10;">Brand Identity &middot; Design Tokens</span>
+                  </div>
+                  <div class="mockup-results-stack">
+                    <div class="mockup-result-highlight" style="border-color:#DFE0D7;">
+                      <div class="mockup-res-info">
+                        <span class="mockup-res-url">Vector Identity &middot; Master Files</span>
+                        <span class="mockup-res-title">Primary Logo, Monogram &amp; App Icon Suite</span>
+                      </div>
+                      <span class="mockup-res-rank">100% Bespoke</span>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Curated Palette &middot; Precision Typography</span>
+                      <div class="skeleton-bar" style="width:75%;"></div>
+                    </div>
+                    <div class="mockup-result-skeleton">
+                      <span class="skeleton-url">Comprehensive Brand Guidelines Book</span>
+                      <div class="skeleton-bar" style="width:55%;"></div>
+                    </div>
+                  </div>
+                  <div class="mockup-floating-badge">
+                    <span class="badge-dot-green" aria-hidden="true"></span>
+                    <span>100% Bespoke Identity</span>
+                    <span class="badge-dot-red" aria-hidden="true"></span>
+                  </div>
+                </div>
+
+                <!-- Right: Specifications -->
+                <div class="service-details-col">
+                  <div>
+                    <p class="service-pitch-text">
+                      Distinct visual identity, brand positioning, design systems, and guidelines that set your business apart in crowded markets.
+                    </p>
+                    <div class="deliverables-block">
+                      <div class="deliverables-label">WHAT'S INCLUDED</div>
+                      <ul class="deliverables-list">
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Logo marks &amp; responsive vector assets</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Typography &amp; curated color systems</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Comprehensive brand guidelines book</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Pitch deck &amp; corporate stationery</li>
+                        <li class="deliverables-item"><span class="deliverable-check" aria-hidden="true">&#10003;</span> Digital &amp; print production assets</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="service-footer-row">
+                    <span class="service-metric-tag">&#9733; Complete Brand Kit</span>
+                    <div class="service-price-wrap">
+                      <span class="price-sublabel">FROM</span>
+                      <span class="price-value">$1,800/mo</span>
+                    </div>
+                    <a href="services.html" class="btn-explore-service">
+                      <span>Explore</span>
+                      <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-            <h3 class="service-title">Game Development</h3>
-            <p class="service-desc">Immersive interactive 2D and 3D web games, casual game architectures, and gamified digital mechanics.</p>
-            <a href="services.html" class="service-card-link">Explore Capability &rarr;</a>
           </article>
+
+        </div>
+
+        <!-- Bottom Stepper Progress Indicator -->
+        <div class="services-stepper-bar">
+          <div class="acc-stepper-tracks" aria-label="Services Progress">
+            <div class="acc-stepper-segment is-active" data-step="1"></div>
+            <div class="acc-stepper-segment" data-step="2"></div>
+            <div class="acc-stepper-segment" data-step="3"></div>
+            <div class="acc-stepper-segment" data-step="4"></div>
+            <div class="acc-stepper-segment" data-step="5"></div>
+            <div class="acc-stepper-segment" data-step="6"></div>
+          </div>
+          <div class="acc-stepper-counter">
+            <span class="stepper-badge">01 / 06</span>
+            <span class="stepper-name">SEO</span>
+          </div>
         </div>
       </div>
     </section>
@@ -856,6 +1250,7 @@
   <!-- Interactive Scripts -->
   <script src="water-ripple.js" defer></script>
   <script src="radar-sweep.js" defer></script>
+  <script src="services-accordion.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 </html>

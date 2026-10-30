@@ -568,8 +568,8 @@ button {
   width: clamp(340px, 58vw, 720px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  border: 2px solid #D4FF3A;
-  box-shadow: 0 0 35px rgba(212, 255, 58, 0.4), inset 0 0 30px rgba(212, 255, 58, 0.15);
+  border: 2px solid #E7192D;
+  box-shadow: 0 0 35px rgba(231, 25, 45, 0.45), inset 0 0 30px rgba(231, 25, 45, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -577,13 +577,13 @@ button {
   padding: 40px 32px;
   margin: 12px 0 20px;
   /* Translucent Optical Spotlight: illuminates the crowd underneath without blocking it */
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.14) 0%, rgba(212, 255, 58, 0.05) 55%, rgba(0, 0, 0, 0.28) 100%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.16) 0%, rgba(231, 25, 45, 0.08) 55%, rgba(0, 0, 0, 0.32) 100%);
   transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .hero-lens-circle:hover {
-  border-color: #e5ff70;
-  box-shadow: 0 0 50px rgba(212, 255, 58, 0.55), inset 0 0 35px rgba(212, 255, 58, 0.22);
+  border-color: #ff3b4e;
+  box-shadow: 0 0 50px rgba(231, 25, 45, 0.6), inset 0 0 35px rgba(231, 25, 45, 0.28);
 }
 
 /* Perimeter Radar Target Badge (Top-Right of Circle) */
@@ -610,16 +610,16 @@ button {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1.5px solid #D4FF3A;
-  opacity: 0.8;
+  border: 1.5px solid #E7192D;
+  opacity: 0.9;
 }
 
 .target-ring-inner {
   position: absolute;
   inset: 5px;
   border-radius: 50%;
-  border: 1px dashed #D4FF3A;
-  opacity: 0.9;
+  border: 1px dashed #E7192D;
+  opacity: 0.95;
   animation: spinSlow 12s linear infinite;
 }
 
@@ -627,8 +627,8 @@ button {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #D4FF3A;
-  box-shadow: 0 0 8px #D4FF3A;
+  background: #E7192D;
+  box-shadow: 0 0 8px #E7192D;
 }
 
 @keyframes spinSlow {
@@ -703,8 +703,8 @@ button {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   display: grid;
   place-items: center;
   font-size: 0.85rem;
@@ -712,8 +712,8 @@ button {
 }
 
 .pill-badge-num {
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 800;
@@ -922,8 +922,8 @@ button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #D4FF3A;
-  box-shadow: 0 0 6px #D4FF3A;
+  background: #E7192D;
+  box-shadow: 0 0 8px #E7192D;
 }
 
 .hero-stat-huge {
@@ -962,12 +962,12 @@ button {
 
 .hero-channel-pill:hover {
   background: #0D0E10;
-  border-color: #D4FF3A;
+  border-color: #E7192D;
   transform: translateY(-2px);
 }
 
 .hero-channel-pill .channel-num {
-  color: #D4FF3A;
+  color: #E7192D;
   font-weight: 800;
 }
 
@@ -1075,13 +1075,13 @@ button {
 
 .radar-highlight-pill {
   display: inline-block;
-  background: #d4ff3a;
-  color: #0d0e10;
+  background: #E7192D;
+  color: #FFFFFF;
   padding: 0 16px 4px;
   border-radius: 9999px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  box-shadow: 0 4px 16px rgba(212, 255, 58, 0.35);
+  box-shadow: 0 4px 16px rgba(231, 25, 45, 0.35);
 }
 
 .radar-subtext {
@@ -1429,8 +1429,8 @@ button {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #D4FF3A;
-  box-shadow: 0 0 6px rgba(212, 255, 58, 0.8);
+  background: #E7192D;
+  box-shadow: 0 0 8px rgba(231, 25, 45, 0.8);
   display: inline-block;
 }
 
@@ -1505,8 +1505,8 @@ button {
 }
 
 .btn-all-services:hover .btn-arrow-circle {
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
 }
 
 /* Accordion Stack Container */
@@ -1806,13 +1806,13 @@ button {
 /* Highlighted Result #1 */
 .mockup-result-highlight {
   background: #FCFCFA;
-  border: 2px solid #D4FF3A;
+  border: 2px solid #E7192D;
   border-radius: 14px;
   padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 14px rgba(212, 255, 58, 0.2);
+  box-shadow: 0 4px 14px rgba(231, 25, 45, 0.2);
 }
 
 .mockup-res-info {
@@ -1845,8 +1845,8 @@ button {
 }
 
 .mockup-res-rank {
-  background: #0D0E10;
-  color: #D4FF3A;
+  background: #E7192D;
+  color: #FFFFFF;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1972,8 +1972,8 @@ button {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   display: grid;
   place-items: center;
   font-size: 0.72rem;
@@ -1993,14 +1993,14 @@ button {
 }
 
 .service-metric-tag {
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 2px 6px rgba(212, 255, 58, 0.3);
+  box-shadow: 0 2px 8px rgba(231, 25, 45, 0.35);
 }
 
 .service-price-wrap {
@@ -2046,8 +2046,8 @@ button {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   display: grid;
   place-items: center;
   font-size: 0.85rem;
@@ -2099,8 +2099,8 @@ button {
 }
 
 .acc-stepper-counter .stepper-badge {
-  background: #D4FF3A;
-  color: #0D0E10;
+  background: #E7192D;
+  color: #FFFFFF;
   padding: 3px 10px;
   border-radius: var(--radius-pill);
   font-weight: 800;

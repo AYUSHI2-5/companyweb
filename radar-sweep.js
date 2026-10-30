@@ -90,11 +90,11 @@
         ctx.arc(cx, cy, maxR, currentAngle - sweepArc, currentAngle, false);
         ctx.closePath();
 
-        // Lime-tinted luminous gradient matching Reachwise styling
+        // Red luminous gradient matching Baadam brand identity
         var grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, maxR);
-        grad.addColorStop(0, 'rgba(212, 255, 58, 0.45)');
-        grad.addColorStop(0.7, 'rgba(212, 255, 58, 0.22)');
-        grad.addColorStop(1, 'rgba(212, 255, 58, 0.02)');
+        grad.addColorStop(0, 'rgba(231, 25, 45, 0.45)');
+        grad.addColorStop(0.7, 'rgba(231, 25, 45, 0.22)');
+        grad.addColorStop(1, 'rgba(231, 25, 45, 0.02)');
         ctx.fillStyle = grad;
         ctx.fill();
 
@@ -102,7 +102,7 @@
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx + Math.cos(currentAngle) * maxR, cy + Math.sin(currentAngle) * maxR);
-        ctx.strokeStyle = 'rgba(212, 255, 58, 0.9)';
+        ctx.strokeStyle = 'rgba(231, 25, 45, 0.9)';
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.restore();

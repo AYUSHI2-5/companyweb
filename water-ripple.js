@@ -116,24 +116,24 @@
 
           var ringAlpha = alpha * (1 - (ring * 0.28));
 
-          // Outer shadow refraction line
+          // Outer subtle red refraction line
           ctx.beginPath();
           ctx.arc(r.x, r.y, ringRadius, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(0, 0, 0, ' + (ringAlpha * 0.6) + ')';
-          ctx.lineWidth = 4.5;
+          ctx.strokeStyle = 'rgba(231, 25, 45, ' + (ringAlpha * 0.4) + ')';
+          ctx.lineWidth = 3.5;
           ctx.stroke();
 
-          // Luminous specular caustic wave crest line
+          // Luminous specular white wave crest line
           ctx.beginPath();
           ctx.arc(r.x, r.y, Math.max(0.1, ringRadius - 1.5), 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(235, 245, 255, ' + (ringAlpha * 0.95) + ')';
+          ctx.strokeStyle = 'rgba(255, 255, 255, ' + (ringAlpha * 0.95) + ')';
           ctx.lineWidth = 2.0;
           ctx.stroke();
 
-          // Subtle caustic light halo
+          // Subtle red caustic halo
           ctx.beginPath();
           ctx.arc(r.x, r.y, ringRadius + 2, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(212, 255, 58, ' + (ringAlpha * 0.35) + ')';
+          ctx.strokeStyle = 'rgba(231, 25, 45, ' + (ringAlpha * 0.25) + ')';
           ctx.lineWidth = 1.2;
           ctx.stroke();
         }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    background: #f8fafc;
+    margin: 40px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .preview-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid rgba(231,25,45,0.15);
+  }
+  
+  /* Stick & Arm animation styles */
+  .teacher-arm {
+    transform-origin: 38px 90px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  /* Idle gentle breathing / slight stick sway */
+  @keyframes stickIdle {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-3deg); }
+  }
+  .teacher-arm.is-idle {
+    animation: stickIdle 3.5s ease-in-out infinite;
+  }
+
+  /* Pointing Downward Gesture */
+  @keyframes stickPointDown {
+    0% { transform: rotate(0deg); }
+    30% { transform: rotate(-15deg); } /* Wind up slightly */
+    65% { transform: rotate(38deg); }  /* Decisive point downward */
+    85% { transform: rotate(34deg); }  /* Soft settle */
+    100% { transform: rotate(0deg); }  /* Return to rest */
+  }
+  .teacher-arm.is-pointing {
+    animation: stickPointDown 1.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+
+  /* Spark effect from stick tip */
+  .stick-sparkle {
+    opacity: 0;
+    transform-origin: 108px 65px;
+  }
+  @keyframes sparkPulse {
+    0% { transform: scale(0.2); opacity: 0; }
+    45% { transform: scale(1.6); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .is-pointing .stick-sparkle {
+    animation: sparkPulse 0.9s ease-out 0.4s forwards;
+  }
+
+  /* Blinking animation */
+  @keyframes eyeBlink {
+    0%, 94%, 98%, 100% { transform: scaleY(1); }
+    96% { transform: scaleY(0.1); }
+  }
+  .teacher-eyes {
+    transform-origin: 60px 48px;
+    animation: eyeBlink 4.2s infinite;
+  }
+</style>
+</head>
+<body>
+<div class="preview-card">
+  <h3>Teacher Avatar Preview</h3>
+  <svg width="150" height="180" viewBox="0 0 150 180" fill="none" xmlns="http://www.w3.org/2000/svg" id="teacherSvg">
+    <defs>
+      <linearGradient id="blazerRed" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FF2E44"/>
+        <stop offset="100%" stop-color="#C81023"/>
+      </linearGradient>
+      <filter id="glowRed" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+      </filter>
+    </defs>
+
+    <!-- Ground shadow -->
+    <ellipse cx="65" cy="172" rx="42" ry="7" fill="rgba(231,25,45,0.12)" />
+
+    <!-- Torso / Dress -->
+    <g class="teacher-torso">
+      <!-- White blouse -->
+      <path d="M46 95 L65 115 L84 95 L80 145 L50 145 Z" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+      <path d="M65 102 L65 138" stroke="#E7192D" stroke-width="2" stroke-linecap="round"/>
+      
+      <!-- Red Teacher Blazer -->
+      <path d="M38 95 C38 85 48 80 65 80 C82 80 92 85 92 95 L95 158 C95 163 90 166 84 166 L46 166 C40 166 35 163 35 158 Z" fill="url(#blazerRed)"/>
+      <!-- Blazer lapels (white accent) -->
+      <path d="M48 82 L65 116 L54 135 L40 102 Z" fill="#FFFFFF"/>
+      <path d="M82 82 L65 116 L76 135 L90 102 Z" fill="#FFFFFF"/>
+      <!-- Gold/White Buttons -->
+      <circle cx="65" cy="126" r="2.5" fill="#FFFFFF"/>
+      <circle cx="65" cy="142" r="2.5" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Left Arm holding Baadam presentation clipboard -->
+    <g class="teacher-left-arm">
+      <!-- Left sleeve -->
+      <path d="M90 92 Q105 108 98 126" stroke="#C81023" stroke-width="11" stroke-linecap="round"/>
+      <!-- Clipboard / Tablet (Red & White) -->
+      <rect x="92" y="115" width="22" height="30" rx="3" fill="#FFFFFF" stroke="#E7192D" stroke-width="2"/>
+      <rect x="96" y="121" width="14" height="2" rx="1" fill="#E7192D"/>
+      <rect x="96" y="126" width="10" height="2" rx="1" fill="#E7192D" opacity="0.6"/>
+      <rect x="96" y="131" width="12" height="2" rx="1" fill="#E7192D" opacity="0.4"/>
+      <!-- Left Hand -->
+      <circle cx="95" cy="128" r="4.5" fill="#FDDEC3"/>
+    </g>
+
+    <!-- Head & Hair -->
+    <g class="teacher-head">
+      <!-- Neck -->
+      <path d="M58 72 L72 72 L70 85 L60 85 Z" fill="#FDDEC3"/>
+      <!-- Chic Hair Back (Bun) -->
+      <circle cx="65" cy="32" r="14" fill="#241B19"/>
+      <!-- Face -->
+      <ellipse cx="65" cy="54" rx="18" ry="20" fill="#FDDEC3"/>
+      
+      <!-- Cute stylish hair bangs -->
+      <path d="M47 48 C48 34 56 28 65 28 C74 28 82 34 83 48 C78 40 70 38 65 42 C60 38 52 40 47 48 Z" fill="#241B19"/>
+      <!-- Soft Red Earring Studs -->
+      <circle cx="47" cy="56" r="2.5" fill="#E7192D"/>
+      <circle cx="83" cy="56" r="2.5" fill="#E7192D"/>
+
+      <!-- Blushing Cheeks -->
+      <ellipse cx="54" cy="59" rx="3.5" ry="2" fill="#E7192D" opacity="0.25"/>
+      <ellipse cx="76" cy="59" rx="3.5" ry="2" fill="#E7192D" opacity="0.25"/>
+
+      <!-- Friendly Smile -->
+      <path d="M60 63 Q65 67 70 63" stroke="#C81023" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+      <!-- Eyes & Eyebrows -->
+      <g class="teacher-eyes">
+        <ellipse cx="56" cy="51" rx="2.2" ry="2.5" fill="#241B19"/>
+        <ellipse cx="74" cy="51" rx="2.2" ry="2.5" fill="#241B19"/>
+        <!-- Eye highlights -->
+        <circle cx="55.2" cy="50.2" r="0.8" fill="#FFFFFF"/>
+        <circle cx="73.2" cy="50.2" r="0.8" fill="#FFFFFF"/>
+      </g>
+      <path d="M53 45 Q56 43 59 45" stroke="#241B19" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M71 45 Q74 43 77 45" stroke="#241B19" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+      <!-- Red Teacher Glasses -->
+      <rect x="50" y="46" width="12" height="10" rx="3" fill="none" stroke="#E7192D" stroke-width="1.8"/>
+      <rect x="68" y="46" width="12" height="10" rx="3" fill="none" stroke="#E7192D" stroke-width="1.8"/>
+      <!-- Bridge -->
+      <path d="M62 50 L68 50" stroke="#E7192D" stroke-width="1.8"/>
+      <!-- Temples -->
+      <path d="M50 49 L46 47" stroke="#E7192D" stroke-width="1.4"/>
+      <path d="M80 49 L84 47" stroke="#E7192D" stroke-width="1.4"/>
+    </g>
+
+    <!-- Animated Right Arm holding the Teacher Pointer Stick -->
+    <g class="teacher-arm is-idle" id="teacherArmGroup">
+      <!-- Right Sleeve (Red Blazer) -->
+      <path d="M40 92 Q26 106 34 122" stroke="#C81023" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="34" cy="122" r="4.5" fill="#FFFFFF"/> <!-- White cuff -->
+      
+      <!-- Right Hand holding pointer stick -->
+      <circle cx="33" cy="124" r="5" fill="#FDDEC3"/>
+
+      <!-- The Teacher's Pointer Stick / Wand -->
+      <!-- Grip / Handle -->
+      <path d="M30 133 L35 119" stroke="#E7192D" stroke-width="4.5" stroke-linecap="round"/>
+      <!-- Shaft (Sleek White & Chrome with red ring) -->
+      <path d="M35 119 L98 62" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <path d="M35 119 L98 62" stroke="#E7192D" stroke-width="1.2" stroke-dasharray="8 4"/>
+      <!-- Pointer Tip: Glowing Baadam Red Sphere & Arrow/Star -->
+      <circle cx="102" cy="58" r="6" fill="#E7192D" filter="url(#glowRed)"/>
+      <circle cx="102" cy="58" r="3.5" fill="#FFFFFF"/>
+      
+      <!-- Pulse Rings / Sparkle emitted when pointing -->
+      <g class="stick-sparkle">
+        <circle cx="102" cy="58" r="10" stroke="#E7192D" stroke-width="2" fill="none" opacity="0.8"/>
+        <path d="M102 46 L102 70 M90 58 L114 58" stroke="#E7192D" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
+
+  <div style="margin-top: 15px;">
+    <button onclick="triggerPoint()">Test Pointing Animation</button>
+  </div>
+</div>
+
+<script>
+  function triggerPoint() {
+    const arm = document.getElementById('teacherArmGroup');
+    arm.classList.remove('is-idle');
+    arm.classList.remove('is-pointing');
+    void arm.offsetWidth; // force reflow
+    arm.classList.add('is-pointing');
+    setTimeout(() => {
+      arm.classList.remove('is-pointing');
+      arm.classList.add('is-idle');
+    }, 1400);
+  }
+</script>
+</body>
+</html>
+

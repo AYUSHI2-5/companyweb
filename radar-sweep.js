@@ -23,19 +23,19 @@
     var currentAngle = 0;
     var sweepSpeed = isReduced ? 0 : 0.022; // radians per frame
 
-    // Client and technology blips positioned at (distance: 0-1, angle: radians, label, category, color)
+    // Balanced 6-sector distribution with safe radial placement to guarantee zero label collisions
     var targets = [
-      { r: 0.72, angle: 0.65, label: 'Single Origin', cat: 'Retail Brand', color: '#E7192D', ping: 0 },
-      { r: 0.45, angle: 1.15, label: 'E-commerce platform', cat: 'Shopify Plus', color: '#10B981', ping: 0 },
-      { r: 0.82, angle: 2.85, label: 'FinTech Mobile App', cat: 'Flutter & Cloud', color: '#E7192D', ping: 0 },
-      { r: 0.60, angle: 3.85, label: 'Enterprise ERP', cat: 'Custom SaaS', color: '#3B82F6', ping: 0 },
-      { r: 0.88, angle: 4.60, label: 'Global Logistics Hub', cat: 'Laravel Platform', color: '#F59E0B', ping: 0 },
-      { r: 0.35, angle: 5.40, label: 'Healthcare Network', cat: 'Web Architecture', color: '#8B5CF6', ping: 0 }
+      { r: 0.62, angle: 5.45, label: 'Website Development', align: 'top', color: '#E7192D', ping: 0 },
+      { r: 0.58, angle: 0.40, label: 'E-Commerce Development', align: 'bottom', color: '#E7192D', ping: 0 },
+      { r: 0.68, angle: 1.65, label: 'Game Development', align: 'bottom', color: '#E7192D', ping: 0 },
+      { r: 0.60, angle: 2.70, label: 'Software Development', align: 'bottom', color: '#E7192D', ping: 0 },
+      { r: 0.65, angle: 3.75, label: 'Digital Marketing', align: 'top', color: '#E7192D', ping: 0 },
+      { r: 0.62, angle: 4.80, label: 'Application Development', align: 'top', color: '#E7192D', ping: 0 }
     ];
 
     function resize() {
       var rect = canvas.getBoundingClientRect();
-      size = Math.min(rect.width || 520, 560);
+      size = Math.round(rect.width || 580);
       canvas.width = size * dpr;
       canvas.height = size * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -44,7 +44,7 @@
     function draw() {
       var cx = size / 2;
       var cy = size / 2;
-      var maxR = (size / 2) - 34;
+      var maxR = (size / 2) - 40;
 
       ctx.clearRect(0, 0, size, size);
 
@@ -54,7 +54,7 @@
         var r = maxR * ringRatio;
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.strokeStyle = ringRatio === 1.0 ? 'rgba(0, 0, 0, 0.22)' : 'rgba(0, 0, 0, 0.1)';
+        ctx.strokeStyle = ringRatio === 1.0 ? 'rgba(231, 25, 45, 0.35)' : 'rgba(231, 25, 45, 0.16)';
         ctx.lineWidth = ringRatio === 1.0 ? 1.5 : 1;
         ctx.stroke();
       });
@@ -65,13 +65,13 @@
       ctx.lineTo(cx + maxR + 12, cy);
       ctx.moveTo(cx, cy - maxR - 12);
       ctx.lineTo(cx, cy + maxR + 12);
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.12)';
+      ctx.strokeStyle = 'rgba(231, 25, 45, 0.2)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
       // Degree labels
       ctx.font = '10px "Geist Mono", monospace';
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+      ctx.fillStyle = '#E7192D';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('0°', cx + maxR + 24, cy);
@@ -111,11 +111,11 @@
       // Center Hub
       ctx.beginPath();
       ctx.arc(cx, cy, 6, 0, Math.PI * 2);
-      ctx.fillStyle = '#0D0E10';
+      ctx.fillStyle = '#E7192D';
       ctx.fill();
       ctx.beginPath();
       ctx.arc(cx, cy, 14, 0, Math.PI * 2);
-      ctx.strokeStyle = '#0D0E10';
+      ctx.strokeStyle = 'rgba(231, 25, 45, 0.45)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -149,7 +149,7 @@
         // Core blip dot
         ctx.beginPath();
         ctx.arc(tx, ty, 5, 0, Math.PI * 2);
-        ctx.fillStyle = t.ping > 0.4 ? '#E7192D' : '#0D0E10';
+        ctx.fillStyle = '#E7192D';
         ctx.fill();
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1.5;
@@ -157,25 +157,42 @@
 
         // Label Tag Pill
         var text = t.label;
-        ctx.font = '600 11px "Inter", sans-serif';
+        ctx.font = '600 11.5px "Inter", -apple-system, sans-serif';
         var metrics = ctx.measureText(text);
-        var pillW = metrics.width + 16;
+        var pillW = Math.round(metrics.width + 16);
         var pillH = 22;
-        var pillX = tx + 10;
-        var pillY = ty - 11;
 
-        // Ensure pill stays within canvas bounds
-        if (pillX + pillW > size - 10) pillX = tx - pillW - 10;
+        // Position pill vertically offset from blip so blip dot remains completely visible
+        var pillX = Math.round(tx - pillW / 2);
+        var pillY = t.align === 'bottom' ? Math.round(ty + 10) : Math.round(ty - pillH - 10);
 
-        ctx.fillStyle = t.ping > 0.4 ? 'rgba(231, 25, 45, 0.95)' : 'rgba(13, 14, 16, 0.88)';
+        // Keep strictly within canvas bounds
+        if (pillX < 14) pillX = 14;
+        if (pillX + pillW > size - 14) pillX = size - 14 - pillW;
+        if (pillY < 14) pillY = 14;
+        if (pillY + pillH > size - 14) pillY = size - 14 - pillH;
+
+        // Connector line linking blip dot to pill
         ctx.beginPath();
-        ctx.roundRect(pillX, pillY, pillW, pillH, 11);
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(tx, t.align === 'bottom' ? pillY : (pillY + pillH));
+        ctx.strokeStyle = 'rgba(231, 25, 45, 0.35)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(231, 25, 45, 0.94)';
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(pillX, pillY, pillW, pillH, 11);
+        } else {
+          ctx.rect(pillX, pillY, pillW, pillH);
+        }
         ctx.fill();
 
         ctx.fillStyle = '#ffffff';
-        ctx.textAlign = 'left';
+        ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(text, pillX + 8, pillY + (pillH / 2));
+        ctx.fillText(text, pillX + (pillW / 2), pillY + (pillH / 2));
       });
 
       requestAnimationFrame(draw);

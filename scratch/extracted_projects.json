@@ -1,0 +1,338 @@
+[
+  {
+    "num": 1,
+    "case_badge": "CASE STUDY 01",
+    "industry": "FinTech &amp; Loan Operations",
+    "kicker": "Loan Lifecycle &amp; Digital Operations Platform",
+    "title": "KP E-Services",
+    "img": "assets/portfolio-hero-1.png",
+    "services": "Multi-Tier Loan Origination, Digital Wallets, Customer &amp; Connector Portals",
+    "challenge": "Tracking loan applications across disconnected channels, calculating complex bank criteria manually, and handling commission disbursements and document security.",
+    "solution": "Built a unified loan operations platform guiding applications from lead and pre-login through sanction and disbursement, featuring bank criteria algorithms, referral wallets, KYC document vaults, and support ticketing.",
+    "outcome": "Accelerated loan approval cycles, enabled instant status tracking for borrowers, and automated commission payouts for connectors.",
+    "tags": [
+      "React.js",
+      "Node.js",
+      "Digital Wallets",
+      "Cloud Vault",
+      "FinTech APIs"
+    ],
+    "category": "enterprise cloud web mobile",
+    "slug": "kp-e-services"
+  },
+  {
+    "num": 2,
+    "case_badge": "CASE STUDY 02",
+    "industry": "Healthcare &amp; Diagnostics",
+    "kicker": "Clinical Laboratory Website &amp; Diagnostics Admin System",
+    "title": "Ashray Labs",
+    "img": "assets/case-dental-clinic.jpg",
+    "services": "Appointment Scheduling, Test Package Directory, Online Reports, Multi-City CMS",
+    "challenge": "Patients faced delays booking pathology appointments and retrieving reports, while administrative staff struggled to manage test catalogs and city-wide campaigns across centers.",
+    "solution": "Engineered an integrated patient portal and admin back-office where patients browse test packages, book lab visits, request quotes, and download digital invoices and pathology reports with automated SMS/email alerts.",
+    "outcome": "Substantially lowered front-desk workload, boosted online test bookings, and allowed real-time report access for thousands of patients.",
+    "tags": [
+      "Next.js",
+      "Clinical ERP",
+      "PDF Engine",
+      "Automated SMS",
+      "Cloud DB"
+    ],
+    "category": "web enterprise cloud mobile",
+    "slug": "ashray-labs"
+  },
+  {
+    "num": 3,
+    "case_badge": "CASE STUDY 03",
+    "industry": "Financial Valuation &amp; Advisory",
+    "kicker": "Business Valuation Software for Registered Valuers",
+    "title": "ProCurve",
+    "img": "assets/about-office-mockup.jpg",
+    "services": "DCF Modeling, Market &amp; Asset Approach Worksheets, Capital Structuring Suite",
+    "challenge": "Registered valuers had to execute complex multi-method valuations across fragmented spreadsheets, making audit trails and director/share-capital record-keeping error-prone.",
+    "solution": "Developed a dedicated internal business-valuation system enabling valuers to manage clients, share capital, and director registries, while systematically running Income, Market, and Net-Asset valuation algorithms.",
+    "outcome": "Standardized valuation workpapers across teams, reduced reporting turnaround by 60%, and established audit-ready calculation sheets.",
+    "tags": [
+      "Python",
+      "React.js",
+      "Financial Modeling",
+      "Data Security",
+      "Audit Workflows"
+    ],
+    "category": "enterprise cloud ai",
+    "slug": "procurve"
+  },
+  {
+    "num": 4,
+    "case_badge": "CASE STUDY 04",
+    "industry": "Medical Research &amp; Grants",
+    "kicker": "Institutional Grant &amp; Project Submission Portal",
+    "title": "Heart Foundation and Research Institute",
+    "img": "assets/about-office.jpg",
+    "services": "Applicant Onboarding, Research Dossier Submissions, Multi-Stage Peer Review",
+    "challenge": "Managing project submissions from organizations, researchers, and private entities via manual email trails led to processing bottlenecks and delayed approvals.",
+    "solution": "Created an end-to-end registration and project-submission portal with dynamic applicant profiles, structured dossier uploading, automated notifications, and an admin jury dashboard for reviewing and tracking submissions.",
+    "outcome": "Streamlined research intake, eliminated paperwork delays, and provided transparent tracking for grant applicants and institutional evaluators.",
+    "tags": [
+      "Vue.js",
+      "Node.js",
+      "Document Vault",
+      "In-App Alerts",
+      "MongoDB"
+    ],
+    "category": "web enterprise cloud",
+    "slug": "heart-foundation-and-research-institute"
+  },
+  {
+    "num": 5,
+    "case_badge": "CASE STUDY 05",
+    "industry": "Education &amp; Academic LMS",
+    "kicker": "College Web Portal &amp; Campus Management ERP",
+    "title": "Vishan Institute of Technology",
+    "img": "assets/hero-office-clean.jpg",
+    "services": "Online Enrollment, Academic Batch Scheduling, Digital Library, Fee Invoicing",
+    "challenge": "The college required a unified system to attract prospective students online while managing teachers, batches, timetables, course resources, and fee collections behind the scenes.",
+    "solution": "Built a high-conversion institutional website with course catalogs and online enrollment, coupled with an administrative backend for batch scheduling, teacher assignments, student invoicing, and a cloud-based e-library.",
+    "outcome": "Digitized campus operations, boosted student admissions, and provided self-service enrollment and learning material access.",
+    "tags": [
+      "React.js",
+      "PHP / Laravel",
+      "Student LMS",
+      "MySQL",
+      "Billing Gateway"
+    ],
+    "category": "web enterprise cloud",
+    "slug": "vishan-institute-of-technology"
+  },
+  {
+    "num": 6,
+    "case_badge": "CASE STUDY 06",
+    "industry": "Food &amp; Beverage E-Commerce",
+    "kicker": "Multi-Tenant Online Food Ordering &amp; Mobile Platform",
+    "title": "Chick N Go",
+    "img": "assets/portfolio-hero-2.png",
+    "services": "Customer Food Ordering App, Multi-Domain White-Label Engine, Live Kitchen Admin",
+    "challenge": "The restaurant brand needed a fast, mobile-friendly online ordering experience and backend kitchen dispatch system that could effortlessly run across multiple domains and storefronts.",
+    "solution": "Engineered a high-performance food-ordering application and responsive storefront with real-time menu management, cart checkout, payment gateway integration, and a centralized store setup admin panel.",
+    "outcome": "Enabled direct-to-consumer online ordering with zero third-party commission fees and sub-second checkout speeds across multiple domains.",
+    "tags": [
+      "Flutter / PWA",
+      "React.js",
+      "Online Payments",
+      "Multi-Tenant",
+      "Live Dispatch"
+    ],
+    "category": "mobile web enterprise",
+    "slug": "chick-n-go"
+  },
+  {
+    "num": 7,
+    "case_badge": "CASE STUDY 07",
+    "industry": "B2B Wholesale &amp; Distribution",
+    "kicker": "Wholesale Storefront for Canadian Accessories Distributor",
+    "title": "Sunshine Wholesale",
+    "img": "assets/case-coffee-roastery.jpg",
+    "services": "B2B Catalog Management, Tiered Bulk Pricing, Buyer Accounts &amp; Wishlists",
+    "challenge": "Distributing across Canadian provinces demanded strict account verification, tiered wholesale pricing, bulk order minimums, and custom SEO catalog architecture.",
+    "solution": "Engineered a robust wholesale storefront with authenticated buyer accounts, wholesale application vetting, quick-order wishlists, dynamic SEO pages, and an administrative catalog management engine.",
+    "outcome": "Increased wholesale re-order rates by 45%, streamlined distributor onboarding, and achieved top organic rankings for high-intent B2B keywords.",
+    "tags": [
+      "Headless E-Commerce",
+      "Next.js",
+      "B2B Pricing Engine",
+      "Elasticsearch",
+      "SEO Architecture"
+    ],
+    "category": "web enterprise",
+    "slug": "sunshine-wholesale"
+  },
+  {
+    "num": 8,
+    "case_badge": "CASE STUDY 08",
+    "industry": "Beauty &amp; D2C E-Commerce",
+    "kicker": "Custom Shopify Theme &amp; Retailer Locator",
+    "title": "Cyclical Beauty",
+    "img": "assets/portfolio-hero-3.png",
+    "services": "Shopify Theme Architecture, Product Storytelling, Wholesale Retailer Applications",
+    "challenge": "Creating an elegant, conversion-focused digital home for a clean, multi-use beauty brand that equally supported direct retail buyers and wholesale boutique applications.",
+    "solution": "Designed and custom-developed a high-conversion Shopify storefront theme featuring interactive product storytelling, clean ingredient callouts, a wholesale application pipeline, and an interactive &#x27;Where to Shop&#x27; retail locator.",
+    "outcome": "Boosted average order value (AOV), expanded boutique retailer stockist sign-ups, and established a distinctive modern brand identity.",
+    "tags": [
+      "Shopify Liquid",
+      "Tailwind CSS",
+      "Store Locator API",
+      "Mobile UX",
+      "Conversion CRO"
+    ],
+    "category": "web mobile",
+    "slug": "cyclical-beauty"
+  },
+  {
+    "num": 9,
+    "case_badge": "CASE STUDY 09",
+    "industry": "Energy &amp; Utility Operations",
+    "kicker": "Operations Portal &amp; Digital Wallet for LPG Agents",
+    "title": "LPG Booking",
+    "img": "assets/hero-office-rect.jpg",
+    "services": "Agent Booking Management, Wallet Recharge System, Post-Booking Issue Dispatch",
+    "challenge": "LPG distribution agents faced reconciliation errors, disconnected booking sheets, and slow customer grievance handling across busy delivery networks.",
+    "solution": "Architected an operational hub for LPG booking agents featuring automated booking sheets, role-based admin oversight, digital wallet recharges, and rapid grievance escalation tools.",
+    "outcome": "Eliminated booking sheet discrepancies, accelerated delivery turnaround, and ensured reliable prepaid wallet reconciliation for all field agents.",
+    "tags": [
+      "React Native / Mobile",
+      "Node.js",
+      "Digital Wallets",
+      "Role-Based RBAC",
+      "PostgreSQL"
+    ],
+    "category": "mobile enterprise cloud",
+    "slug": "lpg-booking"
+  },
+  {
+    "num": 10,
+    "case_badge": "CASE STUDY 10",
+    "industry": "On-Demand Services &amp; Marketplace",
+    "kicker": "Admin Operations System for On-Demand Service Business",
+    "title": "Servizo",
+    "img": "assets/case-fitness-app.jpg",
+    "services": "Vendor &amp; Customer Dispatch, Warranty Product Claims, Dynamic Referral Lists",
+    "challenge": "Coordinating home and commercial services across diverse service categories, managing verified vendors, and tracking warranty claims required an enterprise-grade back office.",
+    "solution": "Built a scalable administrative system managing customer requests, multi-tier service categories, vendor onboarding, warranty claims, banner promotions, and dynamic category questionnaires.",
+    "outcome": "Increased service fulfillment rates, streamlined warranty claim resolution, and provided operational transparency across all active service teams.",
+    "tags": [
+      "Flutter App",
+      "React.js",
+      "Vendor Dispatch",
+      "Firebase Cloud",
+      "Claims Engine"
+    ],
+    "category": "mobile enterprise cloud",
+    "slug": "servizo"
+  },
+  {
+    "num": 11,
+    "case_badge": "CASE STUDY 11",
+    "industry": "Real Estate &amp; Land Marketplace",
+    "kicker": "Property Marketplace &amp; FSBO Exchange Platform",
+    "title": "Just Land",
+    "img": "assets/hero-building.jpg",
+    "services": "Interactive Property Search, FSBO Portals, In-App Buyer/Agent Chat",
+    "challenge": "Connecting land buyers directly with FSBO (For Sale By Owner) sellers and professional agents with verified acreage listings, clean zoning details, and secure communication.",
+    "solution": "Developed a comprehensive property marketplace where users explore parcel listings, save favorites, and chat in real time with agents and property owners, supported by an admin panel for zoning types and listings oversight.",
+    "outcome": "Created a thriving property marketplace with rapid buyer-seller messaging and automated FSBO verification workflows.",
+    "tags": [
+      "Next.js",
+      "Mapbox GL",
+      "WebSocket Chat",
+      "Node.js",
+      "FSBO Engine"
+    ],
+    "category": "web mobile enterprise",
+    "slug": "just-land"
+  },
+  {
+    "num": 12,
+    "case_badge": "CASE STUDY 12",
+    "industry": "Private Real Estate Social Network",
+    "kicker": "Private Real Estate Agent Network &amp; Downline Suite",
+    "title": "Just My Team",
+    "img": "assets/hero-crowd-overhead.jpg",
+    "services": "Referral Code Access, Downline Management, In-Network Encrypted Chat",
+    "challenge": "Real estate brokerage networks needed a private, invitation-only digital ecosystem where agents could coordinate deals, organize their downline, and communicate confidentially.",
+    "solution": "Engineered a closed-network portal accessible exclusively via referral codes, equipping agents with downline hierarchy visualization, private property sharing, personal deal notebooks, and encrypted chat channels.",
+    "outcome": "Enhanced agent retention and referral deal velocity, keeping sensitive brokerage workflows protected behind authenticated access.",
+    "tags": [
+      "React Native",
+      "React.js",
+      "Referral Trees",
+      "End-to-End Chat",
+      "Secure Auth"
+    ],
+    "category": "mobile enterprise web",
+    "slug": "just-my-team"
+  },
+  {
+    "num": 13,
+    "case_badge": "CASE STUDY 13",
+    "industry": "PropTech SaaS &amp; Marketing",
+    "kicker": "Marketing Site &amp; Headless CMS for Real Estate Platforms",
+    "title": "RealtyBizHub",
+    "img": "assets/portfolio-hero-showcase.png",
+    "services": "Software Platform Marketing, Headless CMS, Interactive Demo Booking Engine",
+    "challenge": "Showcasing a specialized suite of real-estate software solutions while empowering the marketing team to edit branding, section content, and industry articles without developer assistance.",
+    "solution": "Constructed a high-converting marketing site and headless CMS featuring interactive product previews, an automated demo-booking pipeline, and a flexible editorial content engine for articles and product releases.",
+    "outcome": "Surged inbound demo request conversions and provided marketing staff with zero-code autonomy over digital brand assets.",
+    "tags": [
+      "Next.js",
+      "Headless CMS",
+      "Tailwind CSS",
+      "Lead Capture",
+      "API Webhooks"
+    ],
+    "category": "web enterprise",
+    "slug": "realtybizhub"
+  },
+  {
+    "num": 14,
+    "case_badge": "CASE STUDY 14",
+    "industry": "Brokerage Back-Office &amp; Escrow ERP",
+    "kicker": "Internal Real Estate Operations &amp; Escrow Workspace",
+    "title": "Dodani ERP",
+    "img": "assets/about-office-showcase.png",
+    "services": "Lead &amp; Task Orchestration, Shared Well Water Agreements, Escrow Tracking Vault",
+    "challenge": "Managing complex land brokerage transactions involving multi-party offers, escrow deadlines, shared well water rights, and compliance documents in a single secure environment.",
+    "solution": "Built a custom internal ERP workspace for brokerage teams to track properties, active offers, escrow stages, water well covenants, and team tasks with threaded internal notes and calendar coordination.",
+    "outcome": "Unified fragmented brokerage spreadsheets into an airtight operational ERP, reducing deal closing delays and safeguarding transaction documents.",
+    "tags": [
+      "React.js",
+      "Python / Django",
+      "PostgreSQL",
+      "Escrow Workflow",
+      "AWS S3 Vault"
+    ],
+    "category": "enterprise cloud",
+    "slug": "dodani-erp"
+  },
+  {
+    "num": 15,
+    "case_badge": "CASE STUDY 15",
+    "industry": "Private Land Syndication &amp; Capital",
+    "kicker": "Private Land-Investment Platform &amp; Summit Portal",
+    "title": "Arizona Land Investors",
+    "img": "assets/contact-hero-workspace.png",
+    "services": "Investor Portfolio Desk, Escrow Document Vault, Annual Summit Booking System",
+    "challenge": "Presenting land investment strategies to high-net-worth investors and developers while providing private authenticated tools to review acreage offerings, escrow milestones, and summit passes.",
+    "solution": "Created an authoritative institutional website coupled with a private investor portal where registered members manage property favorites, express interest, track escrow progress, and register for annual summits.",
+    "outcome": "Accelerated capital syndication, simplified investor due diligence, and automated annual summit registrations with dedicated concierge chat.",
+    "tags": [
+      "Next.js",
+      "Stripe Connect",
+      "Investor Portal",
+      "Real-Time Support",
+      "Cloud Security"
+    ],
+    "category": "web enterprise cloud",
+    "slug": "arizona-land-investors"
+  },
+  {
+    "num": 16,
+    "case_badge": "CASE STUDY 16",
+    "industry": "Influencer Marketing &amp; AdTech",
+    "kicker": "Creator Marketplace &amp; Automated KYC Admin Panel",
+    "title": "Micro Matching",
+    "img": "assets/cta-collaboration.jpg",
+    "services": "Creator Verification, Automated KYC Inspection, Stripe Campaign Payouts",
+    "challenge": "Operations staff spent hours manually verifying influencer and brand credentials, validating identity documents, tracking coupon performance, and handling escrow payments.",
+    "solution": "Built a streamlined operations administration panel connecting brands with influencers, featuring automated KYC document checking, campaign package managers, discount coupon trackers, and integrated Stripe payment pipelines.",
+    "outcome": "Cut influencer verification turnaround by 75%, mitigated fraud, and powered transparent payout processing across hundreds of brand campaigns.",
+    "tags": [
+      "React.js",
+      "Stripe Connect",
+      "Automated KYC",
+      "OCR Intelligence",
+      "Node.js"
+    ],
+    "category": "enterprise ai cloud web",
+    "slug": "micro-matching"
+  }
+]

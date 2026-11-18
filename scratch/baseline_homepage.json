@@ -1,0 +1,311 @@
+{
+  "header": {
+    "logo_text": "BAADAM",
+    "logo_sub": "Info and Tradelink Services",
+    "logo_img": "assets/baadam-logo.png",
+    "nav_links": [
+      {
+        "label": "Home",
+        "url": "index.html"
+      },
+      {
+        "label": "Services",
+        "url": "services.html"
+      },
+      {
+        "label": "Portfolio",
+        "url": "portfolio.html"
+      },
+      {
+        "label": "About Us",
+        "url": "about.html"
+      },
+      {
+        "label": "Contact",
+        "url": "contact.html"
+      }
+    ],
+    "cta_button": {
+      "label": "Let's Talk",
+      "url": "contact.html"
+    },
+    "portfolio_mega_menu": [
+      {
+        "title": "Web & Websites",
+        "url": "portfolio.html?filter=web",
+        "image": "assets/mega-web-services.jpg"
+      },
+      {
+        "title": "Mobile Applications",
+        "url": "portfolio.html?filter=mobile",
+        "image": "assets/mega-mobile-apps.jpg"
+      },
+      {
+        "title": "Enterprise Software & ERP",
+        "url": "portfolio.html?filter=enterprise",
+        "image": "assets/mega-service-software.jpg"
+      }
+    ]
+  },
+  "hero": {
+    "kicker": "Now booking Q4 · 3 spots left",
+    "title_main": "Bespoke Enterprise Software &",
+    "title_highlight": "Scalable Digital Architecture",
+    "description": "We architect high-performing web platforms, native mobile applications, enterprise ERPs, and automated growth funnels for modern businesses.",
+    "cta_primary": {
+      "label": "Book a strategy call",
+      "url": "#"
+    },
+    "cta_secondary": {
+      "label": "See our work",
+      "url": "#portfolio-showcase-section"
+    },
+    "orbit_badges": [
+      {
+        "text": "1.2k likes on one post",
+        "icon": "heart"
+      },
+      {
+        "text": "New 5-star review",
+        "icon": "star"
+      },
+      {
+        "text": "#1 \"dentist near me\"",
+        "icon": "pin"
+      }
+    ],
+    "metrics_bar": {
+      "reach_number": "1,284,300",
+      "reach_label": "PEOPLE REACHED FOR CLIENTS THIS MONTH",
+      "channels": [
+        "01 Website",
+        "02 Apps",
+        "03 Marketing",
+        "04 E-Commerce"
+      ],
+      "reviews_score": "4.9",
+      "reviews_count": "128 client reviews",
+      "reviews_subtext": "140+ brands grown"
+    }
+  },
+  "radar": {
+    "kicker": "OUR SERVICES",
+    "heading_line1": "Digital Solutions",
+    "heading_highlight": "For Your Business.",
+    "description": "We build websites, applications, software and games while helping businesses grow through digital marketing and e-commerce solutions.",
+    "center_number": "16+",
+    "center_label": "Active Deliveries"
+  },
+  "services": {
+    "kicker": "(02) Services",
+    "title_line1": "Six core services.",
+    "title_highlight": "One",
+    "title_line2": "elite partner.",
+    "subtitle": "Website, application, digital marketing, software and games provide all the benefits associated with e-commerce development.",
+    "items": [
+      {
+        "id": "serv-01",
+        "num": "01",
+        "title": "Website Development",
+        "tag": "High-Performance Web Platforms",
+        "pitch": "Baadam Info Services Pvt. Ltd. is a highly specialized team for website development and services. You will get the high performing web experiences that are digitally transformative, and it is designed to be user-friendly. Our team creates the best website, which will be fully functional, very secure and able to grow your business.",
+        "mockup_query": "Website Development Solutions",
+        "features": [
+          "Custom Web Architecture & Responsive Design",
+          "Enterprise Performance & Cloud Optimization",
+          "SEO-Ready Structure & High Security Protocols"
+        ],
+        "starting_price": "From $1,500",
+        "metric_value": "99.9%",
+        "metric_label": "Uptime & Fluid Performance"
+      },
+      {
+        "id": "serv-02",
+        "num": "02",
+        "title": "Application Development",
+        "tag": "Native iOS, Android & Hybrid",
+        "pitch": "Our great application development services allow you to build the best B2B apps for a wide range of platforms. We are making the apps for mobile, web, smartwatch, desktop, AR and VR. Baadam Info Pvt. Ltd. simplifies your business complexities with native-grade fluidity.",
+        "mockup_query": "Enterprise App Development",
+        "features": [
+          "Cross-Platform Flutter & React Native",
+          "Native Swift & Kotlin High-Speed Modules",
+          "Offline-First Database Synchronization"
+        ],
+        "starting_price": "From $2,800",
+        "metric_value": "100%",
+        "metric_label": "Native Device Fluidity"
+      },
+      {
+        "id": "serv-03",
+        "num": "03",
+        "title": "Software Development",
+        "tag": "Enterprise ERPs & Business Systems",
+        "pitch": "Modern business requires custom engineering. We engineer custom enterprise systems, ERPs, CRM platforms, and automated workflow software that eliminate human error, streamline operations, and support exponential business scale.",
+        "mockup_query": "Custom Enterprise Software",
+        "features": [
+          "End-to-End ERP & CRM Systems",
+          "Automated Operational Workflow Pipelines",
+          "Secure Role-Based Access & Audit Logging"
+        ],
+        "starting_price": "Custom Scope",
+        "metric_value": "99.8%",
+        "metric_label": "Data Integrity & Precision"
+      },
+      {
+        "id": "serv-04",
+        "num": "04",
+        "title": "Digital Marketing",
+        "tag": "SEO, Performance & Paid Growth",
+        "pitch": "Baadam Info Pvt. Ltd. provides you with the complete Digital Marketing services. It includes email and content marketing, search engine marketing, content marketing & lead generation and many more awesome services. We also increase improvement up to 1000 times in website traffic, visitors, & sources.",
+        "mockup_query": "Performance Growth Strategy",
+        "features": [
+          "Data-Driven Search Engine Optimization (SEO)",
+          "High-ROI Paid Ad Funnels (Meta & Google)",
+          "Conversion Rate Optimization & Funnel Scaling"
+        ],
+        "starting_price": "From $800/mo",
+        "metric_value": "+240%",
+        "metric_label": "Average Qualified Lead Growth"
+      },
+      {
+        "id": "serv-05",
+        "num": "05",
+        "title": "E-Commerce Platforms",
+        "tag": "Omnichannel Stores & Fast Checkout",
+        "pitch": "Turn browsers into loyal customers with lightning-fast digital storefronts. We build headless and high-converting e-commerce experiences with frictionless payments, automated inventory, and unified customer profiles.",
+        "mockup_query": "High-Volume E-Commerce",
+        "features": [
+          "Custom Shopify & Next.js Headless Stores",
+          "Multi-Currency Automated Checkout & Gateway Integration",
+          "Real-Time Inventory & ERP Dispatch Sync"
+        ],
+        "starting_price": "From $1,800",
+        "metric_value": "<1.2s",
+        "metric_label": "Average Checkout Load Time"
+      },
+      {
+        "id": "serv-06",
+        "num": "06",
+        "title": "Game Development",
+        "tag": "3D Interactive, Unity & WebGL",
+        "pitch": "Our game development team is highly expert in making 2D games and apps both using Unity 3D tool. We are making a game for various platforms like PhoneGap and Android. We assist you from the initial to final support with the proper maintenance.",
+        "mockup_query": "Interactive 3D Engine",
+        "features": [
+          "Immersive Unity 3D & 2D Mobile Games",
+          "WebGL Web Games & Interactive Experiences",
+          "Optimized Hardware Acceleration & 60 FPS"
+        ],
+        "starting_price": "From $3,500",
+        "metric_value": "60 FPS",
+        "metric_label": "Fluid Hardware Rendering"
+      }
+    ]
+  },
+  "featured_work": {
+    "kicker": "(03) Featured Work",
+    "title_line1": "Crafted for Impact.",
+    "title_highlight": "Engineered for Scale.",
+    "subtitle": "Explore our latest digital platforms, applications, and enterprise systems built for ambitious businesses.",
+    "selected_project_slugs": [
+      "kp-e-services",
+      "dodani-erp",
+      "lpg-booking",
+      "cyclical-beauty"
+    ],
+    "cta_label": "Explore All 16 Projects",
+    "cta_url": "portfolio.html"
+  },
+  "case_studies": {
+    "kicker": "(04) Case Studies",
+    "title_line1": "Technology That Delivers.",
+    "title_highlight": "Results That Matter.",
+    "subtitle": "Discover how BAADAM transforms business challenges into measurable market results with reliable software architecture.",
+    "items": [
+      {
+        "id": "case-01",
+        "tab_name": "FinTech Loan Operations",
+        "client_name": "KP E-Services",
+        "category": "Fintech & Loan Operations",
+        "challenge": "Manual loan origination led to 3-day approval delays, high error rates, and dropped loan applicants.",
+        "solution": "Engineered an automated verification engine with instant credit scoring and direct bank verification APIs.",
+        "result": "+340% Processing Speed",
+        "metric_badge": "3-Day to 4-Minute Approvals",
+        "image": "assets/portfolio-hero-1.png",
+        "project_url": "projects/kp-e-services/index.html"
+      },
+      {
+        "id": "case-02",
+        "tab_name": "Supply Chain & ERP",
+        "client_name": "Dodani ERP",
+        "category": "Enterprise ERP & Distribution",
+        "challenge": "Disconnected warehouse databases caused stock discrepancies, delayed dispatches, and inventory write-offs.",
+        "solution": "Unified multi-warehouse management with real-time barcode scanning, automated PO generation, and dispatch routing.",
+        "result": "99.8% Order Accuracy",
+        "metric_badge": "Zero Inventory Discrepancies",
+        "image": "assets/portfolio-hero-2.png",
+        "project_url": "projects/dodani-erp/index.html"
+      },
+      {
+        "id": "case-03",
+        "tab_name": "Utility Booking App",
+        "client_name": "LPG Booking",
+        "category": "Energy & Utility Operations",
+        "challenge": "High call center congestion and delayed refill allocations during seasonal demand spikes.",
+        "solution": "Built a self-service customer mobile app and real-time delivery tracking driver dispatch portal.",
+        "result": "4.9★ App Rating",
+        "metric_badge": "70% Reduction in Call Volume",
+        "image": "assets/portfolio-hero-3.png",
+        "project_url": "projects/lpg-booking/index.html"
+      }
+    ]
+  },
+  "how_we_work": {
+    "kicker": "(04) How we work",
+    "title_line1": "From attention",
+    "title_highlight": "clients.",
+    "subtitle": "Every retainer runs the same four steps. You see the funnel fill in your report every week.",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Discovery & Technical Scoping",
+        "desc": "We analyze your business workflow, identify operational bottlenecks, and architect a robust technical blueprint with fixed deliverables and timelines.",
+        "metric": "Week 1 Architecture Blueprint"
+      },
+      {
+        "num": "02",
+        "title": "UI/UX & Prototype Validation",
+        "desc": "Interactive wireframes and high-fidelity clickable prototypes designed around user psychology and frictionless interaction design.",
+        "metric": "100% User Tested Before Code"
+      },
+      {
+        "num": "03",
+        "title": "Agile Engineering Sprints",
+        "desc": "Bi-weekly sprint releases with continuous integration, automated testing, and transparent progress demos on staging environments.",
+        "metric": "Continuous Staging Demos"
+      },
+      {
+        "num": "04",
+        "title": "Deployment & Hypercare Support",
+        "desc": "Zero-downtime cloud production deployment followed by dedicated SLA monitoring, performance tuning, and continuous security patching.",
+        "metric": "24/7 Production Reliability"
+      }
+    ]
+  },
+  "next_steps": {
+    "kicker": "(05) Next Steps",
+    "heading": "Have a Technology Challenge?",
+    "description": "Let's turn your idea into a practical digital solution. Schedule a consultation with our senior engineers.",
+    "cta_label": "Let's Talk",
+    "cta_url": "contact.html",
+    "phone": "+91 94286 92198",
+    "email": "info@baadam.com"
+  },
+  "footer": {
+    "brand_desc": "Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.",
+    "headquarters": "Ahmedabad, Gujarat, India",
+    "email": "info@baadam.com",
+    "hours": "Mon - Sat: 9:30 AM - 6:30 PM",
+    "social_linkedin": "https://linkedin.com",
+    "social_instagram": "https://instagram.com"
+  }
+}

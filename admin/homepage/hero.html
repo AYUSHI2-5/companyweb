@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.location.replace('/admin/homepage/index.html#hero');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Section Editor | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Action bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Hero Section Editor</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:14px; color:#6B7280; margin:4px 0 0 0;">Customise headlines, availability badges, statistics counters, social proof, and shortcut pills.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" onclick="openPreviewModal('hero')">
+              Preview
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">
+              Publish Changes
+            </button>
+          </div>
+        </div>
+
+        <form id="hero-form">
+          <!-- 1. Main Headline & Copy -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Main Headline &amp; Narrative</h3>
+                <p class="card-subtitle">Primary hero banner typography and paragraph</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="main_headline">Main Headline</label>
+                <input type="text" id="main_headline" class="form-control" placeholder="Transforming Visions Into Scalable Digital Reality" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="highlighted_headline">Highlighted Headline Keyword</label>
+                <input type="text" id="highlighted_headline" class="form-control" placeholder="Scalable Digital Reality" required>
+                <span class="form-hint">Text that receives the prominent red styling.</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Background / Decorative Visual</label>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <input type="text" id="hero_background_image" class="form-control" placeholder="Optional background image URL">
+                  <button type="button" class="btn btn-secondary" data-image-picker="hero_background_image">Browse</button>
+                </div>
+              </div>
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="description">Hero Subtitle / Description</label>
+                <textarea id="description" class="form-control" rows="3" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Availability Badge -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Quarter Availability Badge</h3>
+                <p class="card-subtitle">Pill badge displaying real-time booking availability</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="badge_visible" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="badge_status">Status Text</label>
+                <input type="text" id="badge_status" class="form-control" placeholder="Booking Open for" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="badge_quarter">Quarter / Period</label>
+                <input type="text" id="badge_quarter" class="form-control" placeholder="Q1 2026" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="badge_spots">Available Spots Count</label>
+                <input type="number" id="badge_spots" class="form-control" placeholder="2" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Primary CTA Buttons -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Call To Action (CTA) Buttons</h3>
+                <p class="card-subtitle">Action buttons below the main headline</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="cta_primary_label">Primary Button Label</label>
+                <input type="text" id="cta_primary_label" class="form-control" placeholder="Book a Strategy Call" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cta_primary_url">Primary Button URL</label>
+                <input type="text" id="cta_primary_url" class="form-control" placeholder="#contact" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cta_secondary_label">Secondary Button Label</label>
+                <input type="text" id="cta_secondary_label" class="form-control" placeholder="See Our Work" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cta_secondary_url">Secondary Button URL</label>
+                <input type="text" id="cta_secondary_url" class="form-control" placeholder="#portfolio" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Key Metrics & Social Proof -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Live Statistics &amp; Social Proof Counters</h3>
+                <p class="card-subtitle">Floating badges, review ratings, and reached audience counters</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="people_reached_label">People Reached Label</label>
+                <input type="text" id="people_reached_label" class="form-control" placeholder="People Reached" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="people_reached_counter">People Reached Counter</label>
+                <input type="text" id="people_reached_counter" class="form-control" placeholder="10M+" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="client_rating">Client Review Rating</label>
+                <input type="text" id="client_rating" class="form-control" placeholder="4.9/5" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reviews_count">Total Reviews</label>
+                <input type="text" id="reviews_count" class="form-control" placeholder="120+ Reviews" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="brands_grown">Brands Scaled / Grown</label>
+                <input type="text" id="brands_grown" class="form-control" placeholder="50+ Brands" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="search_ranking">Search / Market Ranking Label</label>
+                <input type="text" id="search_ranking" class="form-control" placeholder="#1 Development Agency" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Service Shortcuts -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Hero Service Shortcuts (Floating Pills)</h3>
+                <p class="card-subtitle">Interactive service shortcut pills at the base of the hero</p>
+              </div>
+            </div>
+            <div id="shortcuts-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
+              <!-- 4 shortcuts -->
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px;">
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">Save Draft</button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">Publish Changes</button>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'hero',
+      title: 'Hero Section Editor',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Homepage', url: '/admin/homepage/index.html' },
+        { label: 'Hero Section', url: '/admin/homepage/hero.html' }
+      ]
+    });
+
+    let currentData = null;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/admin/homepage/hero');
+        const data = await res.json();
+        currentData = data.draft || data.published || {};
+
+        const statusBadge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          statusBadge.className = 'badge badge-draft';
+          statusBadge.textContent = 'Draft Changes';
+        } else {
+          statusBadge.className = 'badge badge-published';
+          statusBadge.textContent = 'Published';
+        }
+
+        populateForm(currentData);
+        bindImagePickers();
+      } catch (err) {
+        showToast('Error loading hero data: ' + err.message, 'error');
+      }
+    }
+
+    function populateForm(d) {
+      document.getElementById('main_headline').value = d.main_headline || d.headline?.main || '';
+      document.getElementById('highlighted_headline').value = d.highlighted_headline || d.headline?.highlight || '';
+      document.getElementById('description').value = d.description || d.headline?.description || '';
+      document.getElementById('hero_background_image').value = d.hero_background_image || '';
+
+      // Availability badge
+      const badge = d.availability_badge || {};
+      document.getElementById('badge_visible').checked = badge.visible !== false;
+      document.getElementById('badge_status').value = badge.status_text || 'Booking Open for';
+      document.getElementById('badge_quarter').value = badge.current_quarter || 'Q1 2026';
+      document.getElementById('badge_spots').value = badge.available_spots ?? 2;
+
+      // CTA Buttons
+      const cta = d.cta_buttons || {};
+      document.getElementById('cta_primary_label').value = cta.primary?.label || 'Book a Strategy Call';
+      document.getElementById('cta_primary_url').value = cta.primary?.url || '#contact';
+      document.getElementById('cta_secondary_label').value = cta.secondary?.label || 'See Our Work';
+      document.getElementById('cta_secondary_url').value = cta.secondary?.url || '#portfolio';
+
+      // Statistics
+      const stats = d.statistics || {};
+      document.getElementById('people_reached_label').value = stats.people_reached_label || 'People Reached';
+      document.getElementById('people_reached_counter').value = stats.people_reached_counter || '10M+';
+      document.getElementById('client_rating').value = stats.client_rating || '4.9/5';
+      document.getElementById('reviews_count').value = stats.reviews_count || '120+ Reviews';
+      document.getElementById('brands_grown').value = stats.brands_grown || '50+ Brands';
+
+      const proof = d.social_proof || {};
+      document.getElementById('search_ranking').value = proof.search_ranking_label || '#1 Development Agency';
+
+      // Shortcuts
+      const shortcuts = d.service_shortcuts || [
+        { label: 'Website', url: '#services' },
+        { label: 'Apps', url: '#services' },
+        { label: 'Marketing', url: '#services' },
+        { label: 'E-Commerce', url: '#services' }
+      ];
+
+      const scContainer = document.getElementById('shortcuts-container');
+      scContainer.innerHTML = shortcuts.map((sc, idx) => `
+        <div style="border:1px solid #E2E8F0; border-radius:8px; padding:12px; background:#F8FAFC;">
+          <div style="font-weight:700; font-size:12px; margin-bottom:6px; color:#111827;">Shortcut #${idx + 1}</div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Label</label>
+            <input type="text" class="form-control sc-label" value="${sc.label || ''}" required>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" style="font-size:11px;">Destination URL</label>
+            <input type="text" class="form-control sc-url" value="${sc.url || ''}" required>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function gatherFormData() {
+      const scLabels = document.querySelectorAll('.sc-label');
+      const scUrls = document.querySelectorAll('.sc-url');
+      const service_shortcuts = [];
+      for (let i = 0; i < scLabels.length; i++) {
+        service_shortcuts.push({
+          label: scLabels[i].value.trim(),
+          url: scUrls[i].value.trim()
+        });
+      }
+
+      return {
+        main_headline: document.getElementById('main_headline').value.trim(),
+        highlighted_headline: document.getElementById('highlighted_headline').value.trim(),
+        description: document.getElementById('description').value.trim(),
+        hero_background_image: document.getElementById('hero_background_image').value.trim(),
+        availability_badge: {
+          visible: document.getElementById('badge_visible').checked,
+          status_text: document.getElementById('badge_status').value.trim(),
+          current_quarter: document.getElementById('badge_quarter').value.trim(),
+          available_spots: parseInt(document.getElementById('badge_spots').value) || 0
+        },
+        cta_buttons: {
+          primary: {
+            label: document.getElementById('cta_primary_label').value.trim(),
+            url: document.getElementById('cta_primary_url').value.trim()
+          },
+          secondary: {
+            label: document.getElementById('cta_secondary_label').value.trim(),
+            url: document.getElementById('cta_secondary_url').value.trim()
+          }
+        },
+        statistics: {
+          people_reached_label: document.getElementById('people_reached_label').value.trim(),
+          people_reached_counter: document.getElementById('people_reached_counter').value.trim(),
+          client_rating: document.getElementById('client_rating').value.trim(),
+          reviews_count: document.getElementById('reviews_count').value.trim(),
+          brands_grown: document.getElementById('brands_grown').value.trim()
+        },
+        social_proof: {
+          likes_count: '24K+',
+          likes_label: 'Happy Users',
+          new_review_text: '5.0 Star Rating',
+          search_ranking_label: document.getElementById('search_ranking').value.trim()
+        },
+        service_shortcuts
+      };
+    }
+
+    async function saveSection(publish = false) {
+      const payload = gatherFormData();
+      try {
+        const res = await fetch('/api/admin/homepage/hero', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/homepage/hero/publish', { method: 'POST' });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Hero section published live successfully!');
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft saved successfully!');
+        }
+        loadData();
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to the currently published hero configuration?')) return;
+      try {
+        const res = await fetch('/api/admin/homepage/hero/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          loadData();
+        } else {
+          showToast(data.error || 'Failed to revert draft', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

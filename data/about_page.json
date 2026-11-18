@@ -1,0 +1,410 @@
+{
+  "version": "1.0.2",
+  "status": "published",
+  "last_published": "2026-11-16T13:29:10.046Z",
+  "published": {
+    "hero": {
+      "kicker": "ABOUT BAADAM",
+      "heading": "We Are Here For<br><span class=\"text-brand-red\">Make Best Product</span>",
+      "subhead": "We help you to create your Digital Presence to world.",
+      "lead": "Baadam Info And Trade Link Services Pvt. Ltd. uses cutting-edge technologies to design and develop apps, websites and software for your business growth. We have experienced team members to serve you dynamic, high-quality and customized services that take your business on top grade. Our experienced in-house team will help you strategize your business growth with their analytical skills. With an experience of five years, we create stunning websites and design brand identities that increase your business's sale growth. We are among the leading technology-based company that can reach you with all device compatibility.",
+      "image": "assets/about-office-showcase.png",
+      "trust_items": [
+        {
+          "value": "5+ Years",
+          "label": "Industry Experience"
+        },
+        {
+          "value": "End-to-End",
+          "label": "Digital Solutions"
+        },
+        {
+          "value": "Trusted Partner",
+          "label": "for Business Growth"
+        }
+      ]
+    },
+    "what_we_do": {
+      "heading": "What We <span class=\"text-brand-red\">Do?</span>",
+      "description_1": "We are involved in web development activities, including developing a new website and provide services for existing ones; in application development, including developing apps for web, mobiles, smartwatches, desktop, AR and VR; in digital marketing, increase traffic on your website, create product awareness.",
+      "description_2": "We build software product and services with outstanding quality, make games for androids, and iPhone or Ipad.",
+      "image": "assets/about-office.jpg"
+    },
+    "skills_metrics": {
+      "aria_label": "Service Proficiency & Success Rates",
+      "gauges": [
+        {
+          "id": "g-1",
+          "label": "Website Development",
+          "percent": 98
+        },
+        {
+          "id": "g-2",
+          "label": "Application Development",
+          "percent": 95
+        },
+        {
+          "id": "g-3",
+          "label": "Digital Marketing",
+          "percent": 96
+        },
+        {
+          "id": "g-4",
+          "label": "Software Development",
+          "percent": 90
+        }
+      ]
+    },
+    "approach": {
+      "kicker": "Our Approach",
+      "heading": "We Are Here For <span class=\"text-brand-red\">Make Best Services</span>",
+      "lead": "We, Baadam Info And Trade Link Services Pvt. Ltd. a young yet experienced, dynamic, and technology-based company, are here to reduce your financial issues and increase your business's growth. Having an experience of five years, with more than thirty workers, we ensure an increase in traffic, high- quality software, and other related services. We are here to help new and digitally emerging companies. You can reach us by mobile, desktop as well as the laptop.",
+      "cards": [
+        {
+          "id": "appr-1",
+          "pill": "5+ YEARS · 30+ WORKERS",
+          "title": "Experienced & Dynamic Tech Team",
+          "desc": "A united team of over thirty specialized developers, engineers, and digital marketers delivering proven results for half a decade."
+        },
+        {
+          "id": "appr-2",
+          "pill": "BUSINESS GROWTH",
+          "title": "Reduce Financial Issues & Scale",
+          "desc": "We eliminate technical inefficiencies and costly overhead, optimizing your operations so your capital directly fuels measurable commercial expansion."
+        },
+        {
+          "id": "appr-3",
+          "pill": "TRAFFIC · QUALITY CODE",
+          "title": "High-Quality Software & Traffic",
+          "desc": "From enterprise-grade web and mobile applications to high-converting marketing campaigns, we ensure massive traffic surges and rock-solid software."
+        },
+        {
+          "id": "appr-4",
+          "pill": "OMNICHANNEL ACCESS",
+          "title": "Universal Cross-Device Compatibility",
+          "desc": "Engineered for seamless accessibility across smartphones, tablets, laptops, and desktop screens with fluid responsive adaptation."
+        }
+      ]
+    },
+    "principles": {
+      "kicker": "[ PRINCIPLES ]",
+      "heading": "The Principles That <span class=\"text-brand-red\">Guide Our Code</span>",
+      "description": "Four pillars that define our development standards, client relationships, and operational culture.",
+      "items": [
+        {
+          "id": "pr-1",
+          "title": "Agile Execution",
+          "desc": "Rapid two-week sprint cycles with live staging previews, ensuring continuous feedback and zero surprises."
+        },
+        {
+          "id": "pr-2",
+          "title": "Zero-Compromise Security",
+          "desc": "Industry-standard encryption, strict access governance, and rigorous automated code vulnerability audits."
+        },
+        {
+          "id": "pr-3",
+          "title": "Obsession With Performance",
+          "desc": "Sub-second page speeds, minimal server latency, optimized assets, and 95+ Core Web Vitals benchmark targets."
+        },
+        {
+          "id": "pr-4",
+          "title": "Transparent Communication",
+          "desc": "Direct Slack/Teams channels with lead engineers, transparent code repositories, and weekly video syncs."
+        }
+      ]
+    },
+    "team": {
+      "kicker": "[ CORE TEAM ]",
+      "heading": "Meet the <span class=\"text-brand-red\">Leadership Team</span>",
+      "description": "The strategists, designers, and systems architects steering client outcomes at Baadam.",
+      "members": [
+        {
+          "id": "tm-1",
+          "name": "M K Parmar",
+          "role": "Founder & CEO",
+          "desc": "Leads executive technology direction, strategic partnerships, and client innovation at Baadam.",
+          "image": "assets/team-mk-parmar.jpg"
+        },
+        {
+          "id": "tm-2",
+          "name": "Ishani Parikh",
+          "role": "UI/UX Designer",
+          "desc": "Specializes in human-centered design systems, interaction patterns, and user experience flows.",
+          "image": "assets/team-ishani.jpg"
+        },
+        {
+          "id": "tm-3",
+          "name": "Brijesh Lathiya",
+          "role": "Full Stack Developer",
+          "desc": "Engineers robust full-stack software and resilient APIs using modern frameworks and cloud tooling.",
+          "image": "assets/team-brijesh.jpg"
+        },
+        {
+          "id": "tm-4",
+          "name": "Sanjay Vaja",
+          "role": "Flutter Developer",
+          "desc": "Specializes in cross-platform mobile architecture, high-performance Flutter applications, and seamless API integrations.",
+          "image": "assets/team-sanjay.jpg"
+        },
+        {
+          "id": "tm-5",
+          "name": "Neha Shah",
+          "role": "Digital Marketing Specialist",
+          "desc": "Maximizes client reach through data-backed performance marketing and technical SEO strategies.",
+          "image": "assets/team-neha.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "kicker": "Client Stories & Trust",
+      "heading": "Trusted by Businesses <span class=\"text-brand-red\">Across Industries</span>",
+      "description": "See how our software engineering, web development, and digital solutions empower founders, enterprise leaders, and growing brands.",
+      "items": [
+        {
+          "id": "tst-1",
+          "stars": 5,
+          "tag": "Enterprise Platform",
+          "quote": "Baadam transformed our disjointed operational workflow into a high-performance web platform. Their engineering rigor, rapid sprints, and proactive communication saved us months of development time.",
+          "author": "Rajesh Sharma",
+          "role": "VP of Technology, NexaFlow Enterprise",
+          "avatar": "RA"
+        },
+        {
+          "id": "tst-2",
+          "stars": 5,
+          "tag": "E-Commerce & SEO",
+          "quote": "With Baadam, our online shop experienced a 140% surge in qualified conversions. Their focus on mobile responsiveness, speed optimization, and seamless payment integration was truly exceptional.",
+          "author": "Ananya Patel",
+          "role": "Co-Founder, Aura Organics",
+          "avatar": "AN"
+        },
+        {
+          "id": "tst-3",
+          "stars": 5,
+          "tag": "Mobile App & Cloud",
+          "quote": "The Flutter mobile application and resilient backend system Baadam built for us runs flawlessly across iOS and Android. Their in-house team is deeply knowledgeable, transparent, and genuinely invested in client success.",
+          "author": "Vikram Desai",
+          "role": "Managing Director, Horizon Tech Labs",
+          "avatar": "VI"
+        }
+      ]
+    },
+    "cta": {
+      "kicker": "[ LET'S CONNECT ]",
+      "heading": "Experience the Baadam<br>Difference Firsthand.",
+      "description": "Whether modernizing an enterprise backend or launching a flagship digital product, our senior engineering studio is ready to build with you.",
+      "button_label": "Schedule Discovery Call",
+      "button_url": "contact.html"
+    }
+  },
+  "draft": {
+    "hero": {
+      "kicker": "ABOUT BAADAM",
+      "heading": "We Are Here For<br><span class=\"text-brand-red\">Make Best Product</span>",
+      "subhead": "We help you to create your Digital Presence to world.",
+      "lead": "Baadam Info And Trade Link Services Pvt. Ltd. uses cutting-edge technologies to design and develop apps, websites and software for your business growth. We have experienced team members to serve you dynamic, high-quality and customized services that take your business on top grade. Our experienced in-house team will help you strategize your business growth with their analytical skills. With an experience of five years, we create stunning websites and design brand identities that increase your business's sale growth. We are among the leading technology-based company that can reach you with all device compatibility.",
+      "image": "assets/about-office-showcase.png",
+      "trust_items": [
+        {
+          "value": "5+ Years",
+          "label": "Industry Experience"
+        },
+        {
+          "value": "End-to-End",
+          "label": "Digital Solutions"
+        },
+        {
+          "value": "Trusted Partner",
+          "label": "for Business Growth"
+        }
+      ]
+    },
+    "what_we_do": {
+      "heading": "What We <span class=\"text-brand-red\">Do?</span>",
+      "description_1": "We are involved in web development activities, including developing a new website and provide services for existing ones; in application development, including developing apps for web, mobiles, smartwatches, desktop, AR and VR; in digital marketing, increase traffic on your website, create product awareness.",
+      "description_2": "We build software product and services with outstanding quality, make games for androids, and iPhone or Ipad.",
+      "image": "assets/about-office.jpg"
+    },
+    "skills_metrics": {
+      "aria_label": "Service Proficiency & Success Rates",
+      "gauges": [
+        {
+          "id": "g-1",
+          "label": "Website Development",
+          "percent": 98
+        },
+        {
+          "id": "g-2",
+          "label": "Application Development",
+          "percent": 95
+        },
+        {
+          "id": "g-3",
+          "label": "Digital Marketing",
+          "percent": 96
+        },
+        {
+          "id": "g-4",
+          "label": "Software Development",
+          "percent": 90
+        }
+      ]
+    },
+    "approach": {
+      "kicker": "Our Approach",
+      "heading": "We Are Here For <span class=\"text-brand-red\">Make Best Services</span>",
+      "lead": "We, Baadam Info And Trade Link Services Pvt. Ltd. a young yet experienced, dynamic, and technology-based company, are here to reduce your financial issues and increase your business's growth. Having an experience of five years, with more than thirty workers, we ensure an increase in traffic, high- quality software, and other related services. We are here to help new and digitally emerging companies. You can reach us by mobile, desktop as well as the laptop.",
+      "cards": [
+        {
+          "id": "appr-1",
+          "pill": "5+ YEARS · 30+ WORKERS",
+          "title": "Experienced & Dynamic Tech Team",
+          "desc": "A united team of over thirty specialized developers, engineers, and digital marketers delivering proven results for half a decade."
+        },
+        {
+          "id": "appr-2",
+          "pill": "BUSINESS GROWTH",
+          "title": "Reduce Financial Issues & Scale",
+          "desc": "We eliminate technical inefficiencies and costly overhead, optimizing your operations so your capital directly fuels measurable commercial expansion."
+        },
+        {
+          "id": "appr-3",
+          "pill": "TRAFFIC · QUALITY CODE",
+          "title": "High-Quality Software & Traffic",
+          "desc": "From enterprise-grade web and mobile applications to high-converting marketing campaigns, we ensure massive traffic surges and rock-solid software."
+        },
+        {
+          "id": "appr-4",
+          "pill": "OMNICHANNEL ACCESS",
+          "title": "Universal Cross-Device Compatibility",
+          "desc": "Engineered for seamless accessibility across smartphones, tablets, laptops, and desktop screens with fluid responsive adaptation."
+        }
+      ]
+    },
+    "principles": {
+      "kicker": "[ PRINCIPLES ]",
+      "heading": "The Principles That <span class=\"text-brand-red\">Guide Our Code</span>",
+      "description": "Four pillars that define our development standards, client relationships, and operational culture.",
+      "items": [
+        {
+          "id": "pr-1",
+          "title": "Agile Execution",
+          "desc": "Rapid two-week sprint cycles with live staging previews, ensuring continuous feedback and zero surprises."
+        },
+        {
+          "id": "pr-2",
+          "title": "Zero-Compromise Security",
+          "desc": "Industry-standard encryption, strict access governance, and rigorous automated code vulnerability audits."
+        },
+        {
+          "id": "pr-3",
+          "title": "Obsession With Performance",
+          "desc": "Sub-second page speeds, minimal server latency, optimized assets, and 95+ Core Web Vitals benchmark targets."
+        },
+        {
+          "id": "pr-4",
+          "title": "Transparent Communication",
+          "desc": "Direct Slack/Teams channels with lead engineers, transparent code repositories, and weekly video syncs."
+        }
+      ]
+    },
+    "team": {
+      "kicker": "[ CORE TEAM ]",
+      "heading": "Meet the <span class=\"text-brand-red\">Leadership Team</span>",
+      "description": "The strategists, designers, and systems architects steering client outcomes at Baadam.",
+      "members": [
+        {
+          "id": "tm-1",
+          "name": "M K Parmar",
+          "role": "Founder & CEO",
+          "desc": "Leads executive technology direction, strategic partnerships, and client innovation at Baadam.",
+          "image": "assets/team-mk-parmar.jpg"
+        },
+        {
+          "id": "tm-2",
+          "name": "Ishani Parikh",
+          "role": "UI/UX Designer",
+          "desc": "Specializes in human-centered design systems, interaction patterns, and user experience flows.",
+          "image": "assets/team-ishani.jpg"
+        },
+        {
+          "id": "tm-3",
+          "name": "Brijesh Lathiya",
+          "role": "Full Stack Developer",
+          "desc": "Engineers robust full-stack software and resilient APIs using modern frameworks and cloud tooling.",
+          "image": "assets/team-brijesh.jpg"
+        },
+        {
+          "id": "tm-4",
+          "name": "Sanjay Vaja",
+          "role": "Flutter Developer",
+          "desc": "Specializes in cross-platform mobile architecture, high-performance Flutter applications, and seamless API integrations.",
+          "image": "assets/team-sanjay.jpg"
+        },
+        {
+          "id": "tm-5",
+          "name": "Neha Shah",
+          "role": "Digital Marketing Specialist",
+          "desc": "Maximizes client reach through data-backed performance marketing and technical SEO strategies.",
+          "image": "assets/team-neha.jpg"
+        }
+      ]
+    },
+    "testimonials": {
+      "kicker": "Client Stories & Trust",
+      "heading": "Trusted by Businesses <span class=\"text-brand-red\">Across Industries</span>",
+      "description": "See how our software engineering, web development, and digital solutions empower founders, enterprise leaders, and growing brands.",
+      "items": [
+        {
+          "id": "tst-1",
+          "stars": 5,
+          "tag": "Enterprise Platform",
+          "quote": "Baadam transformed our disjointed operational workflow into a high-performance web platform. Their engineering rigor, rapid sprints, and proactive communication saved us months of development time.",
+          "author": "Rajesh Sharma",
+          "role": "VP of Technology, NexaFlow Enterprise",
+          "avatar": "RA"
+        },
+        {
+          "id": "tst-2",
+          "stars": 5,
+          "tag": "E-Commerce & SEO",
+          "quote": "With Baadam, our online shop experienced a 140% surge in qualified conversions. Their focus on mobile responsiveness, speed optimization, and seamless payment integration was truly exceptional.",
+          "author": "Ananya Patel",
+          "role": "Co-Founder, Aura Organics",
+          "avatar": "AN"
+        },
+        {
+          "id": "tst-3",
+          "stars": 5,
+          "tag": "Mobile App & Cloud",
+          "quote": "The Flutter mobile application and resilient backend system Baadam built for us runs flawlessly across iOS and Android. Their in-house team is deeply knowledgeable, transparent, and genuinely invested in client success.",
+          "author": "Vikram Desai",
+          "role": "Managing Director, Horizon Tech Labs",
+          "avatar": "VI"
+        }
+      ]
+    },
+    "cta": {
+      "kicker": "[ LET'S CONNECT ]",
+      "heading": "Experience the Baadam<br>Difference Firsthand.",
+      "description": "Whether modernizing an enterprise backend or launching a flagship digital product, our senior engineering studio is ready to build with you.",
+      "button_label": "Schedule Discovery Call",
+      "button_url": "contact.html"
+    }
+  },
+  "history": [
+    {
+      "version": "1.0.2",
+      "published_at": "2026-11-16T13:29:10.046Z",
+      "published_by": "admin",
+      "notes": "Published About Us page changes"
+    },
+    {
+      "version": "1.0.1",
+      "published_at": "2026-11-16T13:28:56.905Z",
+      "published_by": "admin",
+      "notes": "Published About Us page changes"
+    }
+  ],
+  "last_draft_updated": "2026-11-16T13:29:10.029Z"
+}

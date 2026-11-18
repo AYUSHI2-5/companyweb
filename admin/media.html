@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Library | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <link rel="icon" type="image/png" href="/assets/baadam-logo.png">
+  <style>
+    /* Checkerboard pattern for transparent PNG / SVG assets */
+    .checker-bg {
+      background-color: #F8FAFC;
+      background-image: 
+        linear-gradient(45deg, #EEF2F6 25%, transparent 25%), 
+        linear-gradient(-45deg, #EEF2F6 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #EEF2F6 75%), 
+        linear-gradient(-45deg, transparent 75%, #EEF2F6 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+
+    /* Stat Cards Bar */
+    .media-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .media-stat-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .media-stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.2;
+    }
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Upload Zone */
+    .dropzone-container {
+      background: #FFFFFF;
+      border: 2px dashed #CBD5E1;
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .dropzone-container:hover, .dropzone-container.dragover {
+      border-color: #E7192D;
+      background: #FFF5F5;
+      transform: translateY(-1px);
+    }
+    .dropzone-icon-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #FEE2E2;
+      color: #E7192D;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    /* Filter Toolbar */
+    .media-toolbar {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .filter-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .filter-pill {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid transparent;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .filter-pill:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+    .filter-pill.active {
+      background: #E7192D;
+      color: #FFFFFF;
+      border-color: #E7192D;
+      box-shadow: 0 2px 6px rgba(231, 25, 45, 0.25);
+    }
+    .pill-badge {
+      background: rgba(0, 0, 0, 0.12);
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+    .filter-pill.active .pill-badge {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    /* Search & Controls */
+    .toolbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 280px;
+    }
+    .search-box-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 320px;
+    }
+    .search-box-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: #94A3B8;
+      pointer-events: none;
+    }
+    .search-box-wrap input {
+      padding-left: 36px;
+      padding-right: 28px;
+      height: 38px;
+      font-size: 13px;
+      border-radius: 8px;
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #94A3B8;
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* View Switcher */
+    .view-switcher {
+      display: inline-flex;
+      background: #F1F5F9;
+      border-radius: 8px;
+      padding: 3px;
+      border: 1px solid #E2E8F0;
+    }
+    .view-btn {
+      border: none;
+      background: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      color: #64748B;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .view-btn.active {
+      background: #FFFFFF;
+      color: #0F172A;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* Media Grid Cards */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+    .media-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .media-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+      border-color: #CBD5E1;
+    }
+    .media-preview-box {
+      width: 100%;
+      height: 175px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .media-preview-box img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+    }
+    .media-card:hover .media-preview-box img {
+      transform: scale(1.04);
+    }
+
+    /* Hover Overlay */
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .media-card:hover .preview-overlay {
+      opacity: 1;
+    }
+    .overlay-action-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.15s ease;
+    }
+    .overlay-action-btn:hover {
+      background: #E7192D;
+      color: #FFFFFF;
+      transform: scale(1.1);
+    }
+
+    /* Badges on Thumbnail */
+    .ext-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 3px 7px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.75);
+      color: #FFFFFF;
+      backdrop-filter: blur(4px);
+    }
+    .ext-badge.ext-jpg, .ext-badge.ext-jpeg { background: rgba(37, 99, 235, 0.85); }
+    .ext-badge.ext-png { background: rgba(5, 150, 105, 0.85); }
+    .ext-badge.ext-svg { background: rgba(217, 119, 6, 0.85); }
+    .ext-badge.ext-webp { background: rgba(124, 58, 237, 0.85); }
+    .ext-badge.ext-gif { background: rgba(236, 72, 153, 0.85); }
+    .ext-badge.ext-avif { background: rgba(14, 165, 233, 0.85); }
+    .ext-badge.ext-bmp { background: rgba(100, 116, 139, 0.85); }
+    .ext-badge.ext-ico { background: rgba(245, 158, 11, 0.85); }
+    .ext-badge.ext-tiff, .ext-badge.ext-tif { background: rgba(139, 92, 246, 0.85); }
+
+    #modal-ext-badge {
+      position: static !important;
+      display: inline-block;
+    }
+
+    .dim-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(15, 23, 42, 0.7);
+      color: #FFFFFF;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Card Details */
+    .media-card-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      background: #FFFFFF;
+      border-top: 1px solid #F1F5F9;
+    }
+    .media-filename {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E293B;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .media-submeta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #64748B;
+      margin-bottom: 10px;
+    }
+    .media-card-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-copy-path {
+      flex: 1;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      background: #F1F5F9;
+      color: #334155;
+      border: 1px solid #E2E8F0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-copy-path:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+    .btn-copy-path.copied {
+      background: #DCFCE7;
+      color: #15803D;
+      border-color: #86EFAC;
+    }
+    .btn-delete-card {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #FFFFFF;
+      color: #94A3B8;
+      border: 1px solid #E2E8F0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-delete-card:hover {
+      background: #FEE2E2;
+      color: #DC2626;
+      border-color: #FCA5A5;
+    }
+
+    /* List View Table */
+    .media-list-table-wrap {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      margin-bottom: 40px;
+    }
+    .media-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .media-table th {
+      background: #F8FAFC;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      border-bottom: 1px solid #E2E8F0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .media-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+    .media-table tr:hover td {
+      background: #F8FAFC;
+    }
+    .table-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      border: 1px solid #E2E8F0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .table-thumb img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    /* Modal / Lightbox Dialog */
+    .media-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .media-modal-backdrop.active {
+      display: flex;
+    }
+    .media-modal-content {
+      background: #FFFFFF;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 980px;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .media-modal-header {
+      padding: 16px 22px;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #F8FAFC;
+    }
+    .media-modal-body {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      overflow-y: auto;
+      max-height: calc(90vh - 70px);
+    }
+    @media (max-width: 768px) {
+      .media-modal-body {
+        grid-template-columns: 1fr;
+      }
+    }
+    .modal-preview-col {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #E2E8F0;
+      min-height: 380px;
+    }
+    .modal-img-container {
+      max-width: 100%;
+      max-height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-img-container img {
+      max-width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .modal-info-col {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #FFFFFF;
+    }
+    .info-param-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .param-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .param-value {
+      font-size: 13px;
+      color: #1E293B;
+      font-weight: 500;
+      word-break: break-all;
+    }
+    .copyable-field {
+      display: flex;
+      align-items: center;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 4px 6px 4px 10px;
+      gap: 8px;
+    }
+    .copyable-field input {
+      border: none;
+      background: none;
+      font-family: monospace;
+      font-size: 12px;
+      color: #334155;
+      flex: 1;
+      outline: none;
+    }
+
+    /* Fallback box when image cannot load */
+    .img-fallback-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #94A3B8;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Header Row -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <h2 style="font-size:24px; font-weight:800; color:#0F172A; margin:0 0 6px 0; letter-spacing:-0.02em;">Media Library</h2>
+            <p style="font-size:14px; color:#64748B; margin:0;">Browse, inspect, upload and copy paths for all website images and graphics.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button type="button" class="btn btn-secondary" onclick="loadMedia()" title="Refresh media index">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Refresh
+            </button>
+            <label class="btn btn-primary" style="cursor:pointer; margin-bottom:0;">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span>Upload Pictures</span>
+              <input type="file" id="top-file-input" style="display:none;" accept="image/*,.jpg,.jpeg,.png,.webp,.svg,.gif,.avif,.bmp,.ico,.tiff,.heic" multiple onchange="handleFilesSelected(this.files)">
+            </label>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="media-stat-grid">
+          <div class="media-stat-card">
+            <div class="media-stat-icon" style="background:#FEE2E2; color:#E7192D;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="stat-val" id="stat-total-count">0</div>
+              <div class="stat-label">Total Pictures</div>
+            </div>
+          </div>
+
+          <div class="media-stat-card">
+            <div class="media-stat-icon" style="background:#E0E7FF; color:#4F46E5;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            </div>
+            <div>
+              <div class="stat-val" id="stat-total-size">0 MB</div>
+              <div class="stat-label">Total Storage</div>
+            </div>
+          </div>
+
+          <div class="media-stat-card">
+            <div class="media-stat-icon" style="background:#DCFCE7; color:#16A34A;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <div class="stat-val" id="stat-ready-count">57</div>
+              <div class="stat-label">Active &amp; Visible</div>
+            </div>
+          </div>
+
+          <div class="media-stat-card">
+            <div class="media-stat-icon" style="background:#FEF3C7; color:#D97706;">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <div class="stat-val" id="stat-formats-breakdown">JPG / PNG / WebP / SVG</div>
+              <div class="stat-label">All Picture Formats</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drag & Drop Upload Zone -->
+        <div class="dropzone-container" id="dropzone" onclick="document.getElementById('top-file-input').click()">
+          <div class="dropzone-icon-wrap">
+            <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          </div>
+          <div style="font-size:16px; font-weight:700; color:#1E293B; margin-bottom:4px;">Drag and drop any picture files here, or click to browse</div>
+          <div style="font-size:13px; color:#64748B;">Supports all image formats (JPG, PNG, WebP, SVG, GIF, AVIF, BMP, ICO) up to 50 MB</div>
+          <!-- Upload Progress Bar (hidden by default) -->
+          <div id="upload-progress-box" style="display:none; max-width:400px; margin:16px auto 0; text-align:left;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; color:#334155; margin-bottom:6px;">
+              <span id="upload-status-text">Uploading pictures...</span>
+              <span id="upload-percent-text">0%</span>
+            </div>
+            <div style="height:8px; background:#E2E8F0; border-radius:4px; overflow:hidden;">
+              <div id="upload-progress-bar" style="width:0%; height:100%; background:#E7192D; transition:width 0.2s ease;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toolbar: Filters, Search, Sorting, View Toggle -->
+        <div class="media-toolbar">
+          <!-- Filter Pills -->
+          <div class="filter-pills-wrap">
+            <button type="button" class="filter-pill active" data-filter="all" onclick="setFilter('all', this)">
+              All Pictures <span class="pill-badge" id="pill-count-all">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="jpg" onclick="setFilter('jpg', this)">
+              JPG <span class="pill-badge" id="pill-count-jpg">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="png" onclick="setFilter('png', this)">
+              PNG <span class="pill-badge" id="pill-count-png">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="webp" onclick="setFilter('webp', this)">
+              WebP <span class="pill-badge" id="pill-count-webp">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="svg" onclick="setFilter('svg', this)">
+              SVG <span class="pill-badge" id="pill-count-svg">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="gif" onclick="setFilter('gif', this)">
+              GIF <span class="pill-badge" id="pill-count-gif">0</span>
+            </button>
+            <button type="button" class="filter-pill" data-filter="uploads" onclick="setFilter('uploads', this)">
+              Uploads <span class="pill-badge" id="pill-count-uploads">0</span>
+            </button>
+          </div>
+
+          <!-- Controls: Search, Sort, View Toggle -->
+          <div class="toolbar-controls">
+            <!-- Search -->
+            <div class="search-box-wrap">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              <input type="text" id="media-search" class="form-control" placeholder="Search by name or alt..." oninput="handleSearch()">
+              <button type="button" id="search-clear" class="search-clear-btn" onclick="clearSearch()">&times;</button>
+            </div>
+
+            <!-- Sort Select -->
+            <select id="sort-select" class="form-control" style="width:150px; height:38px; font-size:12.5px;" onchange="handleSort()">
+              <option value="name-asc">Name (A &rarr; Z)</option>
+              <option value="name-desc">Name (Z &rarr; A)</option>
+              <option value="size-desc">Size (Largest)</option>
+              <option value="size-asc">Size (Smallest)</option>
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+
+            <!-- View Switcher -->
+            <div class="view-switcher">
+              <button type="button" class="view-btn active" id="btn-view-grid" onclick="setViewMode('grid')" title="Grid View">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              </button>
+              <button type="button" class="view-btn" id="btn-view-list" onclick="setViewMode('list')" title="List View">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active View Results -->
+        <div id="media-container">
+          <!-- Populated dynamically: Grid or List -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Detail / Lightbox Modal -->
+  <div class="media-modal-backdrop" id="media-modal" onclick="if(event.target === this) closeModal()">
+    <div class="media-modal-content">
+      <div class="media-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="ext-badge" id="modal-ext-badge">JPG</span>
+          <span style="font-size:15px; font-weight:700; color:#0F172A;" id="modal-filename-title">Asset Details</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary" onclick="closeModal()" style="border-radius:50%; width:32px; height:32px; padding:0; display:flex; align-items:center; justify-content:center;">✕</button>
+      </div>
+
+      <div class="media-modal-body">
+        <!-- Preview Column -->
+        <div class="modal-preview-col checker-bg">
+          <div class="modal-img-container">
+            <img id="modal-preview-img" src="" alt="">
+          </div>
+          <div style="display:flex; gap:10px; margin-top:16px;">
+            <a id="modal-open-tab-btn" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-secondary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Open Original
+            </a>
+            <a id="modal-download-btn" href="#" download class="btn btn-sm btn-secondary">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Download
+            </a>
+          </div>
+        </div>
+
+        <!-- Info & Copy Column -->
+        <div class="modal-info-col">
+          <div class="info-param-row">
+            <div class="param-label">File Name</div>
+            <div class="param-value" id="modal-info-filename">-</div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+            <div class="info-param-row">
+              <div class="param-label">Dimensions</div>
+              <div class="param-value" id="modal-info-dims">-</div>
+            </div>
+            <div class="info-param-row">
+              <div class="param-label">File Size</div>
+              <div class="param-value" id="modal-info-size">-</div>
+            </div>
+          </div>
+
+          <div class="info-param-row">
+            <div class="param-label">Relative Asset Path (Use in HTML/CSS)</div>
+            <div class="copyable-field">
+              <input type="text" id="modal-copy-relative" readonly>
+              <button type="button" class="btn btn-sm btn-primary" style="padding:4px 10px;" onclick="copyFieldValue('modal-copy-relative', this)">Copy</button>
+            </div>
+          </div>
+
+          <div class="info-param-row">
+            <div class="param-label">Absolute Web URL</div>
+            <div class="copyable-field">
+              <input type="text" id="modal-copy-url" readonly>
+              <button type="button" class="btn btn-sm btn-secondary" style="padding:4px 10px;" onclick="copyFieldValue('modal-copy-url', this)">Copy</button>
+            </div>
+          </div>
+
+          <div class="info-param-row">
+            <div class="param-label">HTML &lt;img&gt; Tag Snippet</div>
+            <div class="copyable-field">
+              <input type="text" id="modal-copy-tag" readonly>
+              <button type="button" class="btn btn-sm btn-secondary" style="padding:4px 10px;" onclick="copyFieldValue('modal-copy-tag', this)">Copy</button>
+            </div>
+          </div>
+
+          <!-- Alt Text Editor -->
+          <div class="info-param-row" style="margin-top:6px;">
+            <label class="param-label" for="modal-input-alt">Alt Text &amp; Accessibility Caption</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="modal-input-alt" class="form-control" style="font-size:12.5px;" placeholder="Describe this image for screen readers and SEO...">
+              <button type="button" class="btn btn-sm btn-primary" onclick="saveAltText()">Save</button>
+            </div>
+          </div>
+
+          <div style="margin-top:auto; padding-top:16px; border-top:1px solid #F1F5F9; display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:11px; color:#94A3B8;" id="modal-info-id">ID: -</span>
+            <button type="button" class="btn btn-sm btn-danger" id="modal-delete-btn" onclick="deleteCurrentModalItem()">
+              Delete Asset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'media',
+      title: 'Media Library',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Media Library', url: '/admin/media.html' }
+      ]
+    });
+
+    let allMediaItems = [];
+    let currentFilter = 'all';
+    let currentSort = 'name-asc';
+    let currentViewMode = 'grid';
+    let activeModalItem = null;
+
+    // Helper to resolve clean web URL with leading slash
+    function resolveImgUrl(item) {
+      if (!item) return '/assets/baadam-logo.png';
+      if (item.url && item.url.startsWith('/')) return item.url;
+      const rawPath = item.path || item.url || '';
+      if (!rawPath) return '/assets/baadam-logo.png';
+      return rawPath.startsWith('/') ? rawPath : '/' + rawPath;
+    }
+
+    // Helper to format file size
+    function formatBytes(bytes) {
+      if (!bytes || bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    // Load media from API
+    async function loadMedia() {
+      const container = document.getElementById('media-container');
+      container.innerHTML = `
+        <div style="text-align:center; padding:60px; color:#64748B;">
+          <svg style="width:36px; height:36px; animation:spin 1s linear infinite; margin-bottom:12px; color:#E7192D;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="4" style="opacity:0.25;"></circle><path fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+          <div style="font-weight:600; font-size:14px;">Loading media assets...</div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch('/api/admin/media');
+        const data = await res.json();
+        allMediaItems = data.items || data.media || [];
+        updateStats();
+        applyFilterAndRender();
+      } catch (err) {
+        container.innerHTML = `
+          <div class="card" style="text-align:center; padding:40px; color:#DC2626;">
+            <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Failed to load Media Library</div>
+            <div style="font-size:13px; color:#64748B; margin-bottom:16px;">${err.message}</div>
+            <button class="btn btn-primary" onclick="loadMedia()">Try Again</button>
+          </div>
+        `;
+      }
+    }
+
+    // Update Top Stat Cards & Filter Pill Badges
+    function updateStats() {
+      const totalCount = allMediaItems.length;
+      document.getElementById('stat-total-count').textContent = totalCount;
+      document.getElementById('stat-ready-count').textContent = totalCount;
+
+      let totalBytes = 0;
+      let jpgCount = 0;
+      let pngCount = 0;
+      let webpCount = 0;
+      let svgCount = 0;
+      let gifCount = 0;
+      let uploadsCount = 0;
+
+      allMediaItems.forEach(item => {
+        totalBytes += item.size || 0;
+        const fn = (item.filename || item.path || '').toLowerCase();
+        if (fn.endsWith('.jpg') || fn.endsWith('.jpeg')) jpgCount++;
+        else if (fn.endsWith('.png')) pngCount++;
+        else if (fn.endsWith('.webp')) webpCount++;
+        else if (fn.endsWith('.svg')) svgCount++;
+        else if (fn.endsWith('.gif')) gifCount++;
+        if (fn.includes('upload') || (item.path && item.path.includes('upload'))) uploadsCount++;
+      });
+
+      document.getElementById('stat-total-size').textContent = (totalBytes / (1024 * 1024)).toFixed(1) + ' MB';
+      document.getElementById('pill-count-all').textContent = totalCount;
+      document.getElementById('pill-count-jpg').textContent = jpgCount;
+      document.getElementById('pill-count-png').textContent = pngCount;
+      document.getElementById('pill-count-webp').textContent = webpCount;
+      document.getElementById('pill-count-svg').textContent = svgCount;
+      document.getElementById('pill-count-gif').textContent = gifCount;
+      document.getElementById('pill-count-uploads').textContent = uploadsCount;
+    }
+
+    // Filtering & Sorting
+    function applyFilterAndRender() {
+      const q = (document.getElementById('media-search')?.value || '').toLowerCase().trim();
+      const clearBtn = document.getElementById('search-clear');
+      if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+
+      let filtered = allMediaItems.filter(item => {
+        const fn = (item.filename || '').toLowerCase();
+        const alt = (item.alt || '').toLowerCase();
+        const p = (item.path || '').toLowerCase();
+
+        // Search match
+        if (q && !fn.includes(q) && !alt.includes(q) && !p.includes(q)) {
+          return false;
+        }
+
+        // Category filter
+        if (currentFilter === 'jpg') return fn.endsWith('.jpg') || fn.endsWith('.jpeg');
+        if (currentFilter === 'png') return fn.endsWith('.png');
+        if (currentFilter === 'webp') return fn.endsWith('.webp');
+        if (currentFilter === 'svg') return fn.endsWith('.svg');
+        if (currentFilter === 'gif') return fn.endsWith('.gif');
+        if (currentFilter === 'uploads') return p.includes('upload') || fn.includes('med_');
+
+        return true;
+      });
+
+      // Sorting
+      filtered.sort((a, b) => {
+        if (currentSort === 'name-asc') return (a.filename || '').localeCompare(b.filename || '');
+        if (currentSort === 'name-desc') return (b.filename || '').localeCompare(a.filename || '');
+        if (currentSort === 'size-desc') return (b.size || 0) - (a.size || 0);
+        if (currentSort === 'size-asc') return (a.size || 0) - (b.size || 0);
+        if (currentSort === 'newest') return new Date(b.uploaded_at || 0) - new Date(a.uploaded_at || 0);
+        if (currentSort === 'oldest') return new Date(a.uploaded_at || 0) - new Date(b.uploaded_at || 0);
+        return 0;
+      });
+
+      render(filtered);
+    }
+
+    function setFilter(filterName, btn) {
+      currentFilter = filterName;
+      document.querySelectorAll('.filter-pill').forEach(el => el.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      applyFilterAndRender();
+    }
+
+    function handleSearch() {
+      applyFilterAndRender();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('media-search');
+      if (input) input.value = '';
+      applyFilterAndRender();
+    }
+
+    function handleSort() {
+      currentSort = document.getElementById('sort-select').value;
+      applyFilterAndRender();
+    }
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      document.getElementById('btn-view-grid').classList.toggle('active', mode === 'grid');
+      document.getElementById('btn-view-list').classList.toggle('active', mode === 'list');
+      applyFilterAndRender();
+    }
+
+    // Fallback on Image Load Error
+    window.handleImgError = function(img, filename) {
+      img.onerror = null;
+      img.style.display = 'none';
+      const parent = img.parentElement;
+      if (parent) {
+        parent.classList.add('has-error');
+        parent.innerHTML = `
+          <div class="img-fallback-box">
+            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span style="font-size:11px; font-weight:600;">Image Preview</span>
+          </div>
+        `;
+      }
+    };
+
+    // Render Container (Grid or List)
+    function render(items) {
+      const container = document.getElementById('media-container');
+
+      if (!items.length) {
+        container.innerHTML = `
+          <div class="card" style="text-align:center; padding:60px 20px; color:#64748B;">
+            <svg style="width:48px; height:48px; color:#CBD5E1; margin-bottom:12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <div style="font-size:16px; font-weight:700; color:#1E293B; margin-bottom:4px;">No matching media assets found</div>
+            <div style="font-size:13px; color:#64748B; margin-bottom:16px;">Try clearing your search query or choosing another format filter.</div>
+            <button class="btn btn-secondary btn-sm" onclick="clearSearch(); setFilter('all', document.querySelector('[data-filter=all]'));">Reset Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (currentViewMode === 'grid') {
+        container.innerHTML = `
+          <div class="media-grid">
+            ${items.map(item => {
+              const url = resolveImgUrl(item);
+              const ext = (item.ext || (item.filename || '').split('.').pop() || 'img').toLowerCase();
+              const dims = item.dimensions ? `${item.dimensions.width}×${item.dimensions.height}` : (item.width && item.height ? `${item.width}×${item.height}` : '');
+              const sizeStr = formatBytes(item.size);
+
+              return `
+                <div class="media-card" id="card-${item.id}">
+                  <div class="media-preview-box checker-bg" onclick="openModal('${item.id}')">
+                    <span class="ext-badge ext-${ext}">${ext}</span>
+                    ${dims ? `<span class="dim-badge">${dims}</span>` : ''}
+                    <img src="${url}" alt="${item.alt || item.filename}" loading="lazy" onerror="handleImgError(this, '${item.filename}')">
+                    <div class="preview-overlay">
+                      <button type="button" class="overlay-action-btn" title="Inspect &amp; Copy" onclick="event.stopPropagation(); openModal('${item.id}')">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                      </button>
+                      <button type="button" class="overlay-action-btn" title="Quick Copy Path" onclick="event.stopPropagation(); quickCopyPath('${item.path || url}', this)">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="media-card-body">
+                    <div>
+                      <div class="media-filename" title="${item.filename}">${item.filename}</div>
+                      <div class="media-submeta">
+                        <span>${sizeStr}</span>
+                        <span style="max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${item.alt || ''}">${item.alt || 'Asset'}</span>
+                      </div>
+                    </div>
+                    <div class="media-card-actions">
+                      <button type="button" class="btn-copy-path" onclick="quickCopyPath('${item.path || url}', this)">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <span>Copy Path</span>
+                      </button>
+                      <button type="button" class="btn-delete-card" title="Delete" onclick="deleteMedia('${item.id}', '${item.filename}')">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      } else {
+        // List View Table
+        container.innerHTML = `
+          <div class="media-list-table-wrap">
+            <table class="media-table">
+              <thead>
+                <tr>
+                  <th style="width:70px;">Preview</th>
+                  <th>File Name</th>
+                  <th>Dimensions</th>
+                  <th>Size</th>
+                  <th>Format</th>
+                  <th>Alt Text</th>
+                  <th style="text-align:right; width:160px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${items.map(item => {
+                  const url = resolveImgUrl(item);
+                  const ext = (item.ext || (item.filename || '').split('.').pop() || 'img').toUpperCase();
+                  const dims = item.dimensions ? `${item.dimensions.width}×${item.dimensions.height}` : (item.width && item.height ? `${item.width}×${item.height}` : '—');
+                  const sizeStr = formatBytes(item.size);
+
+                  return `
+                    <tr id="row-${item.id}">
+                      <td>
+                        <div class="table-thumb checker-bg" onclick="openModal('${item.id}')">
+                          <img src="${url}" alt="${item.alt || ''}" onerror="handleImgError(this, '${item.filename}')">
+                        </div>
+                      </td>
+                      <td>
+                        <div style="font-weight:700; color:#0F172A; cursor:pointer;" onclick="openModal('${item.id}')">${item.filename}</div>
+                        <div style="font-size:11px; color:#94A3B8; font-family:monospace;">${item.path || url}</div>
+                      </td>
+                      <td style="color:#475569; font-weight:600;">${dims}</td>
+                      <td style="color:#64748B;">${sizeStr}</td>
+                      <td><span class="ext-badge ext-${ext.toLowerCase()}" style="position:static;">${ext}</span></td>
+                      <td style="color:#64748B; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${item.alt || '—'}</td>
+                      <td style="text-align:right;">
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="quickCopyPath('${item.path || url}', this)" style="padding:4px 8px; font-size:11.5px;">Copy</button>
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="openModal('${item.id}')" style="padding:4px 8px; font-size:11.5px;">View</button>
+                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteMedia('${item.id}', '${item.filename}')" style="padding:4px 8px; font-size:11.5px;">✕</button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+    }
+
+    // Quick Copy Path to Clipboard
+    function quickCopyPath(path, btn) {
+      const cleanPath = path.replace(/^\/+/, '');
+      navigator.clipboard.writeText(cleanPath).then(() => {
+        showToast(`Copied "${cleanPath}" to clipboard!`);
+        if (btn) {
+          const originalHtml = btn.innerHTML;
+          btn.classList.add('copied');
+          btn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Copied!</span>`;
+          setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = originalHtml;
+          }, 1800);
+        }
+      }).catch(() => {
+        prompt('Copy Asset Path:', cleanPath);
+      });
+    }
+
+    function copyFieldValue(fieldId, btn) {
+      const input = document.getElementById(fieldId);
+      if (!input) return;
+      input.select();
+      navigator.clipboard.writeText(input.value).then(() => {
+        showToast('Copied to clipboard!');
+        if (btn) {
+          const orig = btn.textContent;
+          btn.textContent = '✓ Copied';
+          setTimeout(() => { btn.textContent = orig; }, 1600);
+        }
+      }).catch(() => {
+        prompt('Copy value:', input.value);
+      });
+    }
+
+    // Modal Details & Lightbox
+    function openModal(itemId) {
+      const item = allMediaItems.find(m => m.id === itemId);
+      if (!item) return;
+      activeModalItem = item;
+
+      const url = resolveImgUrl(item);
+      const cleanRel = (item.path || url).replace(/^\/+/, '');
+      const ext = (item.ext || (item.filename || '').split('.').pop() || 'img').toUpperCase();
+      const dims = item.dimensions ? `${item.dimensions.width} × ${item.dimensions.height} px` : (item.width && item.height ? `${item.width} × ${item.height} px` : 'Vector / Auto');
+
+      document.getElementById('modal-ext-badge').textContent = ext;
+      document.getElementById('modal-ext-badge').className = `ext-badge ext-${ext.toLowerCase()}`;
+      document.getElementById('modal-filename-title').textContent = item.filename;
+
+      const previewImg = document.getElementById('modal-preview-img');
+      previewImg.src = url;
+      previewImg.alt = item.alt || item.filename;
+
+      document.getElementById('modal-open-tab-btn').href = url;
+      document.getElementById('modal-download-btn').href = url;
+      document.getElementById('modal-download-btn').setAttribute('download', item.filename);
+
+      document.getElementById('modal-info-filename').textContent = item.filename;
+      document.getElementById('modal-info-dims').textContent = dims;
+      document.getElementById('modal-info-size').textContent = formatBytes(item.size);
+      document.getElementById('modal-info-id').textContent = `Asset ID: ${item.id}`;
+
+      document.getElementById('modal-copy-relative').value = cleanRel;
+      document.getElementById('modal-copy-url').value = window.location.origin + url;
+      document.getElementById('modal-copy-tag').value = `<img src="${cleanRel}" alt="${item.alt || ''}">`;
+
+      document.getElementById('modal-input-alt').value = item.alt || '';
+
+      document.getElementById('media-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('media-modal').classList.remove('active');
+      activeModalItem = null;
+    }
+
+    // Inline Save Alt Text
+    async function saveAltText() {
+      if (!activeModalItem) return;
+      const newAlt = document.getElementById('modal-input-alt').value.trim();
+      try {
+        const res = await fetch(`/api/admin/media/${activeModalItem.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ alt: newAlt })
+        });
+        const data = await res.json();
+        if (data.success) {
+          activeModalItem.alt = newAlt;
+          document.getElementById('modal-copy-tag').value = `<img src="${(activeModalItem.path || activeModalItem.url).replace(/^\/+/, '')}" alt="${newAlt}">`;
+          showToast('Alt text updated successfully!');
+          applyFilterAndRender();
+        } else {
+          showToast(data.error || 'Failed to update alt text', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    // Delete Media
+    async function deleteMedia(id, name) {
+      if (!confirm(`Are you sure you want to delete "${name}" from the media library? This cannot be undone.`)) return;
+      try {
+        const res = await fetch(`/api/admin/media/${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Image removed from library.');
+          allMediaItems = allMediaItems.filter(m => m.id !== id);
+          updateStats();
+          applyFilterAndRender();
+        } else {
+          showToast(data.error || 'Failed to delete asset', 'error');
+        }
+      } catch (err) {
+        showToast('Error deleting asset: ' + err.message, 'error');
+      }
+    }
+
+    function deleteCurrentModalItem() {
+      if (!activeModalItem) return;
+      const id = activeModalItem.id;
+      const fn = activeModalItem.filename;
+      closeModal();
+      deleteMedia(id, fn);
+    }
+
+    const ALLOWED_IMAGE_EXTS = new Set([
+      'jpg', 'jpeg', 'png', 'webp', 'svg', 'gif', 'avif', 'bmp', 'ico', 'tiff', 'tif', 'heic'
+    ]);
+
+    // Universal Picture Upload Handler (Native FormData Multipart with Client & Server Validation)
+    async function handleFilesSelected(files) {
+      if (!files || !files.length) return;
+
+      const progressBox = document.getElementById('upload-progress-box');
+      const progressBar = document.getElementById('upload-progress-bar');
+      const statusText = document.getElementById('upload-status-text');
+      const percentText = document.getElementById('upload-percent-text');
+
+      const validFiles = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const ext = (file.name.split('.').pop() || '').toLowerCase();
+        
+        // Validation: Must be an image format
+        if (!ALLOWED_IMAGE_EXTS.has(ext) && !file.type.startsWith('image/')) {
+          showToast(`"${file.name}" is not a picture file. Only images (JPG, PNG, WebP, SVG, GIF, AVIF, BMP, ICO) are allowed.`, 'error');
+          continue;
+        }
+
+        // Validation: Max file size (50MB)
+        if (file.size > 50 * 1024 * 1024) {
+          showToast(`"${file.name}" exceeds the 50 MB limit.`, 'error');
+          continue;
+        }
+
+        validFiles.push(file);
+      }
+
+      if (!validFiles.length) {
+        document.getElementById('top-file-input').value = '';
+        return;
+      }
+
+      progressBox.style.display = 'block';
+      progressBar.style.width = '15%';
+      statusText.textContent = `Uploading ${validFiles.length} picture(s)...`;
+      percentText.textContent = '15%';
+
+      try {
+        const formData = new FormData();
+        validFiles.forEach(f => formData.append('files', f));
+
+        progressBar.style.width = '50%';
+        percentText.textContent = '50%';
+
+        const res = await fetch('/api/admin/media/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        progressBar.style.width = '100%';
+        percentText.textContent = '100%';
+
+        if (data.success) {
+          showToast(`Successfully uploaded ${data.count || validFiles.length} picture(s)!`);
+          if (data.warnings && data.warnings.length) {
+            data.warnings.forEach(w => showToast(w, 'warning'));
+          }
+          setTimeout(() => { progressBox.style.display = 'none'; }, 900);
+          loadMedia();
+        } else {
+          showToast(data.error || 'Upload failed', 'error');
+          progressBox.style.display = 'none';
+        }
+      } catch (err) {
+        showToast('Upload error: ' + err.message, 'error');
+        progressBox.style.display = 'none';
+      }
+
+      document.getElementById('top-file-input').value = '';
+    }
+
+    // Drag and drop listeners
+    const dz = document.getElementById('dropzone');
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dz.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dz.classList.add('dragover');
+      }, false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      dz.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dz.classList.remove('dragover');
+      }, false);
+    });
+    dz.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files && dt.files.length) {
+        handleFilesSelected(dt.files);
+      }
+    });
+
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Initial load
+    loadMedia();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Projects Manager | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    .table-thumb-wrap {
+      width: 58px;
+      height: 42px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #E2E8F0;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .table-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-status.is-yes {
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+    /* Homepage Replace Modal Options */
+    .swap-project-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 2px solid #E2E8F0;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+    .swap-project-option:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+    }
+    .swap-project-option.is-selected {
+      border-color: #ED1C2E !important;
+      background: #FFF5F5 !important;
+    }
+    .badge-status.is-no {
+      background: #F1F5F9;
+      color: #64748B;
+      border: 1px solid #CBD5E1;
+    }
+    .tech-pill-chip {
+      display: inline-block;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #B91C1C;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin: 2px 2px;
+      white-space: nowrap;
+    }
+    .preview-thumb-small {
+      width: 64px;
+      height: 46px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1.5px solid var(--border-color);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      background: #E2E8F0;
+    }
+    .preview-thumb-small:hover, .preview-thumb-small.active {
+      border-color: var(--brand-red);
+      transform: scale(1.05);
+    }
+    .preview-thumb-small img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .filter-btn-reset {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      color: #475569;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .filter-btn-reset:hover {
+      background: #F1F5F9;
+      color: var(--brand-red);
+      border-color: #CBD5E1;
+    }
+    .btn-icon-only {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      flex-shrink: 0;
+    }
+    .btn-icon-only svg {
+      display: block;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- 1. PAGE HEADER -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="color:var(--brand-red); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px;">
+              PORTFOLIO CMS &mdash; ADMIN CONTROL
+            </div>
+            <h2 style="font-size:24px; font-weight:800; color:#0F172A; margin:0 0 6px 0; letter-spacing:-0.02em;">
+              Portfolio Projects Manager
+            </h2>
+            <p style="font-size:13.5px; color:#64748B; margin:0; max-width:680px; line-height:1.5;">
+              Create, edit, and dynamically manage all required project fields with instant database synchronization.
+            </p>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <a href="/portfolio.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display:inline-flex; align-items:center; gap:6px;">
+              <span>View Live Portfolio</span>
+              <svg style="width:14px; height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+            <button type="button" class="btn btn-primary" onclick="openProjectModal()" style="display:inline-flex; align-items:center; gap:6px;">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Add New Project</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. DASHBOARD STATISTICS (4 CARDS) -->
+        <div class="stats-grid-4">
+          <!-- Card 1: TOTAL PROJECTS -->
+          <div class="stat-card">
+            <div class="stat-label">TOTAL PROJECTS</div>
+            <div class="stat-value" id="stat-total-projects">0</div>
+            <div class="stat-desc">Total records stored in database</div>
+          </div>
+
+          <!-- Card 2: FEATURED ON HOMEPAGE -->
+          <div class="stat-card">
+            <div class="stat-label">FEATURED ON HOMEPAGE</div>
+            <div class="stat-value" id="stat-featured-projects" style="color:var(--brand-red);">0</div>
+            <div class="stat-desc">Active on live homepage showcase</div>
+          </div>
+
+          <!-- Card 3: ACTIVE CATEGORIES -->
+          <div class="stat-card">
+            <div class="stat-label">ACTIVE CATEGORIES</div>
+            <div class="stat-value" id="stat-active-categories">0</div>
+            <div class="stat-desc">Distinct service classifications</div>
+          </div>
+
+          <!-- Card 4: DATABASE STATUS -->
+          <div class="stat-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div class="stat-label">DATABASE STATUS</div>
+              <div class="stat-value" id="stat-db-status" style="font-size:20px; color:#059669; display:flex; align-items:center; gap:8px;">
+                <span class="pulse-dot"></span>
+                <span>Synchronized</span>
+              </div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; border-top:1px solid #F1F5F9; padding-top:6px;">
+              <span id="stat-db-time" style="font-size:11.5px; color:#64748B;">Live JSON storage</span>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="syncDatabase(true)" title="Fetch and verify latest records from server" style="font-size:11px; padding:3px 9px;">
+                ↻ Refresh
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. SEARCH AND FILTER BAR -->
+        <div class="card" style="margin-bottom:24px;">
+          <div style="padding:16px 20px; background:#F8FAFC; border-bottom:1px solid var(--border-light); display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px; max-width:380px; position:relative;">
+              <input type="text" id="filter-search" class="form-control" placeholder="Search by project name, technology, URL or category..." oninput="applyFilters()">
+            </div>
+            <select id="filter-category" class="form-control" style="width:auto; min-width:200px; max-width:260px;" onchange="applyFilters()">
+              <option value="all">All Categories</option>
+            </select>
+            <select id="filter-homepage" class="form-control" style="width:auto; min-width:170px;" onchange="applyFilters()">
+              <option value="all">All (Homepage &amp; Standard)</option>
+              <option value="yes">Homepage (Featured)</option>
+              <option value="no">Standard (Portfolio Only)</option>
+            </select>
+            <button type="button" class="filter-btn-reset" onclick="resetFilters()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Reset Filters</span>
+            </button>
+            <div style="margin-left:auto; font-size:12.5px; color:#64748B;">
+              Showing <strong id="filter-count" style="color:#0F172A;">0</strong> of <strong id="filter-total" style="color:#0F172A;">0</strong> projects
+            </div>
+          </div>
+
+          <!-- 4. PROJECT MANAGEMENT TABLE -->
+          <div class="table-container" style="overflow-x:auto;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:70px;">IMAGE</th>
+                  <th>PROJECT TITLE</th>
+                  <th>CATEGORY</th>
+                  <th style="width:150px;">SERVICE MONTH</th>
+                  <th style="text-align:right; width:95px;">ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="projects-table-body">
+                <tr><td colspan="5" style="text-align:center; padding:36px; color:#64748B;">Loading database projects...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       PROJECT PREVIEW MODAL (View Action)
+       ========================================================================= -->
+  <div class="admin-modal-overlay" id="preview-modal" role="dialog" aria-modal="true" aria-labelledby="preview-heading">
+    <div class="admin-modal-card" style="max-width: 820px;">
+      <div class="modal-header-bar">
+        <div>
+          <div class="modal-kicker">[ PROJECT PREVIEW &bull; SAVED DETAILS ]</div>
+          <h2 class="modal-title-text" id="preview-heading">Project Preview</h2>
+        </div>
+        <button class="modal-close-icon" onclick="closePreviewModal()" aria-label="Close preview">&times;</button>
+      </div>
+
+      <div class="modal-form-body" style="padding: 24px 30px;">
+        <!-- Large Showcase Display -->
+        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border-color); background:#0F172A; margin-bottom:14px; aspect-ratio:16/9; max-height:360px; display:flex; align-items:center; justify-content:center;">
+          <img id="preview-hero-img" src="" alt="Project Showcase" style="width:100%; height:100%; object-fit:contain; background:#0F172A;">
+        </div>
+
+        <!-- Thumbnail Strip -->
+        <div id="preview-thumbs-strip" style="display:flex; gap:10px; overflow-x:auto; margin-bottom:20px; padding-bottom:4px;">
+          <!-- Small clickable thumbnails inserted dynamically -->
+        </div>
+
+        <!-- Specs Grid -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px; margin-bottom:20px; background:#F8FAFC; border:1px solid var(--border-light); border-radius:12px; padding:16px 20px;">
+          <div>
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:2px;">Category</span>
+            <span id="preview-category" class="table-category-badge">-</span>
+          </div>
+          <div>
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:2px;">Homepage Status</span>
+            <span id="preview-homepage-badge" class="badge-status is-yes">-</span>
+          </div>
+          <div>
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:2px;">Service Period &amp; Duration</span>
+            <span id="preview-service-meta" style="font-size:13px; font-weight:700; color:#0F172A;">-</span>
+          </div>
+          <div>
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:2px;">Live URL</span>
+            <a id="preview-live-url" href="#" target="_blank" rel="noopener noreferrer" class="table-visit-link" style="margin-top:2px;">
+              <span>Visit Link</span> <span>&nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Technologies -->
+        <div style="margin-bottom:20px;">
+          <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:8px;">Engineering Technologies</span>
+          <div id="preview-tech-badges" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+        </div>
+
+        <!-- Description -->
+        <div style="margin-bottom:8px;">
+          <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B; display:block; margin-bottom:8px;">Project Scope &amp; Architecture Description</span>
+          <div id="preview-description" style="font-size:14px; line-height:1.65; color:#334155; background:#FFFFFF; border:1px solid var(--border-color); border-radius:10px; padding:16px 18px; white-space:pre-line;"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer-bar">
+        <button type="button" class="btn-admin-cta btn-admin-secondary" onclick="closePreviewModal()">Close Preview</button>
+        <button type="button" class="btn-admin-cta btn-admin-primary" id="preview-edit-shortcut-btn">
+          <span>Edit Project in Editor</span>
+          <span>&rarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       EXACT 9-PARAMETER PROJECT EDITOR MODAL (Add / Edit Action)
+       ========================================================================= -->
+  <div class="admin-modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="admin-modal-card">
+      <div class="modal-header-bar">
+        <div>
+          <div class="modal-kicker">[ FIELD EDITOR &bull; 9 PARAMETERS ]</div>
+          <h2 class="modal-title-text" id="modal-heading">Add New Project</h2>
+        </div>
+        <button class="modal-close-icon" id="modal-close-btn" onclick="closeProjectModal()" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="project-form" onsubmit="handleProjectFormSubmit(event)">
+        <input type="hidden" id="field-project-id">
+        <div class="modal-form-body">
+
+          <!-- Alert for validation errors -->
+          <div class="form-alert-banner" id="form-error-alert" role="alert">
+            <strong>Please correct the following fields before saving:</strong>
+            <ul id="error-list"></ul>
+          </div>
+
+          <div class="form-grid-layout">
+            
+            <!-- Field 1: Project Title (Required) -->
+            <div class="col-span-2">
+              <label class="form-field-label" for="field-title">
+                1. Project Title <span class="req-star">*</span>
+              </label>
+              <input type="text" id="field-title" class="form-input-text" placeholder="e.g. KP E-Services" required oninput="markDirty()">
+              <div class="form-field-help">The primary headline displayed prominently on the project page.</div>
+            </div>
+
+            <!-- Field 2: Project URL (Required) -->
+            <div>
+              <label class="form-field-label" for="field-url">
+                2. Project URL <span class="req-star">*</span>
+              </label>
+              <input type="url" id="field-url" class="form-input-text" placeholder="https://play.google.com/store/apps/details?id=kp_eservice.com" required oninput="markDirty()">
+              <div class="form-field-help">Live clickable URL with external link icon.</div>
+            </div>
+
+            <!-- Field 3: Project Category (Required) -->
+            <div>
+              <label class="form-field-label" for="field-category">
+                3. Project Category <span class="req-star">*</span>
+              </label>
+              <input type="text" id="field-category" list="category-suggestions" class="form-input-text" placeholder="e.g. FinTech &amp; Loan Operations" required oninput="markDirty()">
+              <datalist id="category-suggestions">
+                <option value="Healthcare &amp; Diagnostics">
+                <option value="FinTech &amp; Loan Operations">
+                <option value="Financial Valuation &amp; Advisory">
+                <option value="Industrial Real Estate &amp; Logistics">
+                <option value="Enterprise Logistics &amp; Supply Chain">
+                <option value="E-Commerce &amp; Digital Merchandising">
+                <option value="Legal Tech &amp; Case Management">
+                <option value="Creative Agency &amp; Branding">
+                <option value="Automotive Telematics &amp; Fleet IoT">
+                <option value="Renewable Energy Analytics">
+                <option value="B2B Marketplace &amp; Procurement">
+                <option value="Web Application">
+                <option value="Mobile Application">
+                <option value="Enterprise Software &amp; ERP">
+              </datalist>
+              <div class="form-field-help">Populate options from the central Project Categories database.</div>
+            </div>
+
+            <!-- Field 4: Project At Home Page (Required) -->
+            <div>
+              <label class="form-field-label">
+                4. Project At Home Page <span class="req-star">*</span>
+                <span class="tooltip-badge" data-tooltip="Display on Home Page (Max 3 projects limit applies)">?</span>
+              </label>
+              <div class="radio-card-wrap">
+                <label class="radio-choice-card">
+                  <input type="radio" name="at_home_page" value="yes" id="radio-home-yes" onchange="handleHomepageRadioChange(this)">
+                  <span><strong>Yes</strong> (Homepage)</span>
+                </label>
+                <label class="radio-choice-card">
+                  <input type="radio" name="at_home_page" value="no" id="radio-home-no" onchange="handleHomepageRadioChange(this)">
+                  <span><strong>No</strong> (Standard)</span>
+                </label>
+              </div>
+              <div id="homepage-swap-alert" style="display: none; margin-top: 6px; font-size: 0.78rem; line-height: 1.4; color: #991B1B; background: #FEF2F2; border: 1px solid #FECACA; padding: 6px 10px; border-radius: 6px;"></div>
+            </div>
+
+            <!-- Fields 5 & 6: Service Month & Duration (in days) -->
+            <div>
+              <div style="display: grid; grid-template-columns: 1.25fr 0.95fr; gap: 10px;">
+                <div>
+                  <label class="form-field-label" for="field-month">
+                    5. Service Month <span class="req-star">*</span>
+                  </label>
+                  <input type="text" id="field-month" class="form-input-text" placeholder="e.g. October 2024" required oninput="markDirty()">
+                </div>
+                <div>
+                  <label class="form-field-label" for="field-duration">
+                    6. Duration (Days) <span class="req-star">*</span>
+                  </label>
+                  <input type="number" id="field-duration" class="form-input-text" placeholder="e.g. 90" min="1" max="9999" required oninput="markDirty()">
+                </div>
+              </div>
+              <div class="form-field-help">Delivery month/year and service duration in days.</div>
+            </div>
+
+            <!-- Field 7: Project Technologies (Required) -->
+            <div class="col-span-2">
+              <label class="form-field-label">
+                7. Project Technologies <span class="req-star">*</span>
+              </label>
+              <div class="tags-manager-box" id="tags-container" onclick="document.getElementById('tech-input-bare').focus()">
+                <!-- Tag bubbles will render here -->
+                <input type="text" id="tech-input-bare" class="tag-input-bare" placeholder="Type tech name and press Enter (e.g. React.js, Node.js, PostgreSQL)...">
+              </div>
+              <div class="form-field-help">Press Enter or comma to add each technology badge.</div>
+            </div>
+
+            <!-- Field 8: Project Description (Required) -->
+            <div class="col-span-2">
+              <label class="form-field-label" for="field-description">
+                8. Project Description <span class="req-star">*</span>
+              </label>
+              <textarea id="field-description" class="form-textarea-text" rows="3" placeholder="Detailed description explaining the project and its purpose..." required oninput="markDirty()"></textarea>
+              <div class="form-field-help">Provide a comprehensive explanation of the project domain, scope, and technical purpose.</div>
+            </div>
+
+            <!-- Field 9: Project Images (Required) -->
+            <div class="col-span-2">
+              <label class="form-field-label">
+                9. Project Images <span class="req-star">*</span>
+              </label>
+              <div class="images-uploader-zone">
+                <input type="file" id="file-uploader" multiple accept="image/*" style="display: none;" onchange="handleProjectFiles(this.files)">
+                <div style="display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap;">
+                  <button type="button" class="btn-admin-cta btn-admin-secondary" onclick="document.getElementById('file-uploader').click();" style="padding: 7px 16px; font-size: 0.84rem;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <span>Upload Multiple Images</span>
+                  </button>
+                  <span style="font-size: 0.8rem; color: #94A3B8;">or path:</span>
+                  <input type="text" id="manual-image-input" placeholder="assets/portfolio-hero-1.png" class="form-input-text" style="width: 240px; display: inline-block; padding: 6px 10px; font-size: 0.82rem;">
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="addManualImage(document.getElementById('manual-image-input').value)" style="padding: 6px 12px; font-size: 0.82rem;">Add Asset</button>
+                </div>
+                <div class="images-grid-preview" id="images-preview-grid">
+                  <!-- Thumbnails populated here -->
+                </div>
+              </div>
+              <div class="form-field-help">Upload at least one image. The first image serves as the primary cover.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="modal-footer-bar">
+          <button type="button" class="btn-admin-cta btn-admin-secondary" onclick="closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn-admin-cta btn-admin-primary" id="btn-save-project">
+            <span>Save Project to Database</span>
+            <span style="font-size: 1.1rem; line-height: 1;">&rarr;</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       HOMEPAGE FEATURED PROJECT REPLACEMENT MODAL (MAX 3 LIMIT)
+       ========================================================================= -->
+  <div class="admin-modal-overlay" id="homepage-replace-modal" role="dialog" aria-modal="true" aria-labelledby="swap-modal-heading" style="z-index: 100000;">
+    <div class="admin-modal-card" style="max-width: 560px; border-top: 4px solid var(--brand-red);">
+      <div class="modal-header-bar">
+        <div>
+          <div class="modal-kicker" style="color: var(--brand-red);">[ HOMEPAGE LIMIT: MAX 3 PROJECTS ]</div>
+          <h2 class="modal-title-text" id="swap-modal-heading" style="font-size: 1.15rem;">Select Project to Replace on Home Page</h2>
+        </div>
+        <button type="button" class="btn-modal-close" onclick="cancelHomepageSwap()" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body-scroll" style="padding: 20px;">
+        <p style="margin: 0 0 16px; font-size: 0.88rem; color: #475569; line-height: 1.5;">
+          Only <strong>3 projects</strong> can be displayed in the Home Page's Featured Work section at a time. The 3 projects below are currently featured on the Home Page. Please select which project should be replaced by this one:
+        </p>
+
+        <div id="swap-projects-list" style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Dynamically populated 3 projects -->
+        </div>
+      </div>
+
+      <div class="modal-footer-bar" style="background: #F8FAFC; border-top: 1px solid #E2E8F0; padding: 12px 20px; display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn-admin-cta btn-admin-secondary" onclick="cancelHomepageSwap()">Cancel (Keep as Standard)</button>
+        <button type="button" class="btn-admin-cta btn-admin-primary" onclick="confirmHomepageSwap()">Replace Selected Project</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    let allProjects = [];
+    let currentTechnologies = [];
+    let currentImages = [];
+    let formDirty = false;
+
+    function markDirty() {
+      formDirty = true;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAuth();
+      setupAdminLayout({
+        activeNav: 'projects',
+        title: 'Portfolio Projects Manager',
+        breadcrumbs: [
+          { label: 'Home', url: '/admin/dashboard.html' },
+          { label: 'Selected Work', url: '/admin/homepage/featured-work.html' },
+          { label: 'Portfolio CMS Manager', url: '/admin/projects.html' }
+        ]
+      });
+
+      setupTagInputEvents();
+      await syncDatabase(false);
+
+      // Check URL for ?edit=id
+      const urlParams = new URLSearchParams(window.location.search);
+      const editId = urlParams.get('edit');
+      if (editId) {
+        openProjectModal(editId);
+      }
+    });
+
+    // =========================================================================
+    // DATABASE SYNCHRONIZATION & STATISTICS
+    // =========================================================================
+    async function syncDatabase(userInitiated = false) {
+      const dbStatusEl = document.getElementById('stat-db-status');
+      const dbTimeEl = document.getElementById('stat-db-time');
+
+      if (userInitiated) {
+        dbStatusEl.innerHTML = `<span style="font-size:14px; color:#D97706;">↻ Synchronizing...</span>`;
+      }
+
+      try {
+        const res = await fetch('/api/projects');
+        if (!res.ok) throw new Error('API server returned ' + res.status);
+        allProjects = await res.json();
+
+        // Calculate dynamic dashboard statistics
+        updateDashboardStatistics();
+        populateCategoryFilter();
+        applyFilters();
+
+        dbStatusEl.innerHTML = `<span class="pulse-dot"></span><span>Synchronized</span>`;
+        dbStatusEl.style.color = '#059669';
+        dbTimeEl.textContent = `Synced ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
+
+        if (userInitiated) {
+          showToast('Database synchronized successfully: ' + allProjects.length + ' records active');
+        }
+      } catch (err) {
+        dbStatusEl.innerHTML = `<span style="color:#EF4444;">● Sync Error</span>`;
+        dbStatusEl.style.color = '#EF4444';
+        dbTimeEl.textContent = 'Failed to reach database';
+        showToast('Database synchronization error: ' + err.message, 'error');
+      }
+    }
+
+    function updateDashboardStatistics() {
+      // 1. Total Projects
+      document.getElementById('stat-total-projects').textContent = allProjects.length;
+
+      // 2. Featured on Homepage
+      const featuredCount = allProjects.filter(p => Boolean(p.at_home_page)).length;
+      document.getElementById('stat-featured-projects').textContent = featuredCount;
+
+      // 3. Active Categories
+      const categories = [...new Set(allProjects.map(p => p.category).filter(Boolean))];
+      document.getElementById('stat-active-categories').textContent = categories.length;
+
+      document.getElementById('filter-total').textContent = allProjects.length;
+    }
+
+    function populateCategoryFilter() {
+      const categories = [...new Set(allProjects.map(p => p.category).filter(Boolean))].sort();
+      const sel = document.getElementById('filter-category');
+      const curVal = sel.value;
+
+      sel.innerHTML = '<option value="all">All Categories</option>' + categories.map(c => `
+        <option value="${escapeHtml(c)}">${escapeHtml(c)}</option>
+      `).join('');
+
+      if (categories.includes(curVal)) {
+        sel.value = curVal;
+      }
+    }
+
+    // =========================================================================
+    // SEARCH & FILTER SYSTEM
+    // =========================================================================
+    function applyFilters() {
+      const q = (document.getElementById('filter-search').value || '').toLowerCase().trim();
+      const cat = document.getElementById('filter-category').value;
+      const home = document.getElementById('filter-homepage').value;
+
+      const filtered = allProjects.filter(p => {
+        const titleMatch = (p.title || '').toLowerCase().includes(q);
+        const catMatch = (p.category || '').toLowerCase().includes(q);
+        const urlMatch = (p.url || '').toLowerCase().includes(q);
+        const techMatch = (p.technologies || []).some(t => t.toLowerCase().includes(q));
+        const slugMatch = (p.slug || '').toLowerCase().includes(q);
+
+        const matchesQuery = !q || titleMatch || catMatch || urlMatch || techMatch || slugMatch;
+        const matchesCat = (cat === 'all') || (p.category === cat);
+        const matchesHome = (home === 'all') || (home === 'yes' && p.at_home_page) || (home === 'no' && !p.at_home_page);
+
+        return matchesQuery && matchesCat && matchesHome;
+      });
+
+      renderProjectsTable(filtered);
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-search').value = '';
+      document.getElementById('filter-category').value = 'all';
+      document.getElementById('filter-homepage').value = 'all';
+      applyFilters();
+      showToast('Filters reset');
+    }
+
+    // =========================================================================
+    // RENDER PROJECTS TABLE (9 COLUMNS)
+    // =========================================================================
+    function renderProjectsTable(projects) {
+      const tbody = document.getElementById('projects-table-body');
+      document.getElementById('filter-count').textContent = projects.length;
+
+      if (!projects.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding:36px; color:#64748B;">
+              No projects found matching the selected search and filter criteria.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = projects.map(p => {
+        const coverImg = (p.images && p.images.length) ? p.images[0] : 'assets/portfolio-hero-1.png';
+        const slugDisplay = p.slug || p.id;
+
+        return `
+          <tr>
+            <!-- 1. IMAGE -->
+            <td>
+              <div class="table-thumb-wrap">
+                <img src="/${coverImg.replace(/^\//, '')}" alt="${escapeHtml(p.title)}" onerror="this.src='/assets/portfolio-hero-1.png'">
+              </div>
+            </td>
+
+            <!-- 2. PROJECT TITLE & SLUG -->
+            <td>
+              <div class="table-proj-title">${escapeHtml(p.title)}</div>
+              <div class="table-proj-slug">${escapeHtml(slugDisplay)}</div>
+            </td>
+
+            <!-- 3. CATEGORY -->
+            <td>
+              <span class="table-category-badge">${escapeHtml(p.category || 'General')}</span>
+            </td>
+
+            <!-- 4. SERVICE MONTH -->
+            <td>
+              <span style="font-size:12.5px; font-weight:700; color:#0F172A;">${escapeHtml(p.service_month || 'N/A')}</span>
+            </td>
+
+            <!-- 5. ACTIONS (Edit symbol, Delete symbol) -->
+            <td style="text-align:right; white-space:nowrap;">
+              <div style="display:inline-flex; gap:6px; justify-content:flex-end;">
+                <button type="button" class="btn btn-sm btn-primary btn-icon-only" onclick="openProjectModal('${escapeHtml(p.id)}')" title="Edit Project" aria-label="Edit Project">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger btn-icon-only" onclick="deleteProject('${escapeHtml(p.id)}', '${escapeHtml(p.title)}')" title="Delete Project" aria-label="Delete Project">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 5. VIEW ACTION: PROJECT PREVIEW MODAL
+    // =========================================================================
+    function openProjectPreview(projectId) {
+      const p = allProjects.find(item => item.id === projectId || item.slug === projectId);
+      if (!p) {
+        showToast('Project not found', 'error');
+        return;
+      }
+
+      document.getElementById('preview-heading').textContent = `Preview: ${p.title}`;
+      
+      const images = (p.images && p.images.length) ? p.images : ['assets/portfolio-hero-1.png'];
+      const heroImg = document.getElementById('preview-hero-img');
+      heroImg.src = `/${images[0].replace(/^\//, '')}`;
+
+      // Build thumbs strip
+      const thumbsContainer = document.getElementById('preview-thumbs-strip');
+      thumbsContainer.innerHTML = images.map((img, idx) => `
+        <div class="preview-thumb-small ${idx === 0 ? 'active' : ''}" onclick="switchPreviewImage(this, '/${img.replace(/^\//, '')}')">
+          <img src="/${img.replace(/^\//, '')}" alt="Thumb ${idx + 1}" onerror="this.src='/assets/portfolio-hero-1.png'">
+        </div>
+      `).join('');
+
+      document.getElementById('preview-category').textContent = p.category || 'General';
+      
+      const homeBadge = document.getElementById('preview-homepage-badge');
+      if (p.at_home_page) {
+        homeBadge.className = 'badge-status is-yes';
+        homeBadge.textContent = '● Yes (Featured on Homepage)';
+      } else {
+        homeBadge.className = 'badge-status is-no';
+        homeBadge.textContent = '○ No (Standard / Portfolio Only)';
+      }
+
+      document.getElementById('preview-service-meta').textContent = `${p.service_month || 'N/A'} • ${p.service_duration_days || 30} Days engineering`;
+      
+      const urlLink = document.getElementById('preview-live-url');
+      if (p.url) {
+        urlLink.href = p.url;
+        urlLink.style.display = 'inline-flex';
+      } else {
+        urlLink.style.display = 'none';
+      }
+
+      // Tech badges
+      const techWrap = document.getElementById('preview-tech-badges');
+      techWrap.innerHTML = (p.technologies || []).map(t => `<span class="tech-pill-chip" style="font-size:12px; padding:3px 9px;">${escapeHtml(t)}</span>`).join('');
+
+      // Description
+      document.getElementById('preview-description').textContent = p.description || 'No description provided for this project.';
+
+      // Wire edit shortcut button
+      document.getElementById('preview-edit-shortcut-btn').onclick = () => {
+        closePreviewModal();
+        openProjectModal(p.id);
+      };
+
+      document.getElementById('preview-modal').classList.add('active');
+    }
+
+    function switchPreviewImage(el, src) {
+      document.querySelectorAll('.preview-thumb-small').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('preview-hero-img').src = src;
+    }
+
+    function closePreviewModal() {
+      document.getElementById('preview-modal').classList.remove('active');
+    }
+
+    let pendingSwapProjectId = null;
+
+    function handleHomepageRadioChange(radio) {
+      markDirty();
+      if (radio.value === 'yes') {
+        const currentId = document.getElementById('field-project-id').value;
+        const currentFeatured = allProjects.filter(p => Boolean(p.at_home_page) && String(p.id) !== String(currentId) && String(p.slug) !== String(currentId));
+
+        if (currentFeatured.length >= 3) {
+          openReplaceHomepageModal(currentFeatured);
+        } else {
+          pendingSwapProjectId = null;
+          hideSwapAlert();
+        }
+      } else {
+        pendingSwapProjectId = null;
+        hideSwapAlert();
+      }
+    }
+
+    function openReplaceHomepageModal(featuredList) {
+      const container = document.getElementById('swap-projects-list');
+      container.innerHTML = featuredList.slice(0, 3).map((p, idx) => {
+        const isFirst = (idx === 0);
+        const cover = (p.images && p.images[0]) ? ('/' + p.images[0].replace(/^\//, '')) : '/assets/portfolio-hero-1.png';
+        return `
+          <label class="swap-project-option ${isFirst ? 'is-selected' : ''}" onclick="selectSwapOption(this)">
+            <input type="radio" name="project_to_replace" value="${p.id}" ${isFirst ? 'checked' : ''} style="accent-color: #ED1C2E; width: 16px; height: 16px;">
+            <img src="${cover}" alt="${p.title}" style="width: 52px; height: 38px; object-fit: cover; border-radius: 6px; border: 1px solid #CBD5E1;">
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-weight: 700; font-size: 0.92rem; color: #0F172A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(p.title)}</div>
+              <div style="font-size: 0.76rem; color: #64748B;">${escapeHtml(p.category || 'Portfolio')} &bull; ${escapeHtml(p.service_month || '')}</div>
+            </div>
+            <span style="font-size: 0.72rem; font-weight: 600; color: #DC2626; background: #FEE2E2; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">Will be replaced</span>
+          </label>
+        `;
+      }).join('');
+
+      document.getElementById('homepage-replace-modal').classList.add('active');
+    }
+
+    function selectSwapOption(cardEl) {
+      document.querySelectorAll('.swap-project-option').forEach(el => el.classList.remove('is-selected'));
+      cardEl.classList.add('is-selected');
+      const radio = cardEl.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+    }
+
+    function confirmHomepageSwap() {
+      const selected = document.querySelector('input[name="project_to_replace"]:checked');
+      if (!selected) {
+        showToast('Please select a project to replace', 'error');
+        return;
+      }
+      pendingSwapProjectId = selected.value;
+      const replacedProj = allProjects.find(p => String(p.id) === String(pendingSwapProjectId));
+      const replacedTitle = replacedProj ? replacedProj.title : 'selected project';
+
+      document.getElementById('radio-home-yes').checked = true;
+      document.getElementById('radio-home-no').checked = false;
+
+      showSwapAlert(`⚠️ Limit reached (3 max). On Save, this project will replace <strong>${escapeHtml(replacedTitle)}</strong> on the Home Page.`);
+      document.getElementById('homepage-replace-modal').classList.remove('active');
+      showToast(`Selected "${replacedTitle}" to be replaced on Home Page.`);
+    }
+
+    function cancelHomepageSwap() {
+      pendingSwapProjectId = null;
+      document.getElementById('radio-home-yes').checked = false;
+      document.getElementById('radio-home-no').checked = true;
+      hideSwapAlert();
+      document.getElementById('homepage-replace-modal').classList.remove('active');
+    }
+
+    function showSwapAlert(msg) {
+      const el = document.getElementById('homepage-swap-alert');
+      if (el) {
+        el.innerHTML = msg;
+        el.style.display = 'block';
+      }
+    }
+
+    function hideSwapAlert() {
+      const el = document.getElementById('homepage-swap-alert');
+      if (el) {
+        el.innerHTML = '';
+        el.style.display = 'none';
+      }
+    }
+
+    // =========================================================================
+    // 6. EDIT & ADD ACTION: 9-PARAMETER PROJECT EDITOR MODAL
+    // =========================================================================
+    function openProjectModal(projectId = null) {
+      const modal = document.getElementById('project-modal');
+      const errBox = document.getElementById('form-error-alert');
+      errBox.style.display = 'none';
+      formDirty = false;
+      pendingSwapProjectId = null;
+      hideSwapAlert();
+
+      if (projectId) {
+        const p = allProjects.find(item => item.id === projectId || item.slug === projectId);
+        if (!p) {
+          showToast('Project not found', 'error');
+          return;
+        }
+
+        document.getElementById('modal-heading').textContent = `Edit Project: ${p.title}`;
+        document.getElementById('field-project-id').value = p.id;
+        document.getElementById('field-title').value = p.title || '';
+        document.getElementById('field-url').value = p.url || '';
+        document.getElementById('field-category').value = p.category || '';
+        document.getElementById('radio-home-yes').checked = Boolean(p.at_home_page);
+        document.getElementById('radio-home-no').checked = !p.at_home_page;
+        document.getElementById('field-month').value = p.service_month || '';
+        document.getElementById('field-duration').value = p.service_duration_days || 30;
+        document.getElementById('field-description').value = p.description || '';
+
+        currentTechnologies = Array.isArray(p.technologies) ? [...p.technologies] : ['React.js'];
+        currentImages = Array.isArray(p.images) ? [...p.images] : [];
+      } else {
+        document.getElementById('modal-heading').textContent = 'Add New Project';
+        document.getElementById('field-project-id').value = '';
+        document.getElementById('field-title').value = '';
+        document.getElementById('field-url').value = 'https://';
+        document.getElementById('field-category').value = 'Web Application';
+        
+        // If already 3 projects featured, default new to No, otherwise Yes
+        const featuredCount = allProjects.filter(p => Boolean(p.at_home_page)).length;
+        document.getElementById('radio-home-yes').checked = (featuredCount < 3);
+        document.getElementById('radio-home-no').checked = (featuredCount >= 3);
+
+        document.getElementById('field-month').value = 'November 2026';
+        document.getElementById('field-duration').value = 45;
+        document.getElementById('field-description').value = '';
+
+        currentTechnologies = ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS'];
+        currentImages = ['assets/portfolio-hero-1.png'];
+      }
+
+      renderTags();
+      renderImagesPreview();
+      modal.classList.add('active');
+      const formBody = modal.querySelector('.modal-form-body');
+      if (formBody) formBody.scrollTop = 0;
+      const card = modal.querySelector('.admin-modal-card');
+      if (card) card.scrollTop = 0;
+    }
+
+    function closeProjectModal() {
+      if (formDirty) {
+        if (!confirm('You have unsaved changes. Are you sure you want to close without saving?')) {
+          return;
+        }
+      }
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('active');
+      const formBody = modal.querySelector('.modal-form-body');
+      if (formBody) formBody.scrollTop = 0;
+      formDirty = false;
+    }
+
+    // =========================================================================
+    // 7. DELETE ACTION (With confirmation dialog and backend sync)
+    // =========================================================================
+    async function deleteProject(id, title) {
+      if (!confirm(`Are you sure you want to permanently delete "${title}" from the database?\n\nThis will remove the project from both the admin and live website listings.`)) {
+        return;
+      }
+
+      try {
+        const token = localStorage.getItem('admin_token');
+        const res = await fetch(`/api/projects/${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+          credentials: 'same-origin',
+          headers: {
+            ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+          }
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to delete project');
+        }
+
+        showToast(`Project "${title}" deleted successfully.`);
+        await syncDatabase(false);
+      } catch (err) {
+        showToast('Error deleting project: ' + err.message, 'error');
+      }
+    }
+
+    // =========================================================================
+    // TAGS INPUT SYSTEM (TECHNOLOGIES)
+    // =========================================================================
+    function setupTagInputEvents() {
+      const input = document.getElementById('tech-input-bare');
+      input.addEventListener('keydown', (e) => {
+        markDirty();
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const val = input.value.trim().replace(/^,|,$/g, '');
+          if (val && !currentTechnologies.includes(val)) {
+            currentTechnologies.push(val);
+            renderTags();
+            input.value = '';
+          }
+        } else if (e.key === 'Backspace' && input.value === '' && currentTechnologies.length) {
+          currentTechnologies.pop();
+          renderTags();
+        }
+      });
+    }
+
+    function renderTags() {
+      const container = document.getElementById('tags-container');
+      const input = document.getElementById('tech-input-bare');
+
+      container.querySelectorAll('.tag-bubble').forEach(t => t.remove());
+
+      currentTechnologies.forEach((tag, idx) => {
+        const bubble = document.createElement('span');
+        bubble.className = 'tag-bubble';
+        bubble.innerHTML = `
+          <span>${escapeHtml(tag)}</span>
+          <span class="tag-bubble-close" onclick="removeTag(${idx})">&times;</span>
+        `;
+        container.insertBefore(bubble, input);
+      });
+    }
+
+    function removeTag(idx) {
+      markDirty();
+      currentTechnologies.splice(idx, 1);
+      renderTags();
+    }
+
+    // =========================================================================
+    // IMAGES MANAGEMENT & UPLOADER
+    // =========================================================================
+    function renderImagesPreview() {
+      const grid = document.getElementById('images-preview-grid');
+      if (!currentImages.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1; color:#94A3B8; font-size:12px; padding:10px 0;">No images uploaded yet. Upload images above.</div>`;
+        return;
+      }
+
+      grid.innerHTML = currentImages.map((img, idx) => {
+        const cleanPath = `/${img.replace(/^\//, '')}`;
+        const isCover = (idx === 0);
+
+        return `
+          <div class="img-card-preview" title="${escapeHtml(img)}">
+            <img src="${cleanPath}" alt="Project image ${idx + 1}" onerror="this.src='/assets/portfolio-hero-1.png'">
+            <button type="button" class="img-card-remove" onclick="removeImage(${idx})" title="Remove image">&times;</button>
+            ${isCover ? `
+              <span class="img-card-cover-tag">COVER</span>
+            ` : `
+              <button type="button" class="img-card-make-cover" onclick="makeCoverImage(${idx})">Set as Cover</button>
+            `}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function removeImage(idx) {
+      markDirty();
+      currentImages.splice(idx, 1);
+      renderImagesPreview();
+    }
+
+    function makeCoverImage(idx) {
+      markDirty();
+      const chosen = currentImages.splice(idx, 1)[0];
+      currentImages.unshift(chosen);
+      renderImagesPreview();
+    }
+
+    function addManualImage(path) {
+      if (!path) return;
+      markDirty();
+      const clean = path.trim().replace(/^\//, '');
+      if (clean && !currentImages.includes(clean)) {
+        currentImages.push(clean);
+        renderImagesPreview();
+      }
+      document.getElementById('manual-image-input').value = '';
+    }
+
+    async function handleProjectFiles(files) {
+      if (!files || !files.length) return;
+      markDirty();
+      showToast(`Uploading ${files.length} image(s)...`);
+
+      const base64List = [];
+      for (const file of files) {
+        const base64 = await readFileAsBase64(file);
+        base64List.push({ data: base64, name: file.name });
+      }
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ images: base64List })
+        });
+        const data = await res.json();
+        if (data.paths && data.paths.length) {
+          currentImages.push(...data.paths);
+        }
+      } catch (err) {
+        // Fallback local data url if offline
+        base64List.forEach(item => currentImages.push(item.data));
+      }
+
+      renderImagesPreview();
+      showToast('Images uploaded successfully');
+    }
+
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // =========================================================================
+    // SUBMIT & VALIDATE FORM (9 FIELDS)
+    // =========================================================================
+    async function handleProjectFormSubmit(e) {
+      e.preventDefault();
+      const errBox = document.getElementById('form-error-alert');
+      const errList = document.getElementById('error-list');
+      const submitBtn = document.getElementById('btn-save-project');
+
+      errList.innerHTML = '';
+      errBox.style.display = 'none';
+
+      // 9 Parameters
+      const id = document.getElementById('field-project-id').value;
+      const title = document.getElementById('field-title').value.trim();
+      const url = document.getElementById('field-url').value.trim();
+      const category = document.getElementById('field-category').value.trim();
+      const at_home_page = document.getElementById('radio-home-yes').checked;
+      const service_month = document.getElementById('field-month').value.trim();
+      const service_duration_days = parseInt(document.getElementById('field-duration').value, 10);
+      const description = document.getElementById('field-description').value.trim();
+
+      const errors = [];
+      if (!title) errors.push('1. Project Title is required.');
+      if (!url) errors.push('2. Project URL is required.');
+      if (!category) errors.push('3. Project Category is required.');
+      if (!service_month) errors.push('5. Service Month is required (e.g. October 2024).');
+      if (isNaN(service_duration_days) || service_duration_days <= 0) errors.push('6. Service Duration in Days must be a positive number.');
+      if (!currentTechnologies.length) errors.push('7. At least one Project Technology is required.');
+      if (!description) errors.push('8. Project Description is required.');
+      if (!currentImages.length) errors.push('9. At least one Project Image is required.');
+
+      if (errors.length) {
+        errList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+        errBox.style.display = 'block';
+        const formBody = document.querySelector('#project-modal .modal-form-body');
+        if (formBody) formBody.scrollTop = 0;
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Saving Project to Database...</span>`;
+
+      const payload = {
+        title,
+        url,
+        category,
+        at_home_page,
+        replace_project_id: (at_home_page && pendingSwapProjectId) ? pendingSwapProjectId : undefined,
+        service_month,
+        service_duration_days,
+        technologies: currentTechnologies,
+        description,
+        images: currentImages
+      };
+
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+        let res;
+        if (id) {
+          res = await fetch(`/api/projects/${id}`, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: authHeaders,
+            body: JSON.stringify(payload)
+          });
+        } else {
+          payload.id = `proj-${Date.now()}`;
+          payload.slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          res = await fetch('/api/projects', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: authHeaders,
+            body: JSON.stringify(payload)
+          });
+        }
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Server error saving project');
+        }
+
+        const savedProj = await res.json();
+        showToast(`Project "${savedProj.title}" saved successfully to database!`);
+
+        formDirty = false;
+        closeProjectModal();
+        await syncDatabase(false);
+      } catch (err) {
+        showToast('Error saving project: ' + err.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Save Project to Database</span><span style="font-size: 1.1rem; line-height: 1;">&rarr;</span>`;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>

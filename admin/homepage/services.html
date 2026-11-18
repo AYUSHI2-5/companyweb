@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.location.replace('/admin/homepage/index.html#services');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services Section Editor | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Action bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Services Section Editor</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:14px; color:#6B7280; margin:4px 0 0 0;">Manage the 6 interactive core services, features, tech tags, metrics, and pricing.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" onclick="openPreviewModal('services')">
+              Preview
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">
+              Publish Changes
+            </button>
+          </div>
+        </div>
+
+        <!-- Section Header Settings -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Services Header &amp; Subtitle</h3>
+              <p class="card-subtitle">Global text displayed above the interactive service accordion</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="sec_badge">Section Label / Badge</label>
+              <input type="text" id="sec_badge" class="form-control" placeholder="[ OUR CORE CAPABILITIES ]">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="sec_heading">Section Main Heading</label>
+              <input type="text" id="sec_heading" class="form-control" placeholder="Transformative Solutions for Forward-Thinking Enterprises">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" for="sec_subtitle">Section Description</label>
+              <textarea id="sec_subtitle" class="form-control" rows="2" placeholder="Optional description displayed underneath the services section heading..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services List & Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="font-size:18px; font-weight:700; margin:0; color:#111827;">Core Services (<span id="service-count">6</span>)</h3>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="toggleAllServices(true)">Expand All</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="toggleAllServices(false)">Collapse All</button>
+            <button type="button" class="btn btn-sm btn-primary" onclick="addNewService()">+ Add New Service</button>
+          </div>
+        </div>
+
+        <div id="services-accordion-list" style="display:flex; flex-direction:column; gap:16px; margin-bottom:40px;">
+          <!-- Injected dynamic service cards -->
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px;">
+          <button type="button" class="btn btn-secondary" onclick="saveSection(false)">Save Draft</button>
+          <button type="button" class="btn btn-primary" onclick="saveSection(true)">Publish Changes</button>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'services',
+      title: 'Services Section Editor',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Homepage', url: '/admin/homepage/index.html' },
+        { label: 'Services', url: '/admin/homepage/services.html' }
+      ]
+    });
+
+    let currentData = null;
+    let servicesList = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/admin/homepage/services');
+        const data = await res.json();
+        const raw = data.draft || data.published || [];
+        
+        if (Array.isArray(raw)) {
+          servicesList = JSON.parse(JSON.stringify(raw));
+          currentData = {
+            section_badge: '[ OUR SERVICES ]',
+            heading: 'Transformative Solutions',
+            subtitle: '',
+            services: servicesList
+          };
+        } else if (raw && Array.isArray(raw.services)) {
+          currentData = raw;
+          servicesList = JSON.parse(JSON.stringify(raw.services));
+        } else {
+          servicesList = [];
+          currentData = {};
+        }
+
+        const statusBadge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          statusBadge.className = 'badge badge-draft';
+          statusBadge.textContent = 'Draft Changes';
+        } else {
+          statusBadge.className = 'badge badge-published';
+          statusBadge.textContent = 'Published';
+        }
+
+        document.getElementById('sec_badge').value = currentData.section_badge || '[ OUR SERVICES ]';
+        document.getElementById('sec_heading').value = currentData.heading || 'Transformative Solutions';
+        document.getElementById('sec_subtitle').value = currentData.subtitle || '';
+
+        renderServicesList();
+      } catch (err) {
+        showToast('Error loading services: ' + err.message, 'error');
+      }
+    }
+
+    function renderServicesList() {
+      const container = document.getElementById('services-accordion-list');
+      document.getElementById('service-count').textContent = servicesList.length;
+
+      if (!servicesList.length) {
+        container.innerHTML = `<div style="text-align:center; padding:40px; background:#fff; border-radius:12px; border:1px dashed #CBD5E1; color:#6B7280;">No services configured. Click "+ Add New Service" above.</div>`;
+        return;
+      }
+
+      container.innerHTML = servicesList.map((svc, idx) => `
+        <div class="card service-item" data-index="${idx}" style="margin-bottom:0;">
+          <div class="card-header" style="cursor:pointer; background:#F8FAFC;" onclick="toggleServiceCollapse(${idx})">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-family:monospace; font-weight:800; color:#E7192D; font-size:16px; background:#FEE2E2; padding:4px 8px; border-radius:6px;">${svc.num || svc.number || ('0' + (idx+1))}</span>
+              <div>
+                <h4 style="margin:0; font-size:16px; font-weight:700; color:#111827;">${svc.title || 'Untitled Service'}</h4>
+                <div style="font-size:12px; color:#64748B;">${(svc.technologies || []).join(' • ')}</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;" onclick="event.stopPropagation()">
+              <label class="switch" title="Active/Inactive">
+                <input type="checkbox" onchange="updateServiceProp(${idx}, 'active', this.checked)" ${svc.active !== false ? 'checked' : ''}>
+                <span class="slider"></span>
+              </label>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="moveService(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="moveService(${idx}, 1)" ${idx === servicesList.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="duplicateService(${idx})" title="Duplicate">Copy</button>
+              <button type="button" class="btn btn-sm btn-danger" onclick="deleteService(${idx})" title="Delete">✕</button>
+            </div>
+          </div>
+
+          <div id="service-body-${idx}" class="card-body" style="display:${idx === 0 ? 'block' : 'none'}; padding:20px;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Service Title</label>
+                <input type="text" class="form-control" value="${svc.title || ''}" oninput="updateServiceProp(${idx}, 'title', this.value)" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Service Number</label>
+                <input type="text" class="form-control" value="${svc.num || svc.number || ('0' + (idx+1))}" oninput="updateServiceProp(${idx}, 'num', this.value); updateServiceProp(${idx}, 'number', this.value);" required>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Short Description</label>
+                <textarea class="form-control" rows="2" oninput="updateServiceProp(${idx}, 'short_desc', this.value); updateServiceProp(${idx}, 'description', this.value);">${svc.short_desc || svc.description || ''}</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Search / Query Heading (Visual Box)</label>
+                <input type="text" class="form-control" value="${svc.search_heading || svc.search_query_heading || ''}" oninput="updateServiceProp(${idx}, 'search_heading', this.value); updateServiceProp(${idx}, 'search_query_heading', this.value);">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Badge Text</label>
+                <input type="text" class="form-control" value="${svc.badge_text || ''}" oninput="updateServiceProp(${idx}, 'badge_text', this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Starting Price</label>
+                <input type="text" class="form-control" value="${svc.price || svc.starting_price || ''}" oninput="updateServiceProp(${idx}, 'price', this.value); updateServiceProp(${idx}, 'starting_price', this.value);">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Pricing Unit</label>
+                <input type="text" class="form-control" value="${svc.unit || svc.pricing_unit || ''}" oninput="updateServiceProp(${idx}, 'unit', this.value); updateServiceProp(${idx}, 'pricing_unit', this.value);">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Explore Destination URL</label>
+                <input type="text" class="form-control" value="${svc.explore_url || svc.explore_button?.url || '#portfolio'}" oninput="updateServiceProp(${idx}, 'explore_url', this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Feature Headline</label>
+                <input type="text" class="form-control" value="${svc.feature_headline || ''}" oninput="updateServiceProp(${idx}, 'feature_headline', this.value)">
+              </div>
+
+              <!-- Media Visual -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Service Visual / Mockup Image</label>
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div style="width:100px; height:60px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                    <img id="svc_img_prev_${idx}" src="${svc.image || ''}" style="max-width:100%; max-height:100%; object-fit:cover;">
+                  </div>
+                  <input type="text" id="svc_img_input_${idx}" class="form-control" value="${svc.image || ''}" oninput="updateServiceProp(${idx}, 'image', this.value); document.getElementById('svc_img_prev_${idx}').src = this.value;" style="flex:1;">
+                  <button type="button" class="btn btn-secondary" onclick="openMediaPicker((u) => { document.getElementById('svc_img_input_${idx}').value = u; document.getElementById('svc_img_prev_${idx}').src = u; updateServiceProp(${idx}, 'image', u); })">Select Media</button>
+                </div>
+              </div>
+
+              <!-- Technologies List -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Technologies (comma-separated)</label>
+                <input type="text" class="form-control" value="${(svc.technologies || []).join(', ')}" onchange="updateServiceTech(${idx}, this.value)" placeholder="React, Node.js, Next.js, TypeScript">
+              </div>
+
+              <!-- Features List -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Included Features (one per line)</label>
+                <textarea class="form-control" rows="3" onchange="updateServiceFeatures(${idx}, this.value)" placeholder="Custom Architecture&#10;High Security&#10;SEO Optimization">${(svc.features || []).join('\n')}</textarea>
+              </div>
+
+              <!-- Feature Description -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Feature Detailed Description</label>
+                <textarea class="form-control" rows="2" oninput="updateServiceProp(${idx}, 'feature_desc', this.value)">${svc.feature_desc || ''}</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      bindImagePickers();
+    }
+
+    function toggleServiceCollapse(idx) {
+      const el = document.getElementById(`service-body-${idx}`);
+      if (el) {
+        el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    function toggleAllServices(expand) {
+      servicesList.forEach((_, idx) => {
+        const el = document.getElementById(`service-body-${idx}`);
+        if (el) el.style.display = expand ? 'block' : 'none';
+      });
+    }
+
+    function updateServiceProp(idx, prop, val) {
+      servicesList[idx][prop] = val;
+    }
+
+    function updateExploreProp(idx, prop, val) {
+      if (!servicesList[idx].explore_button) servicesList[idx].explore_button = {};
+      servicesList[idx].explore_button[prop] = val;
+    }
+
+    function updateMetricProp(idx, prop, val) {
+      if (!servicesList[idx].performance_metric) servicesList[idx].performance_metric = {};
+      servicesList[idx].performance_metric[prop] = val;
+    }
+
+    function updateServiceTech(idx, raw) {
+      servicesList[idx].technologies = raw.split(',').map(s => s.trim()).filter(Boolean);
+    }
+
+    function updateServiceFeatures(idx, raw) {
+      servicesList[idx].features = raw.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+
+    function moveService(idx, direction) {
+      const target = idx + direction;
+      if (target < 0 || target >= servicesList.length) return;
+      const temp = servicesList[idx];
+      servicesList[idx] = servicesList[target];
+      servicesList[target] = temp;
+      renderServicesList();
+    }
+
+    function duplicateService(idx) {
+      const copy = JSON.parse(JSON.stringify(servicesList[idx]));
+      copy.title = copy.title + ' (Copy)';
+      copy.number = '0' + (servicesList.length + 1);
+      servicesList.splice(idx + 1, 0, copy);
+      renderServicesList();
+      showToast('Service duplicated');
+    }
+
+    function deleteService(idx) {
+      if (!confirm(`Delete service "${servicesList[idx].title}"?`)) return;
+      servicesList.splice(idx, 1);
+      renderServicesList();
+      showToast('Service deleted');
+    }
+
+    function addNewService() {
+      servicesList.push({
+        number: '0' + (servicesList.length + 1),
+        title: 'New Custom Service',
+        description: 'Comprehensive engineering tailored to your industry standards.',
+        image: '/attached_assets/IMG-20250917-WA0001.jpg',
+        search_query_heading: 'Full-Stack Delivery',
+        technologies: ['React', 'Node.js', 'PostgreSQL'],
+        features: ['Bespoke Development', 'Security Hardened', 'Cloud Ready'],
+        performance_metric: { value: '99.9%', label: 'SLA Guarantee' },
+        starting_price: '$2,500',
+        pricing_unit: '/ project',
+        explore_button: { label: 'Explore Capabilities', url: '#portfolio' },
+        active: true
+      });
+      renderServicesList();
+      // Expand the new service
+      toggleServiceCollapse(servicesList.length - 1);
+      showToast('New service added');
+    }
+
+    async function saveSection(publish = false) {
+      const payload = {
+        section_badge: document.getElementById('sec_badge').value.trim(),
+        heading: document.getElementById('sec_heading').value.trim(),
+        subtitle: document.getElementById('sec_subtitle').value.trim(),
+        services: servicesList
+      };
+
+      try {
+        const res = await fetch('/api/admin/homepage/services', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/homepage/services/publish', { method: 'POST' });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Services published live successfully!');
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft saved successfully!');
+        }
+        loadData();
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to published state?')) return;
+      try {
+        const res = await fetch('/api/admin/homepage/services/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          loadData();
+        } else {
+          showToast(data.error || 'Failed to revert draft', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

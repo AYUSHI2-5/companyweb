@@ -1,0 +1,194 @@
+{
+  "adm_632bbf34e57f1e8f9f2ae8535e2a7ac92630eb48792d549c62a357ee63814957": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794918683252
+  },
+  "adm_1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795437083307
+  },
+  "adm_ea47443f80ef7b1e0f8e3a9b8699d909a8846959c73c948a4eb02d7d919770c0": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795500384331
+  },
+  "adm_test_token_123": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795438728887
+  },
+  "adm_session_valid_active": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795438795619
+  },
+  "adm_test_token_about": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795439560135
+  },
+  "adm_673d454eb42cb49741d2a48c6a205cabf11124703c9d21946259fbec7714b165": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795496258920
+  },
+  "adm_8250307d785be8371ba4c2e1f1fafaa65e2d78c030c1541d7df811b88c9e9077": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794977946604
+  },
+  "adm_ffed514aedb477efd1d08d62feaee85d66d0130a230750dbf0ae4dc7f45e12b5": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795496733494
+  },
+  "adm_7a81448c2dbba3594258392f3d860738bd41290f87e4d095627ebec4e84ee252": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794978353881
+  },
+  "adm_a8e79e2175a3ced4a88cad731ac91b36ecac3b9dcd3ad7f7221db47d5dd99983": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795497965617
+  },
+  "adm_039f09233157242cbf388eb59b029890af1c2ed5db949eb44adc9cfa564ac3f1": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794979705430
+  },
+  "adm_273fec429cc81857022f53985dcec17b58ab16dda48949a9670b7b9b695bea89": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795498827389
+  },
+  "adm_93311c4e612f6dfd1bc5c3cb5724c97566ca65f06f06c365e22af109d36590a3": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795499225975
+  },
+  "adm_c47e407c3a3816fe3b1256a5342b112377af62b66fd701ed99e05bca1c6f89f5": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794980867674
+  },
+  "adm_22fe8b8d9f05452bb78a9b908f8a18f8a34fbb018855476495ca323ebe6d64d6": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795499531008
+  },
+  "adm_d2e8fb3817f16fee051aa9bb5d67f3514af386d3c2672118c34d7252283bb18a": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795499864901
+  },
+  "adm_d02c1f2c66da912b9c9968b473e7e7cce345210dc44e120dbae7ed67acab56fa": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795500314702
+  },
+  "adm_499c704f59004e061c0b28b6d10ee071298edd0f402960043f0a0be993cf9079": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795500591735
+  },
+  "adm_ee76568ae6ef72b02d75ee2d936890142ff8e1df5a982c865c0b61620d3c7769": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1794982238166
+  },
+  "adm_3961a80cc324e9a23e492f8b9c9021e2c2cf50d575c8e8860b02f2405d130157": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795001909550
+  },
+  "adm_33161e677478e0fb41b79e081d94ce62c176ce207c8206fe1d8c00162def347c": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795582935957
+  },
+  "adm_7c5153df190b18ccfbc2bab6162136310720acf8dd194555f557061c1dca254b": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795583802667
+  },
+  "adm_0c215caf32405a44a8ce4486b77ae55b19b3e587fd8ef133fa724eb9a9622f27": {
+    "userId": "usr-01",
+    "username": "admin",
+    "name": "BAADAM Administrator",
+    "email": "admin@baadam.com",
+    "role": "superadmin",
+    "expiresAt": 1795065440190
+  }
+}

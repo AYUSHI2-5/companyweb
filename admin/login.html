@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Sign In | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at 50% -10%, #FEF2F2 0%, #F8FAFC 50%, #FFFFFF 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+    }
+    .login-card {
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 42px 38px;
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #E2E8F0;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #E7192D;
+    }
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .logo-badge {
+      width: 42px;
+      height: 42px;
+      background: #E7192D;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 22px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(231, 25, 45, 0.35);
+    }
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+    .logo-sub {
+      font-size: 11px;
+      font-weight: 700;
+      color: #E7192D;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+    .alert-error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-badge">B</div>
+        <div>
+          <div class="logo-text">BAADAM</div>
+          <div class="logo-sub">[ HOMEPAGE CMS &amp; ADMIN ]</div>
+        </div>
+      </div>
+
+      <h2 style="font-size: 20px; font-weight: 800; color: #0F172A; margin: 0 0 6px 0; letter-spacing: -0.01em;">Sign In</h2>
+      <p style="font-size: 13.5px; color: #64748B; margin: 0 0 24px 0;">Access the homepage CMS and section editors.</p>
+
+      <div id="error-box" class="alert-error"></div>
+
+      <form id="login-form">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label class="form-label" for="username">Username or Email</label>
+          <input type="text" id="username" class="form-control" placeholder="admin@baadam.com" required autofocus value="admin">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••••••" required>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px;">
+          Sign In to Admin Panel
+        </button>
+      </form>
+
+      <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid #F1F5F9; font-size: 12px; color: #94A3B8; text-align: center;">
+        Default Credentials: <code style="background:#FEF2F2; color:#B91C1C; padding:3px 7px; border-radius:4px; font-weight:600; border:1px solid #FECACA;">admin</code> / <code style="background:#FEF2F2; color:#B91C1C; padding:3px 7px; border-radius:4px; font-weight:600; border:1px solid #FECACA;">Baadam@2026</code>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const errBox = document.getElementById('error-box');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Authenticating...';
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          if (data.token) localStorage.setItem('admin_token', data.token);
+          if (data.user) localStorage.setItem('admin_user', JSON.stringify(data.user));
+          submitBtn.textContent = 'Redirecting...';
+          const urlParams = new URLSearchParams(window.location.search);
+          const redirect = urlParams.get('redirect') || '/admin/dashboard.html';
+          window.location.href = redirect;
+        } else {
+          errBox.textContent = data.error || 'Invalid credentials. Please try again.';
+          errBox.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Sign In to Admin Panel';
+        }
+      } catch (err) {
+        errBox.textContent = 'Network error or server unreachable.';
+        errBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In to Admin Panel';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.location.replace('/admin/homepage/index.html#case-studies');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Studies Editor | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Action bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Case Studies Editor</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:14px; color:#6B7280; margin:4px 0 0 0;">Manage client case studies, tabs, before &amp; after comparison sliders, and metrics.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" onclick="openPreviewModal('case-studies')">
+              Preview
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">
+              Publish Changes
+            </button>
+          </div>
+        </div>
+
+        <!-- Section Header Settings -->
+        <div class="card" style="margin-bottom:24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Case Studies Header &amp; Subtitle</h3>
+              <p class="card-subtitle">Global text displayed above the interactive case study comparisons</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="cs_badge">Section Label / Badge</label>
+              <input type="text" id="cs_badge" class="form-control" placeholder="[ CASE STUDIES ]">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cs_heading">Section Main Heading</label>
+              <input type="text" id="cs_heading" class="form-control" placeholder="Delivering Measurable Impact">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" for="cs_subtitle">Section Description</label>
+              <textarea id="cs_subtitle" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Studies List -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h3 style="font-size:18px; font-weight:700; margin:0; color:#111827;">Client Case Studies (<span id="cs-count">0</span>)</h3>
+          <button type="button" class="btn btn-sm btn-primary" onclick="addNewCaseStudy()">+ Add New Case Study</button>
+        </div>
+
+        <div id="case-studies-list" style="display:flex; flex-direction:column; gap:16px; margin-bottom:40px;">
+          <!-- Case study cards -->
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px;">
+          <button type="button" class="btn btn-secondary" onclick="saveSection(false)">Save Draft</button>
+          <button type="button" class="btn btn-primary" onclick="saveSection(true)">Publish Changes</button>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'case-studies',
+      title: 'Case Studies Editor',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Homepage', url: '/admin/homepage/index.html' },
+        { label: 'Case Studies', url: '/admin/homepage/case-studies.html' }
+      ]
+    });
+
+    let currentData = null;
+    let itemsList = [];
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/admin/homepage/case-studies');
+        const data = await res.json();
+        currentData = data.draft || data.published || {};
+
+        const statusBadge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          statusBadge.className = 'badge badge-draft';
+          statusBadge.textContent = 'Draft Changes';
+        } else {
+          statusBadge.className = 'badge badge-published';
+          statusBadge.textContent = 'Published';
+        }
+
+        document.getElementById('cs_badge').value = currentData.section_badge || '[ CASE STUDIES ]';
+        document.getElementById('cs_heading').value = currentData.heading || 'Delivering Measurable Impact';
+        document.getElementById('cs_subtitle').value = currentData.subtitle || '';
+
+        itemsList = JSON.parse(JSON.stringify(currentData.items || []));
+        renderList();
+      } catch (err) {
+        showToast('Error loading case studies: ' + err.message, 'error');
+      }
+    }
+
+    function renderList() {
+      const container = document.getElementById('case-studies-list');
+      document.getElementById('cs-count').textContent = itemsList.length;
+
+      if (!itemsList.length) {
+        container.innerHTML = `<div style="text-align:center; padding:40px; background:#fff; border-radius:12px; border:1px dashed #CBD5E1; color:#6B7280;">No case studies created. Click "+ Add New Case Study" above.</div>`;
+        return;
+      }
+
+      container.innerHTML = itemsList.map((cs, idx) => `
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header" style="background:#F8FAFC;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-weight:700; color:#E7192D; font-size:14px;">#${idx + 1}</span>
+              <div>
+                <h4 style="margin:0; font-size:16px; font-weight:700; color:#111827;">${cs.client_name || 'Client Case Study'}</h4>
+                <div style="font-size:12px; color:#64748B;">Category: <strong>${cs.category || 'General'}</strong></div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button type="button" class="btn btn-sm btn-secondary" onclick="moveItem(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>↑</button>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="moveItem(${idx}, 1)" ${idx === itemsList.length - 1 ? 'disabled' : ''}>↓</button>
+              <button type="button" class="btn btn-sm btn-danger" onclick="deleteItem(${idx})">✕</button>
+            </div>
+          </div>
+
+          <div class="card-body" style="padding:20px;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Client Name</label>
+                <input type="text" class="form-control" value="${cs.client_name || ''}" oninput="updateProp(${idx}, 'client_name', this.value)" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <input type="text" class="form-control" value="${cs.category || ''}" oninput="updateProp(${idx}, 'category', this.value)">
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Title / Outcome Summary</label>
+                <input type="text" class="form-control" value="${cs.title || ''}" oninput="updateProp(${idx}, 'title', this.value)" required>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Case Study Story / Description</label>
+                <textarea class="form-control" rows="3" oninput="updateProp(${idx}, 'description', this.value)">${cs.description || ''}</textarea>
+              </div>
+
+              <!-- Before Image -->
+              <div class="form-group">
+                <label class="form-label">Before Image</label>
+                <div style="height:90px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:6px; margin-bottom:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                  <img id="cs_before_prev_${idx}" src="${cs.before_image || ''}" style="max-height:100%; max-width:100%; object-fit:cover;">
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <input type="text" id="cs_before_input_${idx}" class="form-control" value="${cs.before_image || ''}" oninput="updateProp(${idx}, 'before_image', this.value); document.getElementById('cs_before_prev_${idx}').src = this.value;">
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="openMediaPicker((u) => { document.getElementById('cs_before_input_${idx}').value = u; document.getElementById('cs_before_prev_${idx}').src = u; updateProp(${idx}, 'before_image', u); })">Pick</button>
+                </div>
+              </div>
+
+              <!-- After Image -->
+              <div class="form-group">
+                <label class="form-label">After Image (Redesigned / Scaled)</label>
+                <div style="height:90px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:6px; margin-bottom:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                  <img id="cs_after_prev_${idx}" src="${cs.after_image || ''}" style="max-height:100%; max-width:100%; object-fit:cover;">
+                </div>
+                <div style="display:flex; gap:6px;">
+                  <input type="text" id="cs_after_input_${idx}" class="form-control" value="${cs.after_image || ''}" oninput="updateProp(${idx}, 'after_image', this.value); document.getElementById('cs_after_prev_${idx}').src = this.value;">
+                  <button type="button" class="btn btn-sm btn-secondary" onclick="openMediaPicker((u) => { document.getElementById('cs_after_input_${idx}').value = u; document.getElementById('cs_after_prev_${idx}').src = u; updateProp(${idx}, 'after_image', u); })">Pick</button>
+                </div>
+              </div>
+
+              <!-- Key Achievements -->
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Key Achievements / Metrics (one per line)</label>
+                <textarea class="form-control" rows="2" onchange="updateAchievements(${idx}, this.value)" placeholder="+142% Traffic Growth&#10;99.9% Uptime&#10;3.4x Faster Page Speeds">${(cs.key_achievements || []).join('\n')}</textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">CTA Label</label>
+                <input type="text" class="form-control" value="${cs.cta_button?.label || 'Explore Case Study'}" oninput="updateCta(${idx}, 'label', this.value)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">CTA Link URL</label>
+                <input type="text" class="form-control" value="${cs.cta_button?.url || '#contact'}" oninput="updateCta(${idx}, 'url', this.value)">
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateProp(idx, prop, val) {
+      itemsList[idx][prop] = val;
+    }
+
+    function updateCta(idx, prop, val) {
+      if (!itemsList[idx].cta_button) itemsList[idx].cta_button = {};
+      itemsList[idx].cta_button[prop] = val;
+    }
+
+    function updateAchievements(idx, raw) {
+      itemsList[idx].key_achievements = raw.split('\n').map(s => s.trim()).filter(Boolean);
+    }
+
+    function moveItem(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= itemsList.length) return;
+      const temp = itemsList[idx];
+      itemsList[idx] = itemsList[target];
+      itemsList[target] = temp;
+      renderList();
+    }
+
+    function deleteItem(idx) {
+      if (!confirm('Delete this case study?')) return;
+      itemsList.splice(idx, 1);
+      renderList();
+      showToast('Case study removed');
+    }
+
+    function addNewCaseStudy() {
+      itemsList.push({
+        id: 'cs-' + Date.now(),
+        client_name: 'Enterprise Client',
+        category: 'Fintech Platform',
+        title: 'Modernizing Digital Infrastructure for Scale',
+        description: 'Comprehensive re-architecture reducing latency and increasing customer retention across multiple regions.',
+        before_image: '/attached_assets/IMG-20250917-WA0001.jpg',
+        after_image: '/attached_assets/IMG-20250917-WA0001.jpg',
+        key_achievements: ['+210% Conversion Rate', '0.4s Global Latency'],
+        cta_button: { label: 'Explore Case Study', url: '#contact' }
+      });
+      renderList();
+      showToast('New case study added');
+    }
+
+    async function saveSection(publish = false) {
+      const payload = {
+        section_badge: document.getElementById('cs_badge').value.trim(),
+        heading: document.getElementById('cs_heading').value.trim(),
+        subtitle: document.getElementById('cs_subtitle').value.trim(),
+        items: itemsList
+      };
+
+      try {
+        const res = await fetch('/api/admin/homepage/case-studies', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/homepage/case-studies/publish', { method: 'POST' });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Case Studies published live successfully!');
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft saved successfully!');
+        }
+        loadData();
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to published state?')) return;
+      try {
+        const res = await fetch('/api/admin/homepage/case-studies/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          loadData();
+        } else {
+          showToast(data.error || 'Failed to revert draft', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

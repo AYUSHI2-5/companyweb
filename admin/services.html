@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services Management | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    /* Tab Navigation */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      background: #FFFFFF;
+      padding: 0 4px;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+    .tab-btn {
+      padding: 12px 18px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: var(--brand-red);
+    }
+    .tab-btn.active {
+      color: var(--brand-red);
+      border-bottom-color: var(--brand-red);
+      background: #FEF2F2;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Service Card in Admin List */
+    .admin-service-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-service-card:hover {
+      border-color: rgba(231, 25, 45, 0.4);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .admin-service-card.inactive {
+      opacity: 0.55;
+      background: #F8FAFC;
+    }
+
+    /* Exact Circular Icon Badge Preview */
+    .service-badge-preview-wrap {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .service-badge-preview-circle {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+      border: 1.5px solid rgba(231, 25, 45, 0.22);
+      box-shadow: 0 4px 14px rgba(231, 25, 45, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .service-badge-preview-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(231, 25, 45, 0.3);
+      animation: badgeSpin 16s linear infinite;
+      pointer-events: none;
+    }
+    .service-badge-preview-dot-1 {
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #eb163c;
+      box-shadow: 0 0 6px rgba(235, 22, 60, 0.6);
+    }
+    .service-badge-preview-dot-2 {
+      position: absolute;
+      bottom: 3px;
+      right: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #eb163c;
+      box-shadow: 0 0 6px rgba(235, 22, 60, 0.6);
+    }
+    @keyframes badgeSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Modal / Drawer */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .drawer-modal {
+      background: #FFFFFF;
+      border-radius: var(--radius-xl);
+      max-width: 820px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+    }
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: #FFFFFF;
+      z-index: 10;
+    }
+    .drawer-body {
+      padding: 24px;
+      flex: 1;
+    }
+    .drawer-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-light);
+      background: #F8FAFC;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+    }
+
+    /* Preset Icons Grid */
+    .preset-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .preset-icon-item {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      background: #FFFFFF;
+      transition: all 0.15s ease;
+    }
+    .preset-icon-item:hover {
+      border-color: var(--brand-red);
+      background: #FEF2F2;
+    }
+    .preset-icon-item.selected {
+      border-color: var(--brand-red);
+      background: #FEF2F2;
+      box-shadow: 0 0 0 2px rgba(231, 25, 45, 0.2);
+    }
+    .preset-icon-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Color picker preview pill */
+    .color-picker-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .color-picker-input {
+      width: 40px;
+      height: 38px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 2px;
+      cursor: pointer;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Top Header & Action Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <h2 style="font-size:22px; font-weight:800; color:#0F172A; margin:0;">Services Page Management</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:13.5px; color:#64748B; margin:0;">Manage the 6 service cards, heading text, decorative separator, categories, and 3-column responsive layout without touching source code.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <a href="/services.html" target="_blank" class="btn btn-secondary" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              View Live Page
+            </a>
+            <button type="button" class="btn btn-secondary" onclick="openLivePreview()">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Preview Draft
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()" title="Discard draft changes and revert to published state">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveDraft(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveDraft(true)">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Publish Live
+            </button>
+          </div>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-label">Total Services</div>
+            <div class="stat-value" id="kpi-total-services">6</div>
+            <div class="stat-desc">Cards configured in CMS</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Active / Live</div>
+            <div class="stat-value" id="kpi-active-services" style="color:#10B981;">6</div>
+            <div class="stat-desc">Visible on public grid</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Categories</div>
+            <div class="stat-value" id="kpi-categories">6</div>
+            <div class="stat-desc">Assigned service domains</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Grid Layout</div>
+            <div class="stat-value" id="kpi-grid">3 Col</div>
+            <div class="stat-desc">Desktop 3x2 responsive grid</div>
+          </div>
+        </div>
+
+        <!-- Tab Navigation Bar -->
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab('services-list')">
+            <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+            Services Management (<span id="tab-services-count">6</span>)
+          </button>
+          <button class="tab-btn" onclick="switchTab('header-settings')">
+            <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            Page Header &amp; Separator
+          </button>
+          <button class="tab-btn" onclick="switchTab('grid-settings')">
+            <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+            Card Grid Settings
+          </button>
+          <button class="tab-btn" onclick="switchTab('categories-mgr')">
+            <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+            Service Categories
+          </button>
+        </div>
+
+        <!-- TAB 1: Services List Management -->
+        <div id="tab-services-list" class="tab-content active">
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <h3 class="card-title">Configured Service Cards</h3>
+                <span style="font-size:12px; color:#64748B;">Drag or use arrows to adjust display ordering on the live page.</span>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button type="button" class="btn btn-primary" onclick="openAddServiceModal()">
+                  <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  Add New Service
+                </button>
+              </div>
+            </div>
+
+            <!-- Filter & Search Toolbar -->
+            <div style="padding:14px 20px; background:#F8FAFC; border-bottom:1px solid var(--border-light); display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <input type="text" id="service-search-input" class="form-control" placeholder="Search by title, description or ID..." style="max-width:320px;" oninput="filterServices()">
+              <select id="service-cat-filter" class="form-control" style="max-width:220px;" onchange="filterServices()">
+                <option value="all">All Categories</option>
+              </select>
+              <div style="margin-left:auto; font-size:12px; color:#64748B;">
+                Showing <strong id="filter-count">6</strong> services
+              </div>
+            </div>
+
+            <div class="card-body" id="services-cards-container" style="padding:20px;">
+              <!-- Dynamically populated admin service cards -->
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Page Header & Separator Editor -->
+        <div id="tab-header-settings" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Services Page Header &amp; Accent Separator</h3>
+                <p class="card-subtitle">Edit the centered page title, two-line descriptive statement, and decorative chevron line.</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label">Main Heading</label>
+                  <input type="text" id="hdr-heading" class="form-control" value="Our Services" required>
+                  <span class="form-hint">Centered primary title (H1) on services.html</span>
+                </div>
+
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label">Description Paragraph — First Line</label>
+                  <input type="text" id="hdr-sub1" class="form-control" value="We develop website, application, software and games and provide all other services related to these.">
+                  <span class="form-hint">First sentence of the centered header narrative.</span>
+                </div>
+
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label">Description Paragraph — Second Line</label>
+                  <input type="text" id="hdr-sub2" class="form-control" value="We provide all the benefits associated with digital marketing and E-commerce development.">
+                  <span class="form-hint">Second sentence describing digital marketing &amp; e-commerce capabilities.</span>
+                </div>
+
+                <!-- Separator Controls -->
+                <div class="form-group">
+                  <label class="form-label">Decorative Red Separator Visible</label>
+                  <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+                    <label class="switch">
+                      <input type="checkbox" id="hdr-sep-visible" checked>
+                      <span class="slider"></span>
+                    </label>
+                    <span style="font-size:13px; color:#475569;">Show decorative chevron SVG under subtitle</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Separator Stroke Colour</label>
+                  <div class="color-picker-wrap">
+                    <input type="color" id="hdr-sep-color" class="color-picker-input" value="#EB163C" oninput="document.getElementById('hdr-sep-color-text').value = this.value">
+                    <input type="text" id="hdr-sep-color-text" class="form-control" value="#EB163C" style="max-width:120px;" oninput="document.getElementById('hdr-sep-color').value = this.value">
+                  </div>
+                </div>
+
+                <!-- Live Header Preview Box -->
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label">Live Header Preview</label>
+                  <div style="padding:40px 20px; background:radial-gradient(circle at 50% 0%, #ffffff 0%, #f7f9fd 60%, #eef2f8 100%); border:1px solid var(--border-color); border-radius:16px; text-align:center;">
+                    <h2 id="prev-hdr-title" style="font-size:36px; font-weight:800; color:#0B1528; margin:0 0 14px 0; letter-spacing:-0.02em;">Our Services</h2>
+                    <p id="prev-hdr-sub" style="font-size:14.5px; color:#556270; max-width:720px; margin:0 auto 16px auto; line-height:1.7;">
+                      We develop website, application, software and games and provide all other services related to these. We provide all the benefits associated with digital marketing and E-commerce development.
+                    </p>
+                    <div id="prev-hdr-sep" style="display:flex; justify-content:center; align-items:center;">
+                      <svg width="60" height="12" viewBox="0 0 60 12" fill="none">
+                        <path id="prev-hdr-sep-path" d="M2 8H24L30 2L36 8H58" stroke="#EB163C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Card Grid & Spacing Settings -->
+        <div id="tab-grid-settings" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Service Card Grid Architecture &amp; Spacing</h3>
+                <p class="card-subtitle">Configure responsive column counts and section padding while preserving agency visual balance.</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Desktop Columns (Default: 3)</label>
+                  <select id="grid-cols-desktop" class="form-control">
+                    <option value="2">2 Columns</option>
+                    <option value="3" selected>3 Columns (3x2 Agency Grid)</option>
+                    <option value="4">4 Columns</option>
+                  </select>
+                  <span class="form-hint">Number of equal columns displayed on desktop &gt; 1024px.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Tablet Columns (Default: 2)</label>
+                  <select id="grid-cols-tablet" class="form-control">
+                    <option value="1">1 Column</option>
+                    <option value="2" selected>2 Columns</option>
+                    <option value="3">3 Columns</option>
+                  </select>
+                  <span class="form-hint">Number of columns on iPad &amp; tablets (680px - 1024px).</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Mobile Columns (Default: 1)</label>
+                  <select id="grid-cols-mobile" class="form-control">
+                    <option value="1" selected>1 Column (Stacked)</option>
+                    <option value="2">2 Columns</option>
+                  </select>
+                  <span class="form-hint">Card layout on smartphones &lt; 680px.</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Grid Card Gap (px)</label>
+                  <input type="number" id="grid-gap" class="form-control" value="32" min="16" max="64">
+                  <span class="form-hint">Space between cards (default: 32px).</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Section Top Padding (px)</label>
+                  <input type="number" id="grid-pad-top" class="form-control" value="160" min="80" max="240">
+                  <span class="form-hint">Top spacing for floating navigation clearance (default: 160px).</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Section Bottom Padding (px)</label>
+                  <input type="number" id="grid-pad-bottom" class="form-control" value="100" min="40" max="200">
+                  <span class="form-hint">Bottom spacing before the CTA collaboration banner.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: Service Categories Management -->
+        <div id="tab-categories-mgr" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Service Categories</h3>
+                <p class="card-subtitle">Group and organize capabilities across web, mobile, marketing, software, and interactive sectors.</p>
+              </div>
+              <button type="button" class="btn btn-secondary" onclick="addNewCategory()">
+                + Add Category
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width:60px;">Order</th>
+                      <th>Category Name</th>
+                      <th>Slug</th>
+                      <th>Assigned Services</th>
+                      <th>Status</th>
+                      <th style="text-align:right;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="categories-table-body">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- SERVICE ADD / EDIT DRAWER MODAL -->
+  <div class="drawer-overlay" id="service-modal-overlay">
+    <div class="drawer-modal">
+      <div class="drawer-header">
+        <div>
+          <h3 id="modal-title" style="margin:0; font-size:18px; font-weight:800; color:#0F172A;">Edit Service</h3>
+          <span style="font-size:12px; color:#64748B;" id="modal-subtitle">Configure title, icons, descriptions, and buttons</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-secondary" onclick="closeServiceModal()">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <input type="hidden" id="edit-service-id">
+
+        <div class="form-grid">
+          <!-- Basic Information -->
+          <div class="form-group">
+            <label class="form-label">Service Number</label>
+            <input type="text" id="edit-num" class="form-control" placeholder="01" required>
+            <span class="form-hint">Displayed in top-right corner of card (e.g. 01, 02).</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="edit-category" class="form-control">
+              <!-- Populated from categories list -->
+            </select>
+          </div>
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Service Title</label>
+            <input type="text" id="edit-title" class="form-control" placeholder="Website Development" required>
+            <span class="form-hint">Use \n or new line for two-line agency card title.</span>
+          </div>
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Short Description (Card Narrative)</label>
+            <textarea id="edit-short-desc" class="form-control" rows="3" placeholder="Explain the service value proposition and delivery scope..." required></textarea>
+          </div>
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Full Description (Extended Metadata)</label>
+            <textarea id="edit-full-desc" class="form-control" rows="2" placeholder="Extended enterprise architecture and capabilities overview..."></textarea>
+          </div>
+
+          <!-- Icon Management -->
+          <div class="form-group" style="grid-column:1/-1; background:#FEF2F2; border:1px solid #FECACA; border-radius:12px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+              <div>
+                <label class="form-label" style="font-weight:700; color:#991B1B; margin:0;">Icon Management &amp; Live Circular Badge</label>
+                <span class="form-hint" style="color:#B91C1C;">Choose from the preset icon library, paste custom SVG, or upload an asset.</span>
+              </div>
+              
+              <!-- Circular Badge Live Preview -->
+              <div class="service-badge-preview-wrap">
+                <span class="service-badge-preview-dot-1"></span>
+                <div class="service-badge-preview-circle">
+                  <span class="service-badge-preview-ring"></span>
+                  <div id="live-icon-render" style="display:flex; align-items:center; justify-content:center;">
+                    <!-- Rendered SVG preview -->
+                  </div>
+                </div>
+                <span class="service-badge-preview-dot-2"></span>
+              </div>
+            </div>
+
+            <!-- Icon Source Selector -->
+            <div style="display:flex; gap:16px; margin-bottom:12px;">
+              <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                <input type="radio" name="icon-source-type" value="preset" checked onchange="toggleIconSource('preset')">
+                <span>Preset Icon Library</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                <input type="radio" name="icon-source-type" value="custom-svg" onchange="toggleIconSource('custom-svg')">
+                <span>Custom SVG Code</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer;">
+                <input type="radio" name="icon-source-type" value="media" onchange="toggleIconSource('media')">
+                <span>Media Asset URL</span>
+              </label>
+            </div>
+
+            <!-- Preset Icons Selector -->
+            <div id="icon-preset-panel">
+              <div class="preset-icon-grid" id="preset-icons-list">
+                <!-- Preset icons generated here -->
+              </div>
+            </div>
+
+            <!-- Custom SVG Input -->
+            <div id="icon-custom-panel" style="display:none; margin-top:10px;">
+              <textarea id="edit-custom-svg" class="form-control" rows="3" placeholder="<rect x='2' y='3' ...></rect>" oninput="updateLiveIconPreview()"></textarea>
+              <span class="form-hint">Inner SVG paths/elements or full SVG.</span>
+            </div>
+
+            <!-- Media Asset Input -->
+            <div id="icon-media-panel" style="display:none; margin-top:10px;">
+              <div style="display:flex; gap:10px;">
+                <input type="text" id="edit-icon-url" class="form-control" placeholder="/assets/icons/service.svg" oninput="updateLiveIconPreview()">
+                <button type="button" class="btn btn-secondary" onclick="openMediaPicker((u) => { document.getElementById('edit-icon-url').value = u; updateLiveIconPreview(); })">Browse Media</button>
+              </div>
+            </div>
+
+            <!-- Icon Color -->
+            <div style="margin-top:12px; display:flex; align-items:center; gap:12px;">
+              <label class="form-label" style="margin:0;">Icon Stroke Colour:</label>
+              <div class="color-picker-wrap">
+                <input type="color" id="edit-icon-color" class="color-picker-input" value="#eb163c" oninput="updateLiveIconPreview()">
+                <input type="text" id="edit-icon-color-text" class="form-control" value="#eb163c" style="max-width:110px;" oninput="document.getElementById('edit-icon-color').value = this.value; updateLiveIconPreview();">
+              </div>
+            </div>
+          </div>
+
+          <!-- Button Management -->
+          <div class="form-group">
+            <label class="form-label">Button Label</label>
+            <input type="text" id="edit-btn-label" class="form-control" value="Explore Capability" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Destination URL</label>
+            <input type="text" id="edit-btn-url" class="form-control" value="services/website-development/" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Open in New Tab</label>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+              <label class="switch">
+                <input type="checkbox" id="edit-btn-target">
+                <span class="slider"></span>
+              </label>
+              <span style="font-size:13px; color:#64748B;">target="_blank"</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Button Visibility</label>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+              <label class="switch">
+                <input type="checkbox" id="edit-btn-visible" checked>
+                <span class="slider"></span>
+              </label>
+              <span style="font-size:13px; color:#64748B;">Show Explore button pill</span>
+            </div>
+          </div>
+
+          <!-- Status & Highlights -->
+          <div class="form-group">
+            <label class="form-label">Active / Live Status</label>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+              <label class="switch">
+                <input type="checkbox" id="edit-active" checked>
+                <span class="slider"></span>
+              </label>
+              <span style="font-size:13px; color:#64748B;">Visible on public Services page</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Featured Card Styling</label>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:6px;">
+              <label class="switch">
+                <input type="checkbox" id="edit-featured">
+                <span class="slider"></span>
+              </label>
+              <span style="font-size:13px; color:#64748B;">Highlight with crimson glow accent</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <button type="button" class="btn btn-secondary" onclick="closeServiceModal()">Cancel</button>
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="btn btn-secondary" onclick="saveServiceModal(false)">Save Draft</button>
+          <button type="button" class="btn btn-primary" onclick="saveServiceModal(true)">Save &amp; Publish Live</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    // PRESET SVG ICONS LIBRARY
+    const PRESET_ICONS = {
+      monitor: {
+        label: 'Website',
+        svg: `<rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line>`
+      },
+      smartphone: {
+        label: 'Mobile',
+        svg: `<rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"></line>`
+      },
+      megaphone: {
+        label: 'Marketing',
+        svg: `<path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>`
+      },
+      'shopping-cart': {
+        label: 'E-Commerce',
+        svg: `<circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>`
+      },
+      code: {
+        label: 'Software',
+        svg: `<polyline points="7 8 3 12 7 16"></polyline><line x1="14" y1="5" x2="10" y2="19"></line><polyline points="17 8 21 12 17 16"></polyline>`
+      },
+      gamepad: {
+        label: 'Gaming',
+        svg: `<rect x="2" y="6" width="20" height="12" rx="6"></rect><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><circle cx="15.5" cy="11" r="0.75" fill="#eb163c"></circle><circle cx="17.5" cy="13" r="0.75" fill="#eb163c"></circle>`
+      },
+      cloud: {
+        label: 'Cloud',
+        svg: `<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>`
+      },
+      database: {
+        label: 'Database',
+        svg: `<ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>`
+      },
+      cpu: {
+        label: 'AI & CPU',
+        svg: `<rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line>`
+      },
+      shield: {
+        label: 'Security',
+        svg: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>`
+      },
+      zap: {
+        label: 'Speed',
+        svg: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>`
+      },
+      layers: {
+        label: 'Architecture',
+        svg: `<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>`
+      }
+    };
+
+    let fullData = {
+      header: {},
+      grid_settings: {},
+      categories: [],
+      services: []
+    };
+    let activePreset = 'monitor';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAuth();
+      setupAdminLayout({
+        activeNav: 'services-page',
+        title: 'Services Management',
+        breadcrumbs: [
+          { label: 'Admin', url: '/admin/dashboard.html' },
+          { label: 'Services Page', url: '/admin/services.html' }
+        ]
+      });
+
+      renderPresetIconsGrid();
+      setupHeaderLivePreviewListeners();
+      await loadServicesPageData();
+    });
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      const target = document.getElementById(`tab-${tabId}`);
+      if (target) target.classList.add('active');
+    }
+
+    // Load data from Backend API
+    async function loadServicesPageData() {
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+        const res = await fetch(`/api/admin/services-page?t=${Date.now()}`, {
+          credentials: 'same-origin',
+          headers: authHeaders,
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        
+        fullData = data.draft || data.published || {};
+        if (!fullData.services) fullData.services = [];
+        if (!fullData.categories) fullData.categories = [];
+        if (!fullData.header) fullData.header = {};
+        if (!fullData.grid_settings) fullData.grid_settings = {};
+
+        // Update status badge
+        const badge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          badge.className = 'badge badge-draft';
+          badge.textContent = 'Draft Changes';
+        } else {
+          badge.className = 'badge badge-published';
+          badge.textContent = 'Published';
+        }
+
+        // Hydrate KPIs
+        document.getElementById('kpi-total-services').textContent = fullData.services.length;
+        document.getElementById('tab-services-count').textContent = fullData.services.length;
+        document.getElementById('kpi-active-services').textContent = fullData.services.filter(s => s.active !== false).length;
+        document.getElementById('kpi-categories').textContent = fullData.categories.length;
+        document.getElementById('kpi-grid').textContent = `${fullData.grid_settings.columns_desktop || 3} Col`;
+
+        // Hydrate Header Settings
+        document.getElementById('hdr-heading').value = fullData.header.heading || 'Our Services';
+        document.getElementById('hdr-sub1').value = fullData.header.subtitle_line1 || '';
+        document.getElementById('hdr-sub2').value = fullData.header.subtitle_line2 || '';
+        document.getElementById('hdr-sep-visible').checked = fullData.header.separator_visible !== false;
+        document.getElementById('hdr-sep-color').value = fullData.header.separator_color || '#EB163C';
+        document.getElementById('hdr-sep-color-text').value = fullData.header.separator_color || '#EB163C';
+        updateHeaderPreview();
+
+        // Hydrate Grid Settings
+        document.getElementById('grid-cols-desktop').value = fullData.grid_settings.columns_desktop || 3;
+        document.getElementById('grid-cols-tablet').value = fullData.grid_settings.columns_tablet || 2;
+        document.getElementById('grid-cols-mobile').value = fullData.grid_settings.columns_mobile || 1;
+        document.getElementById('grid-gap').value = fullData.grid_settings.gap || 32;
+        document.getElementById('grid-pad-top').value = fullData.grid_settings.padding_top || 160;
+        document.getElementById('grid-pad-bottom').value = fullData.grid_settings.padding_bottom || 100;
+
+        // Render Categories & Filter
+        renderCategories();
+        renderCategoryFilterDropdown();
+
+        // Render Services List
+        renderServicesList();
+      } catch (err) {
+        showToast('Error loading services data: ' + err.message, 'error');
+      }
+    }
+
+    // Render Admin Services Cards List
+    function renderServicesList(filtered = null) {
+      const container = document.getElementById('services-cards-container');
+      const list = filtered || fullData.services;
+
+      document.getElementById('filter-count').textContent = list.length;
+
+      if (!list.length) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:48px 20px; background:#fff; border-radius:12px; border:1px dashed #CBD5E1; color:#6B7280;">
+            <p style="font-size:15px; font-weight:600; margin:0 0 6px 0;">No services found</p>
+            <p style="font-size:13px; margin:0 0 16px 0;">Click "+ Add New Service" to configure a new capability card.</p>
+            <button type="button" class="btn btn-primary" onclick="openAddServiceModal()">+ Add New Service</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map((svc, idx) => {
+        const cat = fullData.categories.find(c => c.id === svc.category_id);
+        const catName = cat ? cat.name : (svc.category_name || 'General');
+        const iconSvg = svc.icon_svg || (PRESET_ICONS[svc.icon_preset] ? PRESET_ICONS[svc.icon_preset].svg : PRESET_ICONS.monitor.svg);
+
+        return `
+          <div class="admin-service-card ${svc.active === false ? 'inactive' : ''}" id="card-row-${svc.id}">
+            <!-- Circular Icon Badge (Exact visual replica) -->
+            <div class="service-badge-preview-wrap">
+              <span class="service-badge-preview-dot-1"></span>
+              <div class="service-badge-preview-circle">
+                <span class="service-badge-preview-ring"></span>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${svc.icon_color || '#eb163c'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  ${iconSvg}
+                </svg>
+              </div>
+              <span class="service-badge-preview-dot-2"></span>
+            </div>
+
+            <!-- Service Details -->
+            <div style="flex:1; min-width:0;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+                <span style="font-family:monospace; font-weight:800; color:#E7192D; font-size:13px; background:#FEF2F2; padding:2px 6px; border-radius:4px; border:1px solid #FECACA;">${svc.num || ('0' + (idx+1))}</span>
+                <h4 style="margin:0; font-size:16px; font-weight:700; color:#0F172A;">${svc.display_title || svc.title.replace(/\n/g, ' ')}</h4>
+                <span style="font-size:11px; background:#F1F5F9; color:#475569; padding:2px 8px; border-radius:999px; font-weight:600;">${catName}</span>
+                ${svc.featured ? '<span style="font-size:10px; background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; padding:1px 6px; border-radius:4px; font-weight:700;">FEATURED</span>' : ''}
+              </div>
+              <p style="margin:0 0 6px 0; font-size:13px; color:#64748B; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:800px;">
+                ${svc.short_desc || 'No description provided.'}
+              </p>
+              <div style="display:flex; align-items:center; gap:12px; font-size:11.5px; color:#94A3B8;">
+                <span>Button: <strong>${svc.button_label || 'Explore Capability'}</strong> &rarr; <code style="color:#0F172A;">${svc.button_url || '#'}</code></span>
+              </div>
+            </div>
+
+            <!-- Controls & Actions -->
+            <div style="display:flex; align-items:center; gap:8px;">
+              <label class="switch" title="Toggle Active / Live Status">
+                <input type="checkbox" onchange="toggleServiceActive('${svc.id}', this.checked)" ${svc.active !== false ? 'checked' : ''}>
+                <span class="slider"></span>
+              </label>
+
+              <!-- Order Buttons -->
+              <div style="display:flex; gap:2px;">
+                <button type="button" class="btn btn-sm btn-secondary" onclick="moveServiceOrder('${svc.id}', -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="moveServiceOrder('${svc.id}', 1)" ${idx === list.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              </div>
+
+              <button type="button" class="btn btn-sm btn-primary" onclick="openEditServiceModal('${svc.id}')">Edit</button>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="duplicateService('${svc.id}')" title="Duplicate">Copy</button>
+              <button type="button" class="btn btn-sm btn-danger" onclick="deleteService('${svc.id}')" title="Delete">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Filter & Search
+    function filterServices() {
+      const q = document.getElementById('service-search-input').value.toLowerCase().trim();
+      const cat = document.getElementById('service-cat-filter').value;
+
+      const filtered = fullData.services.filter(s => {
+        const matchesQuery = !q || 
+          (s.title && s.title.toLowerCase().includes(q)) || 
+          (s.display_title && s.display_title.toLowerCase().includes(q)) || 
+          (s.short_desc && s.short_desc.toLowerCase().includes(q)) || 
+          (s.num && s.num.includes(q));
+
+        const matchesCat = (cat === 'all') || (s.category_id === cat);
+        return matchesQuery && matchesCat;
+      });
+
+      renderServicesList(filtered);
+    }
+
+    // Toggle Active Status
+    function toggleServiceActive(serviceId, active) {
+      const s = fullData.services.find(item => item.id === serviceId);
+      if (s) {
+        s.active = active;
+        markDraftChanges();
+        renderServicesList();
+        showToast(`Service "${s.display_title || s.title}" set to ${active ? 'Active' : 'Inactive'}`);
+      }
+    }
+
+    // Move Service Order
+    function moveServiceOrder(serviceId, direction) {
+      const idx = fullData.services.findIndex(s => s.id === serviceId);
+      if (idx === -1) return;
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= fullData.services.length) return;
+
+      const [item] = fullData.services.splice(idx, 1);
+      fullData.services.splice(targetIdx, 0, item);
+
+      // Re-index num
+      fullData.services.forEach((s, i) => {
+        s.order = i + 1;
+        s.num = String(i + 1).padStart(2, '0');
+      });
+
+      markDraftChanges();
+      renderServicesList();
+      showToast('Service reordered');
+    }
+
+    // Duplicate Service
+    async function duplicateService(serviceId) {
+      try {
+        const res = await fetch(`/api/admin/services-page/duplicate/${serviceId}`, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Service duplicated successfully');
+          await loadServicesPageData();
+        } else {
+          showToast(data.error || 'Failed to duplicate', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    // Delete Service
+    async function deleteService(serviceId) {
+      const s = fullData.services.find(item => item.id === serviceId);
+      const name = s ? (s.display_title || s.title) : 'this service';
+      if (!confirm(`Are you sure you want to permanently delete "${name}"?`)) return;
+
+      try {
+        const res = await fetch(`/api/admin/services-page/service/${serviceId}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Deleted "${name}"`);
+          await loadServicesPageData();
+        } else {
+          showToast(data.error || 'Failed to delete service', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    // MODAL: Open Add New Service
+    function openAddServiceModal() {
+      document.getElementById('modal-title').textContent = 'Add New Service';
+      document.getElementById('modal-subtitle').textContent = 'Create a new service card in the 3-column showcase grid';
+      document.getElementById('edit-service-id').value = '';
+
+      const nextNum = String(fullData.services.length + 1).padStart(2, '0');
+      document.getElementById('edit-num').value = nextNum;
+      document.getElementById('edit-title').value = '';
+      document.getElementById('edit-short-desc').value = '';
+      document.getElementById('edit-full-desc').value = '';
+      document.getElementById('edit-btn-label').value = 'Explore Capability';
+      document.getElementById('edit-btn-url').value = 'services/';
+      document.getElementById('edit-btn-target').checked = false;
+      document.getElementById('edit-btn-visible').checked = true;
+      document.getElementById('edit-active').checked = true;
+      document.getElementById('edit-featured').checked = false;
+
+      // Select first preset icon
+      selectPresetIcon('monitor');
+      toggleIconSource('preset');
+
+      populateModalCategoryDropdown();
+      document.getElementById('service-modal-overlay').style.display = 'flex';
+    }
+
+    // MODAL: Open Edit Service
+    function openEditServiceModal(serviceId) {
+      const s = fullData.services.find(item => item.id === serviceId);
+      if (!s) return;
+
+      document.getElementById('modal-title').textContent = `Edit Service: ${s.display_title || s.title}`;
+      document.getElementById('modal-subtitle').textContent = `Editing card index ${s.num}`;
+      document.getElementById('edit-service-id').value = s.id;
+
+      document.getElementById('edit-num').value = s.num || '';
+      document.getElementById('edit-title').value = s.title || '';
+      document.getElementById('edit-short-desc').value = s.short_desc || '';
+      document.getElementById('edit-full-desc').value = s.full_desc || '';
+
+      document.getElementById('edit-btn-label').value = s.button_label || 'Explore Capability';
+      document.getElementById('edit-btn-url').value = s.button_url || '#';
+      document.getElementById('edit-btn-target').checked = Boolean(s.button_target_blank);
+      document.getElementById('edit-btn-visible').checked = s.button_visible !== false;
+      document.getElementById('edit-active').checked = s.active !== false;
+      document.getElementById('edit-featured').checked = Boolean(s.featured);
+
+      document.getElementById('edit-icon-color').value = s.icon_color || '#eb163c';
+      document.getElementById('edit-icon-color-text').value = s.icon_color || '#eb163c';
+
+      // Icon source
+      if (s.icon_preset && PRESET_ICONS[s.icon_preset]) {
+        selectPresetIcon(s.icon_preset);
+        toggleIconSource('preset');
+      } else if (s.icon_svg) {
+        document.getElementById('edit-custom-svg').value = s.icon_svg;
+        toggleIconSource('custom-svg');
+      } else if (s.icon_url) {
+        document.getElementById('edit-icon-url').value = s.icon_url;
+        toggleIconSource('media');
+      } else {
+        selectPresetIcon('monitor');
+        toggleIconSource('preset');
+      }
+
+      populateModalCategoryDropdown(s.category_id);
+      updateLiveIconPreview();
+      document.getElementById('service-modal-overlay').style.display = 'flex';
+    }
+
+    function closeServiceModal() {
+      document.getElementById('service-modal-overlay').style.display = 'none';
+    }
+
+    // MODAL: Save Service
+    async function saveServiceModal(publish = false) {
+      const id = document.getElementById('edit-service-id').value;
+      const num = document.getElementById('edit-num').value.trim();
+      const title = document.getElementById('edit-title').value.trim();
+      const short_desc = document.getElementById('edit-short-desc').value.trim();
+      const full_desc = document.getElementById('edit-full-desc').value.trim();
+      const category_id = document.getElementById('edit-category').value;
+      const cat = fullData.categories.find(c => c.id === category_id);
+
+      if (!title) {
+        alert('Service title is required');
+        return;
+      }
+
+      const iconType = document.querySelector('input[name="icon-source-type"]:checked').value;
+      const icon_color = document.getElementById('edit-icon-color').value;
+
+      let icon_preset = null;
+      let icon_svg = null;
+      let icon_url = null;
+
+      if (iconType === 'preset') {
+        icon_preset = activePreset;
+        icon_svg = PRESET_ICONS[activePreset] ? PRESET_ICONS[activePreset].svg : PRESET_ICONS.monitor.svg;
+      } else if (iconType === 'custom-svg') {
+        icon_svg = document.getElementById('edit-custom-svg').value.trim();
+      } else {
+        icon_url = document.getElementById('edit-icon-url').value.trim();
+      }
+
+      const svcPayload = {
+        num: num || String(fullData.services.length + 1).padStart(2, '0'),
+        title: title,
+        display_title: title.replace(/\n/g, ' '),
+        category_id: category_id,
+        category_name: cat ? cat.name : 'General',
+        short_desc: short_desc,
+        full_desc: full_desc,
+        icon_type: iconType,
+        icon_preset: icon_preset,
+        icon_svg: icon_svg,
+        icon_url: icon_url,
+        icon_color: icon_color,
+        button_label: document.getElementById('edit-btn-label').value.trim(),
+        button_url: document.getElementById('edit-btn-url').value.trim(),
+        button_target_blank: document.getElementById('edit-btn-target').checked,
+        button_visible: document.getElementById('edit-btn-visible').checked,
+        active: document.getElementById('edit-active').checked,
+        featured: document.getElementById('edit-featured').checked
+      };
+
+      if (id) {
+        // Update existing
+        const idx = fullData.services.findIndex(s => s.id === id);
+        if (idx !== -1) {
+          fullData.services[idx] = { ...fullData.services[idx], ...svcPayload };
+        }
+      } else {
+        // Create new
+        const newService = {
+          id: `srv-${Date.now()}`,
+          order: fullData.services.length + 1,
+          ...svcPayload
+        };
+        fullData.services.push(newService);
+      }
+
+      renderServicesList();
+      closeServiceModal();
+
+      // Automatically sync and persist to server!
+      await saveDraft(publish);
+    }
+
+    // Preset Icons UI
+    function renderPresetIconsGrid() {
+      const container = document.getElementById('preset-icons-list');
+      container.innerHTML = Object.entries(PRESET_ICONS).map(([key, item]) => `
+        <div class="preset-icon-item ${key === activePreset ? 'selected' : ''}" data-key="${key}" onclick="selectPresetIcon('${key}')">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E7192D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            ${item.svg}
+          </svg>
+          <span class="preset-icon-label">${item.label}</span>
+        </div>
+      `).join('');
+    }
+
+    function selectPresetIcon(key) {
+      activePreset = key;
+      document.querySelectorAll('.preset-icon-item').forEach(el => {
+        el.classList.toggle('selected', el.getAttribute('data-key') === key);
+      });
+      updateLiveIconPreview();
+    }
+
+    function toggleIconSource(source) {
+      document.getElementById('icon-preset-panel').style.display = source === 'preset' ? 'block' : 'none';
+      document.getElementById('icon-custom-panel').style.display = source === 'custom-svg' ? 'block' : 'none';
+      document.getElementById('icon-media-panel').style.display = source === 'media' ? 'block' : 'none';
+      const rad = document.querySelector(`input[name="icon-source-type"][value="${source}"]`);
+      if (rad) rad.checked = true;
+      updateLiveIconPreview();
+    }
+
+    function updateLiveIconPreview() {
+      const color = document.getElementById('edit-icon-color').value || '#eb163c';
+      const container = document.getElementById('live-icon-render');
+      const iconType = document.querySelector('input[name="icon-source-type"]:checked')?.value || 'preset';
+
+      if (iconType === 'preset') {
+        const svgBody = PRESET_ICONS[activePreset] ? PRESET_ICONS[activePreset].svg : PRESET_ICONS.monitor.svg;
+        container.innerHTML = `
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            ${svgBody}
+          </svg>
+        `;
+      } else if (iconType === 'custom-svg') {
+        const raw = document.getElementById('edit-custom-svg').value.trim();
+        if (raw.startsWith('<svg')) {
+          container.innerHTML = raw;
+        } else {
+          container.innerHTML = `
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              ${raw}
+            </svg>
+          `;
+        }
+      } else {
+        const url = document.getElementById('edit-icon-url').value.trim();
+        if (url) {
+          container.innerHTML = `<img src="${url}" style="width:26px; height:26px; object-fit:contain;">`;
+        } else {
+          container.innerHTML = `<span style="font-size:10px; color:#6B7280;">No image</span>`;
+        }
+      }
+    }
+
+    // Categories UI & Dropdowns
+    function renderCategories() {
+      const tbody = document.getElementById('categories-table-body');
+      if (!fullData.categories.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:20px; color:#6B7280;">No categories defined.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = fullData.categories.map((c, idx) => {
+        const count = fullData.services.filter(s => s.category_id === c.id).length;
+        return `
+          <tr>
+            <td style="font-family:monospace; font-weight:700; color:#E7192D;">${c.order || (idx+1)}</td>
+            <td style="font-weight:700; color:#0F172A;">${c.name}</td>
+            <td><code style="background:#F1F5F9; color:#475569; padding:2px 6px; border-radius:4px; font-size:12px;">${c.slug}</code></td>
+            <td><span style="font-weight:600;">${count}</span> services</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" ${c.active !== false ? 'checked' : ''} onchange="toggleCategoryActive('${c.id}', this.checked)">
+                <span class="slider"></span>
+              </label>
+            </td>
+            <td style="text-align:right;">
+              <button type="button" class="btn btn-sm btn-secondary" onclick="editCategoryName('${c.id}')">Rename</button>
+              <button type="button" class="btn btn-sm btn-danger" onclick="deleteCategory('${c.id}')" ${count > 0 ? 'disabled title="Cannot delete category with assigned services"' : ''}>✕</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderCategoryFilterDropdown() {
+      const sel = document.getElementById('service-cat-filter');
+      sel.innerHTML = '<option value="all">All Categories</option>' + fullData.categories.map(c => `
+        <option value="${c.id}">${c.name}</option>
+      `).join('');
+    }
+
+    function populateModalCategoryDropdown(selectedId = null) {
+      const sel = document.getElementById('edit-category');
+      sel.innerHTML = fullData.categories.map(c => `
+        <option value="${c.id}" ${c.id === selectedId ? 'selected' : ''}>${c.name}</option>
+      `).join('');
+    }
+
+    function addNewCategory() {
+      const name = prompt('Enter new category name:');
+      if (!name || !name.trim()) return;
+      const slug = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const newCat = {
+        id: `cat-${Date.now()}`,
+        name: name.trim(),
+        slug: slug,
+        order: fullData.categories.length + 1,
+        active: true
+      };
+      fullData.categories.push(newCat);
+      markDraftChanges();
+      renderCategories();
+      renderCategoryFilterDropdown();
+      showToast(`Category "${newCat.name}" added`);
+    }
+
+    function editCategoryName(catId) {
+      const c = fullData.categories.find(item => item.id === catId);
+      if (!c) return;
+      const newName = prompt('Enter new name for category:', c.name);
+      if (!newName || !newName.trim()) return;
+      c.name = newName.trim();
+      markDraftChanges();
+      renderCategories();
+      renderCategoryFilterDropdown();
+      renderServicesList();
+      showToast('Category updated');
+    }
+
+    function toggleCategoryActive(catId, active) {
+      const c = fullData.categories.find(item => item.id === catId);
+      if (c) {
+        c.active = active;
+        markDraftChanges();
+      }
+    }
+
+    function deleteCategory(catId) {
+      const idx = fullData.categories.findIndex(c => c.id === catId);
+      if (idx === -1) return;
+      fullData.categories.splice(idx, 1);
+      markDraftChanges();
+      renderCategories();
+      renderCategoryFilterDropdown();
+      showToast('Category deleted');
+    }
+
+    // Header live preview listeners
+    function setupHeaderLivePreviewListeners() {
+      ['hdr-heading', 'hdr-sub1', 'hdr-sub2', 'hdr-sep-visible', 'hdr-sep-color'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateHeaderPreview);
+      });
+    }
+
+    function updateHeaderPreview() {
+      const title = document.getElementById('hdr-heading').value;
+      const s1 = document.getElementById('hdr-sub1').value;
+      const s2 = document.getElementById('hdr-sub2').value;
+      const sepVis = document.getElementById('hdr-sep-visible').checked;
+      const sepCol = document.getElementById('hdr-sep-color').value;
+
+      document.getElementById('prev-hdr-title').textContent = title || 'Our Services';
+      document.getElementById('prev-hdr-sub').textContent = `${s1} ${s2}`.trim();
+      document.getElementById('prev-hdr-sep').style.display = sepVis ? 'flex' : 'none';
+      document.getElementById('prev-hdr-sep-path').setAttribute('stroke', sepCol);
+    }
+
+    // Mark status as Draft
+    function markDraftChanges() {
+      const badge = document.getElementById('section-status-badge');
+      badge.className = 'badge badge-draft';
+      badge.textContent = 'Draft Changes';
+    }
+
+    // SAVE DRAFT & PUBLISH
+    async function saveDraft(publish = false) {
+      // Gather Header Settings
+      fullData.header = {
+        heading: document.getElementById('hdr-heading').value.trim(),
+        subtitle_line1: document.getElementById('hdr-sub1').value.trim(),
+        subtitle_line2: document.getElementById('hdr-sub2').value.trim(),
+        separator_visible: document.getElementById('hdr-sep-visible').checked,
+        separator_color: document.getElementById('hdr-sep-color').value
+      };
+
+      // Gather Grid Settings
+      fullData.grid_settings = {
+        columns_desktop: parseInt(document.getElementById('grid-cols-desktop').value, 10) || 3,
+        columns_tablet: parseInt(document.getElementById('grid-cols-tablet').value, 10) || 2,
+        columns_mobile: parseInt(document.getElementById('grid-cols-mobile').value, 10) || 1,
+        gap: parseInt(document.getElementById('grid-gap').value, 10) || 32,
+        padding_top: parseInt(document.getElementById('grid-pad-top').value, 10) || 160,
+        padding_bottom: parseInt(document.getElementById('grid-pad-bottom').value, 10) || 100
+      };
+
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+
+        const res = await fetch('/api/admin/services-page', {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: authHeaders,
+          body: JSON.stringify(fullData)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/services-page/publish', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: authHeaders
+          });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Services page published live successfully!');
+            await loadServicesPageData();
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft changes saved successfully!');
+          markDraftChanges();
+        }
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    // REVERT DRAFT
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to published state?')) return;
+      try {
+        const res = await fetch('/api/admin/services-page/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          await loadServicesPageData();
+        } else {
+          showToast(data.error || 'Failed to revert', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    // LIVE PREVIEW
+    function openLivePreview() {
+      window.open('/services.html?preview=draft', '_blank');
+    }
+  </script>
+</body>
+</html>

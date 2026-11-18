@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Learn about Baadam Info and Tradelink Services Pvt. Ltd. - our mission, 5+ years of experience, engineering culture, leadership team, and Ahmedabad studio.">
   <title>About Us | Baadam Info and Tradelink Services</title>
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="style.css?v=28">
   <link rel="icon" type="image/png" href="assets/baadam-logo.png">
 </head>
 <body>
@@ -30,11 +30,61 @@
           <li class="nav-item">
             <a href="index.html" class="nav-link">Home</a>
           </li>
-          <li class="nav-item">
+                    <li class="nav-item">
             <a href="services.html" class="nav-link">Services</a>
           </li>
-          <li class="nav-item">
-            <a href="portfolio.html" class="nav-link">Portfolio</a>
+                    <li class="nav-item nav-item-has-dropdown" id="nav-portfolio-item">
+            <a href="portfolio.html" class="nav-link nav-link-dropdown-trigger" id="nav-portfolio-link" aria-haspopup="true" aria-expanded="false" aria-controls="portfolio-mega-menu">
+              <span>Portfolio</span>
+              <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 1L5 5L9 1"/>
+              </svg>
+            </a>
+
+            <!-- Portfolio Image-Based Mega Menu Dropdown (Matches Portfolio Page Categories) -->
+            <div class="portfolio-mega-menu" id="portfolio-mega-menu" role="region" aria-label="Portfolio Categories">
+              <div class="mega-menu-inner">
+                <div class="mega-menu-grid">
+                  
+                  <!-- Card 1: Web & Websites -->
+                  <a href="portfolio.html?filter=web" class="mega-menu-card" data-category="web" aria-label="Web & Websites Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-web-services.jpg" alt="Web & Websites - High-Performing Web Platforms" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Web &amp; Websites</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                  <!-- Card 2: Mobile Applications -->
+                  <a href="portfolio.html?filter=mobile" class="mega-menu-card" data-category="mobile" aria-label="Mobile Applications Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-mobile-apps.jpg" alt="Mobile Applications - iOS & Android Solutions" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Mobile Applications</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                  <!-- Card 3: Enterprise Software & ERP -->
+                  <a href="portfolio.html?filter=enterprise" class="mega-menu-card" data-category="enterprise" aria-label="Enterprise Software & ERP Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-service-software.jpg" alt="Enterprise Software & ERP - Custom Business Systems" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Enterprise Software &amp; ERP</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
             <a href="about.html" class="nav-link active">About Us</a>
@@ -413,10 +463,10 @@
           <!-- Member 1 -->
           <article class="team-card scroll-reveal" style="width: 100%;">
             <div class="team-card-image-wrap">
-              <img src="assets/team-dhaval.jpg" alt="Dhaval Shah - Founder & CEO" class="team-card-img" width="290" height="310">
+              <img src="assets/team-mk-parmar.jpg" alt="M K Parmar - Founder & CEO" class="team-card-img" width="290" height="310">
             </div>
             <div class="team-card-content">
-              <h3 class="team-card-name">Dhaval Shah</h3>
+              <h3 class="team-card-name">M K Parmar</h3>
               <div class="team-card-role">Founder &amp; CEO</div>
               <p class="team-card-desc">Leads executive technology direction, strategic partnerships, and client innovation at Baadam.</p>
             </div>
@@ -425,10 +475,10 @@
           <!-- Member 2 -->
           <article class="team-card scroll-reveal" style="width: 100%;">
             <div class="team-card-image-wrap">
-              <img src="assets/team-riya.jpg" alt="Riya Mehta - Product Design Lead" class="team-card-img" width="290" height="310">
+              <img src="assets/team-ishani.jpg" alt="Ishani Parikh - UI/UX Designer" class="team-card-img" width="290" height="310">
             </div>
             <div class="team-card-content">
-              <h3 class="team-card-name">Riya Mehta</h3>
+              <h3 class="team-card-name">Ishani Parikh</h3>
               <div class="team-card-role">UI/UX Designer</div>
               <p class="team-card-desc">Specializes in human-centered design systems, interaction patterns, and user experience flows.</p>
             </div>
@@ -437,16 +487,28 @@
           <!-- Member 3 -->
           <article class="team-card scroll-reveal" style="width: 100%;">
             <div class="team-card-image-wrap">
-              <img src="assets/team-karan.jpg" alt="Karan Patel - Full Stack Developer" class="team-card-img" width="290" height="310">
+              <img src="assets/team-brijesh.jpg" alt="Brijesh Lathiya - Full Stack Developer" class="team-card-img" width="290" height="310">
             </div>
             <div class="team-card-content">
-              <h3 class="team-card-name">Karan Patel</h3>
+              <h3 class="team-card-name">Brijesh Lathiya</h3>
               <div class="team-card-role">Full Stack Developer</div>
               <p class="team-card-desc">Engineers robust full-stack software and resilient APIs using modern frameworks and cloud tooling.</p>
             </div>
           </article>
 
           <!-- Member 4 -->
+          <article class="team-card scroll-reveal" style="width: 100%;">
+            <div class="team-card-image-wrap">
+              <img src="assets/team-sanjay.jpg" alt="Sanjay Vaja - Flutter Developer" class="team-card-img" width="290" height="310">
+            </div>
+            <div class="team-card-content">
+              <h3 class="team-card-name">Sanjay Vaja</h3>
+              <div class="team-card-role">Flutter Developer</div>
+              <p class="team-card-desc">Specializes in cross-platform mobile architecture, high-performance Flutter applications, and seamless API integrations.</p>
+            </div>
+          </article>
+
+          <!-- Member 5 -->
           <article class="team-card scroll-reveal" style="width: 100%;">
             <div class="team-card-image-wrap">
               <img src="assets/team-neha.jpg" alt="Neha Shah - Digital Marketing Specialist" class="team-card-img" width="290" height="310">
@@ -570,9 +632,11 @@
   </main>
 
   <!-- Site Footer -->
+    <!-- Canonical Site Footer -->
   <footer class="site-footer" id="site-footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-grid">
+        <!-- Col 1: Brand & Overview -->
         <div class="footer-col footer-col-brand">
           <a href="index.html" class="logo-link" aria-label="Baadam Home">
             <img src="assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="140" height="38">
@@ -582,17 +646,17 @@
           </p>
           <div class="footer-social-links" aria-label="Social Media Links">
             <a href="https://linkedin.com" class="footer-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             </a>
             <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
             </a>
             <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Direct Email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
@@ -600,6 +664,7 @@
           </div>
         </div>
 
+        <!-- Col 2: Navigation Links -->
         <div class="footer-col">
           <h3 class="footer-col-title">Navigation</h3>
           <ul class="footer-link-list">
@@ -611,18 +676,20 @@
           </ul>
         </div>
 
+        <!-- Col 3: Core Services -->
         <div class="footer-col">
           <h3 class="footer-col-title">Core Services</h3>
           <ul class="footer-link-list">
-            <li><a href="services.html#web-dev" class="footer-nav-link">Website Development</a></li>
-            <li><a href="services.html#app-dev" class="footer-nav-link">Application Development</a></li>
-            <li><a href="services.html#software-dev" class="footer-nav-link">Software Engineering</a></li>
-            <li><a href="services.html#marketing-seo" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
-            <li><a href="services.html#ecommerce" class="footer-nav-link">E-Commerce Platforms</a></li>
-            <li><a href="services.html#game-dev" class="footer-nav-link">Game Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Website Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Application Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Software Engineering</a></li>
+            <li><a href="services.html" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
+            <li><a href="services.html" class="footer-nav-link">E-Commerce Platforms</a></li>
+            <li><a href="services.html" class="footer-nav-link">Game Development</a></li>
           </ul>
         </div>
 
+        <!-- Col 4: Studio Contact -->
         <div class="footer-col">
           <h3 class="footer-col-title">Headquarters</h3>
           <ul class="footer-contact-list">
@@ -651,6 +718,7 @@
         </div>
       </div>
 
+      <!-- Bottom Bar -->
       <div class="footer-bottom-bar">
         <div class="footer-bottom-container">
           <p class="footer-copyright">
@@ -674,15 +742,17 @@
       <!-- 1. Independently animated pointing arm layer (forearm, wrist, hand, stylus) -->
       <div class="teacher-arm-layer" id="teacherArmLayer">
         <div class="teacher-wrist-layer" id="teacherWristLayer">
-          <img src="assets/teacher-pointing-arm.png?v=9" alt="" class="teacher-arm-img" id="teacherArmImg" width="150" height="195" />
+          <img src="assets/teacher-pointing-arm.png?v=10" alt="" class="teacher-arm-img" id="teacherArmImg" width="150" height="195" />
         </div>
       </div>
       <!-- 2. Completely stationary body layer (head bun, glasses, collar, torso, tablet, legs) -->
-      <img src="assets/teacher-pointing-body.png?v=9" alt="Baadam Presentation Guide" class="teacher-body-layer" id="teacherBodyLayer" width="150" height="195" />
+      <img src="assets/teacher-pointing-body.png?v=10" alt="Baadam Presentation Guide" class="teacher-body-layer" id="teacherBodyLayer" width="150" height="195" />
     </div>
   </aside>
 
   <!-- Interactive Scripts -->
-  <script src="main.js?v=13" defer></script>
+  <script src="main.js?v=28" defer></script>
+  <script src="portfolio-mega-menu.js" defer></script>
+  <script src="about-page-cms.js" defer></script>
 </body>
 </html>

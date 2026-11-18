@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.location.replace('/admin/homepage/index.html#header');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header & Navigation Editor | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Header Action Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Header &amp; Navigation Editor</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:14px; color:#6B7280; margin:4px 0 0 0;">Manage logo, primary navigation links, header CTA, and mega menu cards.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" onclick="openPreviewModal('header')">
+              Preview
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()">
+              Revert to Published
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">
+              Publish Changes
+            </button>
+          </div>
+        </div>
+
+        <form id="header-form">
+          <!-- 1. Brand Logo -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Brand Logo &amp; Identity</h3>
+                <p class="card-subtitle">Configure logo display, image asset, and alt attributes</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="logo_text">Logo Text / Brand Name</label>
+                <input type="text" id="logo_text" class="form-control" placeholder="BAADAM" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="logo_url">Brand Home Destination URL</label>
+                <input type="text" id="logo_url" class="form-control" placeholder="/" required>
+              </div>
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label">Logo Image Asset</label>
+                <div style="display:flex; gap:12px; align-items:center;">
+                  <div style="width:120px; height:50px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; display:flex; align-items:center; justify-content:center; padding:4px;">
+                    <img id="logo_img_preview" src="/assets/baadam-logo.png" alt="Logo preview" style="max-height:100%; max-width:100%; object-fit:contain;">
+                  </div>
+                  <input type="text" id="logo_image" class="form-control" placeholder="assets/baadam-logo.png" style="flex:1;">
+                  <button type="button" class="btn btn-secondary" data-image-picker="logo_image" data-image-preview="logo_img_preview">Choose Media</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Header CTA Button -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Header CTA Button ("Let's Talk")</h3>
+                <p class="card-subtitle">Pill button with red gradient and directional arrow</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="cta_label">Button Label</label>
+                <input type="text" id="cta_label" class="form-control" placeholder="Let's Talk" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cta_url">Destination Link / Anchor</label>
+                <input type="text" id="cta_url" class="form-control" placeholder="#contact" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Portfolio Mega Menu Items -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Portfolio Mega Menu (4 Image Cards)</h3>
+                <p class="card-subtitle">Image cards displayed when hovering over "Portfolio" in the navbar</p>
+              </div>
+            </div>
+            <div id="portfolio-mega-container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px;">
+              <!-- 4 cards -->
+            </div>
+          </div>
+
+
+
+          <div style="display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px;">
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">Save Draft</button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">Publish Changes</button>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'header',
+      title: 'Header & Navigation',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Homepage', url: '/admin/homepage/index.html' },
+        { label: 'Header & Navigation', url: '/admin/homepage/header.html' }
+      ]
+    });
+
+    let currentData = null;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/admin/homepage/header');
+        const data = await res.json();
+        currentData = data.draft || data.published || {};
+
+        const statusBadge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          statusBadge.className = 'badge badge-draft';
+          statusBadge.textContent = 'Draft Changes';
+        } else {
+          statusBadge.className = 'badge badge-published';
+          statusBadge.textContent = 'Published';
+        }
+
+        populateForm(currentData);
+        bindImagePickers();
+      } catch (err) {
+        showToast('Error loading header data: ' + err.message, 'error');
+      }
+    }
+
+    function populateForm(d) {
+      document.getElementById('logo_text').value = d.logo_text || 'BAADAM';
+      document.getElementById('logo_url').value = d.logo_url || '/';
+      const logoVal = d.logo_img || d.logo_image || 'assets/baadam-logo.png';
+      document.getElementById('logo_image').value = logoVal;
+      const previewEl = document.getElementById('logo_img_preview');
+      previewEl.src = logoVal.startsWith('/') ? logoVal : '/' + logoVal;
+      previewEl.onerror = function() {
+        this.src = '/assets/baadam-logo.png';
+      };
+
+      document.getElementById('cta_label').value = d.cta_button?.label || "Let's Talk";
+      document.getElementById('cta_url').value = d.cta_button?.url || "#contact";
+
+      // Nav Links
+      window._headerNavLinks = d.nav_links || [
+        { label: 'Home', url: '/' },
+        { label: 'Services', url: '#services' },
+        { label: 'Portfolio', url: '#portfolio' },
+        { label: 'About Us', url: '#about' },
+        { label: 'Contact', url: '#contact' }
+      ];
+
+      const navContainer = document.getElementById('nav-links-container');
+      if (navContainer) {
+        navContainer.innerHTML = window._headerNavLinks.map((link, idx) => `
+          <div style="display:flex; gap:12px; align-items:center; background:#F8FAFC; padding:10px 14px; border-radius:8px; border:1px solid #E2E8F0;">
+            <span style="font-weight:700; color:#6B7280; font-size:12px; width:24px;">#${idx + 1}</span>
+            <div style="flex:1;">
+              <input type="text" class="form-control nav-item-label" value="${link.label || ''}" placeholder="Label" required>
+            </div>
+            <div style="flex:2;">
+              <input type="text" class="form-control nav-item-url" value="${link.url || ''}" placeholder="URL (e.g. #services)" required>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Portfolio Mega Menu
+      const portMega = d.portfolio_mega_menu || [];
+      const portContainer = document.getElementById('portfolio-mega-container');
+      portContainer.innerHTML = portMega.map((card, idx) => `
+        <div style="border:1px solid #E2E8F0; border-radius:8px; padding:12px; background:#F8FAFC;">
+          <div style="font-weight:700; font-size:13px; margin-bottom:8px; color:#111827;">Card ${idx + 1}: ${card.title}</div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Category Title</label>
+            <input type="text" class="form-control port-mega-title" value="${card.title || ''}" required>
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Link URL</label>
+            <input type="text" class="form-control port-mega-url" value="${card.url || ''}" required>
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Card Image</label>
+            <div style="height:70px; background:#fff; border:1px solid #E2E8F0; border-radius:6px; margin-bottom:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+              <img id="port_mega_preview_${idx}" src="${card.image || ''}" style="max-height:100%; max-width:100%; object-fit:cover;">
+            </div>
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="port_mega_img_${idx}" class="form-control port-mega-image" value="${card.image || ''}" style="font-size:11px;">
+              <button type="button" class="btn btn-sm btn-secondary" data-image-picker="port_mega_img_${idx}" data-image-preview="port_mega_preview_${idx}">Choose</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Services Mega Menu
+      window._servicesMegaMenu = d.services_mega_menu || [];
+      const servContainer = document.getElementById('services-mega-container');
+      if (servContainer) {
+        servContainer.innerHTML = window._servicesMegaMenu.map((card, idx) => `
+          <div style="border:1px solid #E2E8F0; border-radius:8px; padding:12px; background:#F8FAFC;">
+            <div style="font-weight:700; font-size:13px; margin-bottom:8px; color:#111827;">Card ${idx + 1}: ${card.title}</div>
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" style="font-size:11px;">Service Title</label>
+              <input type="text" class="form-control serv-mega-title" value="${card.title || ''}" required>
+            </div>
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" style="font-size:11px;">Link URL</label>
+              <input type="text" class="form-control serv-mega-url" value="${card.url || ''}" required>
+            </div>
+            <div class="form-group" style="margin-bottom:8px;">
+              <label class="form-label" style="font-size:11px;">Card Image</label>
+              <div style="height:70px; background:#fff; border:1px solid #E2E8F0; border-radius:6px; margin-bottom:6px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                <img id="serv_mega_preview_${idx}" src="${card.image || ''}" style="max-height:100%; max-width:100%; object-fit:cover;">
+              </div>
+              <div style="display:flex; gap:6px;">
+                <input type="text" id="serv_mega_img_${idx}" class="form-control serv-mega-image" value="${card.image || ''}" style="font-size:11px;">
+                <button type="button" class="btn btn-sm btn-secondary" data-image-picker="serv_mega_img_${idx}" data-image-preview="serv_mega_preview_${idx}">Choose</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function gatherFormData() {
+      // Gather Nav Links
+      const navLabels = document.querySelectorAll('.nav-item-label');
+      const navUrls = document.querySelectorAll('.nav-item-url');
+      let nav_links = window._headerNavLinks || [];
+      if (navLabels.length > 0) {
+        nav_links = [];
+        for (let i = 0; i < navLabels.length; i++) {
+          nav_links.push({
+            label: navLabels[i].value.trim(),
+            url: navUrls[i].value.trim()
+          });
+        }
+      }
+
+      // Gather Portfolio Mega
+      const portTitles = document.querySelectorAll('.port-mega-title');
+      const portUrls = document.querySelectorAll('.port-mega-url');
+      const portImages = document.querySelectorAll('.port-mega-image');
+      const portfolio_mega_menu = [];
+      for (let i = 0; i < portTitles.length; i++) {
+        portfolio_mega_menu.push({
+          title: portTitles[i].value.trim(),
+          url: portUrls[i].value.trim(),
+          image: portImages[i].value.trim()
+        });
+      }
+
+      // Gather Services Mega
+      const servTitles = document.querySelectorAll('.serv-mega-title');
+      const servUrls = document.querySelectorAll('.serv-mega-url');
+      const servImages = document.querySelectorAll('.serv-mega-image');
+      let services_mega_menu = window._servicesMegaMenu || [];
+      if (servTitles.length > 0) {
+        services_mega_menu = [];
+        for (let i = 0; i < servTitles.length; i++) {
+          services_mega_menu.push({
+            title: servTitles[i].value.trim(),
+            url: servUrls[i].value.trim(),
+            image: servImages[i].value.trim()
+          });
+        }
+      }
+
+      return {
+        logo_text: document.getElementById('logo_text').value.trim(),
+        logo_url: document.getElementById('logo_url').value.trim(),
+        logo_img: document.getElementById('logo_image').value.trim(),
+        logo_image: document.getElementById('logo_image').value.trim(),
+        nav_links,
+        cta_button: {
+          label: document.getElementById('cta_label').value.trim(),
+          url: document.getElementById('cta_url').value.trim()
+        },
+        portfolio_mega_menu,
+        services_mega_menu
+      };
+    }
+
+    async function saveSection(publish = false) {
+      const payload = gatherFormData();
+      try {
+        const res = await fetch('/api/admin/homepage/header', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/homepage/header/publish', { method: 'POST' });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Header configuration published live successfully!');
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft saved successfully!');
+        }
+        loadData();
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to the currently published header configuration?')) return;
+      try {
+        const res = await fetch('/api/admin/homepage/header/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          loadData();
+        } else {
+          showToast(data.error || 'Failed to revert draft', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

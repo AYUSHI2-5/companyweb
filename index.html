@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Baadam Info and Trade Link Services Pvt. Ltd. - Building Digital Solutions for Growing Businesses in Ahmedabad. Web development, app development, software, e-commerce and digital marketing.">
   <title>Baadam Info and Tradelink Services | Digital Agency & Technology Partner</title>
-  <link rel="stylesheet" href="style.css?v=21">
+  <link rel="stylesheet" href="style.css?v=30">
   <link rel="icon" type="image/png" href="assets/baadam-logo.png">
 </head>
 <body class="has-snap-nav">
@@ -30,11 +30,61 @@
           <li class="nav-item">
             <a href="index.html" class="nav-link active">Home</a>
           </li>
-          <li class="nav-item">
+                    <li class="nav-item">
             <a href="services.html" class="nav-link">Services</a>
           </li>
-          <li class="nav-item">
-            <a href="portfolio.html" class="nav-link">Portfolio</a>
+                    <li class="nav-item nav-item-has-dropdown" id="nav-portfolio-item">
+            <a href="portfolio.html" class="nav-link nav-link-dropdown-trigger" id="nav-portfolio-link" aria-haspopup="true" aria-expanded="false" aria-controls="portfolio-mega-menu">
+              <span>Portfolio</span>
+              <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 1L5 5L9 1"/>
+              </svg>
+            </a>
+
+            <!-- Portfolio Image-Based Mega Menu Dropdown (Matches Portfolio Page Categories) -->
+            <div class="portfolio-mega-menu" id="portfolio-mega-menu" role="region" aria-label="Portfolio Categories">
+              <div class="mega-menu-inner">
+                <div class="mega-menu-grid">
+                  
+                  <!-- Card 1: Web & Websites -->
+                  <a href="portfolio.html?filter=web" class="mega-menu-card" data-category="web" aria-label="Web & Websites Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-web-services.jpg" alt="Web & Websites - High-Performing Web Platforms" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Web &amp; Websites</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                  <!-- Card 2: Mobile Applications -->
+                  <a href="portfolio.html?filter=mobile" class="mega-menu-card" data-category="mobile" aria-label="Mobile Applications Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-mobile-apps.jpg" alt="Mobile Applications - iOS & Android Solutions" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Mobile Applications</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                  <!-- Card 3: Enterprise Software & ERP -->
+                  <a href="portfolio.html?filter=enterprise" class="mega-menu-card" data-category="enterprise" aria-label="Enterprise Software & ERP Portfolio">
+                    <div class="mega-card-media">
+                      <img src="assets/mega-service-software.jpg" alt="Enterprise Software & ERP - Custom Business Systems" class="mega-card-img" width="360" height="240" loading="lazy">
+                      <div class="mega-card-overlay" aria-hidden="true"></div>
+                    </div>
+                    <div class="mega-card-content">
+                      <h4 class="mega-card-title">Enterprise Software &amp; ERP</h4>
+                      <span class="mega-card-divider" aria-hidden="true"></span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+            </div>
           </li>
           <li class="nav-item">
             <a href="about.html" class="nav-link">About Us</a>
@@ -44,16 +94,9 @@
           </li>
         </ul>
         <div class="nav-cta-wrapper">
-          <a href="contact.html" class="btn-talk" aria-label="Book a call">
-            <span>Book a call</span>
-            <span class="nav-arrow-circle" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-              </svg>
-            </span>
+          <a href="contact.html" class="btn-talk" aria-label="Start a conversation">
+            <span>Let's Talk</span>
+            <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>
@@ -113,13 +156,13 @@
 
             <!-- Central Editorial Headline with Single-Line Lime Pill -->
             <h1 class="hero-lens-headline">
-              Get Your Business On Height,<br>
-              <span class="hero-lime-tag">With Our Product And Services</span>
+              Take Your Business To New Heights,<br>
+              <span class="hero-lime-tag">With Our Products &amp; Services.</span>
             </h1>
 
             <!-- Subtitle Description -->
             <p class="hero-lens-desc">
-              We, Baadam Info And Trade Link Services Pvt. Ltd., a young yet experienced, dynamic, and technology-based company, are here to reduce your financial issues and increase your business's growth. Having an experience of five years, with more than thirty workers, we ensure an increase in traffic, high-quality software, offer e-commerce, and an increase in product awareness.
+              We help businesses grow with cutting-edge software, custom web development, mobile apps, e-commerce, and high-impact digital marketing.
             </p>
 
             <!-- Dual Centered Action Buttons -->
@@ -307,8 +350,20 @@
     </section>
     <!-- =====================================================================
          Section 2: Services (Reachwise Reference Interactive Accordion)
+         Sticky Multi-Step Scroll Track: Pinned cards step-by-step
          ===================================================================== -->
-    <section class="services-section" id="services-section" aria-labelledby="services-main-heading">
+    <div class="services-sticky-track" id="services-sticky-track">
+      <!-- Invisible snap stops for CSS scroll-snap step-by-step locking -->
+      <div class="services-snap-stops-wrap" aria-hidden="true">
+        <div class="services-snap-stop" data-step="0"></div>
+        <div class="services-snap-stop" data-step="1"></div>
+        <div class="services-snap-stop" data-step="2"></div>
+        <div class="services-snap-stop" data-step="3"></div>
+        <div class="services-snap-stop" data-step="4"></div>
+        <div class="services-snap-stop" data-step="5"></div>
+      </div>
+
+      <section class="services-section services-pinned-content" id="services-section" aria-labelledby="services-main-heading">
       <div class="section-container">
         <!-- Section Header: Split Editorial -->
         <div class="services-header-split scroll-reveal">
@@ -806,6 +861,7 @@
         </div>
       </div>
     </section>
+  </div>
 
     <!-- =====================================================================
          Section: Featured Portfolio Showcase (3-Project Interactive Gallery)
@@ -839,131 +895,119 @@
 
         <!-- 3 Flagship Showcase Deck -->
         <div class="portfolio-showcase-deck">
-          <!-- Project 01: Enterprise Cloud & ERP -->
-          <article class="portfolio-feature-card scroll-reveal" data-project="erp">
+          <!-- Project 01: KP E-Services -->
+          <a href="projects/kp-e-services/" class="portfolio-feature-card scroll-reveal is-revealed" data-project="kp-e-services" aria-label="View KP E-Services Project Details">
             <div class="feature-card-glow" aria-hidden="true"></div>
             <div class="feature-card-media-wrap">
               <div class="feature-card-chrome-bar" aria-hidden="true">
                 <span class="chrome-dot chrome-dot-red"></span>
                 <span class="chrome-dot chrome-dot-yellow"></span>
                 <span class="chrome-dot chrome-dot-green"></span>
-                <span class="chrome-url-pill">app.enterprise.io/dashboard</span>
+                <span class="chrome-url-pill">play.google.com/store/apps/details?id=kp_eservice.com</span>
               </div>
               <div class="feature-media-overflow">
-                <img src="assets/about-office.jpg" alt="Enterprise Management Platform Interface" class="feature-media-img" width="460" height="280">
+                <img src="assets/portfolio-hero-1.png" alt="KP E-Services" class="feature-media-img" width="460" height="240" loading="lazy">
               </div>
               <div class="feature-live-pill">
-                <span class="live-dot-beacon"></span>
-                <span>99.98% Uptime &middot; 4x Speed</span>
+                <span class="live-dot-beacon "></span>
+                <span>Automated Sanction &middot; Wallets</span>
               </div>
             </div>
 
             <div class="feature-card-body">
               <div class="feature-meta-kicker">
-                <span class="feature-kicker-cat">Web Platform</span>
+                <span class="feature-kicker-cat">FinTech & Loan Operations</span>
                 <span class="feature-kicker-idx">01</span>
               </div>
-              <h3 class="feature-card-title">Business Management &amp; ERP</h3>
+              <h3 class="feature-card-title">KP E-Services</h3>
               <p class="feature-card-desc">
-                Centralized multi-tenant cloud architecture automating complex operations, database sync, and reporting engines for 15,000+ daily users.
+                A comprehensive loan operations platform designed for connectors, borrowers, and internal underwriting teams. It tracks each loan application seamlessly from lead capture and pre-login data intake through document verification, credit sanction, and disbursement, incorporating live bank criteria algorithms, commission payouts, referral wallets, and support ticketing.12345
               </p>
               <div class="feature-card-footer">
                 <div class="feature-tech-tags">
-                  <span class="feature-tech-pill">React</span>
-                  <span class="feature-tech-pill">Python</span>
-                  <span class="feature-tech-pill">PostgreSQL</span>
+                  <span class="feature-tech-pill">React.js</span>
+                  <span class="feature-tech-pill">Node.js</span>
+                  <span class="feature-tech-pill">Express</span>
                 </div>
-                <a href="portfolio.html" class="feature-action-btn" aria-label="View Business Management Platform Case Study">
-                  <span>View Case</span>
-                  <span class="feature-btn-arrow">&rarr;</span>
-                </a>
               </div>
             </div>
-          </article>
+          </a>
 
-          <!-- Project 02: Mobile Health & FinTech App -->
-          <article class="portfolio-feature-card scroll-reveal" data-project="mobile">
+          <!-- Project 02: Ashray Labs -->
+          <a href="projects/ashray-labs/" class="portfolio-feature-card scroll-reveal is-revealed" data-project="ashray-labs" aria-label="View Ashray Labs Project Details">
             <div class="feature-card-glow" aria-hidden="true"></div>
             <div class="feature-card-media-wrap">
               <div class="feature-card-chrome-bar" aria-hidden="true">
                 <span class="chrome-dot chrome-dot-red"></span>
                 <span class="chrome-dot chrome-dot-yellow"></span>
                 <span class="chrome-dot chrome-dot-green"></span>
-                <span class="chrome-url-pill">App Store &middot; Google Play</span>
+                <span class="chrome-url-pill">www.ashraylabs.in</span>
               </div>
               <div class="feature-media-overflow">
-                <img src="assets/case-fitness-app.jpg" alt="Smart Mobile Application Interface" class="feature-media-img" width="460" height="280">
+                <img src="assets/case-dental-clinic.jpg" alt="Ashray Labs" class="feature-media-img" width="460" height="240" loading="lazy">
               </div>
               <div class="feature-live-pill feature-live-pill-emerald">
                 <span class="live-dot-beacon beacon-emerald"></span>
-                <span>★ 4.9 Rating &middot; 50k+ Installs</span>
+                <span>Cloud Diagnostics &middot; Online Reports</span>
               </div>
             </div>
 
             <div class="feature-card-body">
               <div class="feature-meta-kicker">
-                <span class="feature-kicker-cat">Mobile Ecosystem</span>
+                <span class="feature-kicker-cat">Healthcare & Diagnostics</span>
                 <span class="feature-kicker-idx">02</span>
               </div>
-              <h3 class="feature-card-title">Next-Gen Smart Mobile App</h3>
+              <h3 class="feature-card-title">Ashray Labs</h3>
               <p class="feature-card-desc">
-                Cross-platform mobile application with biometric authentication, sub-second API transactions, push notifications, and offline sync.
+                A comprehensive public portal and laboratory management system for a fast-growing pathology collection network. Patients can seamlessly browse diagnostic packages, book home collection visits, request quotations, and securely access medical reports and invoices online.
               </p>
               <div class="feature-card-footer">
                 <div class="feature-tech-tags">
-                  <span class="feature-tech-pill">Flutter</span>
-                  <span class="feature-tech-pill">Firebase</span>
-                  <span class="feature-tech-pill">REST APIs</span>
+                  <span class="feature-tech-pill">Next.js</span>
+                  <span class="feature-tech-pill">Python</span>
+                  <span class="feature-tech-pill">FastAPI</span>
                 </div>
-                <a href="portfolio.html" class="feature-action-btn" aria-label="View Smart Mobile App Case Study">
-                  <span>View Case</span>
-                  <span class="feature-btn-arrow">&rarr;</span>
-                </a>
               </div>
             </div>
-          </article>
+          </a>
 
-          <!-- Project 03: Omnichannel E-Commerce Engine -->
-          <article class="portfolio-feature-card scroll-reveal" data-project="ecommerce">
+          <!-- Project 03: Just Land -->
+          <a href="projects/just-land/" class="portfolio-feature-card scroll-reveal is-revealed" data-project="just-land" aria-label="View Just Land Project Details">
             <div class="feature-card-glow" aria-hidden="true"></div>
             <div class="feature-card-media-wrap">
               <div class="feature-card-chrome-bar" aria-hidden="true">
                 <span class="chrome-dot chrome-dot-red"></span>
                 <span class="chrome-dot chrome-dot-yellow"></span>
                 <span class="chrome-dot chrome-dot-green"></span>
-                <span class="chrome-url-pill">store.globalbrand.com</span>
+                <span class="chrome-url-pill">justlandmarket.com</span>
               </div>
               <div class="feature-media-overflow">
-                <img src="assets/cta-collaboration.jpg" alt="Omnichannel D2C Store Interface" class="feature-media-img" width="460" height="280">
+                <img src="assets/hero-building.jpg" alt="Just Land" class="feature-media-img" width="460" height="240" loading="lazy">
               </div>
               <div class="feature-live-pill feature-live-pill-blue">
                 <span class="live-dot-beacon beacon-blue"></span>
-                <span>▲ +180% Sales Growth</span>
+                <span>Live Kitchen Dispatch &middot; 0% Commission</span>
               </div>
             </div>
 
             <div class="feature-card-body">
               <div class="feature-meta-kicker">
-                <span class="feature-kicker-cat">E-Commerce Scale</span>
+                <span class="feature-kicker-cat">Real Estate & Land Marketplace</span>
                 <span class="feature-kicker-idx">03</span>
               </div>
-              <h3 class="feature-card-title">Omnichannel D2C Retail Platform</h3>
+              <h3 class="feature-card-title">Just Land</h3>
               <p class="feature-card-desc">
-                High-performance headless e-commerce store with 0.5s sub-second page loads, multi-currency checkout, and warehouse ERP integration.
+                A specialized real estate and land marketplace connecting prospective buyers with rural acreage, commercial parcels, and residential properties. Supports both For-Sale-By-Owner (FSBO) listings and verified broker profiles with interactive GIS mapping and in-app chat.
               </p>
               <div class="feature-card-footer">
                 <div class="feature-tech-tags">
-                  <span class="feature-tech-pill">Shopify</span>
                   <span class="feature-tech-pill">Next.js</span>
-                  <span class="feature-tech-pill">Stripe</span>
+                  <span class="feature-tech-pill">React</span>
+                  <span class="feature-tech-pill">Node.js</span>
                 </div>
-                <a href="portfolio.html" class="feature-action-btn" aria-label="View D2C Retail Platform Case Study">
-                  <span>View Case</span>
-                  <span class="feature-btn-arrow">&rarr;</span>
-                </a>
               </div>
             </div>
-          </article>
+          </a>
         </div>
       </div>
     </section>
@@ -1001,57 +1045,57 @@
         <!-- Horizontal Client Tabs Switcher -->
         <div class="case-tabs-container scroll-reveal" role="tablist" aria-label="Case studies by client">
           <div class="case-tabs-track">
-            <!-- Tab 1: Web App (Active) -->
+            <!-- Tab 1: KP E-Services (Active) -->
             <button class="case-tab is-active" role="tab" aria-selected="true" data-client="case1" type="button">
-              <img src="assets/about-office.jpg" alt="Business Management Platform" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/portfolio-hero-1.png" alt="KP E-Services Loan Operations" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">Web Application</span>
-                <span class="case-tab-stat">React &middot; Python</span>
+                <span class="case-tab-name">KP E-Services</span>
+                <span class="case-tab-stat">FinTech &middot; Wallets</span>
               </div>
             </button>
 
-            <!-- Tab 2: Corporate Website -->
+            <!-- Tab 2: Ashray Labs -->
             <button class="case-tab" role="tab" aria-selected="false" data-client="case2" type="button">
-              <img src="assets/hero-office.jpg" alt="Corporate Digital Presence" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/case-dental-clinic.jpg" alt="Ashray Labs Diagnostics" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">Corporate Website</span>
-                <span class="case-tab-stat">HTML5 &middot; Bootstrap</span>
+                <span class="case-tab-name">Ashray Labs</span>
+                <span class="case-tab-stat">Healthcare &middot; Next.js</span>
               </div>
             </button>
 
-            <!-- Tab 3: Mobile App -->
+            <!-- Tab 3: Chick N Go -->
             <button class="case-tab" role="tab" aria-selected="false" data-client="case3" type="button">
-              <img src="assets/case-fitness-app.jpg" alt="Smart Mobile Application" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/portfolio-hero-2.png" alt="Chick N Go Food Ordering" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">Mobile Application</span>
-                <span class="case-tab-stat">Flutter &middot; Firebase</span>
+                <span class="case-tab-name">Chick N Go</span>
+                <span class="case-tab-stat">Food PWA &middot; Multi-Tenant</span>
               </div>
             </button>
 
-            <!-- Tab 4: Cloud Solutions -->
+            <!-- Tab 4: ProCurve -->
             <button class="case-tab" role="tab" aria-selected="false" data-client="case4" type="button">
-              <img src="assets/cta-collaboration.jpg" alt="Cloud Infrastructure Modernization" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/about-office-mockup.jpg" alt="ProCurve Valuation Software" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">Cloud Solutions</span>
-                <span class="case-tab-stat">AWS &middot; Docker</span>
+                <span class="case-tab-name">ProCurve</span>
+                <span class="case-tab-stat">Valuation &middot; Python</span>
               </div>
             </button>
 
-            <!-- Tab 5: AI & Automation -->
+            <!-- Tab 5: Just Land -->
             <button class="case-tab" role="tab" aria-selected="false" data-client="case5" type="button">
-              <img src="assets/about-digital-solutions.jpg" alt="Intelligent Business Automation" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/hero-building.jpg" alt="Just Land Property Marketplace" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">AI &amp; Automation</span>
-                <span class="case-tab-stat">Python &middot; ML</span>
+                <span class="case-tab-name">Just Land</span>
+                <span class="case-tab-stat">PropTech &middot; Mapbox</span>
               </div>
             </button>
 
-            <!-- Tab 6: Enterprise Software -->
+            <!-- Tab 6: Dodani ERP -->
             <button class="case-tab" role="tab" aria-selected="false" data-client="case6" type="button">
-              <img src="assets/hero-building.jpg" alt="Enterprise Management System" class="case-tab-avatar" width="38" height="38">
+              <img src="assets/about-office-showcase.png" alt="Dodani Brokerage ERP" class="case-tab-avatar" width="38" height="38">
               <div class="case-tab-info">
-                <span class="case-tab-name">Enterprise Software</span>
-                <span class="case-tab-stat">Django &middot; Postgres</span>
+                <span class="case-tab-name">Dodani ERP</span>
+                <span class="case-tab-stat">Escrow &middot; Django</span>
               </div>
             </button>
           </div>
@@ -1061,7 +1105,7 @@
         <div class="case-slider-card scroll-reveal" id="caseSliderCard">
           <!-- Background Base Layer: AFTER (Full Color) -->
           <div class="case-layer-after" aria-hidden="true">
-            <img src="assets/about-office.jpg" alt="Business Management Platform" class="case-img-after">
+            <img src="assets/portfolio-hero-1.png" alt="KP E-Services Loan Platform" class="case-img-after">
           </div>
 
           <!-- Clipped Overlay Layer: BEFORE (Grayscale) -->
@@ -1082,7 +1126,7 @@
           <!-- Top-Left Floating Badge -->
           <div class="case-overlay-badge case-overlay-top-left">
             <span class="badge-dot-pink" aria-hidden="true"></span>
-            <span class="case-client-badge-text">Business Management Platform &middot; 2025</span>
+            <span class="case-client-badge-text">KP E-Services &middot; FinTech Platform</span>
           </div>
 
           <!-- Top-Right Floating Metric Tag -->
@@ -1129,8 +1173,8 @@
                 <span class="case-tag-pill">Django</span>
                 <span class="case-tag-pill">MySQL</span>
               </div>
-              <a href="portfolio.html" class="btn-read-case case-cta-link" aria-label="Read full case study">
-                <span>READ CASE STUDY</span>
+              <a href="portfolio.html" class="btn-read-case case-cta-link" aria-label="View project details">
+                <span>VIEW PROJECT</span>
                 <span class="btn-arrow-circle" aria-hidden="true">&nearr;</span>
               </a>
             </div>
@@ -1320,6 +1364,7 @@
   <!-- =====================================================================
        Site Footer: Multi-Column Modern Agency Layout
        ===================================================================== -->
+    <!-- Canonical Site Footer -->
   <footer class="site-footer" id="site-footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-grid">
@@ -1333,17 +1378,17 @@
           </p>
           <div class="footer-social-links" aria-label="Social Media Links">
             <a href="https://linkedin.com" class="footer-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             </a>
             <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
             </a>
             <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Direct Email">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
@@ -1367,12 +1412,12 @@
         <div class="footer-col">
           <h3 class="footer-col-title">Core Services</h3>
           <ul class="footer-link-list">
-            <li><a href="services.html">Website Development</a></li>
-            <li><a href="services.html">Application Development</a></li>
-            <li><a href="services.html">Software Engineering</a></li>
-            <li><a href="services.html">Digital Marketing &amp; SEO</a></li>
-            <li><a href="services.html">E-Commerce Platforms</a></li>
-            <li><a href="services.html">Game Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Website Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Application Development</a></li>
+            <li><a href="services.html" class="footer-nav-link">Software Engineering</a></li>
+            <li><a href="services.html" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
+            <li><a href="services.html" class="footer-nav-link">E-Commerce Platforms</a></li>
+            <li><a href="services.html" class="footer-nav-link">Game Development</a></li>
           </ul>
         </div>
 
@@ -1443,20 +1488,23 @@
       <!-- 1. Independently animated pointing arm layer (forearm, wrist, hand, stylus) -->
       <div class="teacher-arm-layer" id="teacherArmLayer">
         <div class="teacher-wrist-layer" id="teacherWristLayer">
-          <img src="assets/teacher-pointing-arm.png?v=9" alt="" class="teacher-arm-img" id="teacherArmImg" width="150" height="195" />
+          <img src="assets/teacher-pointing-arm.png?v=10" alt="" class="teacher-arm-img" id="teacherArmImg" width="150" height="195" />
         </div>
       </div>
       <!-- 2. Completely stationary body layer (head bun, glasses, collar, torso, tablet, legs) -->
-      <img src="assets/teacher-pointing-body.png?v=9" alt="Baadam Presentation Guide" class="teacher-body-layer" id="teacherBodyLayer" width="150" height="195" />
+      <img src="assets/teacher-pointing-body.png?v=10" alt="Baadam Presentation Guide" class="teacher-body-layer" id="teacherBodyLayer" width="150" height="195" />
     </div>
   </aside>
 
   <!-- Interactive Scripts -->
   <script src="water-ripple.js" defer></script>
   <script src="radar-sweep.js" defer></script>
-  <script src="services-accordion.js" defer></script>
-  <script src="case-study-slider.js" defer></script>
+  <script src="services-accordion.js?v=30" defer></script>
+  <script src="case-study-slider.js?v=28?v=28" defer></script>
   <script src="funnel-animation.js" defer></script>
-  <script src="main.js?v=21" defer></script>
+  <script src="project-database.js" defer></script>
+  <script src="main.js?v=28" defer></script>
+  <script src="portfolio-mega-menu.js" defer></script>
+  <script src="homepage-cms.js" defer></script>
 </body>
 </html>

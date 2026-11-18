@@ -1,13 +1,15 @@
 /**
- * Baadam.com - Modern Services Hover Accordion Engine
+ * Baadam.com - Modern Services Sticky Scroll Accordion Engine
  * Features:
- * - Hover to open: moving cursor over any service pill smoothly expands it
- * - Mouseleave to close: moving cursor away closes that particular service dropdown
- * - Clean UI: Removed + and - toggle buttons per user request
- * - Dynamic height & opacity transitions with requestAnimationFrame
- * - Interactive Mockup: Live typing simulator in search bar
- * - Bottom stepper progress bar with clickable segment pills and [ 01 / 06 ] counter
- * - Full keyboard navigation (Arrow keys, Enter, Space, Escape) and accessibility
+ * - Butter-Smooth Fluid Animation: Hardware-accelerated CSS Grid transition (0fr -> 1fr) with zero layout thrashing
+ * - Pinned Sticky Progression: Services section remains pinned at top:0 while scrolling
+ * - Stabilized Hysteresis: Directional deadband prevents flutter, jitter, and rapid oscillation at scroll boundaries
+ * - Sequential Card Unfolding: Smoothly opens Card 1 -> Card 2 -> Card 3 -> Card 4 -> Card 5 -> Card 6
+ * - Symmetric Reverse Scroll: Smoothly steps backward Card 6 -> Card 5 -> Card 4 -> Card 3 -> Card 2 -> Card 1
+ * - Click & Tap Navigation: Clicking any card header or stepper segment smoothly scrolls directly to that card
+ * - Live Mockup Typing Simulator in search preview bar
+ * - Interactive Stepper Counter [ 01 / 06 ] with clickable progress segments
+ * - Full Keyboard Accessibility (Arrow keys, Enter, Space)
  */
 
 (function () {
@@ -17,6 +19,7 @@
     var section = document.getElementById('services-section');
     if (!section) return;
 
+    var track = document.getElementById('services-sticky-track');
     var stack = section.querySelector('.services-accordion-stack');
     var items = Array.prototype.slice.call(section.querySelectorAll('.service-acc-item'));
     var stepperText = section.querySelector('.acc-stepper-counter');
@@ -25,9 +28,10 @@
 
     if (items.length === 0) return;
 
-    var currentIndex = -1;
+    var currentIndex = 1; // 1-based (1..6)
     var typingTimer = null;
-    var closeTimer = null;
+    var isProgrammaticScroll = false;
+    var scrollTimer = null;
 
     // Simulate typing in the SEO search mockup
     function startTypingEffect() {
@@ -36,9 +40,9 @@
         'full-stack website development',
         'ios & android application engineering',
         'omnichannel digital marketing & growth',
-        'custom b2b/d2c ecommerce platforms',
-        'enterprise cloud software & microservices',
-        'cross-platform 3d game development'
+        'custom e-commerce storefronts',
+        'scalable enterprise software systems',
+        '3d interactive game experiences'
       ];
       var phraseIdx = 0;
       var charIdx = 0;
@@ -72,7 +76,7 @@
       typingTimer = setTimeout(typeLoop, 800);
     }
 
-    // Activate/open a specific service item
+    // Activate/open a specific service item with butter-smooth class transition
     function activateItem(targetItem, shouldFocus) {
       if (!targetItem) return;
 
@@ -91,20 +95,17 @@
             headerBtn.setAttribute('aria-expanded', 'true');
             if (shouldFocus) headerBtn.focus();
           }
-          if (body) {
-            // Fluid height expansion
-            body.style.maxHeight = (body.scrollHeight + 140) + 'px';
-            body.style.opacity = '1';
-          }
         } else {
           item.classList.remove('is-active');
           if (headerBtn) {
             headerBtn.setAttribute('aria-expanded', 'false');
           }
-          if (body) {
-            body.style.maxHeight = '0px';
-            body.style.opacity = '0';
-          }
+        }
+
+        // Remove any legacy inline maxHeight styles so CSS Grid drives transition at 60fps
+        if (body && body.style.maxHeight) {
+          body.style.removeProperty('max-height');
+          body.style.removeProperty('opacity');
         }
       });
 
@@ -138,14 +139,14 @@
         if (headerBtn) {
           headerBtn.setAttribute('aria-expanded', 'false');
         }
-        if (body) {
-          body.style.maxHeight = '0px';
-          body.style.opacity = '0';
+        if (body && body.style.maxHeight) {
+          body.style.removeProperty('max-height');
+          body.style.removeProperty('opacity');
         }
       });
 
       if (stepperText) {
-        stepperText.innerHTML = '<span class="stepper-badge">01 / 06</span> <span class="stepper-name">Hover to explore</span>';
+        stepperText.innerHTML = '<span class="stepper-badge">01 / 06</span> <span class="stepper-name">Website Development</span>';
       }
 
       stepperSegments.forEach(function (seg) {
@@ -160,70 +161,135 @@
       return div.innerHTML;
     }
 
-    // Attach Hover (mouseenter) and Leave (mouseleave) event listeners
+    // Smoothly scroll window to a specific card step within the sticky track
+    function scrollToCard(index) {
+      index = Math.max(0, Math.min(items.length - 1, index));
+      if (items[index]) {
+        activateItem(items[index], false);
+      }
+
+      if (track) {
+        var vh = window.innerHeight;
+        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var trackTop = track.getBoundingClientRect().top + scrollY;
+        var targetY = trackTop + (index * vh);
+
+        isProgrammaticScroll = true;
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
+
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function () {
+          isProgrammaticScroll = false;
+        }, 800);
+      }
+    }
+
+    // Scroll-driven card activation with directional deadband hysteresis
+    function updateCardOnScroll() {
+      if (!track || isProgrammaticScroll) return;
+
+      var rect = track.getBoundingClientRect();
+      var vh = window.innerHeight;
+
+      // If track is outside viewport range, do not update
+      if (rect.top > vh || rect.bottom < 0) return;
+
+      var scrolled = -rect.top;
+      var totalScroll = track.offsetHeight - vh;
+      if (totalScroll <= 0) return;
+
+      var numItems = items.length;
+      var progress = scrolled / vh;
+      var current0 = currentIndex > 0 ? (currentIndex - 1) : 0;
+      var targetIdx = current0;
+
+      // Clamping at boundaries
+      if (progress <= 0.05) {
+        targetIdx = 0;
+      } else if (progress >= (numItems - 1) - 0.05) {
+        targetIdx = numItems - 1;
+      } else {
+        // Hysteresis deadband: advance only past (current + 0.58), retreat only below (current - 0.58)
+        var rawTarget = Math.round(progress);
+        rawTarget = Math.max(0, Math.min(numItems - 1, rawTarget));
+
+        if (rawTarget > current0) {
+          if (progress > (current0 + 0.58)) {
+            targetIdx = rawTarget;
+          }
+        } else if (rawTarget < current0) {
+          if (progress < (current0 - 0.58)) {
+            targetIdx = rawTarget;
+          }
+        }
+      }
+
+      if (targetIdx !== current0) {
+        if (items[targetIdx]) {
+          activateItem(items[targetIdx], false);
+        }
+      }
+    }
+
+    // 60fps RequestAnimationFrame throttled scroll listener
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateCardOnScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Attach Click and Keyboard listeners to service headers
     items.forEach(function (item, index) {
       var headerBtn = item.querySelector('.service-acc-header');
 
-      // 1. Hover to open this service card smoothly
-      item.addEventListener('mouseenter', function () {
-        activateItem(item, false);
-      });
-
+      // Click anywhere on header or collapsed card navigates to and opens that card
       if (headerBtn) {
-        // Also support click to toggle
-        headerBtn.addEventListener('click', function () {
-          if (item.classList.contains('is-active')) {
-            deactivateAll();
-          } else {
-            activateItem(item, false);
-          }
+        headerBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          scrollToCard(index);
         });
 
         // Accessible Keyboard navigation
         headerBtn.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            if (item.classList.contains('is-active')) {
-              deactivateAll();
-            } else {
-              activateItem(item, true);
-            }
+            scrollToCard(index);
           } else if (e.key === 'ArrowDown') {
             e.preventDefault();
-            var nextIdx = (index + 1) % items.length;
-            activateItem(items[nextIdx], true);
+            var nextIdx = Math.min(items.length - 1, index + 1);
+            scrollToCard(nextIdx);
           } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            var prevIdx = (index - 1 + items.length) % items.length;
-            activateItem(items[prevIdx], true);
-          } else if (e.key === 'Escape') {
-            deactivateAll();
+            var prevIdx = Math.max(0, index - 1);
+            scrollToCard(prevIdx);
           }
         });
       }
     });
 
-    // Preserve active card on stack mouseleave so other cards remain neatly visible
-
-    // Stepper segments click / hover
+    // Stepper segments click
     stepperSegments.forEach(function (seg, segIdx) {
       seg.setAttribute('role', 'button');
       seg.setAttribute('tabindex', '0');
       seg.setAttribute('aria-label', 'Go to service ' + (segIdx + 1));
 
-      seg.addEventListener('mouseenter', function () {
-        clearTimeout(closeTimer);
-        if (items[segIdx]) activateItem(items[segIdx], false);
-      });
-
-      seg.addEventListener('click', function () {
-        if (items[segIdx]) activateItem(items[segIdx], false);
+      seg.addEventListener('click', function (e) {
+        e.preventDefault();
+        scrollToCard(segIdx);
       });
 
       seg.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          if (items[segIdx]) activateItem(items[segIdx], true);
+          scrollToCard(segIdx);
         }
       });
     });
@@ -233,22 +299,25 @@
       open: function (index) {
         if (items[index]) activateItem(items[index], false);
       },
+      scrollToCard: function (index) {
+        scrollToCard(index);
+      },
+      getCurrentIndex: function () {
+        return currentIndex > 0 ? (currentIndex - 1) : 0;
+      },
       closeAll: deactivateAll
     };
 
     startTypingEffect();
 
-    // Open first item by default so content is immediately visible without awkward blank state
+    // Open first item by default
     if (items.length > 0) {
       activateItem(items[0], false);
     }
 
-    // Recalculate on window resize to preserve smooth heights
+    // Sync on resize to maintain correct measurements
     window.addEventListener('resize', function () {
-      var active = section.querySelector('.service-acc-item.is-active .service-acc-body');
-      if (active) {
-        active.style.maxHeight = (active.scrollHeight + 140) + 'px';
-      }
+      updateCardOnScroll();
     });
   }
 

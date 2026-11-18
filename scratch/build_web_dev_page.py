@@ -1,0 +1,819 @@
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Custom website development, full-stack web applications, and headless platforms engineered by Baadam in Ahmedabad. 99+ Core Web Vitals, high-conversion design, and scalable cloud architecture.">
+  <title>Website Development Services | Custom Web Applications &amp; Platforms | Baadam</title>
+  <link rel="stylesheet" href="../../style.css?v=29">
+  <link rel="icon" type="image/png" href="../../assets/baadam-logo.png">
+</head>
+<body class="service-detail-page">
+  <!-- Floating Pill Navigation Bar -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="../../index.html" class="logo-link" aria-label="Baadam Home">
+        <img src="../../assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="logo-img" width="140" height="38">
+      </a>
+
+      <!-- CSS + JS mobile menu toggle -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </label>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="../../services.html" class="nav-link active">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="../../portfolio.html" class="nav-link">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a href="../../about.html" class="nav-link">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="../../contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+        <div class="nav-cta-wrapper">
+          <a href="../../contact.html" class="btn-talk" aria-label="Start a conversation">
+            <span>Let's Talk</span>
+            <span class="nav-arrow-circle" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation Bar -->
+  <nav class="service-breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="section-container">
+      <div class="breadcrumb-inner">
+        <a href="../../services.html" class="breadcrumb-back-link">
+          <span class="back-arrow">&larr;</span> Back to All Services
+        </a>
+        <ol class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="../../index.html">Home</a></li>
+          <li class="breadcrumb-sep" aria-hidden="true">/</li>
+          <li class="breadcrumb-item"><a href="../../services.html">Services</a></li>
+          <li class="breadcrumb-sep" aria-hidden="true">/</li>
+          <li class="breadcrumb-item active" aria-current="page">Website Development</li>
+        </ol>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="site-main">
+    <!-- =====================================================================
+         Section 1: Hero
+         ===================================================================== -->
+    <section class="service-hero-section" aria-label="Website Development Overview">
+      <div class="section-container">
+        <div class="service-hero-grid">
+          <!-- Left Column: Editorial Content -->
+          <div class="service-hero-content scroll-reveal">
+            <div class="kicker-capsule">
+              <i class="radar-dot" aria-hidden="true"></i>
+              <span>OUR SERVICES</span>
+            </div>
+
+            <h1 class="service-hero-heading">
+              High-Performing Websites.<br>
+              <span class="text-brand-red">Engineered for Scale &amp; Speed.</span>
+            </h1>
+
+            <p class="service-hero-desc">
+              From high-conversion corporate web platforms to complex full-stack web applications, Baadam crafts lightning-fast, secure, and digitally transformative web experiences tailored to your business growth.
+            </p>
+
+            <div class="service-hero-actions">
+              <a href="../../contact.html" class="btn-pill btn-primary-pill" aria-label="Start Your Website Project">
+                <span>Start Your Project</span>
+                <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+              </a>
+              <a href="#related-projects" class="btn-pill btn-glass-pill" aria-label="Explore Related Web Work">
+                <span>Explore Our Work</span>
+                <span class="btn-arrow-circle" aria-hidden="true">&darr;</span>
+              </a>
+            </div>
+
+            <div class="service-trust-bar">
+              <div class="service-trust-pill">
+                <span class="service-trust-dot"></span>
+                <span>Sub-Second LCP Load Speed</span>
+              </div>
+              <div class="service-trust-pill">
+                <span class="service-trust-dot"></span>
+                <span>99+ Core Web Vitals Standard</span>
+              </div>
+              <div class="service-trust-pill">
+                <span class="service-trust-dot"></span>
+                <span>Mobile-First Fluid UX</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Browser Chrome Showcase -->
+          <div class="service-hero-visual scroll-reveal">
+            <div class="service-preview-card">
+              <div class="preview-chrome-bar" aria-hidden="true">
+                <div class="preview-dots">
+                  <span class="preview-dot red"></span>
+                  <span class="preview-dot yellow"></span>
+                  <span class="preview-dot green"></span>
+                </div>
+                <div class="preview-url-pill">yourbrand.com/platform</div>
+              </div>
+              <div class="preview-image-wrap">
+                <img src="../../assets/portfolio-hero-3.png" alt="Baadam Web Engineering Platform Showcase" width="580" height="340" loading="eager">
+                <div class="preview-floating-badge">
+                  <span class="badge-beacon-dot" aria-hidden="true"></span>
+                  <span>99/100 Google Web Vitals &middot; Production Ready</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 2: Introduction
+         ===================================================================== -->
+    <section class="service-intro-section" aria-labelledby="intro-heading">
+      <div class="section-container">
+        <div class="service-intro-grid scroll-reveal">
+          <div class="service-intro-left">
+            <div class="kicker-capsule">
+              <span>[ STRATEGIC OVERVIEW ]</span>
+            </div>
+            <h2 class="section-heading" id="intro-heading">
+              Why Strategic Web Engineering Matters for Your Business
+            </h2>
+          </div>
+          <div class="service-intro-right">
+            <p>
+              Your website is the digital headquarters of your brand. In today's digital landscape, customers expect seamless navigation, instant sub-second response times, and intuitive interfaces across every device screen. A sluggish, outdated, or brittle website directly degrades conversion rates and customer credibility.
+            </p>
+            <p>
+              At Baadam Info and Tradelink Services, we treat website development as an architectural discipline. We combine clean semantic engineering, accessible UI/UX systems, modular component design, and cloud performance optimization to build websites that look stunning and perform reliably under demanding commercial traffic.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3 Core Foundation Pillars -->
+        <div class="intro-pillars-grid scroll-reveal">
+          <div class="intro-pillar-card">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Sub-Second Speed</h3>
+            <p class="pillar-desc">
+              Engineered with optimized assets, edge caching, and zero layout shift to achieve sub-second LCP and top search performance.
+            </p>
+          </div>
+
+          <div class="intro-pillar-card">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Conversion-First UX</h3>
+            <p class="pillar-desc">
+              Structured user flows, clean visual hierarchy, and strategic calls-to-action designed to turn casual visitors into active clients.
+            </p>
+          </div>
+
+          <div class="intro-pillar-card">
+            <div class="pillar-icon-box" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="pillar-title">Enterprise Security</h3>
+            <p class="pillar-desc">
+              Rigid input sanitization, modern SSL/TLS enforcement, automated backups, and protection against common web vulnerabilities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 3: What We Deliver (6 Capability Cards)
+         ===================================================================== -->
+    <section class="service-deliverables-section" aria-labelledby="deliverables-heading">
+      <div class="section-container">
+        <div class="section-editorial-header scroll-reveal">
+          <div class="kicker-capsule">
+            <span>[ WHAT WE DELIVER ]</span>
+          </div>
+          <h2 class="section-heading" id="deliverables-heading">
+            Comprehensive Web Development Capabilities
+          </h2>
+          <p class="section-subtext">
+            From bespoke frontends to deep enterprise backend integrations, we deliver complete end-to-end web solutions built for scale.
+          </p>
+        </div>
+
+        <div class="service-deliverables-grid">
+          <!-- Capability 1 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="3" y1="9" x2="21" y2="9"/>
+                <line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">Custom UI/UX &amp; Design Systems</h3>
+            <p class="deliverable-card-desc">
+              Bespoke visual layouts crafted in Figma, complete with typography scales, reusable component libraries, micro-animations, and fluid responsive styling across all viewports.
+            </p>
+          </article>
+
+          <!-- Capability 2 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/>
+                <polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">Full-Stack Web Applications</h3>
+            <p class="deliverable-card-desc">
+              Complex customer portals, internal workspaces, and software dashboards engineered with modern frameworks like React, Next.js, Node.js, and Python with secure database storage.
+            </p>
+          </article>
+
+          <!-- Capability 3 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">Headless CMS &amp; E-Commerce</h3>
+            <p class="deliverable-card-desc">
+              Decoupled content platforms and bespoke storefronts connected to headless CMS platforms or Shopify, granting your marketing team full editorial freedom without sacrificing speed.
+            </p>
+          </article>
+
+          <!-- Capability 4 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">RESTful &amp; GraphQL API Architecture</h3>
+            <p class="deliverable-card-desc">
+              High-throughput backend endpoints and microservices connecting your web frontend to payment gateways, CRMs, ERP databases, and third-party SaaS services with robust authentication.
+            </p>
+          </article>
+
+          <!-- Capability 5 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">Technical SEO &amp; Core Web Vitals</h3>
+            <p class="deliverable-card-desc">
+              Structured JSON-LD schema markup, semantic HTML tags, dynamic XML sitemaps, and optimized asset delivery ensuring top search engine discoverability and flawless Google PageSpeed metrics.
+            </p>
+          </article>
+
+          <!-- Capability 6 -->
+          <article class="deliverable-feature-card scroll-reveal">
+            <div class="deliverable-icon-wrap" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h3 class="deliverable-card-title">Maintenance, Hosting &amp; Security</h3>
+            <p class="deliverable-card-desc">
+              Proactive cloud server monitoring, SSL certificate management, daily automated backups, security vulnerability patches, and regular framework version upgrades for uninterrupted uptime.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 4: Why Choose Baadam?
+         ===================================================================== -->
+    <section class="service-why-section" aria-labelledby="why-heading">
+      <div class="section-container">
+        <div class="section-editorial-header scroll-reveal">
+          <div class="kicker-capsule">
+            <span>[ WHY CHOOSE BAADAM ]</span>
+          </div>
+          <h2 class="section-heading" id="why-heading">
+            Engineering Principles That Protect Your Investment
+          </h2>
+          <p class="section-subtext">
+            Our approach is guided by pragmatic engineering, measurable client outcomes, and long-term technical reliability.
+          </p>
+        </div>
+
+        <div class="why-baadam-grid">
+          <!-- Value 1 -->
+          <div class="why-baadam-card scroll-reveal">
+            <span class="why-card-badge">TENET 01</span>
+            <h3 class="why-card-title">Business-Focused Solutions</h3>
+            <p class="why-card-desc">
+              We align technology directly with your commercial goals, ensuring your website drives qualified inquiries, customer engagement, and operational value.
+            </p>
+          </div>
+
+          <!-- Value 2 -->
+          <div class="why-baadam-card scroll-reveal">
+            <span class="why-card-badge">TENET 02</span>
+            <h3 class="why-card-title">Customized Development Approach</h3>
+            <p class="why-card-desc">
+              Zero cookie-cutter templates. Every system is bespoke, engineered around your exact workflow specifications, brand identity, and customer requirements.
+            </p>
+          </div>
+
+          <!-- Value 3 -->
+          <div class="why-baadam-card scroll-reveal">
+            <span class="why-card-badge">TENET 03</span>
+            <h3 class="why-card-title">Scalable &amp; Reliable Solutions</h3>
+            <p class="why-card-desc">
+              Clean modular code and resilient database structures that handle growing user volumes and traffic spikes effortlessly without breaking.
+            </p>
+          </div>
+
+          <!-- Value 4 -->
+          <div class="why-baadam-card scroll-reveal">
+            <span class="why-card-badge">TENET 04</span>
+            <h3 class="why-card-title">Quality-Focused Execution</h3>
+            <p class="why-card-desc">
+              Rigorous manual and automated testing, cross-browser validation on physical hardware, and strict adherence to modern web standards.
+            </p>
+          </div>
+
+          <!-- Value 5 -->
+          <div class="why-baadam-card scroll-reveal">
+            <span class="why-card-badge">TENET 05</span>
+            <h3 class="why-card-title">Ongoing Support &amp; Evolution</h3>
+            <p class="why-card-desc">
+              We stand behind our code with post-launch warranty, dedicated technical assistance, security patches, and continuous performance tuning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 5: Our Process (6 Steps Timeline)
+         ===================================================================== -->
+    <section class="service-process-section" aria-labelledby="process-heading">
+      <div class="section-container">
+        <div class="section-editorial-header scroll-reveal">
+          <div class="kicker-capsule">
+            <span>[ DELIVERY FRAMEWORK ]</span>
+          </div>
+          <h2 class="section-heading" id="process-heading">
+            Our Six-Step Website Delivery Process
+          </h2>
+          <p class="section-subtext">
+            A transparent, disciplined methodology that takes your project from concept to high-performing production launch.
+          </p>
+        </div>
+
+        <div class="process-timeline-grid">
+          <!-- Step 1 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 01</span>
+              <span class="process-step-order">01</span>
+            </div>
+            <h3 class="process-step-title">Discovery &amp; Strategy Blueprint</h3>
+            <p class="process-step-desc">
+              We analyze your business objectives, target audience, brand requirements, and competitor landscape to craft an actionable technical roadmap.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 02</span>
+              <span class="process-step-order">02</span>
+            </div>
+            <h3 class="process-step-title">Information Architecture &amp; Wireframes</h3>
+            <p class="process-step-desc">
+              Mapping conversion journeys, content structures, user permissions, and low-fidelity wireframes for rapid stakeholder alignment.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 03</span>
+              <span class="process-step-order">03</span>
+            </div>
+            <h3 class="process-step-title">UI Design &amp; Prototype System</h3>
+            <p class="process-step-desc">
+              Developing high-fidelity Figma components, typographic rhythm, interactive micro-states, and clickable interactive prototypes for review.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 04</span>
+              <span class="process-step-order">04</span>
+            </div>
+            <h3 class="process-step-title">Full-Stack Web Engineering</h3>
+            <p class="process-step-desc">
+              Writing clean semantic markup, modular CSS, component libraries, REST API controllers, and secure database migrations.
+            </p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 05</span>
+              <span class="process-step-order">05</span>
+            </div>
+            <h3 class="process-step-title">Rigorous QA &amp; Performance Audit</h3>
+            <p class="process-step-desc">
+              Executing functional validation, responsiveness tests on physical smartphones, cross-browser audits, and Core Web Vitals optimization.
+            </p>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="process-step-card scroll-reveal">
+            <div class="process-step-header">
+              <span class="process-step-pill">PHASE 06</span>
+              <span class="process-step-order">06</span>
+            </div>
+            <h3 class="process-step-title">Deployment &amp; Launch Handover</h3>
+            <p class="process-step-desc">
+              Setting up production cloud hosting, SSL, automated backups, DNS cutover, analytics tracking, and providing complete client documentation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 6: Technologies and Tools
+         ===================================================================== -->
+    <section class="service-tech-section" aria-labelledby="tech-heading">
+      <div class="section-container">
+        <div class="section-editorial-header scroll-reveal">
+          <div class="kicker-capsule">
+            <span>[ STACK &amp; TOOLING ]</span>
+          </div>
+          <h2 class="section-heading" id="tech-heading">
+            Technologies &amp; Frameworks Supported
+          </h2>
+          <p class="section-subtext">
+            We build exclusively with modern, battle-tested technologies that ensure performance, maintainability, and developer longevity.
+          </p>
+        </div>
+
+        <div class="tech-badges-grid scroll-reveal">
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">&lt;/&gt;</div>
+            <div>
+              <div class="tech-badge-name">React.js</div>
+              <div class="tech-badge-role">Frontend UI Components</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">▲</div>
+            <div>
+              <div class="tech-badge-name">Next.js</div>
+              <div class="tech-badge-role">SSR &amp; Edge Architecture</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">TS</div>
+            <div>
+              <div class="tech-badge-name">TypeScript</div>
+              <div class="tech-badge-role">Type-Safe Application Code</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">JS</div>
+            <div>
+              <div class="tech-badge-name">Node.js</div>
+              <div class="tech-badge-role">High-Concurrency Backend</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">Py</div>
+            <div>
+              <div class="tech-badge-name">Python &amp; Django</div>
+              <div class="tech-badge-role">Data &amp; Enterprise Services</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">DB</div>
+            <div>
+              <div class="tech-badge-name">PostgreSQL / MySQL</div>
+              <div class="tech-badge-role">Relational Database Storage</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">CSS</div>
+            <div>
+              <div class="tech-badge-name">Tailwind CSS</div>
+              <div class="tech-badge-role">Modern Responsive Styling</div>
+            </div>
+          </div>
+
+          <div class="tech-badge-item">
+            <div class="tech-badge-icon" aria-hidden="true">☁</div>
+            <div>
+              <div class="tech-badge-name">AWS Cloud</div>
+              <div class="tech-badge-role">Elastic Hosting &amp; S3 Vault</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 7: Related Projects
+         ===================================================================== -->
+    <section class="service-projects-section" id="related-projects" aria-labelledby="related-heading">
+      <div class="section-container">
+        <div class="section-editorial-header scroll-reveal">
+          <div class="kicker-capsule">
+            <span>[ PROVEN WORK ]</span>
+          </div>
+          <h2 class="section-heading" id="related-heading">
+            Related Web Projects &amp; Case Studies
+          </h2>
+          <p class="section-subtext">
+            Explore web platforms, institutional portals, and management systems engineered by the Baadam team.
+          </p>
+        </div>
+
+        <div class="service-projects-grid">
+          <!-- Related Project 1: Ashray Labs -->
+          <article class="service-project-card scroll-reveal">
+            <div class="service-project-media">
+              <img src="../../assets/case-dental-clinic.jpg" alt="Ashray Labs Pathology Center Website" class="service-project-img" width="400" height="220" loading="lazy">
+              <div class="portfolio-case-badge">CASE STUDY 02</div>
+            </div>
+            <div class="service-project-body">
+              <div class="service-project-kicker">Healthcare &amp; Diagnostics</div>
+              <h3 class="service-project-title">Ashray Labs</h3>
+              <p class="service-project-desc">
+                An integrated website and clinical admin system enabling patients to book appointments, explore test packages, and securely download pathology reports and invoices.
+              </p>
+              <div class="service-project-tags">
+                <span class="service-project-tag">Next.js</span>
+                <span class="service-project-tag">Clinical ERP</span>
+                <span class="service-project-tag">PDF Reports</span>
+              </div>
+              <a href="../../portfolio.html" class="service-project-link">
+                <span>View Case Details</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Related Project 2: Vishan Institute -->
+          <article class="service-project-card scroll-reveal">
+            <div class="service-project-media">
+              <img src="../../assets/hero-office-clean.jpg" alt="Vishan Institute of Technology Campus Portal" class="service-project-img" width="400" height="220" loading="lazy">
+              <div class="portfolio-case-badge">CASE STUDY 05</div>
+            </div>
+            <div class="service-project-body">
+              <div class="service-project-kicker">Education &amp; Academic LMS</div>
+              <h3 class="service-project-title">Vishan Institute of Technology</h3>
+              <p class="service-project-desc">
+                A college web portal with online student enrollment, batch scheduling, faculty timetables, and digital library resources backed by a centralized administration system.
+              </p>
+              <div class="service-project-tags">
+                <span class="service-project-tag">React.js</span>
+                <span class="service-project-tag">PHP / Laravel</span>
+                <span class="service-project-tag">MySQL</span>
+              </div>
+              <a href="../../portfolio.html" class="service-project-link">
+                <span>View Case Details</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Related Project 3: RealtyBizHub -->
+          <article class="service-project-card scroll-reveal">
+            <div class="service-project-media">
+              <img src="../../assets/portfolio-hero-showcase.png" alt="RealtyBizHub PropTech Marketing Site" class="service-project-img" width="400" height="220" loading="lazy">
+              <div class="portfolio-case-badge">CASE STUDY 13</div>
+            </div>
+            <div class="service-project-body">
+              <div class="service-project-kicker">PropTech Marketing &amp; CMS</div>
+              <h3 class="service-project-title">RealtyBizHub</h3>
+              <p class="service-project-desc">
+                A marketing website and custom headless CMS built for real-estate software platforms, featuring interactive product demos, articles, and lead-generation booking.
+              </p>
+              <div class="service-project-tags">
+                <span class="service-project-tag">Next.js</span>
+                <span class="service-project-tag">Headless CMS</span>
+                <span class="service-project-tag">Tailwind CSS</span>
+              </div>
+              <a href="../../portfolio.html" class="service-project-link">
+                <span>View Case Details</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         Section 8: Final CTA
+         ===================================================================== -->
+    <section class="section-pad cta-banner-section" aria-labelledby="cta-heading">
+      <div class="section-container">
+        <div class="cta-banner-card scroll-reveal">
+          <div class="cta-banner-content">
+            <div class="cta-banner-text">
+              <div class="kicker-capsule">
+                <span>[ COLLABORATION ]</span>
+              </div>
+              <h2 class="cta-banner-heading" id="cta-heading">
+                Let's Build Something<br>Exceptional Together.
+              </h2>
+              <p class="cta-banner-desc">
+                Have an idea or a business challenge? Let's discuss how Baadam can help turn your vision into reality.
+              </p>
+              <div class="cta-banner-btn-wrap">
+                <a href="../../contact.html" class="btn-pill btn-primary-pill" aria-label="Let's Talk">
+                  <span>Let's Talk</span>
+                  <span class="btn-arrow-circle" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="cta-banner-visual">
+              <div class="cta-image-wrapper">
+                <img src="../../assets/cta-collaboration.jpg" alt="Technical discovery and planning" class="cta-collab-img" width="460" height="280">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col-brand">
+          <a href="../../index.html" class="logo-link" aria-label="Baadam Home">
+            <img src="../../assets/baadam-logo.png" alt="BAADAM Info and Tradelink Services" class="footer-logo-img" width="140" height="38">
+          </a>
+          <p class="footer-brand-desc">
+            Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.
+          </p>
+          <div class="footer-social-links" aria-label="Social Media Links">
+            <a href="https://linkedin.com" class="footer-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            </a>
+            <a href="https://instagram.com" class="footer-social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="mailto:info@baadam.com" class="footer-social-btn" aria-label="Direct Email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Navigation</h3>
+          <ul class="footer-link-list">
+            <li><a href="../../index.html" class="footer-nav-link">Home</a></li>
+            <li><a href="../../services.html" class="footer-nav-link">Services &amp; Capabilities</a></li>
+            <li><a href="../../portfolio.html" class="footer-nav-link">Selected Work</a></li>
+            <li><a href="../../about.html" class="footer-nav-link">About Company</a></li>
+            <li><a href="../../contact.html" class="footer-nav-link">Contact Studio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Core Services</h3>
+          <ul class="footer-link-list">
+            <li><a href="../../services/website-development/" class="footer-nav-link">Website Development</a></li>
+            <li><a href="../../services/application-development/" class="footer-nav-link">Application Development</a></li>
+            <li><a href="../../services/digital-marketing/" class="footer-nav-link">Digital Marketing &amp; SEO</a></li>
+            <li><a href="../../services.html#ecommerce" class="footer-nav-link">E-Commerce Platforms</a></li>
+            <li><a href="../../services.html#software-dev" class="footer-nav-link">Software Engineering</a></li>
+            <li><a href="../../services.html#game-dev" class="footer-nav-link">Game Development</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-col-title">Headquarters</h3>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Ahmedabad, Gujarat, India</span>
+            </li>
+            <li class="footer-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+              <a href="mailto:info@baadam.com" class="footer-nav-link">info@baadam.com</a>
+            </li>
+            <li class="footer-contact-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Mon &ndash; Sat: 9:30 AM &ndash; 6:30 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-bottom-container">
+          <p class="footer-copyright">
+            &copy; 2026 Baadam Info and Trade Link Services Pvt. Ltd. All rights reserved.
+          </p>
+          <ul class="footer-legal-links" aria-label="Legal Links">
+            <li><a href="../../contact.html" class="footer-legal-link">Privacy Policy</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="../../contact.html" class="footer-legal-link">Terms &amp; Conditions</a></li>
+            <li class="legal-sep" aria-hidden="true">|</li>
+            <li><a href="../../index.html" class="footer-legal-link">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Teacher Avatar Guide (Bottom-Left) -->
+  <aside class="teacher-guide-widget" id="teacherGuideWidget" aria-label="Baadam Presentation Guide">
+    <div class="teacher-avatar-wrapper" id="teacherAvatarWrapper">
+      <div class="teacher-arm-layer" id="teacherArmLayer">
+        <div class="teacher-wrist-layer" id="teacherWristLayer">
+          <img src="../../assets/teacher-pointing-arm.png?v=10" alt="" class="teacher-arm-img" id="teacherArmImg" width="150" height="195">
+        </div>
+      </div>
+      <img src="../../assets/teacher-pointing-body.png?v=10" alt="Baadam Presentation Guide" class="teacher-body-layer" id="teacherBodyLayer" width="150" height="195">
+    </div>
+  </aside>
+
+  <!-- Interactive Scripts -->
+  <script src="../../main.js?v=29" defer></script>
+</body>
+</html>
+"""
+
+with open('services/website-development/index.html', 'w', encoding='utf-8', newline='\r\n') as f:
+    f.write(html_content)
+
+print("Successfully created services/website-development/index.html!")
+

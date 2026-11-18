@@ -288,14 +288,39 @@
 
     filterBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        filterBtns.forEach(function (b) { b.classList.remove('is-active'); });
+        filterBtns.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
 
         var filter = btn.getAttribute('data-filter') || 'all';
 
+        // Filter Category Section Containers
+        var catSections = document.querySelectorAll('.portfolio-category-section');
+        catSections.forEach(function (sec) {
+          var secCat = sec.getAttribute('data-category') || '';
+          var matchingCards = sec.querySelectorAll('.portfolio-card-item');
+          var hasMatch = false;
+          matchingCards.forEach(function (mc) {
+            var c = (mc.getAttribute('data-category') || '').trim().split(/\s+/);
+            if (c.indexOf(filter) !== -1) hasMatch = true;
+          });
+
+          if (filter === 'all' || secCat === filter || hasMatch) {
+            sec.style.display = '';
+            setTimeout(function () { sec.classList.remove('is-hidden'); }, 10);
+          } else {
+            sec.classList.add('is-hidden');
+            setTimeout(function () { sec.style.display = 'none'; }, 250);
+          }
+        });
+
         items.forEach(function (item) {
           var category = item.getAttribute('data-category') || '';
-          if (filter === 'all' || category.includes(filter)) {
+          var cats = category.trim().split(/\s+/);
+          if (filter === 'all' || cats.indexOf(filter) !== -1) {
             item.style.display = '';
             setTimeout(function () { item.classList.remove('is-hidden'); }, 10);
           } else {
@@ -470,7 +495,15 @@
         var targetSec = document.getElementById(targetId);
         if (targetSec) {
           e.preventDefault();
-          targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (targetId === 'services-section') {
+            var track = document.getElementById('services-sticky-track') || targetSec;
+            track.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (window.BaadamServices && typeof window.BaadamServices.open === 'function') {
+              window.BaadamServices.open(0);
+            }
+          } else {
+            targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           setActiveDot(targetId);
           if (history.pushState) {
             history.pushState(null, null, '#' + targetId);
@@ -496,15 +529,45 @@
       });
     }
 
-    // Keyboard Up / Down arrow navigation between 100vh sections
+    // Keyboard Up / Down arrow navigation between 100vh sections (with sticky card stepping)
     window.addEventListener('keydown', function (e) {
       // Don't intercept if user is typing in form inputs/textarea
       var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
       if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') return;
 
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'ArrowUp' || e.key === 'PageUp') {
-        var currentActiveIndex = -1;
         var vh = window.innerHeight;
+        var servicesTrack = document.getElementById('services-sticky-track');
+
+        // Check if user is currently viewing the sticky services section
+        if (servicesTrack) {
+          var trackRect = servicesTrack.getBoundingClientRect();
+          if (trackRect.top <= 80 && trackRect.bottom >= vh - 80) {
+            var currentCard = (window.BaadamServices && typeof window.BaadamServices.getCurrentIndex === 'function')
+              ? window.BaadamServices.getCurrentIndex()
+              : -1;
+
+            if (currentCard >= 0) {
+              if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                if (currentCard < 5) {
+                  e.preventDefault();
+                  window.BaadamServices.scrollToCard(currentCard + 1);
+                  return;
+                }
+                // If on last card (index 5), allow down arrow to naturally progress to next section
+              } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                if (currentCard > 0) {
+                  e.preventDefault();
+                  window.BaadamServices.scrollToCard(currentCard - 1);
+                  return;
+                }
+                // If on first card (index 0), allow up arrow to naturally retreat to previous section
+              }
+            }
+          }
+        }
+
+        var currentActiveIndex = -1;
 
         for (var i = 0; i < sections.length; i++) {
           var rect = sections[i].getBoundingClientRect();
@@ -527,7 +590,14 @@
 
         if (nextIndex !== currentActiveIndex) {
           e.preventDefault();
-          sections[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (sections[nextIndex].id === 'services-section' && servicesTrack) {
+            servicesTrack.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (window.BaadamServices && typeof window.BaadamServices.open === 'function') {
+              window.BaadamServices.open(0);
+            }
+          } else {
+            sections[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           setActiveDot(sections[nextIndex].id);
         }
       }
@@ -742,6 +812,25 @@
 
     if (teacherArmLayer) {
       requestAnimationFrame(updateTeacherPresenterLoop);
+    }
+
+    // Auto-fade teacher guide widget when viewing interactive maps (unobstructed map browsing)
+    var locationMapEl = document.getElementById('location-map');
+    if (locationMapEl && teacherWidget) {
+      function checkMapCollision() {
+        var rect = locationMapEl.getBoundingClientRect();
+        var vh = window.innerHeight;
+        if (rect.top < vh - 60 && rect.bottom > 80) {
+          teacherWidget.style.opacity = '0';
+          teacherWidget.style.pointerEvents = 'none';
+        } else {
+          teacherWidget.style.opacity = '1';
+          teacherWidget.style.pointerEvents = 'auto';
+        }
+      }
+      window.addEventListener('scroll', checkMapCollision, { passive: true });
+      window.addEventListener('resize', checkMapCollision, { passive: true });
+      checkMapCollision();
     }
 
     function setTeacherSpeech(text) {

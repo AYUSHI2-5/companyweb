@@ -14,7 +14,7 @@ const chrome = spawn(chromePath, [
 ]);
 
 await new Promise(r => setTimeout(r, 2000));
-
+x`  `
 try {
   const versionRes = await fetch('http://127.0.0.1:9232/json/version');
   const versionData = await versionRes.json();

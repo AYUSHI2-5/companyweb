@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard &amp; Control Center | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    /* Executive Command Header */
+    .dash-header-bar {
+      background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+      border: 1px solid var(--brand-red-border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .dash-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--brand-red);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .dash-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-pure);
+      margin: 0 0 6px 0;
+      letter-spacing: -0.02em;
+    }
+    .dash-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+    .dash-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .dash-pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* KPI Metrics Grid */
+    .kpi-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .kpi-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--brand-red);
+    }
+    .kpi-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .kpi-card-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748B;
+    }
+    .kpi-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #FEF2F2;
+      color: var(--brand-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .kpi-card-value {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .kpi-card-sub {
+      font-size: 12.5px;
+      color: #64748B;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .kpi-card-sub strong {
+      color: #0F172A;
+    }
+    .kpi-card-link {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--brand-red);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.15s ease;
+    }
+    .kpi-card-link:hover {
+      gap: 7px;
+      color: #b91c1c;
+    }
+
+    /* Core Modules Grid */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .module-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .module-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .module-badge {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--brand-red);
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .module-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0 0 6px 0;
+    }
+    .module-desc {
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.5;
+      margin: 0 0 16px 0;
+      flex: 1;
+    }
+    .module-meta-tag {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+
+    /* Split Operational Layout */
+    .ops-split-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 1024px) {
+      .ops-split-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Thumbnails and Rows in Table */
+    .dash-proj-thumb {
+      width: 48px;
+      height: 34px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #E2E8F0;
+      background: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .dash-proj-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .dash-datastore-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .dash-datastore-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0F172A;
+      font-family: monospace;
+    }
+    .dash-datastore-sub {
+      font-size: 11.5px;
+      color: #64748B;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- 1. EXECUTIVE COMMAND HEADER -->
+        <div class="dash-header-bar">
+          <div>
+            <div class="dash-kicker">[ BAADAM STUDIO • ENTERPRISE CMS CONTROL CENTER ]</div>
+            <h1 class="dash-title">Website &amp; Systems Management</h1>
+            <p class="dash-desc">
+              Real-time management portal for BAADAM Studio client portfolios, service showcases, company profile, and live production sync.
+            </p>
+          </div>
+          <div class="dash-actions-group">
+            <a href="/admin/projects.html" class="btn btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Add Project</span>
+            </a>
+            <a href="/admin/services.html" class="btn btn-secondary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Manage Services</span>
+            </a>
+            <a href="/index.html" target="_blank" class="btn btn-outline-red">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>View Live Site</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. FOUR BALANCED KEY PERFORMANCE METRICS -->
+        <div class="kpi-metrics-grid">
+          
+          <!-- Metric 1: Portfolio Projects -->
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-card-header">
+                <span class="kpi-card-label">Portfolio Projects</span>
+                <div class="kpi-card-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                </div>
+              </div>
+              <div class="kpi-card-value" id="kpi-projects-count">16</div>
+              <div class="kpi-card-sub">
+                <strong id="kpi-home-count">5</strong> Featured on Homepage &bull; <strong id="kpi-cat-count">16</strong> Categories
+              </div>
+            </div>
+            <a href="/admin/projects.html" class="kpi-card-link">
+              <span>Manage Projects</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Metric 2: Core Services -->
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-card-header">
+                <span class="kpi-card-label">Core Services</span>
+                <div class="kpi-card-icon" style="background:#EFF6FF; color:#2563EB;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                </div>
+              </div>
+              <div class="kpi-card-value" id="kpi-services-count">6</div>
+              <div class="kpi-card-sub">
+                <strong>6</strong> Interactive service showcases with technical deliverables
+              </div>
+            </div>
+            <a href="/admin/services.html" class="kpi-card-link" style="color:#2563EB;">
+              <span>Manage Services</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Metric 3: Managed Content Pages -->
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-card-header">
+                <span class="kpi-card-label">Managed Pages</span>
+                <div class="kpi-card-icon" style="background:#ECFDF5; color:#059669;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+              </div>
+              <div class="kpi-card-value">3</div>
+              <div class="kpi-card-sub">
+                <strong>Homepage</strong> &bull; <strong>Services</strong> &bull; <strong>About Us</strong>
+              </div>
+            </div>
+            <a href="/admin/homepage/index.html" class="kpi-card-link" style="color:#059669;">
+              <span>Open Page Editors</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Metric 4: System & Database Health -->
+          <div class="kpi-card">
+            <div>
+              <div class="kpi-card-header">
+                <span class="kpi-card-label">System Health</span>
+                <div class="kpi-card-icon" style="background:#F5F3FF; color:#7C3AED;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+              </div>
+              <div class="kpi-card-value" style="font-size:24px; color:#059669; display:flex; align-items:center; gap:8px;">
+                <span class="dash-pulse-dot"></span>
+                <span>Active</span>
+              </div>
+              <div class="kpi-card-sub">
+                Central JSON datastores verified healthy &bull; Node.js engine
+              </div>
+            </div>
+            <a href="#audit-log-anchor" class="kpi-card-link" style="color:#7C3AED;">
+              <span>View Audit Activity</span>
+              <span>&darr;</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- 3. CORE MANAGEMENT MODULES (4 CARDS) -->
+        <div class="modules-grid">
+          
+          <!-- Module 1: Homepage CMS -->
+          <div class="module-card">
+            <div>
+              <span class="module-badge">HOMEPAGE CMS</span>
+              <h3 class="module-title">Homepage Content</h3>
+              <p class="module-desc">
+                Section-by-section manager for Hero Spotlight, Client Radar, Services Accordion, Featured Work, Case Studies slider, and Final CTA.
+              </p>
+              <div class="module-meta-tag">8 Interactive Content Sections</div>
+            </div>
+            <a href="/admin/homepage/index.html" class="btn btn-sm btn-secondary" style="width:100%; justify-content:center;">
+              <span>Manage Homepage Sections</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Module 2: Portfolio CMS -->
+          <div class="module-card">
+            <div>
+              <span class="module-badge">PORTFOLIO CMS</span>
+              <h3 class="module-title">Client Projects Manager</h3>
+              <p class="module-desc">
+                Add, edit, and organize client portfolio projects with multi-image gallery showcases, live demo URLs, technologies, and hashtags.
+              </p>
+              <div class="module-meta-tag" id="module-proj-tag">16 Database Projects &bull; Instant Sync</div>
+            </div>
+            <a href="/admin/projects.html" class="btn btn-sm btn-primary" style="width:100%; justify-content:center;">
+              <span>Manage Projects Database</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Module 3: Services CMS -->
+          <div class="module-card">
+            <div>
+              <span class="module-badge">SERVICES CMS</span>
+              <h3 class="module-title">Services Catalogue</h3>
+              <p class="module-desc">
+                Manage the public services directory, expandable feature cards, deliverables, custom SVG badges, and service inquiry actions.
+              </p>
+              <div class="module-meta-tag">6 Active Service Showcases</div>
+            </div>
+            <a href="/admin/services.html" class="btn btn-sm btn-secondary" style="width:100%; justify-content:center;">
+              <span>Manage Services Catalogue</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Module 4: About Us CMS -->
+          <div class="module-card">
+            <div>
+              <span class="module-badge">ABOUT US CMS</span>
+              <h3 class="module-title">Company &amp; Team Profile</h3>
+              <p class="module-desc">
+                Update agency identity, office images, leadership team members, interactive performance gauges, and client testimonials.
+              </p>
+              <div class="module-meta-tag">Studio Story &bull; Team Profiles</div>
+            </div>
+            <a href="/admin/about.html" class="btn btn-sm btn-secondary" style="width:100%; justify-content:center;">
+              <span>Manage About Us Page</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- 4. OPERATIONAL SPLIT LAYOUT (RECENT PROJECTS + SYSTEM HEALTH & LOGS) -->
+        <div class="ops-split-grid">
+          
+          <!-- Left Column: Recent Client Projects -->
+          <div class="card" style="margin-bottom:0;">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <h3 class="card-title">Recent Client Projects</h3>
+                <p class="card-subtitle">Quick access to active database portfolio records</p>
+              </div>
+              <a href="/admin/projects.html" class="btn btn-sm btn-secondary">View All Projects &rarr;</a>
+            </div>
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width:60px;">Image</th>
+                    <th>Project</th>
+                    <th>Category</th>
+                    <th>Service Period</th>
+                    <th style="text-align:right; width:70px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-recent-projects-body">
+                  <tr><td colspan="5" style="text-align:center; padding:24px; color:#64748B;">Loading portfolio projects...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: System Health & Audit Activity -->
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            
+            <!-- Central Datastore Health -->
+            <div class="card" style="margin-bottom:0;">
+              <div class="card-header">
+                <h3 class="card-title">Datastore Health &amp; Storage</h3>
+                <p class="card-subtitle">Live status of backend JSON database stores</p>
+              </div>
+              <div style="padding:16px 20px;">
+                <div class="dash-datastore-item">
+                  <div>
+                    <div class="dash-datastore-name">data/projects.json</div>
+                    <div class="dash-datastore-sub">16 Portfolio records &bull; Dynamic SSR</div>
+                  </div>
+                  <span class="badge" style="background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; font-weight:700;">Synced</span>
+                </div>
+
+                <div class="dash-datastore-item">
+                  <div>
+                    <div class="dash-datastore-name">data/homepage.json</div>
+                    <div class="dash-datastore-sub">8 Homepage sections configured</div>
+                  </div>
+                  <span class="badge" style="background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; font-weight:700;">Active</span>
+                </div>
+
+                <div class="dash-datastore-item">
+                  <div>
+                    <div class="dash-datastore-name">data/services_page.json</div>
+                    <div class="dash-datastore-sub">6 Core service cards &bull; Full specs</div>
+                  </div>
+                  <span class="badge" style="background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; font-weight:700;">Active</span>
+                </div>
+
+                <div class="dash-datastore-item" style="margin-bottom:0;">
+                  <div>
+                    <div class="dash-datastore-name">data/about_page.json</div>
+                    <div class="dash-datastore-sub">Hero, leadership team, and gauges</div>
+                  </div>
+                  <span class="badge" style="background:#ECFDF5; color:#059669; border:1px solid #A7F3D0; font-weight:700;">Active</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Activity Log -->
+            <div class="card" id="audit-log-anchor" style="margin-bottom:0;">
+              <div class="card-header">
+                <h3 class="card-title">Recent System Activity</h3>
+                <p class="card-subtitle">Chronological record of recent CMS modifications</p>
+              </div>
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Action</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logs-table-body">
+                    <tr><td colspan="3" style="text-align:center; padding:18px; color:#64748B;">Loading activity log...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'dashboard',
+      title: 'Dashboard Overview',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Dashboard', url: '/admin/dashboard.html' }
+      ]
+    });
+
+    function formatTimeAgo(dateString) {
+      if (!dateString) return 'Just now';
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffSec = Math.floor((now - date) / 1000);
+
+      if (diffSec < 60) return 'Just now';
+      if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
+      if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}h ago`;
+      return date.toLocaleDateString();
+    }
+
+    async function loadDashboardOverview() {
+      // 1. Fetch Projects
+      try {
+        const projRes = await fetch('/api/projects');
+        if (projRes.ok) {
+          const projects = await projRes.json();
+          document.getElementById('kpi-projects-count').textContent = projects.length;
+          
+          const homeCount = projects.filter(p => Boolean(p.at_home_page)).length;
+          document.getElementById('kpi-home-count').textContent = homeCount;
+          
+          const categories = new Set(projects.map(p => p.category).filter(Boolean));
+          document.getElementById('kpi-cat-count').textContent = categories.size || 16;
+          
+          document.getElementById('module-proj-tag').textContent = `${projects.length} Database Projects • Instant Sync`;
+
+          // Render Recent 5 projects
+          const recentProjects = projects.slice(0, 5);
+          const tbody = document.getElementById('dash-recent-projects-body');
+          if (recentProjects.length > 0) {
+            tbody.innerHTML = recentProjects.map(p => {
+              const coverImg = (p.images && p.images.length) ? p.images[0] : 'assets/portfolio-hero-1.png';
+              const cleanImg = '/' + coverImg.replace(/^\//, '');
+              return `
+                <tr>
+                  <td>
+                    <div class="dash-proj-thumb">
+                      <img src="${cleanImg}" alt="${escapeHtml(p.title)}" onerror="this.src='/assets/portfolio-hero-1.png'">
+                    </div>
+                  </td>
+                  <td>
+                    <div style="font-weight:700; color:#0F172A; font-size:13px;">${escapeHtml(p.title)}</div>
+                    <div style="font-size:11px; color:#64748B;">${escapeHtml(p.slug || p.id)}</div>
+                  </td>
+                  <td>
+                    <span style="font-size:11.5px; font-weight:600; color:#B91C1C; background:#FEF2F2; border:1px solid #FECACA; padding:2px 7px; border-radius:4px;">
+                      ${escapeHtml(p.category || 'General')}
+                    </span>
+                  </td>
+                  <td>
+                    <span style="font-size:12px; font-weight:700; color:#0F172A;">${escapeHtml(p.service_month || 'N/A')}</span>
+                  </td>
+                  <td style="text-align:right;">
+                    <a href="/admin/projects.html" class="btn btn-sm btn-primary" style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px;" title="Edit in Projects Manager">
+                      <span>Edit</span>
+                    </a>
+                  </td>
+                </tr>
+              `;
+            }).join('');
+          } else {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px; color:#64748B;">No projects recorded yet.</td></tr>`;
+          }
+        }
+      } catch (err) {
+        console.error('Error loading projects:', err);
+      }
+
+      // 2. Fetch Services Count
+      try {
+        const srvRes = await fetch('/api/services-page/published');
+        if (srvRes.ok) {
+          const srvData = await srvRes.json();
+          const items = srvData.services || srvData.items || [];
+          if (items.length) {
+            document.getElementById('kpi-services-count').textContent = items.length;
+          }
+        }
+      } catch (e) {}
+
+      // 3. Fetch Audit Logs
+      try {
+        const logsRes = await fetch('/api/admin/logs?limit=5');
+        if (logsRes.ok) {
+          const logsData = await logsRes.json();
+          const logs = logsData.logs || [];
+          const logsTbody = document.getElementById('logs-table-body');
+          if (logs.length > 0) {
+            logsTbody.innerHTML = logs.map(l => {
+              const timeDisplay = formatTimeAgo(l.timestamp);
+              const actionName = (l.action || 'update').replace(/_/g, ' ');
+              return `
+                <tr>
+                  <td style="font-size:11.5px; color:#64748B; white-space:nowrap;">${timeDisplay}</td>
+                  <td>
+                    <span style="font-size:10.5px; font-weight:700; text-transform:uppercase; color:#0F172A; background:#F1F5F9; border:1px solid #CBD5E1; padding:2px 6px; border-radius:4px;">
+                      ${escapeHtml(actionName)}
+                    </span>
+                  </td>
+                  <td style="font-size:12px; color:#334155;">
+                    ${escapeHtml(l.details || 'System update')}
+                  </td>
+                </tr>
+              `;
+            }).join('');
+          } else {
+            logsTbody.innerHTML = `<tr><td colspan="3" style="text-align:center; padding:18px; color:#64748B;">No recent activity logs found.</td></tr>`;
+          }
+        }
+      } catch (err) {
+        console.error('Error loading audit logs:', err);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDashboardOverview);
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<div class="portfolio-showcase-deck">
+          <!-- Project 01: Enterprise Cloud & ERP -->
+          <article class="portfolio-feature-card scroll-reveal" data-project="erp">
+            <div class="feature-card-glow" aria-hidden="true"></div>
+            <div class="feature-card-media-wrap">
+              <div class="feature-card-chrome-bar" aria-hidden="true">
+                <span class="chrome-dot chrome-dot-red"></span>
+                <span class="chrome-dot chrome-dot-yellow"></span>
+                <span class="chrome-dot chrome-dot-green"></span>
+                <span class="chrome-url-pill">app.enterprise.io/dashboard</span>
+              </div>
+              <div class="feature-media-overflow">
+                <img src="assets/about-office.jpg" alt="Enterprise Management Platform Interface" class="feature-media-img" width="460" height="280">
+              </div>
+              <div class="feature-live-pill">
+                <span class="live-dot-beacon"></span>
+                <span>99.98% Uptime &middot; 4x Speed</span>
+              </div>
+            </div>
+
+            <div class="feature-card-body">
+              <div class="feature-meta-kicker">
+                <span class="feature-kicker-cat">Web Platform</span>
+                <span class="feature-kicker-idx">01</span>
+              </div>
+              <h3 class="feature-card-title">Business Management &amp; ERP</h3>
+              <p class="feature-card-desc">
+                Centralized multi-tenant cloud architecture automating complex operations, database sync, and reporting engines for 15,000+ daily users.
+              </p>
+              <div class="feature-card-footer">
+                <div class="feature-tech-tags">
+                  <span class="feature-tech-pill">React</span>
+                  <span class="feature-tech-pill">Python</span>
+                  <span class="feature-tech-pill">PostgreSQL</span>
+                </div>
+                <a href="portfolio.html" class="feature-action-btn" aria-label="View Business Management Platform Case Study">
+                  <span>View Case</span>
+                  <span class="feature-btn-arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 02: Mobile Health & FinTech App -->
+          <article class="portfolio-feature-card scroll-reveal" data-project="mobile">
+            <div class="feature-card-glow" aria-hidden="true"></div>
+            <div class="feature-card-media-wrap">
+              <div class="feature-card-chrome-bar" aria-hidden="true">
+                <span class="chrome-dot chrome-dot-red"></span>
+                <span class="chrome-dot chrome-dot-yellow"></span>
+                <span class="chrome-dot chrome-dot-green"></span>
+                <span class="chrome-url-pill">App Store &middot; Google Play</span>
+              </div>
+              <div class="feature-media-overflow">
+                <img src="assets/case-fitness-app.jpg" alt="Smart Mobile Application Interface" class="feature-media-img" width="460" height="280">
+              </div>
+              <div class="feature-live-pill feature-live-pill-emerald">
+                <span class="live-dot-beacon beacon-emerald"></span>
+                <span>★ 4.9 Rating &middot; 50k+ Installs</span>
+              </div>
+            </div>
+
+            <div class="feature-card-body">
+              <div class="feature-meta-kicker">
+                <span class="feature-kicker-cat">Mobile Ecosystem</span>
+                <span class="feature-kicker-idx">02</span>
+              </div>
+              <h3 class="feature-card-title">Next-Gen Smart Mobile App</h3>
+              <p class="feature-card-desc">
+                Cross-platform mobile application with biometric authentication, sub-second API transactions, push notifications, and offline sync.
+              </p>
+              <div class="feature-card-footer">
+                <div class="feature-tech-tags">
+                  <span class="feature-tech-pill">Flutter</span>
+                  <span class="feature-tech-pill">Firebase</span>
+                  <span class="feature-tech-pill">REST APIs</span>
+                </div>
+                <a href="portfolio.html" class="feature-action-btn" aria-label="View Smart Mobile App Case Study">
+                  <span>View Case</span>
+                  <span class="feature-btn-arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 03: Omnichannel E-Commerce Engine -->
+          <article class="portfolio-feature-card scroll-reveal" data-project="ecommerce">
+            <div class="feature-card-glow" aria-hidden="true"></div>
+            <div class="feature-card-media-wrap">
+              <div class="feature-card-chrome-bar" aria-hidden="true">
+                <span class="chrome-dot chrome-dot-red"></span>
+                <span class="chrome-dot chrome-dot-yellow"></span>
+                <span class="chrome-dot chrome-dot-green"></span>
+                <span class="chrome-url-pill">store.globalbrand.com</span>
+              </div>
+              <div class="feature-media-overflow">
+                <img src="assets/cta-collaboration.jpg" alt="Omnichannel D2C Store Interface" class="feature-media-img" width="460" height="280">
+              </div>
+              <div class="feature-live-pill feature-live-pill-blue">
+                <span class="live-dot-beacon beacon-blue"></span>
+                <span>▲ +180% Sales Growth</span>
+              </div>
+            </div>
+
+            <div class="feature-card-body">
+              <div class="feature-meta-kicker">
+                <span class="feature-kicker-cat">E-Commerce Scale</span>
+                <span class="feature-kicker-idx">03</span>
+              </div>
+              <h3 class="feature-card-title">Omnichannel D2C Retail Platform</h3>
+              <p class="feature-card-desc">
+                High-performance headless e-commerce store with 0.5s sub-second page loads, multi-currency checkout, and warehouse ERP integration.
+              </p>
+              <div class="feature-card-footer">
+                <div class="feature-tech-tags">
+                  <span class="feature-tech-pill">Shopify</span>
+                  <span class="feature-tech-pill">Next.js</span>
+                  <span class="feature-tech-pill">Stripe</span>
+                </div>
+                <a href="portfolio.html" class="feature-action-btn" aria-label="View D2C Retail Platform Case Study">
+                  <span>View Case</span>
+                  <span class="feature-btn-arrow">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>

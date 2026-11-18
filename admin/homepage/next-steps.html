@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>window.location.replace('/admin/homepage/index.html#next-steps');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Steps / CTA Editor | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Action bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <h2 style="font-size:22px; font-weight:700; color:#111827; margin:0;">Next Steps / CTA Editor</h2>
+              <span id="section-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:14px; color:#6B7280; margin:4px 0 0 0;">Manage the prominent red collaboration card, headline, description, and consultation button.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary" onclick="openPreviewModal('contact')">
+              Preview
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertDraft()">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">
+              Publish Changes
+            </button>
+          </div>
+        </div>
+
+        <form id="next-steps-form">
+          <!-- Main Card Settings -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Red Collaboration Card Content</h3>
+                <p class="card-subtitle">Banner styling and textual copy</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="ns_visible" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="ns_badge">Badge / Sub-heading</label>
+                <input type="text" id="ns_badge" class="form-control" placeholder="[ START A COLLABORATION ]" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="ns_heading">Primary Headline</label>
+                <input type="text" id="ns_heading" class="form-control" placeholder="Have a Project in Mind? Let's Build It Together." required>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label" for="ns_description">Narrative Description</label>
+                <textarea id="ns_description" class="form-control" rows="3" required></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Consultation CTA Button -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Consultation Call to Action</h3>
+                <p class="card-subtitle">Action link inside the red collaboration block</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="cta_label">Button Label</label>
+                <input type="text" id="cta_label" class="form-control" placeholder="Schedule a Consultation →" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cta_url">Destination URL</label>
+                <input type="text" id="cta_url" class="form-control" placeholder="#contact" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Background / Visual Assets -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Visual Assets &amp; Backgrounds</h3>
+                <p class="card-subtitle">Configure background textures and right-side graphics</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Background Texture / Image (Optional)</label>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <input type="text" id="bg_image" class="form-control" placeholder="Optional background image URL">
+                  <button type="button" class="btn btn-secondary" data-image-picker="bg_image">Choose</button>
+                </div>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">Right-side Decorative Image (Optional)</label>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <input type="text" id="side_image" class="form-control" placeholder="Optional graphic URL">
+                  <button type="button" class="btn btn-secondary" data-image-picker="side_image">Choose</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:12px; margin-bottom:40px;">
+            <button type="button" class="btn btn-secondary" onclick="saveSection(false)">Save Draft</button>
+            <button type="button" class="btn btn-primary" onclick="saveSection(true)">Publish Changes</button>
+          </div>
+        </form>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    setupAdminLayout({
+      activeNav: 'next-steps',
+      title: 'Next Steps / CTA Editor',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Homepage', url: '/admin/homepage/index.html' },
+        { label: 'Next Steps', url: '/admin/homepage/next-steps.html' }
+      ]
+    });
+
+    let currentData = null;
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/admin/homepage/next-steps');
+        const data = await res.json();
+        currentData = data.draft || data.published || {};
+
+        const statusBadge = document.getElementById('section-status-badge');
+        if (data.status === 'draft') {
+          statusBadge.className = 'badge badge-draft';
+          statusBadge.textContent = 'Draft Changes';
+        } else {
+          statusBadge.className = 'badge badge-published';
+          statusBadge.textContent = 'Published';
+        }
+
+        document.getElementById('ns_visible').checked = currentData.visible !== false;
+        document.getElementById('ns_badge').value = currentData.section_badge || '[ START A COLLABORATION ]';
+        document.getElementById('ns_heading').value = currentData.heading || 'Have a Project in Mind? Let\'s Build It Together.';
+        document.getElementById('ns_description').value = currentData.description || '';
+        document.getElementById('cta_label').value = currentData.cta_button?.label || 'Schedule a Consultation →';
+        document.getElementById('cta_url').value = currentData.cta_button?.url || '#contact';
+        document.getElementById('bg_image').value = currentData.background_image || '';
+        document.getElementById('side_image').value = currentData.side_image || '';
+
+        bindImagePickers();
+      } catch (err) {
+        showToast('Error loading next-steps data: ' + err.message, 'error');
+      }
+    }
+
+    async function saveSection(publish = false) {
+      const payload = {
+        visible: document.getElementById('ns_visible').checked,
+        section_badge: document.getElementById('ns_badge').value.trim(),
+        heading: document.getElementById('ns_heading').value.trim(),
+        description: document.getElementById('ns_description').value.trim(),
+        cta_button: {
+          label: document.getElementById('cta_label').value.trim(),
+          url: document.getElementById('cta_url').value.trim()
+        },
+        background_image: document.getElementById('bg_image').value.trim(),
+        side_image: document.getElementById('side_image').value.trim()
+      };
+
+      try {
+        const res = await fetch('/api/admin/homepage/next-steps', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/homepage/next-steps/publish', { method: 'POST' });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('Next Steps / CTA published live successfully!');
+          } else {
+            showToast(pubData.error || 'Draft saved, but failed to publish live', 'error');
+          }
+        } else {
+          showToast('Draft saved successfully!');
+        }
+        loadData();
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    async function revertDraft() {
+      if (!confirm('Revert all unsaved draft changes back to published state?')) return;
+      try {
+        const res = await fetch('/api/admin/homepage/next-steps/revert', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Draft reverted to published state');
+          loadData();
+        } else {
+          showToast(data.error || 'Failed to revert draft', 'error');
+        }
+      } catch (err) {
+        showToast('Error: ' + err.message, 'error');
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

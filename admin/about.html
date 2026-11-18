@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us Page Management | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    /* Section status pill in tab */
+    .hp-tab-status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+    }
+    .hp-tab-status.draft {
+      background: #F59E0B;
+    }
+
+    .section-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      background: #FFFFFF;
+      padding: 18px 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .section-editor-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text-pure);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 4px 0;
+    }
+    .section-editor-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .section-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Team Member Card in Admin */
+    .team-member-admin-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+    }
+    .team-member-admin-card:hover {
+      border-color: rgba(231, 25, 45, 0.4);
+      box-shadow: var(--shadow-sm);
+    }
+    .team-member-photo-wrap {
+      width: 90px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .team-member-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Testimonial Card in Admin */
+    .testimonial-admin-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+    }
+    .testimonial-admin-card:hover {
+      border-color: rgba(231, 25, 45, 0.4);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Gauge preview badge */
+    .gauge-preview-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #FEF2F2;
+      border: 1px solid rgba(231, 25, 45, 0.2);
+      border-radius: 999px;
+      font-weight: 700;
+      color: #E7192D;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Top Header & Action Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+              <h2 style="font-size:22px; font-weight:800; color:#0F172A; margin:0;">About Us Page Management</h2>
+              <span id="page-status-badge" class="badge badge-published">Published</span>
+            </div>
+            <p style="font-size:13.5px; color:#64748B; margin:0;">Section-wise management for the About Us page: hero, mission, capabilities, methodology, principles, leadership, testimonials, and contact CTA.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <a href="/about.html" target="_blank" class="btn btn-secondary" style="display:inline-flex; align-items:center; gap:6px; text-decoration:none;">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              View Live Page
+            </a>
+            <button type="button" class="btn btn-secondary" onclick="openAboutPreview()">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Preview Draft
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="revertAboutDraft()" title="Discard draft changes and revert to published state">
+              Revert
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Publish Live
+            </button>
+          </div>
+        </div>
+
+        <!-- 8-Section Navigation Tab Bar (All in One Page) -->
+        <div class="hp-tab-bar" id="about-tab-bar">
+          <button class="hp-tab-btn active" data-tab="hero" onclick="switchAboutTab('hero')">
+            <span class="hp-tab-num">01</span>
+            <span>Hero Section</span>
+            <span class="hp-tab-status" id="tab-status-hero"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="what-we-do" onclick="switchAboutTab('what-we-do')">
+            <span class="hp-tab-num">02</span>
+            <span>What We Do</span>
+            <span class="hp-tab-status" id="tab-status-what-we-do"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="skills" onclick="switchAboutTab('skills')">
+            <span class="hp-tab-num">03</span>
+            <span>Capabilities &amp; Gauges</span>
+            <span class="hp-tab-status" id="tab-status-skills"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="approach" onclick="switchAboutTab('approach')">
+            <span class="hp-tab-num">04</span>
+            <span>Our Approach</span>
+            <span class="hp-tab-status" id="tab-status-approach"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="principles" onclick="switchAboutTab('principles')">
+            <span class="hp-tab-num">05</span>
+            <span>Core Principles</span>
+            <span class="hp-tab-status" id="tab-status-principles"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="team" onclick="switchAboutTab('team')">
+            <span class="hp-tab-num">06</span>
+            <span>Leadership Team</span>
+            <span class="hp-tab-status" id="tab-status-team"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="testimonials" onclick="switchAboutTab('testimonials')">
+            <span class="hp-tab-num">07</span>
+            <span>Testimonials</span>
+            <span class="hp-tab-status" id="tab-status-testimonials"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="cta" onclick="switchAboutTab('cta')">
+            <span class="hp-tab-num">08</span>
+            <span>Connect CTA</span>
+            <span class="hp-tab-status" id="tab-status-cta"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="hub" onclick="switchAboutTab('hub')" style="margin-left:auto;">
+            <span>Sections Hub</span>
+          </button>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 01: HERO SECTION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel active" id="panel-hero">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>01. Hero Section</span>
+              </div>
+              <p class="section-editor-desc">Manage primary headline, lead paragraph, trust metric bar, and showcase office visual.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Headline &amp; Brand Intro</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hero_kicker">Kicker Capsule Label</label>
+                  <input type="text" id="hero_kicker" class="form-control" placeholder="ABOUT BAADAM">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_subhead">Subheading</label>
+                  <input type="text" id="hero_subhead" class="form-control" placeholder="We help you to create your Digital Presence to world.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="hero_heading">Hero Main Heading (HTML Supported)</label>
+                  <input type="text" id="hero_heading" class="form-control" placeholder="We Are Here For<br><span class=&quot;text-brand-red&quot;>Make Best Product</span>">
+                  <span class="form-hint">Tip: Wrap highlighted words in <code>&lt;span class="text-brand-red"&gt;...&lt;/span&gt;</code> for the crimson studio glow.</span>
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="hero_lead">Hero Comprehensive Lead Paragraph</label>
+                  <textarea id="hero_lead" class="form-control" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Trust Bar (3 Metrics) -->
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Trust Metric Bar (3 Badges)</h3>
+              <p class="card-subtitle">The three credentials displayed underneath the hero lead</p>
+            </div>
+            <div class="card-body">
+              <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <!-- Trust 1 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px;">
+                  <span style="font-weight:700; font-size:12px; color:#6B7280;">Badge 1 (Experience)</span>
+                  <div class="form-group" style="margin:8px 0;">
+                    <label class="form-label" style="font-size:11px;">Primary Value</label>
+                    <input type="text" id="trust_val_1" class="form-control" placeholder="5+ Years">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Sub-Label</label>
+                    <input type="text" id="trust_lbl_1" class="form-control" placeholder="Industry Experience">
+                  </div>
+                </div>
+
+                <!-- Trust 2 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px;">
+                  <span style="font-weight:700; font-size:12px; color:#6B7280;">Badge 2 (Solutions)</span>
+                  <div class="form-group" style="margin:8px 0;">
+                    <label class="form-label" style="font-size:11px;">Primary Value</label>
+                    <input type="text" id="trust_val_2" class="form-control" placeholder="End-to-End">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Sub-Label</label>
+                    <input type="text" id="trust_lbl_2" class="form-control" placeholder="Digital Solutions">
+                  </div>
+                </div>
+
+                <!-- Trust 3 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px;">
+                  <span style="font-weight:700; font-size:12px; color:#6B7280;">Badge 3 (Partnership)</span>
+                  <div class="form-group" style="margin:8px 0;">
+                    <label class="form-label" style="font-size:11px;">Primary Value</label>
+                    <input type="text" id="trust_val_3" class="form-control" placeholder="Trusted Partner">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Sub-Label</label>
+                    <input type="text" id="trust_lbl_3" class="form-control" placeholder="for Business Growth">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Media -->
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Hero Visual Showcase Media</h3>
+              <p class="card-subtitle">The studio office presentation image displayed on the right column</p>
+            </div>
+            <div class="card-body">
+              <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+                <div style="width:180px; height:120px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                  <img id="hero_image_prev" src="/assets/about-office-showcase.png" style="max-width:100%; max-height:100%; object-fit:cover;">
+                </div>
+                <div style="flex:1; min-width:260px;">
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" for="hero_image">Image Asset Path</label>
+                    <input type="text" id="hero_image" class="form-control" value="assets/about-office-showcase.png">
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button type="button" class="btn btn-secondary" data-image-picker="hero_image" data-image-preview="hero_image_prev">Choose Image Asset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 02: WHAT WE DO -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-what-we-do">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>02. What We Do</span>
+              </div>
+              <p class="section-editor-desc">Manage the company overview, core capability statement, and studio workspace image.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Content &amp; Descriptions</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="what_heading">Section Heading</label>
+                <input type="text" id="what_heading" class="form-control" placeholder="What We <span class=&quot;text-brand-red&quot;>Do?</span>">
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="what_desc_1">Primary Description Paragraph (Web, Mobile, Marketing)</label>
+                <textarea id="what_desc_1" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="what_desc_2">Secondary Description Paragraph (Software &amp; Gaming)</label>
+                <textarea id="what_desc_2" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Studio Collaboration Visual</h3>
+            </div>
+            <div class="card-body">
+              <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+                <div style="width:180px; height:120px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                  <img id="what_image_prev" src="/assets/about-office.jpg" style="max-width:100%; max-height:100%; object-fit:cover;">
+                </div>
+                <div style="flex:1; min-width:260px;">
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" for="what_image">Image Asset Path</label>
+                    <input type="text" id="what_image" class="form-control" value="assets/about-office.jpg">
+                  </div>
+                  <div style="display:flex; gap:8px;">
+                    <button type="button" class="btn btn-secondary" data-image-picker="what_image" data-image-preview="what_image_prev">Choose Image Asset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 03: CAPABILITIES & METRICS GAUGES -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-skills">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>03. Capabilities &amp; Proficiency Gauges</span>
+              </div>
+              <p class="section-editor-desc">Adjust the 4 circular delivery proficiency rates and service labels displayed on the About page.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Circular Proficiency Meters (4 Core Domains)</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+                <!-- Gauge 1 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span style="font-weight:700; font-size:13px; color:#1E293B;">01. Web Domain</span>
+                    <span class="gauge-preview-pill" id="gauge_pill_1">98%</span>
+                  </div>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" style="font-size:11px;">Service Label</label>
+                    <input type="text" id="gauge_lbl_1" class="form-control" value="Website Development">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Success / Delivery Rate (%)</label>
+                    <input type="number" id="gauge_pct_1" class="form-control" value="98" min="50" max="100" oninput="document.getElementById('gauge_pill_1').textContent = this.value + '%'">
+                  </div>
+                </div>
+
+                <!-- Gauge 2 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span style="font-weight:700; font-size:13px; color:#1E293B;">02. Mobile Apps</span>
+                    <span class="gauge-preview-pill" id="gauge_pill_2">95%</span>
+                  </div>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" style="font-size:11px;">Service Label</label>
+                    <input type="text" id="gauge_lbl_2" class="form-control" value="Application Development">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Success / Delivery Rate (%)</label>
+                    <input type="number" id="gauge_pct_2" class="form-control" value="95" min="50" max="100" oninput="document.getElementById('gauge_pill_2').textContent = this.value + '%'">
+                  </div>
+                </div>
+
+                <!-- Gauge 3 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span style="font-weight:700; font-size:13px; color:#1E293B;">03. Marketing</span>
+                    <span class="gauge-preview-pill" id="gauge_pill_3">96%</span>
+                  </div>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" style="font-size:11px;">Service Label</label>
+                    <input type="text" id="gauge_lbl_3" class="form-control" value="Digital Marketing">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Success / Delivery Rate (%)</label>
+                    <input type="number" id="gauge_pct_3" class="form-control" value="96" min="50" max="100" oninput="document.getElementById('gauge_pill_3').textContent = this.value + '%'">
+                  </div>
+                </div>
+
+                <!-- Gauge 4 -->
+                <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <span style="font-weight:700; font-size:13px; color:#1E293B;">04. Software</span>
+                    <span class="gauge-preview-pill" id="gauge_pill_4">90%</span>
+                  </div>
+                  <div class="form-group" style="margin-bottom:10px;">
+                    <label class="form-label" style="font-size:11px;">Service Label</label>
+                    <input type="text" id="gauge_lbl_4" class="form-control" value="Software Development">
+                  </div>
+                  <div class="form-group" style="margin:0;">
+                    <label class="form-label" style="font-size:11px;">Success / Delivery Rate (%)</label>
+                    <input type="number" id="gauge_pct_4" class="form-control" value="90" min="50" max="100" oninput="document.getElementById('gauge_pill_4').textContent = this.value + '%'">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 04: OUR APPROACH -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-approach">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>04. Our Approach</span>
+              </div>
+              <p class="section-editor-desc">Manage the methodology section heading, lead story, and 4 approach pillar cards.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Approach Header &amp; Lead Narrative</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="approach_kicker">Kicker Capsule</label>
+                <input type="text" id="approach_kicker" class="form-control" placeholder="Our Approach">
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="approach_heading">Section Main Heading</label>
+                <input type="text" id="approach_heading" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="approach_lead">Comprehensive Approach Lead Description</label>
+                <textarea id="approach_lead" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Approach Cards List -->
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">4 Feature Cards</h3>
+            </div>
+            <div class="card-body">
+              <div id="approach-cards-container" style="display:flex; flex-direction:column; gap:16px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 05: CORE PRINCIPLES -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-principles">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>05. Core Principles</span>
+              </div>
+              <p class="section-editor-desc">The engineering principles that guide development standards, security, velocity, and communication.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Principles Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="principles_kicker">Kicker Capsule</label>
+                <input type="text" id="principles_kicker" class="form-control" placeholder="[ PRINCIPLES ]">
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="principles_heading">Section Heading</label>
+                <input type="text" id="principles_heading" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="principles_desc">Section Subtitle</label>
+                <textarea id="principles_desc" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Principles Items List -->
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Principle Pillars</h3>
+            </div>
+            <div class="card-body">
+              <div id="principles-items-container" style="display:flex; flex-direction:column; gap:16px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 06: LEADERSHIP TEAM -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-team">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>06. Leadership &amp; Engineering Team</span>
+              </div>
+              <p class="section-editor-desc">Manage team member profiles, designations, biographies, and studio headshots.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Team Section Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="team_heading">Section Heading</label>
+                <input type="text" id="team_heading" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="team_desc">Section Description</label>
+                <input type="text" id="team_desc" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="font-size:16px; font-weight:700; margin:0; color:#0F172A;">Team Members (<span id="team-count">5</span>)</h3>
+            <button type="button" class="btn btn-sm btn-primary" onclick="addNewTeamMember()">+ Add Team Member</button>
+          </div>
+
+          <div id="team-members-list" style="margin-bottom:40px;"></div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 07: CLIENT TESTIMONIALS -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-testimonials">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>07. Client Testimonials</span>
+              </div>
+              <p class="section-editor-desc">Manage verified partner reviews, author roles, project domain tags, and ratings.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:24px;">
+            <div class="card-header">
+              <h3 class="card-title">Testimonials Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="test_kicker">Kicker Capsule</label>
+                <input type="text" id="test_kicker" class="form-control">
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label" for="test_heading">Section Heading</label>
+                <input type="text" id="test_heading" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="test_desc">Section Subtitle</label>
+                <textarea id="test_desc" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="font-size:16px; font-weight:700; margin:0; color:#0F172A;">Testimonial Reviews (<span id="test-count">3</span>)</h3>
+            <button type="button" class="btn btn-sm btn-primary" onclick="addNewTestimonial()">+ Add Testimonial</button>
+          </div>
+
+          <div id="testimonials-list" style="margin-bottom:40px;"></div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 08: CONNECT CTA -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-cta">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>08. Collaboration CTA Banner</span>
+              </div>
+              <p class="section-editor-desc">Manage bottom full-width collaboration card, conversion headline, and call-to-action button.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Banner Configuration</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="cta_kicker">Capsule Label</label>
+                  <input type="text" id="cta_kicker" class="form-control" placeholder="[ LET'S CONNECT ]">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cta_btn_label">Button Label</label>
+                  <input type="text" id="cta_btn_label" class="form-control" placeholder="Schedule Discovery Call">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="cta_heading">Main Banner Headline (HTML Supported)</label>
+                  <input type="text" id="cta_heading" class="form-control" placeholder="Experience the Baadam<br>Difference Firsthand.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="cta_desc">Supporting Description</label>
+                  <textarea id="cta_desc" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="cta_btn_url">Button Destination URL</label>
+                  <input type="text" id="cta_btn_url" class="form-control" placeholder="contact.html">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 09: SECTIONS HUB OVERVIEW -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-hub">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>About Us Page Sections Hub</span>
+              </div>
+              <p class="section-editor-desc">High-level navigation and fast section jumps for all 8 content blocks on the About Us page.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="saveAboutData(false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveAboutData(true)">Publish Live</button>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-bottom:40px;">
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('hero')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 01</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Hero Section</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Headline, lead paragraph, trust metrics, and studio presentation photo.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('what-we-do')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 02</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">What We Do</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Company background, engineering capabilities, and workspace visual.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('skills')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 03</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Capabilities Gauges</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Delivery proficiency percentages across web, mobile, marketing, and software.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('approach')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 04</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Our Approach</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Four feature pillars detailing team, financial relief, software, and device reach.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('principles')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 05</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Core Principles</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Agile execution, zero-compromise security, performance, and communication.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('team')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 06</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Leadership Team</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Headshots, roles, and bios for executive leadership and senior engineers.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('testimonials')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 07</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Testimonials</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Verified partner feedback, author credentials, project tags, and star ratings.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchAboutTab('cta')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 08</span>
+                <span class="badge badge-published">Active</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Connect CTA Banner</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Bottom conversion card driving visitors to schedule a discovery call.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    let aboutFullData = {};
+
+    // Initialize layout
+    setupAdminLayout({
+      activeNav: 'about',
+      title: 'About Us Management',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Pages & Portfolios' },
+        { label: 'About Us Management', active: true }
+      ]
+    });
+
+    // Tab switcher
+    function switchAboutTab(tabKey) {
+      document.querySelectorAll('#about-tab-bar .hp-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabKey);
+      });
+      document.querySelectorAll('.hp-tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-${tabKey}`);
+      });
+      window.location.hash = tabKey;
+    }
+
+    // Load CMS Data
+    async function loadAboutPageData() {
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+        const res = await fetch(`/api/admin/about-page?t=${Date.now()}`, {
+          credentials: 'same-origin',
+          headers: authHeaders,
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        aboutFullData = data.draft || data.published || {};
+
+        // Status badge
+        const badge = document.getElementById('page-status-badge');
+        if (data.status === 'draft') {
+          badge.className = 'badge badge-draft';
+          badge.textContent = 'Draft Changes';
+        } else {
+          badge.className = 'badge badge-published';
+          badge.textContent = 'Published';
+        }
+
+        populateAboutForm(aboutFullData);
+      } catch (err) {
+        showToast('Error loading about data: ' + err.message, 'error');
+      }
+    }
+
+    function populateAboutForm(d) {
+      // 1. Hero
+      if (d.hero) {
+        document.getElementById('hero_kicker').value = d.hero.kicker || 'ABOUT BAADAM';
+        document.getElementById('hero_heading').value = d.hero.heading || '';
+        document.getElementById('hero_subhead').value = d.hero.subhead || '';
+        document.getElementById('hero_lead').value = d.hero.lead || '';
+        document.getElementById('hero_image').value = d.hero.image || 'assets/about-office-showcase.png';
+        document.getElementById('hero_image_prev').src = '/' + (d.hero.image || 'assets/about-office-showcase.png').replace(/^\//, '');
+
+        if (Array.isArray(d.hero.trust_items)) {
+          if (d.hero.trust_items[0]) {
+            document.getElementById('trust_val_1').value = d.hero.trust_items[0].value || '';
+            document.getElementById('trust_lbl_1').value = d.hero.trust_items[0].label || '';
+          }
+          if (d.hero.trust_items[1]) {
+            document.getElementById('trust_val_2').value = d.hero.trust_items[1].value || '';
+            document.getElementById('trust_lbl_2').value = d.hero.trust_items[1].label || '';
+          }
+          if (d.hero.trust_items[2]) {
+            document.getElementById('trust_val_3').value = d.hero.trust_items[2].value || '';
+            document.getElementById('trust_lbl_3').value = d.hero.trust_items[2].label || '';
+          }
+        }
+      }
+
+      // 2. What We Do
+      if (d.what_we_do) {
+        document.getElementById('what_heading').value = d.what_we_do.heading || '';
+        document.getElementById('what_desc_1').value = d.what_we_do.description_1 || '';
+        document.getElementById('what_desc_2').value = d.what_we_do.description_2 || '';
+        document.getElementById('what_image').value = d.what_we_do.image || 'assets/about-office.jpg';
+        document.getElementById('what_image_prev').src = '/' + (d.what_we_do.image || 'assets/about-office.jpg').replace(/^\//, '');
+      }
+
+      // 3. Gauges
+      if (d.skills_metrics && Array.isArray(d.skills_metrics.gauges)) {
+        d.skills_metrics.gauges.forEach((g, i) => {
+          const idx = i + 1;
+          const lblEl = document.getElementById(`gauge_lbl_${idx}`);
+          const pctEl = document.getElementById(`gauge_pct_${idx}`);
+          const pillEl = document.getElementById(`gauge_pill_${idx}`);
+          if (lblEl) lblEl.value = g.label || '';
+          if (pctEl) pctEl.value = g.percent || 90;
+          if (pillEl) pillEl.textContent = `${g.percent || 90}%`;
+        });
+      }
+
+      // 4. Approach
+      if (d.approach) {
+        document.getElementById('approach_kicker').value = d.approach.kicker || 'Our Approach';
+        document.getElementById('approach_heading').value = d.approach.heading || '';
+        document.getElementById('approach_lead').value = d.approach.lead || '';
+        renderApproachCards(d.approach.cards || []);
+      }
+
+      // 5. Principles
+      if (d.principles) {
+        document.getElementById('principles_kicker').value = d.principles.kicker || '[ PRINCIPLES ]';
+        document.getElementById('principles_heading').value = d.principles.heading || '';
+        document.getElementById('principles_desc').value = d.principles.description || '';
+        renderPrinciplesItems(d.principles.items || []);
+      }
+
+      // 6. Team
+      if (d.team) {
+        document.getElementById('team_heading').value = d.team.heading || '';
+        document.getElementById('team_desc').value = d.team.description || '';
+        renderTeamMembers(d.team.members || []);
+      }
+
+      // 7. Testimonials
+      if (d.testimonials) {
+        document.getElementById('test_kicker').value = d.testimonials.kicker || 'Client Stories & Trust';
+        document.getElementById('test_heading').value = d.testimonials.heading || '';
+        document.getElementById('test_desc').value = d.testimonials.description || '';
+        renderTestimonials(d.testimonials.items || []);
+      }
+
+      // 8. CTA
+      if (d.cta) {
+        document.getElementById('cta_kicker').value = d.cta.kicker || "[ LET'S CONNECT ]";
+        document.getElementById('cta_heading').value = d.cta.heading || '';
+        document.getElementById('cta_desc').value = d.cta.description || '';
+        document.getElementById('cta_btn_label').value = d.cta.button_label || 'Schedule Discovery Call';
+        document.getElementById('cta_btn_url').value = d.cta.button_url || 'contact.html';
+      }
+
+      bindImagePickers();
+    }
+
+    // Render Approach Cards
+    function renderApproachCards(cards) {
+      const container = document.getElementById('approach-cards-container');
+      container.innerHTML = cards.map((c, idx) => `
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; font-size:12px; color:#E7192D;">Card ${idx + 1}</span>
+            <input type="text" class="form-control form-control-sm approach-pill-input" value="${c.pill || ''}" style="width:200px; font-size:11px;" placeholder="Stat Pill (e.g. 5+ YEARS)">
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Title</label>
+            <input type="text" class="form-control approach-title-input" value="${c.title || ''}">
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label" style="font-size:11px;">Description</label>
+            <textarea class="form-control approach-desc-input" rows="2">${c.desc || ''}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Principles Items
+    function renderPrinciplesItems(items) {
+      const container = document.getElementById('principles-items-container');
+      container.innerHTML = items.map((p, idx) => `
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; font-size:12px; color:#E7192D;">Principle ${idx + 1}</span>
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Pillar Title</label>
+            <input type="text" class="form-control principle-title-input" value="${p.title || ''}">
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label" style="font-size:11px;">Description</label>
+            <textarea class="form-control principle-desc-input" rows="2">${p.desc || ''}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Team Members
+    function renderTeamMembers(members) {
+      const container = document.getElementById('team-members-list');
+      document.getElementById('team-count').textContent = members.length;
+      container.innerHTML = members.map((m, idx) => `
+        <div class="team-member-admin-card" id="team-card-${idx}">
+          <div class="team-member-photo-wrap">
+            <img id="team_prev_${idx}" src="/${(m.image || 'assets/team-placeholder.jpg').replace(/^\//, '')}" onerror="this.src='/assets/team-mk-parmar.jpg'">
+          </div>
+          <div style="flex:1;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font-weight:700; font-size:13px; color:#1E293B;">Member #${idx + 1}</span>
+              <div style="display:flex; gap:6px;">
+                <button type="button" class="btn btn-sm btn-secondary" onclick="moveTeamMember(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>&uarr;</button>
+                <button type="button" class="btn btn-sm btn-secondary" onclick="moveTeamMember(${idx}, 1)" ${idx === members.length - 1 ? 'disabled' : ''}>&darr;</button>
+                <button type="button" class="btn btn-sm btn-danger" onclick="deleteTeamMember(${idx})">Delete</button>
+              </div>
+            </div>
+            <div class="form-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:10px;">
+              <div class="form-group" style="margin:0;">
+                <label class="form-label" style="font-size:11px;">Full Name</label>
+                <input type="text" class="form-control team-name-input" value="${m.name || ''}" placeholder="Name">
+              </div>
+              <div class="form-group" style="margin:0;">
+                <label class="form-label" style="font-size:11px;">Role / Designation</label>
+                <input type="text" class="form-control team-role-input" value="${m.role || ''}" placeholder="e.g. Lead Engineer">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:10px;">
+              <label class="form-label" style="font-size:11px;">Short Bio</label>
+              <textarea class="form-control team-desc-input" rows="2">${m.desc || ''}</textarea>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="text" id="team_img_${idx}" class="form-control team-img-input" value="${m.image || ''}" placeholder="assets/team-...jpg" style="font-size:11px;">
+              <button type="button" class="btn btn-sm btn-secondary" data-image-picker="team_img_${idx}" data-image-preview="team_prev_${idx}">Choose Photo</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      bindImagePickers();
+    }
+
+    function addNewTeamMember() {
+      if (!aboutFullData.team) aboutFullData.team = { members: [] };
+      if (!Array.isArray(aboutFullData.team.members)) aboutFullData.team.members = [];
+      aboutFullData.team.members.push({
+        id: `tm-${Date.now()}`,
+        name: 'New Member',
+        role: 'Software Engineer',
+        image: 'assets/team-mk-parmar.jpg',
+        desc: 'Specializes in high-performance digital systems and engineering execution.'
+      });
+      renderTeamMembers(aboutFullData.team.members);
+    }
+
+    function moveTeamMember(idx, dir) {
+      const target = idx + dir;
+      if (target < 0 || target >= aboutFullData.team.members.length) return;
+      gatherAllFormData();
+      const tmp = aboutFullData.team.members[idx];
+      aboutFullData.team.members[idx] = aboutFullData.team.members[target];
+      aboutFullData.team.members[target] = tmp;
+      renderTeamMembers(aboutFullData.team.members);
+    }
+
+    function deleteTeamMember(idx) {
+      if (!confirm('Remove this team member?')) return;
+      gatherAllFormData();
+      aboutFullData.team.members.splice(idx, 1);
+      renderTeamMembers(aboutFullData.team.members);
+    }
+
+    // Render Testimonials
+    function renderTestimonials(testimonials) {
+      const container = document.getElementById('testimonials-list');
+      document.getElementById('test-count').textContent = testimonials.length;
+      container.innerHTML = testimonials.map((t, idx) => `
+        <div class="testimonial-admin-card" id="test-card-${idx}">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-weight:700; font-size:13px; color:#1E293B;">Review #${idx + 1}</span>
+              <span style="color:#F59E0B; font-size:14px;">${'★'.repeat(t.stars || 5)}</span>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger" onclick="deleteTestimonial(${idx})">Delete</button>
+          </div>
+          <div class="form-group" style="margin-bottom:10px;">
+            <label class="form-label" style="font-size:11px;">Client Quote</label>
+            <textarea class="form-control test-quote-input" rows="2">${t.quote || ''}</textarea>
+          </div>
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; margin:0;">
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" style="font-size:11px;">Author Name</label>
+              <input type="text" class="form-control test-author-input" value="${t.author || ''}">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" style="font-size:11px;">Designation &amp; Company</label>
+              <input type="text" class="form-control test-role-input" value="${t.role || ''}">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" style="font-size:11px;">Category Tag</label>
+              <input type="text" class="form-control test-tag-input" value="${t.tag || 'Client Feedback'}">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addNewTestimonial() {
+      if (!aboutFullData.testimonials) aboutFullData.testimonials = { items: [] };
+      if (!Array.isArray(aboutFullData.testimonials.items)) aboutFullData.testimonials.items = [];
+      aboutFullData.testimonials.items.push({
+        id: `tst-${Date.now()}`,
+        stars: 5,
+        tag: 'Digital Solution',
+        quote: 'Baadam engineered an outstanding solution with speed and precision.',
+        author: 'Client Partner',
+        role: 'Director of Technology',
+        avatar: 'CP'
+      });
+      renderTestimonials(aboutFullData.testimonials.items);
+    }
+
+    function deleteTestimonial(idx) {
+      if (!confirm('Remove this testimonial?')) return;
+      gatherAllFormData();
+      aboutFullData.testimonials.items.splice(idx, 1);
+      renderTestimonials(aboutFullData.testimonials.items);
+    }
+
+    // Gather form inputs into state object
+    function gatherAllFormData() {
+      // 1. Hero
+      aboutFullData.hero = {
+        kicker: document.getElementById('hero_kicker').value.trim(),
+        heading: document.getElementById('hero_heading').value.trim(),
+        subhead: document.getElementById('hero_subhead').value.trim(),
+        lead: document.getElementById('hero_lead').value.trim(),
+        image: document.getElementById('hero_image').value.trim(),
+        trust_items: [
+          { value: document.getElementById('trust_val_1').value.trim(), label: document.getElementById('trust_lbl_1').value.trim() },
+          { value: document.getElementById('trust_val_2').value.trim(), label: document.getElementById('trust_lbl_2').value.trim() },
+          { value: document.getElementById('trust_val_3').value.trim(), label: document.getElementById('trust_lbl_3').value.trim() }
+        ]
+      };
+
+      // 2. What We Do
+      aboutFullData.what_we_do = {
+        heading: document.getElementById('what_heading').value.trim(),
+        description_1: document.getElementById('what_desc_1').value.trim(),
+        description_2: document.getElementById('what_desc_2').value.trim(),
+        image: document.getElementById('what_image').value.trim()
+      };
+
+      // 3. Gauges
+      aboutFullData.skills_metrics = {
+        aria_label: "Service Proficiency & Success Rates",
+        gauges: [
+          { id: 'g-1', label: document.getElementById('gauge_lbl_1').value.trim(), percent: parseInt(document.getElementById('gauge_pct_1').value, 10) || 98 },
+          { id: 'g-2', label: document.getElementById('gauge_lbl_2').value.trim(), percent: parseInt(document.getElementById('gauge_pct_2').value, 10) || 95 },
+          { id: 'g-3', label: document.getElementById('gauge_lbl_3').value.trim(), percent: parseInt(document.getElementById('gauge_pct_3').value, 10) || 96 },
+          { id: 'g-4', label: document.getElementById('gauge_lbl_4').value.trim(), percent: parseInt(document.getElementById('gauge_pct_4').value, 10) || 90 }
+        ]
+      };
+
+      // 4. Approach
+      const appPills = document.querySelectorAll('.approach-pill-input');
+      const appTitles = document.querySelectorAll('.approach-title-input');
+      const appDescs = document.querySelectorAll('.approach-desc-input');
+      const cards = [];
+      for (let i = 0; i < appPills.length; i++) {
+        cards.push({
+          id: `appr-${i + 1}`,
+          pill: appPills[i].value.trim(),
+          title: appTitles[i].value.trim(),
+          desc: appDescs[i].value.trim()
+        });
+      }
+      aboutFullData.approach = {
+        kicker: document.getElementById('approach_kicker').value.trim(),
+        heading: document.getElementById('approach_heading').value.trim(),
+        lead: document.getElementById('approach_lead').value.trim(),
+        cards
+      };
+
+      // 5. Principles
+      const prTitles = document.querySelectorAll('.principle-title-input');
+      const prDescs = document.querySelectorAll('.principle-desc-input');
+      const pItems = [];
+      for (let i = 0; i < prTitles.length; i++) {
+        pItems.push({
+          id: `pr-${i + 1}`,
+          title: prTitles[i].value.trim(),
+          desc: prDescs[i].value.trim()
+        });
+      }
+      aboutFullData.principles = {
+        kicker: document.getElementById('principles_kicker').value.trim(),
+        heading: document.getElementById('principles_heading').value.trim(),
+        description: document.getElementById('principles_desc').value.trim(),
+        items: pItems
+      };
+
+      // 6. Team
+      const tmNames = document.querySelectorAll('.team-name-input');
+      const tmRoles = document.querySelectorAll('.team-role-input');
+      const tmDescs = document.querySelectorAll('.team-desc-input');
+      const tmImgs = document.querySelectorAll('.team-img-input');
+      const members = [];
+      for (let i = 0; i < tmNames.length; i++) {
+        members.push({
+          id: `tm-${i + 1}`,
+          name: tmNames[i].value.trim(),
+          role: tmRoles[i].value.trim(),
+          desc: tmDescs[i].value.trim(),
+          image: tmImgs[i].value.trim()
+        });
+      }
+      aboutFullData.team = {
+        kicker: '[ CORE TEAM ]',
+        heading: document.getElementById('team_heading').value.trim(),
+        description: document.getElementById('team_desc').value.trim(),
+        members
+      };
+
+      // 7. Testimonials
+      const tstQuotes = document.querySelectorAll('.test-quote-input');
+      const tstAuthors = document.querySelectorAll('.test-author-input');
+      const tstRoles = document.querySelectorAll('.test-role-input');
+      const tstTags = document.querySelectorAll('.test-tag-input');
+      const tstItems = [];
+      for (let i = 0; i < tstQuotes.length; i++) {
+        tstItems.push({
+          id: `tst-${i + 1}`,
+          stars: 5,
+          tag: tstTags[i].value.trim(),
+          quote: tstQuotes[i].value.trim(),
+          author: tstAuthors[i].value.trim(),
+          role: tstRoles[i].value.trim(),
+          avatar: tstAuthors[i].value.trim().substring(0, 2).toUpperCase()
+        });
+      }
+      aboutFullData.testimonials = {
+        kicker: document.getElementById('test_kicker').value.trim(),
+        heading: document.getElementById('test_heading').value.trim(),
+        description: document.getElementById('test_desc').value.trim(),
+        items: tstItems
+      };
+
+      // 8. CTA
+      aboutFullData.cta = {
+        kicker: document.getElementById('cta_kicker').value.trim(),
+        heading: document.getElementById('cta_heading').value.trim(),
+        description: document.getElementById('cta_desc').value.trim(),
+        button_label: document.getElementById('cta_btn_label').value.trim(),
+        button_url: document.getElementById('cta_btn_url').value.trim()
+      };
+    }
+
+    // Save Draft or Publish Live
+    async function saveAboutData(publish = false) {
+      gatherAllFormData();
+
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+
+        const res = await fetch('/api/admin/about-page', {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: authHeaders,
+          body: JSON.stringify(aboutFullData)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch('/api/admin/about-page/publish', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: authHeaders
+          });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast('🚀 About Us page published live successfully!');
+            await loadAboutPageData();
+          } else {
+            showToast(pubData.error || 'Failed to publish', 'error');
+          }
+        } else {
+          showToast('Draft changes saved successfully.');
+          const badge = document.getElementById('page-status-badge');
+          badge.className = 'badge badge-draft';
+          badge.textContent = 'Draft Changes';
+        }
+      } catch (err) {
+        showToast('Error saving: ' + err.message, 'error');
+      }
+    }
+
+    // Revert Draft
+    async function revertAboutDraft() {
+      if (!confirm('Revert all unsaved draft changes back to published state?')) return;
+      try {
+        const token = localStorage.getItem('admin_token');
+        const authHeaders = {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+        };
+        const res = await fetch('/api/admin/about-page/revert', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: authHeaders
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast('Reverted draft back to published state');
+          await loadAboutPageData();
+        } else {
+          showToast(data.error || 'Failed to revert', 'error');
+        }
+      } catch (err) {
+        showToast('Error reverting: ' + err.message, 'error');
+      }
+    }
+
+    // Preview
+    function openAboutPreview() {
+      window.open('/about.html?preview=draft', '_blank');
+    }
+
+    // Initialize on load
+    function initAboutPage() {
+      // Check hash
+      if (window.location.hash) {
+        const h = window.location.hash.replace('#', '');
+        if (['hero', 'what-we-do', 'skills', 'approach', 'principles', 'team', 'testimonials', 'cta', 'hub'].includes(h)) {
+          switchAboutTab(h);
+        }
+      }
+      loadAboutPageData();
+    }
+
+    window.addEventListener('hashchange', () => {
+      const h = window.location.hash.replace('#', '');
+      if (['hero', 'what-we-do', 'skills', 'approach', 'principles', 'team', 'testimonials', 'cta', 'hub'].includes(h)) {
+        switchAboutTab(h);
+      }
+    });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAboutPage);
+    } else {
+      initAboutPage();
+    }
+  </script>
+</body>
+</html>

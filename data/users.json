@@ -1,0 +1,12 @@
+[
+  {
+    "id": "usr-01",
+    "username": "admin",
+    "email": "admin@baadam.com",
+    "name": "BAADAM Administrator",
+    "role": "superadmin",
+    "password_hash": "c285697388a32f73418a034c35811c5715cbc258cf65f2b1ccb667d39bf9ebd7",
+    "created_at": "2026-11-01T00:00:00.000Z",
+    "last_login": "2026-11-18T05:17:20.193Z"
+  }
+]

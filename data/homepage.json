@@ -1,0 +1,1046 @@
+{
+  "version": "1.0.01",
+  "last_published": "2026-11-17T11:47:19.417Z",
+  "published": {
+    "header": {
+      "logo_text": "BAADAM Info and Tradelink Services",
+      "logo_img": "assets/baadam-logo.png",
+      "nav_links": [
+        {
+          "label": "Home",
+          "url": "index.html",
+          "active": true
+        },
+        {
+          "label": "Services",
+          "url": "services.html",
+          "has_dropdown": true
+        },
+        {
+          "label": "Portfolio",
+          "url": "portfolio.html",
+          "has_dropdown": true
+        },
+        {
+          "label": "About Us",
+          "url": "about.html"
+        },
+        {
+          "label": "Contact",
+          "url": "contact.html"
+        }
+      ],
+      "cta_button": {
+        "label": "Let's Talk",
+        "url": "contact.html"
+      },
+      "portfolio_mega_menu": [
+        {
+          "title": "Web & Websites",
+          "url": "portfolio.html?filter=web",
+          "image": "assets/mega-web-services.jpg"
+        },
+        {
+          "title": "Mobile Applications",
+          "url": "portfolio.html?filter=mobile",
+          "image": "assets/mega-mobile-apps.jpg"
+        },
+        {
+          "title": "Enterprise Software & ERP",
+          "url": "portfolio.html?filter=enterprise",
+          "image": "assets/mega-service-software.jpg"
+        }
+      ]
+    },
+    "hero": {
+      "kicker": "Now booking Q4 · 2 spots left",
+      "title_main": "Take Your Business To New Heights,  mzew;odkx",
+      "title_highlight": "With Our Products & Services.",
+      "description": "Updated draft description for testing isolation.",
+      "cta_primary": {
+        "label": "Book a strategy call",
+        "url": "contact.html"
+      },
+      "cta_secondary": {
+        "label": "See our work",
+        "url": "portfolio.html"
+      },
+      "orbit_badges": [
+        {
+          "text": "",
+          "icon": "heart"
+        },
+        {
+          "text": "",
+          "icon": "star"
+        },
+        {
+          "text": "",
+          "icon": "pin"
+        }
+      ],
+      "metrics_bar": {
+        "reach_number": "1,284,300",
+        "reach_label": "PEOPLE REACHED FOR CLIENTS THIS MONTH",
+        "channels": [
+          "01 Website",
+          "02 Apps",
+          "03 Marketing",
+          "04 E-Commerce"
+        ],
+        "reviews_score": "4.9",
+        "reviews_count": "128 client reviews",
+        "reviews_subtext": "140+ brands grown"
+      }
+    },
+    "radar": {
+      "kicker": "ACTIVE RADAR &middot; Q4 2026",
+      "headline_main": "Where Engineering",
+      "headline_highlight": "Meets Momentum",
+      "description": "Continuously deploying high-impact digital products across India, USA, and global markets.",
+      "center_number": "16+",
+      "center_label": "Active Deliveries",
+      "stats": [
+        {
+          "value": "99.8%",
+          "label": "On-Time Sprint Completion"
+        },
+        {
+          "value": "12ms",
+          "label": "Average API Response Latency"
+        },
+        {
+          "value": "100%",
+          "label": "In-House Engineering Team"
+        }
+      ]
+    },
+    "services": [
+      {
+        "id": "service-01",
+        "num": "01",
+        "title": "Website Development",
+        "short_desc": "Baadam Info Services Pvt. Ltd. is a highly specialized team for website development and services. You will get the high performing web experiences that are digitally transformative, and it is designed to be user-friendly. Our team creates the best website, which will be fully functional, very secure and able to grow your business.",
+        "search_heading": "Full-Stack Web Architecture & Performance",
+        "technologies": [
+          "React",
+          "Next.js",
+          "Node.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "feature_headline": "Scalable Digital Portals & Enterprise Web Solutions",
+        "feature_desc": "We build fast, SEO-optimized web platforms with microservices architectures, server-side rendering, and headless CMS integrations.",
+        "features": [
+          "Next.js / SSR & Static Generation",
+          "Headless CMS Architecture",
+          "Core Web Vitals Optimization",
+          "Multi-Tenant SaaS Portals"
+        ],
+        "metrics": {
+          "speed": "< 1.2s LCP",
+          "uptime": "99.99%"
+        },
+        "badge_text": "High Performance",
+        "price": "Custom Quote",
+        "unit": "per sprint",
+        "explore_url": "services/website-development/",
+        "active": true,
+        "order": 1
+      },
+      {
+        "id": "service-02",
+        "num": "02",
+        "title": "Application Development",
+        "short_desc": "Our great application development services allow you to build the best B2B apps for a wide range of platforms. We are making the apps for mobile, web, smartwatch, desktop, AR and VR. Baadam Info Pvt. Ltd. simplifies your business complexities.",
+        "search_heading": "Native iOS & Android Mobile Engineering",
+        "technologies": [
+          "Flutter",
+          "React Native",
+          "Swift",
+          "Kotlin",
+          "Firebase"
+        ],
+        "feature_headline": "Fluid Consumer & Enterprise Mobile Apps",
+        "feature_desc": "End-to-end mobile applications with offline-first capabilities, real-time sync, and hardware integrations.",
+        "features": [
+          "Cross-Platform Flutter & React Native",
+          "Real-Time Push & WebSockets",
+          "Biometric Authentication & Security",
+          "App Store & Play Store CI/CD"
+        ],
+        "metrics": {
+          "rating": "4.9★",
+          "downloads": "500k+"
+        },
+        "badge_text": "Mobile First",
+        "price": "Custom Quote",
+        "unit": "per milestone",
+        "explore_url": "services/application-development/",
+        "active": true,
+        "order": 2
+      },
+      {
+        "id": "service-03",
+        "num": "03",
+        "title": "Digital Marketing",
+        "short_desc": "Baadam Info Pvt. Ltd. provides you with the complete Digital Marketing services. It includes email and content marketing, search engine marketing, content marketing & lead generation and many more awesome services. We also increase improvement up to 1000 times in website traffic, visitors, & sources.",
+        "search_heading": "Performance Marketing & Funnel Optimization",
+        "technologies": [
+          "Google Ads",
+          "Meta Ads",
+          "SEO",
+          "Analytics",
+          "HubSpot"
+        ],
+        "feature_headline": "Data-Driven Multi-Channel Acquisition",
+        "feature_desc": "Strategic digital campaigns driving measurable ROI, organic search dominance, and high-converting lead funnels.",
+        "features": [
+          "Technical SEO & Content Strategy",
+          "Paid Media & PPC Optimization",
+          "Marketing Automation & CRM",
+          "Conversion Rate Optimization (CRO)"
+        ],
+        "metrics": {
+          "roas": "4.2x Avg",
+          "traffic": "+340%"
+        },
+        "badge_text": "Growth Engine",
+        "price": "Custom Quote",
+        "unit": "monthly retainer",
+        "explore_url": "services/digital-marketing/",
+        "active": true,
+        "order": 3
+      },
+      {
+        "id": "service-04",
+        "num": "04",
+        "title": "E-Commerce Development",
+        "short_desc": "Baadam Info Pvt. Ltd. enable your business to reach a broader customer base with our website development services. We scale up your online business very efficiently.",
+        "search_heading": "Modern Headless E-Commerce Platforms",
+        "technologies": [
+          "Shopify Plus",
+          "WooCommerce",
+          "Stripe",
+          "GraphQL",
+          "Algolia"
+        ],
+        "feature_headline": "High-Conversion Digital Commerce",
+        "feature_desc": "Omnichannel shopping experiences with sub-second page loads, custom cart logic, and multi-currency checkout.",
+        "features": [
+          "Headless Storefronts & APIs",
+          "Custom Payment Gateways & Escrow",
+          "Inventory & ERP Synchronization",
+          "One-Click Checkout Optimization"
+        ],
+        "metrics": {
+          "conversion": "3.8%",
+          "cart_abandon": "-24%"
+        },
+        "badge_text": "Omnichannel",
+        "price": "Custom Quote",
+        "unit": "per project",
+        "explore_url": "contact.html?service=ecommerce",
+        "active": true,
+        "order": 4
+      },
+      {
+        "id": "service-05",
+        "num": "05",
+        "title": "Software Development",
+        "short_desc": "Invent, integrate, build and upgrade your ideas with our services at Baadam Info Pvt. Ltd. We help you to create high-quality software solutions and products. We deliver a broader range of software-related services.",
+        "search_heading": "Enterprise Software & Cloud Systems",
+        "technologies": [
+          "Python",
+          "Go",
+          "PostgreSQL",
+          "Docker",
+          "AWS",
+          "Kubernetes"
+        ],
+        "feature_headline": "Robust Custom Software & Distributed Architecture",
+        "feature_desc": "Fault-tolerant internal systems, brokerage ERPs, and financial modeling engines built for mission-critical operations.",
+        "features": [
+          "Microservices & Event-Driven Architecture",
+          "Custom ERP & CRM Platforms",
+          "Cloud Infrastructure & DevOps",
+          "Enterprise Security & Compliance"
+        ],
+        "metrics": {
+          "uptime": "99.99%",
+          "latency": "< 25ms"
+        },
+        "badge_text": "Mission Critical",
+        "price": "Custom Quote",
+        "unit": "per architecture",
+        "explore_url": "contact.html?service=software",
+        "active": true,
+        "order": 5
+      },
+      {
+        "id": "service-06",
+        "num": "06",
+        "title": "Game Development",
+        "short_desc": "Our game development team is a highly expert in making 3D games and application using Unity 3D tool. We are making a game for various platforms like iPhone/Ipad and Androids. We support you from the initials to final support with the proper maintenance.",
+        "search_heading": "Interactive 2D/3D Games & WebGL Experiences",
+        "technologies": [
+          "Unity",
+          "Unreal Engine",
+          "WebGL",
+          "Three.js",
+          "C#"
+        ],
+        "feature_headline": "Immersive Gameplay & Cross-Platform Mechanics",
+        "feature_desc": "From casual mobile gaming titles to interactive 3D browser simulations and gamified brand experiences.",
+        "features": [
+          "Cross-Platform Mobile Game Builds",
+          "3D Browser WebGL / WebGPU",
+          "Real-Time Multiplayer Networking",
+          "Physics Simulation & VFX"
+        ],
+        "metrics": {
+          "fps": "60 FPS Locked",
+          "retention": "D30 28%"
+        },
+        "badge_text": "Immersive 3D",
+        "price": "Custom Quote",
+        "unit": "per title",
+        "explore_url": "contact.html?service=game",
+        "active": true,
+        "order": 6
+      }
+    ],
+    "featured_work": {
+      "kicker": "[ (02) PORTFOLIO &middot; SELECTED WORK ]",
+      "heading": "Featured Case Studies",
+      "description": "High-impact software systems, commercial web portals, and enterprise platforms engineered for industry leaders.",
+      "cta_label": "Explore All 16 Projects",
+      "cta_url": "portfolio.html",
+      "featured_slugs": [
+        "kp-e-services",
+        "ashray-labs",
+        "just-land"
+      ],
+      "display_count": 3,
+      "selected_project_ids": [
+        "kp-e-services",
+        "ashray-labs",
+        "just-land"
+      ]
+    },
+    "case_studies": {
+      "kicker": "(03) REAL TRANSFORMATION",
+      "heading": "Real Challenges.<br>Engineered Solutions.",
+      "description": "Interactive before-and-after architecture breakdowns demonstrating tangible business outcomes.",
+      "items": [
+        {
+          "id": "case-01",
+          "tab_title": "FinTech Loan Operations",
+          "client_name": "KP E-Services",
+          "category": "FinTech & Loan Operations",
+          "before_image": "assets/about-office.jpg",
+          "after_image": "assets/portfolio-hero-1.png",
+          "before_label": "Legacy System (Manual Processing)",
+          "after_label": "Baadam Automated Platform",
+          "description": "Transitioned legacy paper loan operations into a sub-second digital loan verification and disbursement engine.",
+          "technologies": [
+            "Node.js",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "AWS"
+          ],
+          "achievements": [
+            "Disbursement cycle slashed from 4 days to 14 minutes",
+            "Processed over 100k+ customer KYC verifications",
+            "Zero security incidents across $12M in originations"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/kp-e-services/",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "id": "case-02",
+          "tab_title": "Healthcare Diagnostic Portal",
+          "client_name": "Ashray Labs",
+          "category": "Healthcare & Diagnostics",
+          "before_image": "assets/about-office-showcase.png",
+          "after_image": "assets/case-dental-clinic.jpg",
+          "before_label": "Fragmented Patient Communication",
+          "after_label": "Integrated Pathology Portal",
+          "description": "Built an automated pathology collection platform connecting home phlebotomists with automated lab testing pipelines.",
+          "technologies": [
+            "React",
+            "Express",
+            "MongoDB",
+            "Twilio",
+            "PDF Generation"
+          ],
+          "achievements": [
+            "Patient report delivery time reduced by 65%",
+            "Online home sample booking adoption exceeded 78%",
+            "HIPAA-compliant encrypted cloud records storage"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/ashray-labs/",
+          "order": 2,
+          "visible": true
+        },
+        {
+          "id": "case-03",
+          "tab_title": "Enterprise Financial Valuation",
+          "client_name": "ProCurve",
+          "category": "Financial Valuation & Advisory",
+          "before_image": "assets/about-office-mockup.jpg",
+          "after_image": "assets/portfolio-hero-showcase.png",
+          "before_label": "Spreadsheet Inconsistencies",
+          "after_label": "Multi-Method Valuation Engine",
+          "description": "Designed a registered valuer mathematical computation engine covering DCF, NAV, and market-multiple formulas.",
+          "technologies": [
+            "Python",
+            "FastAPI",
+            "React",
+            "NumPy",
+            "Tailwind CSS"
+          ],
+          "achievements": [
+            "Audit calculation accuracy certified at 99.99%",
+            "Multi-scenario financial forecasting in under 2 seconds",
+            "Standardized corporate valuation report generation"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/procurve/",
+          "order": 3,
+          "visible": true
+        }
+      ]
+    },
+    "how_we_work": {
+      "kicker": "(04) How We Work",
+      "heading": "From attention to clients.",
+      "highlight": "The funnel.",
+      "description": "A systematic, disciplined engineering process taking digital products from initial discovery to high-velocity scale.",
+      "stages": [
+        {
+          "id": "stage-01",
+          "num": "01",
+          "title": "Reach",
+          "metric_label": "Impression Rate",
+          "metric_value": "85%",
+          "progress_pct": 85,
+          "conversion_pct": "100%",
+          "timeline": "Week 1-2",
+          "description": "Strategic discovery, audience profiling, technical scoping, and high-visibility digital positioning.",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "id": "stage-02",
+          "num": "02",
+          "title": "Launch",
+          "metric_label": "Deployment Velocity",
+          "metric_value": "72%",
+          "progress_pct": 72,
+          "conversion_pct": "84%",
+          "timeline": "Week 3-6",
+          "description": "Iterative sprint execution, test-driven engineering, security hardening, and production deployment.",
+          "order": 2,
+          "visible": true
+        },
+        {
+          "id": "stage-03",
+          "num": "03",
+          "title": "Optimise",
+          "metric_label": "Efficiency Gain",
+          "metric_value": "94%",
+          "progress_pct": 94,
+          "conversion_pct": "92%",
+          "timeline": "Week 7-8",
+          "description": "Performance profiling, query optimization, conversion funnel refinement, and latency tuning.",
+          "order": 3,
+          "visible": true
+        },
+        {
+          "id": "stage-04",
+          "num": "04",
+          "title": "Scale",
+          "metric_label": "Capacity Multiplier",
+          "metric_value": "99%",
+          "progress_pct": 99,
+          "conversion_pct": "98%",
+          "timeline": "Ongoing",
+          "description": "Automated cloud horizontal scaling, continuous delivery pipelines, and proactive infrastructure monitoring.",
+          "order": 4,
+          "visible": true
+        }
+      ]
+    },
+    "next_steps": {
+      "kicker": "[ START A COLLABORATION ]",
+      "heading": "Have a Project in Mind?<br>Let's Build It Together.",
+      "description": "From high-throughput fintech platforms to scalable enterprise applications, Baadam engineers robust software systems that drive tangible business growth.",
+      "bg_color": "linear-gradient(135deg, #E7192D 0%, #C41224 100%)",
+      "bg_image": "",
+      "right_image": "",
+      "cta_button": {
+        "label": "Schedule a Consultation",
+        "url": "contact.html",
+        "visible": true
+      },
+      "visible": true
+    },
+    "footer": {
+      "brand_desc": "Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.",
+      "headquarters": "Ahmedabad, Gujarat, India",
+      "email": "info@baadam.com",
+      "hours": "Mon - Sat: 9:30 AM - 6:30 PM",
+      "social_linkedin": "https://linkedin.com",
+      "social_instagram": "https://instagram.com"
+    }
+  },
+  "draft": {
+    "header": {
+      "logo_text": "BAADAM Info and Tradelink Services",
+      "logo_img": "assets/baadam-logo.png",
+      "nav_links": [
+        {
+          "label": "Home",
+          "url": "index.html",
+          "active": true
+        },
+        {
+          "label": "Services",
+          "url": "services.html",
+          "has_dropdown": true
+        },
+        {
+          "label": "Portfolio",
+          "url": "portfolio.html",
+          "has_dropdown": true
+        },
+        {
+          "label": "About Us",
+          "url": "about.html"
+        },
+        {
+          "label": "Contact",
+          "url": "contact.html"
+        }
+      ],
+      "cta_button": {
+        "label": "Let's Talk",
+        "url": "contact.html"
+      },
+      "portfolio_mega_menu": [
+        {
+          "title": "Web & Websites",
+          "url": "portfolio.html?filter=web",
+          "image": "assets/mega-web-services.jpg"
+        },
+        {
+          "title": "Mobile Applications",
+          "url": "portfolio.html?filter=mobile",
+          "image": "assets/mega-mobile-apps.jpg"
+        },
+        {
+          "title": "Enterprise Software & ERP",
+          "url": "portfolio.html?filter=enterprise",
+          "image": "assets/mega-service-software.jpg"
+        }
+      ]
+    },
+    "hero": {
+      "kicker": "Now booking Q4 · 2 spots left",
+      "title_main": "Take Your Business To New Heights,  mzew;odkx",
+      "title_highlight": "With Our Products & Services.",
+      "description": "Updated draft description for testing isolation.",
+      "cta_primary": {
+        "label": "Book a strategy call",
+        "url": "contact.html"
+      },
+      "cta_secondary": {
+        "label": "See our work",
+        "url": "portfolio.html"
+      },
+      "orbit_badges": [
+        {
+          "text": "",
+          "icon": "heart"
+        },
+        {
+          "text": "",
+          "icon": "star"
+        },
+        {
+          "text": "",
+          "icon": "pin"
+        }
+      ],
+      "metrics_bar": {
+        "reach_number": "1,284,300",
+        "reach_label": "PEOPLE REACHED FOR CLIENTS THIS MONTH",
+        "channels": [
+          "01 Website",
+          "02 Apps",
+          "03 Marketing",
+          "04 E-Commerce"
+        ],
+        "reviews_score": "4.9",
+        "reviews_count": "128 client reviews",
+        "reviews_subtext": "140+ brands grown"
+      }
+    },
+    "radar": {
+      "kicker": "ACTIVE RADAR &middot; Q4 2026",
+      "headline_main": "Where Engineering",
+      "headline_highlight": "Meets Momentum",
+      "description": "Continuously deploying high-impact digital products across India, USA, and global markets.",
+      "center_number": "16+",
+      "center_label": "Active Deliveries",
+      "stats": [
+        {
+          "value": "99.8%",
+          "label": "On-Time Sprint Completion"
+        },
+        {
+          "value": "12ms",
+          "label": "Average API Response Latency"
+        },
+        {
+          "value": "100%",
+          "label": "In-House Engineering Team"
+        }
+      ]
+    },
+    "services": [
+      {
+        "id": "service-01",
+        "num": "01",
+        "title": "Website Development",
+        "short_desc": "Baadam Info Services Pvt. Ltd. is a highly specialized team for website development and services. You will get the high performing web experiences that are digitally transformative, and it is designed to be user-friendly. Our team creates the best website, which will be fully functional, very secure and able to grow your business.",
+        "search_heading": "Full-Stack Web Architecture & Performance",
+        "technologies": [
+          "React",
+          "Next.js",
+          "Node.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "feature_headline": "Scalable Digital Portals & Enterprise Web Solutions",
+        "feature_desc": "We build fast, SEO-optimized web platforms with microservices architectures, server-side rendering, and headless CMS integrations.",
+        "features": [
+          "Next.js / SSR & Static Generation",
+          "Headless CMS Architecture",
+          "Core Web Vitals Optimization",
+          "Multi-Tenant SaaS Portals"
+        ],
+        "metrics": {
+          "speed": "< 1.2s LCP",
+          "uptime": "99.99%"
+        },
+        "badge_text": "High Performance",
+        "price": "Custom Quote",
+        "unit": "per sprint",
+        "explore_url": "services/website-development/",
+        "active": true,
+        "order": 1
+      },
+      {
+        "id": "service-02",
+        "num": "02",
+        "title": "Application Development",
+        "short_desc": "Our great application development services allow you to build the best B2B apps for a wide range of platforms. We are making the apps for mobile, web, smartwatch, desktop, AR and VR. Baadam Info Pvt. Ltd. simplifies your business complexities.",
+        "search_heading": "Native iOS & Android Mobile Engineering",
+        "technologies": [
+          "Flutter",
+          "React Native",
+          "Swift",
+          "Kotlin",
+          "Firebase"
+        ],
+        "feature_headline": "Fluid Consumer & Enterprise Mobile Apps",
+        "feature_desc": "End-to-end mobile applications with offline-first capabilities, real-time sync, and hardware integrations.",
+        "features": [
+          "Cross-Platform Flutter & React Native",
+          "Real-Time Push & WebSockets",
+          "Biometric Authentication & Security",
+          "App Store & Play Store CI/CD"
+        ],
+        "metrics": {
+          "rating": "4.9★",
+          "downloads": "500k+"
+        },
+        "badge_text": "Mobile First",
+        "price": "Custom Quote",
+        "unit": "per milestone",
+        "explore_url": "services/application-development/",
+        "active": true,
+        "order": 2
+      },
+      {
+        "id": "service-03",
+        "num": "03",
+        "title": "Digital Marketing",
+        "short_desc": "Baadam Info Pvt. Ltd. provides you with the complete Digital Marketing services. It includes email and content marketing, search engine marketing, content marketing & lead generation and many more awesome services. We also increase improvement up to 1000 times in website traffic, visitors, & sources.",
+        "search_heading": "Performance Marketing & Funnel Optimization",
+        "technologies": [
+          "Google Ads",
+          "Meta Ads",
+          "SEO",
+          "Analytics",
+          "HubSpot"
+        ],
+        "feature_headline": "Data-Driven Multi-Channel Acquisition",
+        "feature_desc": "Strategic digital campaigns driving measurable ROI, organic search dominance, and high-converting lead funnels.",
+        "features": [
+          "Technical SEO & Content Strategy",
+          "Paid Media & PPC Optimization",
+          "Marketing Automation & CRM",
+          "Conversion Rate Optimization (CRO)"
+        ],
+        "metrics": {
+          "roas": "4.2x Avg",
+          "traffic": "+340%"
+        },
+        "badge_text": "Growth Engine",
+        "price": "Custom Quote",
+        "unit": "monthly retainer",
+        "explore_url": "services/digital-marketing/",
+        "active": true,
+        "order": 3
+      },
+      {
+        "id": "service-04",
+        "num": "04",
+        "title": "E-Commerce Development",
+        "short_desc": "Baadam Info Pvt. Ltd. enable your business to reach a broader customer base with our website development services. We scale up your online business very efficiently.",
+        "search_heading": "Modern Headless E-Commerce Platforms",
+        "technologies": [
+          "Shopify Plus",
+          "WooCommerce",
+          "Stripe",
+          "GraphQL",
+          "Algolia"
+        ],
+        "feature_headline": "High-Conversion Digital Commerce",
+        "feature_desc": "Omnichannel shopping experiences with sub-second page loads, custom cart logic, and multi-currency checkout.",
+        "features": [
+          "Headless Storefronts & APIs",
+          "Custom Payment Gateways & Escrow",
+          "Inventory & ERP Synchronization",
+          "One-Click Checkout Optimization"
+        ],
+        "metrics": {
+          "conversion": "3.8%",
+          "cart_abandon": "-24%"
+        },
+        "badge_text": "Omnichannel",
+        "price": "Custom Quote",
+        "unit": "per project",
+        "explore_url": "contact.html?service=ecommerce",
+        "active": true,
+        "order": 4
+      },
+      {
+        "id": "service-05",
+        "num": "05",
+        "title": "Software Development",
+        "short_desc": "Invent, integrate, build and upgrade your ideas with our services at Baadam Info Pvt. Ltd. We help you to create high-quality software solutions and products. We deliver a broader range of software-related services.",
+        "search_heading": "Enterprise Software & Cloud Systems",
+        "technologies": [
+          "Python",
+          "Go",
+          "PostgreSQL",
+          "Docker",
+          "AWS",
+          "Kubernetes"
+        ],
+        "feature_headline": "Robust Custom Software & Distributed Architecture",
+        "feature_desc": "Fault-tolerant internal systems, brokerage ERPs, and financial modeling engines built for mission-critical operations.",
+        "features": [
+          "Microservices & Event-Driven Architecture",
+          "Custom ERP & CRM Platforms",
+          "Cloud Infrastructure & DevOps",
+          "Enterprise Security & Compliance"
+        ],
+        "metrics": {
+          "uptime": "99.99%",
+          "latency": "< 25ms"
+        },
+        "badge_text": "Mission Critical",
+        "price": "Custom Quote",
+        "unit": "per architecture",
+        "explore_url": "contact.html?service=software",
+        "active": true,
+        "order": 5
+      },
+      {
+        "id": "service-06",
+        "num": "06",
+        "title": "Game Development",
+        "short_desc": "Our game development team is a highly expert in making 3D games and application using Unity 3D tool. We are making a game for various platforms like iPhone/Ipad and Androids. We support you from the initials to final support with the proper maintenance.",
+        "search_heading": "Interactive 2D/3D Games & WebGL Experiences",
+        "technologies": [
+          "Unity",
+          "Unreal Engine",
+          "WebGL",
+          "Three.js",
+          "C#"
+        ],
+        "feature_headline": "Immersive Gameplay & Cross-Platform Mechanics",
+        "feature_desc": "From casual mobile gaming titles to interactive 3D browser simulations and gamified brand experiences.",
+        "features": [
+          "Cross-Platform Mobile Game Builds",
+          "3D Browser WebGL / WebGPU",
+          "Real-Time Multiplayer Networking",
+          "Physics Simulation & VFX"
+        ],
+        "metrics": {
+          "fps": "60 FPS Locked",
+          "retention": "D30 28%"
+        },
+        "badge_text": "Immersive 3D",
+        "price": "Custom Quote",
+        "unit": "per title",
+        "explore_url": "contact.html?service=game",
+        "active": true,
+        "order": 6
+      }
+    ],
+    "featured_work": {
+      "kicker": "[ (02) PORTFOLIO &middot; SELECTED WORK ]",
+      "heading": "Featured Case Studies",
+      "description": "High-impact software systems, commercial web portals, and enterprise platforms engineered for industry leaders.",
+      "cta_label": "Explore All 16 Projects",
+      "cta_url": "portfolio.html",
+      "featured_slugs": [
+        "kp-e-services",
+        "ashray-labs",
+        "just-land"
+      ],
+      "display_count": 3,
+      "selected_project_ids": [
+        "kp-e-services",
+        "ashray-labs",
+        "just-land"
+      ]
+    },
+    "case_studies": {
+      "kicker": "(03) REAL TRANSFORMATION",
+      "heading": "Real Challenges.<br>Engineered Solutions.",
+      "description": "Interactive before-and-after architecture breakdowns demonstrating tangible business outcomes.",
+      "items": [
+        {
+          "id": "case-01",
+          "tab_title": "FinTech Loan Operations",
+          "client_name": "KP E-Services",
+          "category": "FinTech & Loan Operations",
+          "before_image": "assets/about-office.jpg",
+          "after_image": "assets/portfolio-hero-1.png",
+          "before_label": "Legacy System (Manual Processing)",
+          "after_label": "Baadam Automated Platform",
+          "description": "Transitioned legacy paper loan operations into a sub-second digital loan verification and disbursement engine.",
+          "technologies": [
+            "Node.js",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "AWS"
+          ],
+          "achievements": [
+            "Disbursement cycle slashed from 4 days to 14 minutes",
+            "Processed over 100k+ customer KYC verifications",
+            "Zero security incidents across $12M in originations"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/kp-e-services/",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "id": "case-02",
+          "tab_title": "Healthcare Diagnostic Portal",
+          "client_name": "Ashray Labs",
+          "category": "Healthcare & Diagnostics",
+          "before_image": "assets/about-office-showcase.png",
+          "after_image": "assets/case-dental-clinic.jpg",
+          "before_label": "Fragmented Patient Communication",
+          "after_label": "Integrated Pathology Portal",
+          "description": "Built an automated pathology collection platform connecting home phlebotomists with automated lab testing pipelines.",
+          "technologies": [
+            "React",
+            "Express",
+            "MongoDB",
+            "Twilio",
+            "PDF Generation"
+          ],
+          "achievements": [
+            "Patient report delivery time reduced by 65%",
+            "Online home sample booking adoption exceeded 78%",
+            "HIPAA-compliant encrypted cloud records storage"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/ashray-labs/",
+          "order": 2,
+          "visible": true
+        },
+        {
+          "id": "case-03",
+          "tab_title": "Enterprise Financial Valuation",
+          "client_name": "ProCurve",
+          "category": "Financial Valuation & Advisory",
+          "before_image": "assets/about-office-mockup.jpg",
+          "after_image": "assets/portfolio-hero-showcase.png",
+          "before_label": "Spreadsheet Inconsistencies",
+          "after_label": "Multi-Method Valuation Engine",
+          "description": "Designed a registered valuer mathematical computation engine covering DCF, NAV, and market-multiple formulas.",
+          "technologies": [
+            "Python",
+            "FastAPI",
+            "React",
+            "NumPy",
+            "Tailwind CSS"
+          ],
+          "achievements": [
+            "Audit calculation accuracy certified at 99.99%",
+            "Multi-scenario financial forecasting in under 2 seconds",
+            "Standardized corporate valuation report generation"
+          ],
+          "cta_label": "View Full Case Study",
+          "cta_url": "projects/procurve/",
+          "order": 3,
+          "visible": true
+        }
+      ]
+    },
+    "how_we_work": {
+      "kicker": "(04) How We Work",
+      "heading": "From attention to clients.",
+      "highlight": "The funnel.",
+      "description": "A systematic, disciplined engineering process taking digital products from initial discovery to high-velocity scale.",
+      "stages": [
+        {
+          "id": "stage-01",
+          "num": "01",
+          "title": "Reach",
+          "metric_label": "Impression Rate",
+          "metric_value": "85%",
+          "progress_pct": 85,
+          "conversion_pct": "100%",
+          "timeline": "Week 1-2",
+          "description": "Strategic discovery, audience profiling, technical scoping, and high-visibility digital positioning.",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "id": "stage-02",
+          "num": "02",
+          "title": "Launch",
+          "metric_label": "Deployment Velocity",
+          "metric_value": "72%",
+          "progress_pct": 72,
+          "conversion_pct": "84%",
+          "timeline": "Week 3-6",
+          "description": "Iterative sprint execution, test-driven engineering, security hardening, and production deployment.",
+          "order": 2,
+          "visible": true
+        },
+        {
+          "id": "stage-03",
+          "num": "03",
+          "title": "Optimise",
+          "metric_label": "Efficiency Gain",
+          "metric_value": "94%",
+          "progress_pct": 94,
+          "conversion_pct": "92%",
+          "timeline": "Week 7-8",
+          "description": "Performance profiling, query optimization, conversion funnel refinement, and latency tuning.",
+          "order": 3,
+          "visible": true
+        },
+        {
+          "id": "stage-04",
+          "num": "04",
+          "title": "Scale",
+          "metric_label": "Capacity Multiplier",
+          "metric_value": "99%",
+          "progress_pct": 99,
+          "conversion_pct": "98%",
+          "timeline": "Ongoing",
+          "description": "Automated cloud horizontal scaling, continuous delivery pipelines, and proactive infrastructure monitoring.",
+          "order": 4,
+          "visible": true
+        }
+      ]
+    },
+    "next_steps": {
+      "kicker": "[ START A COLLABORATION ]",
+      "heading": "Have a Project in Mind?<br>Let's Build It Together.",
+      "description": "From high-throughput fintech platforms to scalable enterprise applications, Baadam engineers robust software systems that drive tangible business growth.",
+      "bg_color": "linear-gradient(135deg, #E7192D 0%, #C41224 100%)",
+      "bg_image": "",
+      "right_image": "",
+      "cta_button": {
+        "label": "Schedule a Consultation",
+        "url": "contact.html",
+        "visible": true
+      },
+      "visible": true
+    },
+    "footer": {
+      "brand_desc": "Turning bold ideas into scalable digital solutions through strategy, design, and reliable software engineering.",
+      "headquarters": "Ahmedabad, Gujarat, India",
+      "email": "info@baadam.com",
+      "hours": "Mon - Sat: 9:30 AM - 6:30 PM",
+      "social_linkedin": "https://linkedin.com",
+      "social_instagram": "https://instagram.com"
+    }
+  },
+  "section_status": {
+    "header": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "hero": {
+      "status": "published",
+      "last_updated": "2026-11-17T11:47:19.417Z"
+    },
+    "services": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "featured_work": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "case_studies": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "how_we_work": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "next_steps": {
+      "status": "published",
+      "last_updated": "2026-11-16T15:20:00.000Z"
+    },
+    "radar": {
+      "status": "published",
+      "last_updated": "2026-11-17T05:14:33.318Z"
+    },
+    "footer": {
+      "status": "published",
+      "last_updated": "2026-11-17T05:14:33.318Z"
+    }
+  },
+  "history": [
+    {
+      "version": "1.0.0",
+      "published_at": "2026-11-16T15:20:00.000Z",
+      "published_by": "admin",
+      "notes": "Initial Production Baseline Snapshot"
+    }
+  ]
+}

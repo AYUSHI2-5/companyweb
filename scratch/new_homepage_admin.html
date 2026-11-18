@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage Management | BAADAM CMS</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    /* Section status pill in tab */
+    .hp-tab-status {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+    }
+    .hp-tab-status.draft {
+      background: #F59E0B;
+    }
+
+    .section-editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      background: #FFFFFF;
+      padding: 18px 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .section-editor-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--text-pure);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 4px 0;
+    }
+    .section-editor-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .section-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Accordion / Card item in Admin */
+    .admin-subcard {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+    .admin-subcard:hover {
+      border-color: rgba(231, 25, 45, 0.4);
+      background: #FFFFFF;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .deliverable-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .deliverable-input-row span {
+      color: #10B981;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="admin-topbar" id="admin-topbar"></header>
+
+      <div class="admin-content">
+
+        <!-- Top Header & Global Actions Banner -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+              <h2 style="font-size:24px; font-weight:800; color:var(--text-pure); letter-spacing:-0.02em; margin:0;">Homepage Management</h2>
+              <span id="page-global-badge" class="badge badge-published">Published Live</span>
+            </div>
+            <p style="font-size:13.5px; color:var(--text-muted); margin:0;">Manage and publish all 9 homepage sections in one place with section-by-section editing and live server synchronization.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary" onclick="openHomepagePreview()">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Live Draft Preview
+            </button>
+            <button type="button" class="btn btn-primary" onclick="publishAllSections()">
+              <svg style="width:16px; height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Publish All Sections
+            </button>
+          </div>
+        </div>
+
+        <!-- 10-Tab Navigation Bar -->
+        <div class="hp-tab-bar" id="homepage-tab-bar">
+          <button class="hp-tab-btn active" data-tab="header" onclick="switchSectionTab('header')">
+            <span class="hp-tab-num">01</span>
+            <span>Header &amp; Nav</span>
+            <span class="hp-tab-status" id="tab-status-header"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="hero" onclick="switchSectionTab('hero')">
+            <span class="hp-tab-num">02</span>
+            <span>Hero Section</span>
+            <span class="hp-tab-status" id="tab-status-hero"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="radar" onclick="switchSectionTab('radar')">
+            <span class="hp-tab-num">03</span>
+            <span>Client Radar</span>
+            <span class="hp-tab-status" id="tab-status-radar"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="services" onclick="switchSectionTab('services')">
+            <span class="hp-tab-num">04</span>
+            <span>Core Services (6)</span>
+            <span class="hp-tab-status" id="tab-status-services"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="featured_work" onclick="switchSectionTab('featured_work')">
+            <span class="hp-tab-num">05</span>
+            <span>Featured Work</span>
+            <span class="hp-tab-status" id="tab-status-featured_work"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="case_studies" onclick="switchSectionTab('case_studies')">
+            <span class="hp-tab-num">06</span>
+            <span>Case Studies</span>
+            <span class="hp-tab-status" id="tab-status-case_studies"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="how_we_work" onclick="switchSectionTab('how_we_work')">
+            <span class="hp-tab-num">07</span>
+            <span>How We Work</span>
+            <span class="hp-tab-status" id="tab-status-how_we_work"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="next_steps" onclick="switchSectionTab('next_steps')">
+            <span class="hp-tab-num">08</span>
+            <span>Next Steps / CTA</span>
+            <span class="hp-tab-status" id="tab-status-next_steps"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="footer" onclick="switchSectionTab('footer')">
+            <span class="hp-tab-num">09</span>
+            <span>Footer &amp; Brand</span>
+            <span class="hp-tab-status" id="tab-status-footer"></span>
+          </button>
+          <button class="hp-tab-btn" data-tab="overview" onclick="switchSectionTab('overview')">
+            <span class="hp-tab-num">10</span>
+            <span>Sections Hub</span>
+          </button>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 01: HEADER & NAVIGATION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel active" id="panel-header">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>01. Header &amp; Navigation Bar</span>
+                <span id="badge-header" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage logo branding, top pill navigation links, header Let's Talk CTA button, and Portfolio mega-menu cards.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('header')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('header', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('header', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Brand Identity &amp; Logo</h3>
+              <p class="card-subtitle">Floating navigation pill logo and title</p>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hdr_logo_text">Primary Brand Text</label>
+                  <input type="text" id="hdr_logo_text" class="form-control" placeholder="BAADAM">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hdr_logo_sub">Secondary Subtext</label>
+                  <input type="text" id="hdr_logo_sub" class="form-control" placeholder="Info and Tradelink Services">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="hdr_logo_img">Logo Image Asset Path</label>
+                  <div style="display:flex; gap:10px; align-items:center;">
+                    <div style="width:60px; height:40px; background:#F1F5F9; border:1px solid #E2E8F0; border-radius:6px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="hdr_logo_prev" src="/assets/baadam-logo.png" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </div>
+                    <input type="text" id="hdr_logo_img" class="form-control" value="assets/baadam-logo.png" style="flex:1;">
+                    <button type="button" class="btn btn-secondary" data-image-picker="hdr_logo_img" data-image-preview="hdr_logo_prev">Choose Asset</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Primary Navigation Links</h3>
+              <p class="card-subtitle">Labels and destinations for the main floating menu items</p>
+            </div>
+            <div class="card-body">
+              <div id="hdr_nav_links_container"></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Header Action Button (Let's Talk CTA)</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hdr_cta_label">Button Label</label>
+                  <input type="text" id="hdr_cta_label" class="form-control" placeholder="Let's Talk">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hdr_cta_url">Destination URL</label>
+                  <input type="text" id="hdr_cta_url" class="form-control" placeholder="contact.html">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Portfolio Mega-Menu Dropdown (3 Cards)</h3>
+              <p class="card-subtitle">The rich visual preview cards that open when hovering on "Portfolio"</p>
+            </div>
+            <div class="card-body">
+              <div id="hdr_portfolio_mega_container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 02: HERO SECTION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-hero">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>02. Hero Section (Interactive Spotlight Lens)</span>
+                <span id="badge-hero" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage top booking badge, spotlight headline, description, primary/secondary action buttons, orbit badges, and bottom metrics bar.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('hero')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('hero', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('hero', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Availability Status Capsule</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label" for="hero_kicker">Availability Status Pill Text</label>
+                <input type="text" id="hero_kicker" class="form-control" placeholder="Now booking Q4 · 3 spots left">
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Spotlight Headline &amp; Lead Text</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:14px;">
+                <label class="form-label" for="hero_title_main">Main Headline (First Line)</label>
+                <input type="text" id="hero_title_main" class="form-control" placeholder="Take Your Business To New Heights,">
+              </div>
+              <div class="form-group" style="margin-bottom:14px;">
+                <label class="form-label" for="hero_title_highlight">Highlighted Lime Pill Tag (Second Line)</label>
+                <input type="text" id="hero_title_highlight" class="form-control" placeholder="With Our Products & Services.">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="hero_description">Lead Paragraph Description</label>
+                <textarea id="hero_description" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Dual Action Buttons</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hero_cta_p_label">Primary Button Label (Dark Pill)</label>
+                  <input type="text" id="hero_cta_p_label" class="form-control" placeholder="Book a strategy call">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_cta_p_url">Primary Button URL</label>
+                  <input type="text" id="hero_cta_p_url" class="form-control" placeholder="contact.html">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_cta_s_label">Secondary Button Label (Glass Pill)</label>
+                  <input type="text" id="hero_cta_s_label" class="form-control" placeholder="See our work">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_cta_s_url">Secondary Button URL</label>
+                  <input type="text" id="hero_cta_s_url" class="form-control" placeholder="portfolio.html">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Orbit Floating Badges (Connected to Lens Perimeter)</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div class="form-group">
+                  <label class="form-label" for="hero_orbit_1">Left Badge (Heart)</label>
+                  <input type="text" id="hero_orbit_1" class="form-control" placeholder="1.2k likes on one post">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_orbit_2">Top-Right Badge (Star)</label>
+                  <input type="text" id="hero_orbit_2" class="form-control" placeholder="New 5-star review">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_orbit_3">Bottom-Right Badge (#1)</label>
+                  <input type="text" id="hero_orbit_3" class="form-control" placeholder="#1 &quot;dentist near me&quot;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Bottom Metrics &amp; Channels Strip</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hero_reach_number">Reach Stat Counter</label>
+                  <input type="text" id="hero_reach_number" class="form-control" placeholder="1,284,300">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_reach_label">Reach Kicker Label</label>
+                  <input type="text" id="hero_reach_label" class="form-control" placeholder="PEOPLE REACHED FOR CLIENTS THIS MONTH">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_reviews_score">Client Review Rating Score</label>
+                  <input type="text" id="hero_reviews_score" class="form-control" placeholder="4.9">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero_reviews_count">Reviews Count Statement</label>
+                  <input type="text" id="hero_reviews_count" class="form-control" placeholder="128 client reviews">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="hero_reviews_sub">Brands Grown Statement</label>
+                  <input type="text" id="hero_reviews_sub" class="form-control" placeholder="140+ brands grown">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 03: CLIENT RADAR SECTION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-radar">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>03. Client Radar Section</span>
+                <span id="badge-radar" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage radar editorial kicker, digital solutions headline, description, review pill, and central radar metrics.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('radar')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('radar', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('radar', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Editorial Headline &amp; Tagline</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:14px;">
+                <label class="form-label" for="radar_kicker">Section Kicker Badge</label>
+                <input type="text" id="radar_kicker" class="form-control" placeholder="OUR SERVICES">
+              </div>
+              <div class="form-grid" style="margin-bottom:14px;">
+                <div class="form-group">
+                  <label class="form-label" for="radar_head_1">Headline Line 1</label>
+                  <input type="text" id="radar_head_1" class="form-control" placeholder="Digital Solutions">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="radar_head_pill">Highlight Pill Tag</label>
+                  <input type="text" id="radar_head_pill" class="form-control" placeholder="For Your Business.">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="radar_desc">Supporting Subtext Description</label>
+                <textarea id="radar_desc" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Radar Visual &amp; Central Meta</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="radar_center_num">Radar Center Highlight Number</label>
+                  <input type="text" id="radar_center_num" class="form-control" placeholder="16+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="radar_center_lbl">Radar Center Highlight Label</label>
+                  <input type="text" id="radar_center_lbl" class="form-control" placeholder="Active Deliveries">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 04: CORE SERVICES SECTION (6 ACCORDION CARDS) -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-services">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>04. Core Services (6 Accordion Cards)</span>
+                <span id="badge-services" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage the 6 interactive accordion cards: titles, pitch descriptions, mockup queries, deliverables lists, starting prices, and performance metrics.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('services')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('services', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('services', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Services Section Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="srv_kicker">Kicker Capsule</label>
+                  <input type="text" id="srv_kicker" class="form-control" placeholder="(02) Services">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="srv_title_1">Title Line 1</label>
+                  <input type="text" id="srv_title_1" class="form-control" placeholder="Six core services.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="srv_title_hi">Title Highlight Tag</label>
+                  <input type="text" id="srv_title_hi" class="form-control" placeholder="One">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="srv_title_2">Title Line 2</label>
+                  <input type="text" id="srv_title_2" class="form-control" placeholder="elite partner.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="srv_subtext">Section Subtitle Paragraph</label>
+                  <textarea id="srv_subtext" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- All 6 Service Cards Container -->
+          <div style="margin-bottom:12px;">
+            <h3 style="font-size:16px; font-weight:800; color:#0F172A; margin:0 0 6px 0;">Service Accordion Cards (6 Items)</h3>
+            <p style="font-size:13px; color:#64748B; margin:0 0 16px 0;">Every card can be customized individually with its deliverables and pricing.</p>
+          </div>
+          <div id="services-cards-editor-container" style="margin-bottom:40px;"></div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 05: FEATURED WORK SECTION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-featured_work">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>05. Featured Work (Portfolio Showcase)</span>
+                <span id="badge-featured_work" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage featured portfolio header, subtitle, all-projects button, and showcased client project selection.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('featured_work')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('featured_work', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('featured_work', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Editorial Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="fw_kicker">Kicker Capsule</label>
+                  <input type="text" id="fw_kicker" class="form-control" placeholder="(03) Featured Work">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fw_title_1">Title Line 1</label>
+                  <input type="text" id="fw_title_1" class="form-control" placeholder="Crafted for Impact.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fw_title_hi">Title Highlight</label>
+                  <input type="text" id="fw_title_hi" class="form-control" placeholder="Engineered for Scale.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fw_cta_label">CTA Button Label</label>
+                  <input type="text" id="fw_cta_label" class="form-control" placeholder="All Projects">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="fw_subtext">Subtitle Description</label>
+                  <textarea id="fw_subtext" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="fw_cta_url">CTA Destination URL</label>
+                  <input type="text" id="fw_cta_url" class="form-control" placeholder="portfolio.html">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Selected Projects Showcase</h3>
+              <p class="card-subtitle">Projects featured on the homepage deck</p>
+            </div>
+            <div class="card-body">
+              <div id="featured_work_cards_container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 06: CASE STUDIES SECTION -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-case_studies">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>06. Case Studies (Results You Can Count)</span>
+                <span id="badge-case_studies" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage case studies editorial header, client tabs, before/after slider metrics, and case challenge/solution details.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('case_studies')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('case_studies', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('case_studies', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Editorial Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="cs_kicker">Kicker Capsule</label>
+                  <input type="text" id="cs_kicker" class="form-control" placeholder="(04) Case Studies">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cs_title_1">Main Title Line 1</label>
+                  <input type="text" id="cs_title_1" class="form-control" placeholder="Technology That Delivers.">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cs_title_hi">Title Red Glow Highlight</label>
+                  <input type="text" id="cs_title_hi" class="form-control" placeholder="Results That Matter.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="cs_subtext">Subtitle Description</label>
+                  <textarea id="cs_subtext" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:12px;">
+            <h3 style="font-size:16px; font-weight:800; color:#0F172A; margin:0 0 6px 0;">Case Study Items (3 Flagship Cases)</h3>
+            <p style="font-size:13px; color:#64748B; margin:0 0 16px 0;">Configure client name, challenge, solution, and impact metrics.</p>
+          </div>
+          <div id="case_studies_items_container" style="margin-bottom:40px;"></div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 07: HOW WE WORK (4-STAGE FUNNEL) -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-how_we_work">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>07. How We Work (4-Stage Funnel)</span>
+                <span id="badge-how_we_work" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage the 4 client conversion stages: Audit, Launch, Optimise, and Scale with timeline badges and statistics.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('how_we_work')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('how_we_work', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('how_we_work', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Editorial Header</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="hww_kicker">Kicker Capsule</label>
+                  <input type="text" id="hww_kicker" class="form-control" placeholder="(04) How we work">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hww_title_1">Title Line 1</label>
+                  <input type="text" id="hww_title_1" class="form-control" placeholder="From attention">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hww_title_hi">Highlight Mark</label>
+                  <input type="text" id="hww_title_hi" class="form-control" placeholder="clients.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="hww_subtext">Subtitle Description</label>
+                  <textarea id="hww_subtext" class="form-control" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom:12px;">
+            <h3 style="font-size:16px; font-weight:800; color:#0F172A; margin:0 0 6px 0;">4 Funnel Stages</h3>
+          </div>
+          <div id="how_we_work_stages_container" style="margin-bottom:40px;"></div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 08: NEXT STEPS / CTA -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-next_steps">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>08. Next Steps / Collaboration CTA Banner</span>
+                <span id="badge-next_steps" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage bottom collaboration card, headline, description, primary button, and direct engineering contact channels.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('next_steps')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('next_steps', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('next_steps', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Banner Configuration</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="ns_kicker">Kicker Capsule</label>
+                  <input type="text" id="ns_kicker" class="form-control" placeholder="(05) Next Steps">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ns_cta_label">Button Label</label>
+                  <input type="text" id="ns_cta_label" class="form-control" placeholder="Discuss Your Project">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="ns_heading">Headline</label>
+                  <input type="text" id="ns_heading" class="form-control" placeholder="Have a Technology Challenge?">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="ns_desc">Description Text</label>
+                  <textarea id="ns_desc" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ns_cta_url">Button Destination URL</label>
+                  <input type="text" id="ns_cta_url" class="form-control" placeholder="contact.html">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ns_phone">Contact Phone</label>
+                  <input type="text" id="ns_phone" class="form-control" placeholder="+91 94286 92198">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="ns_email">Contact Email</label>
+                  <input type="text" id="ns_email" class="form-control" placeholder="info@baadam.com">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 09: FOOTER & BRAND -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-footer">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>09. Canonical Footer &amp; Studio Info</span>
+                <span id="badge-footer" class="badge badge-published">Published</span>
+              </div>
+              <p class="section-editor-desc">Manage global footer brand description, studio headquarters address, direct contact email, operating hours, and social media channels.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="revertSection('footer')">Revert to Live</button>
+              <button type="button" class="btn btn-secondary" onclick="saveSection('footer', false)">Save Draft</button>
+              <button type="button" class="btn btn-primary" onclick="saveSection('footer', true)">Publish Section</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <h3 class="card-title">Brand Statement &amp; Headquarters</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group" style="margin-bottom:14px;">
+                <label class="form-label" for="ft_brand_desc">Brand Summary Description</label>
+                <textarea id="ft_brand_desc" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="ft_headquarters">Studio Headquarters Address</label>
+                  <input type="text" id="ft_headquarters" class="form-control" placeholder="Ahmedabad, Gujarat, India">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ft_email">Direct Email Address</label>
+                  <input type="text" id="ft_email" class="form-control" placeholder="info@baadam.com">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                  <label class="form-label" for="ft_hours">Operating Hours</label>
+                  <input type="text" id="ft_hours" class="form-control" placeholder="Mon – Sat: 9:30 AM – 6:30 PM">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:40px;">
+            <div class="card-header">
+              <h3 class="card-title">Social Media Profiles</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="ft_linkedin">LinkedIn Profile URL</label>
+                  <input type="text" id="ft_linkedin" class="form-control" placeholder="https://linkedin.com">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ft_instagram">Instagram Profile URL</label>
+                  <input type="text" id="ft_instagram" class="form-control" placeholder="https://instagram.com">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TAB 10: SECTIONS HUB OVERVIEW -->
+        <!-- ================================================================= -->
+        <div class="hp-tab-panel" id="panel-overview">
+          <div class="section-editor-header">
+            <div>
+              <div class="section-editor-title">
+                <span>Homepage Sections Hub Overview</span>
+              </div>
+              <p class="section-editor-desc">High-level navigation and fast section jumps for all 9 content blocks on the homepage.</p>
+            </div>
+            <div class="section-actions">
+              <button type="button" class="btn btn-secondary" onclick="openHomepagePreview()">Live Preview</button>
+              <button type="button" class="btn btn-primary" onclick="publishAllSections()">Publish All Sections</button>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin-bottom:40px;">
+            
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('header')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 01</span>
+                <span class="badge" id="hub-badge-header">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Header &amp; Navigation</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Logo, main navigation links, Let's Talk CTA button, and Portfolio mega-menu.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('hero')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 02</span>
+                <span class="badge" id="hub-badge-hero">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Hero Section</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Spotlight headline, lime tag, CTAs, floating orbit pills, and reach metrics.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('radar')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 03</span>
+                <span class="badge" id="hub-badge-radar">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Client Radar</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Editorial kicker, headline, description, review pill, and polar radar metrics.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('services')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 04</span>
+                <span class="badge" id="hub-badge-services">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Core Services (6 Cards)</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">All 6 interactive cards: pitch texts, mockup queries, deliverables, and prices.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('featured_work')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 05</span>
+                <span class="badge" id="hub-badge-featured_work">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Featured Work</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Flagship portfolio showcase deck, project highlights, tags, and detail links.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('case_studies')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 06</span>
+                <span class="badge" id="hub-badge-case_studies">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Case Studies</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Interactive before/after slider cards, challenge/solution statements, and ROI.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('how_we_work')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 07</span>
+                <span class="badge" id="hub-badge-how_we_work">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">How We Work (Funnel)</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">4-Stage Funnel: Audit, Launch, Optimise, Scale with metrics &amp; timeline.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('next_steps')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 08</span>
+                <span class="badge" id="hub-badge-next_steps">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Next Steps / CTA</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Bottom conversion card, engineering consultation headline, and contact details.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+            <div class="card" style="padding:20px; cursor:pointer;" onclick="switchSectionTab('footer')">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-weight:800; font-size:12px; color:#E7192D;">SECTION 09</span>
+                <span class="badge" id="hub-badge-footer">Published</span>
+              </div>
+              <h3 style="font-size:17px; font-weight:700; margin:0 0 6px 0; color:#0F172A;">Canonical Footer</h3>
+              <p style="font-size:13px; color:#64748B; margin:0 0 14px 0;">Studio brand statement, headquarters address, email, operating hours, social links.</p>
+              <span style="font-size:13px; font-weight:700; color:#E7192D;">Edit Section &rarr;</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/admin/admin-core.js"></script>
+  <script>
+    // State storage for all sections
+    let hpState = {
+      header: {},
+      hero: {},
+      radar: {},
+      services: {},
+      featured_work: {},
+      case_studies: {},
+      how_we_work: {},
+      next_steps: {},
+      footer: {}
+    };
+    let hpStatus = {};
+
+    // Initialize Layout
+    setupAdminLayout({
+      activeNav: 'homepage',
+      title: 'Homepage Management',
+      breadcrumbs: [
+        { label: 'Admin', url: '/admin/dashboard.html' },
+        { label: 'Pages & Portfolios' },
+        { label: 'Homepage Management', active: true }
+      ]
+    });
+
+    // Switch Tab
+    function switchSectionTab(tabKey) {
+      document.querySelectorAll('#homepage-tab-bar .hp-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabKey);
+      });
+      document.querySelectorAll('.hp-tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-${tabKey}`);
+      });
+      window.location.hash = tabKey;
+    }
+
+    // Helper for auth headers
+    function getAuthHeaders() {
+      const token = localStorage.getItem('admin_token');
+      return {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': 'Bearer ' + token } : {})
+      };
+    }
+
+    // Load full homepage data across all 9 sections
+    async function loadAllHomepageData() {
+      try {
+        const metaRes = await fetch(`/api/admin/homepage?t=${Date.now()}`, {
+          credentials: 'same-origin',
+          headers: getAuthHeaders(),
+          cache: 'no-store'
+        });
+        const meta = await metaRes.json();
+        hpStatus = meta.section_status || {};
+
+        // Fetch each section draft/published
+        const sections = ['header', 'hero', 'radar', 'services', 'featured_work', 'case_studies', 'how_we_work', 'next_steps', 'footer'];
+        
+        let hasAnyDraft = false;
+        await Promise.all(sections.map(async sec => {
+          try {
+            const secRes = await fetch(`/api/admin/homepage/${sec}?t=${Date.now()}`, {
+              credentials: 'same-origin',
+              headers: getAuthHeaders(),
+              cache: 'no-store'
+            });
+            const secData = await secRes.json();
+            hpState[sec] = secData.draft || secData.published || {};
+
+            const isDraft = secData.status === 'draft';
+            if (isDraft) hasAnyDraft = true;
+
+            // Update badge in section editor header
+            const badge = document.getElementById(`badge-${sec}`);
+            if (badge) {
+              badge.className = isDraft ? 'badge badge-draft' : 'badge badge-published';
+              badge.textContent = isDraft ? 'Draft Changes' : 'Published';
+            }
+            // Update tab dot
+            const tabDot = document.getElementById(`tab-status-${sec}`);
+            if (tabDot) {
+              tabDot.className = 'hp-tab-status' + (isDraft ? ' draft' : '');
+            }
+            // Update hub badge
+            const hubBadge = document.getElementById(`hub-badge-${sec}`);
+            if (hubBadge) {
+              hubBadge.className = isDraft ? 'badge badge-draft' : 'badge badge-published';
+              hubBadge.textContent = isDraft ? 'Draft' : 'Published';
+            }
+          } catch (e) {
+            console.error(`Error loading section ${sec}:`, e);
+          }
+        }));
+
+        // Global status badge
+        const globalBadge = document.getElementById('page-global-badge');
+        if (globalBadge) {
+          globalBadge.className = hasAnyDraft ? 'badge badge-draft' : 'badge badge-published';
+          globalBadge.textContent = hasAnyDraft ? 'Draft Changes Pending' : 'Published Live';
+        }
+
+        // Populate form fields
+        populateAllForms();
+      } catch (err) {
+        showToast('Error loading homepage data: ' + err.message, 'error');
+      }
+    }
+
+    // Populate all form controls from hpState
+    function populateAllForms() {
+      // 1. Header
+      const h = hpState.header || {};
+      if (document.getElementById('hdr_logo_text')) document.getElementById('hdr_logo_text').value = h.logo_text || 'BAADAM';
+      if (document.getElementById('hdr_logo_sub')) document.getElementById('hdr_logo_sub').value = h.logo_sub || 'Info and Tradelink Services';
+      if (document.getElementById('hdr_logo_img')) {
+        document.getElementById('hdr_logo_img').value = h.logo_img || 'assets/baadam-logo.png';
+        const prev = document.getElementById('hdr_logo_prev');
+        if (prev) prev.src = '/' + (h.logo_img || 'assets/baadam-logo.png').replace(/^\//, '');
+      }
+      if (document.getElementById('hdr_cta_label')) document.getElementById('hdr_cta_label').value = h.cta_button?.label || "Let's Talk";
+      if (document.getElementById('hdr_cta_url')) document.getElementById('hdr_cta_url').value = h.cta_button?.url || 'contact.html';
+      renderHeaderNavLinks(h.nav_links || []);
+      renderHeaderMegaMenu(h.portfolio_mega_menu || []);
+
+      // 2. Hero
+      const hero = hpState.hero || {};
+      if (document.getElementById('hero_kicker')) document.getElementById('hero_kicker').value = hero.kicker || 'Now booking Q4 · 3 spots left';
+      if (document.getElementById('hero_title_main')) document.getElementById('hero_title_main').value = hero.title_main || 'Take Your Business To New Heights,';
+      if (document.getElementById('hero_title_highlight')) document.getElementById('hero_title_highlight').value = hero.title_highlight || 'With Our Products & Services.';
+      if (document.getElementById('hero_description')) document.getElementById('hero_description').value = hero.description || '';
+      if (document.getElementById('hero_cta_p_label')) document.getElementById('hero_cta_p_label').value = hero.cta_primary?.label || 'Book a strategy call';
+      if (document.getElementById('hero_cta_p_url')) document.getElementById('hero_cta_p_url').value = hero.cta_primary?.url || 'contact.html';
+      if (document.getElementById('hero_cta_s_label')) document.getElementById('hero_cta_s_label').value = hero.cta_secondary?.label || 'See our work';
+      if (document.getElementById('hero_cta_s_url')) document.getElementById('hero_cta_s_url').value = hero.cta_secondary?.url || 'portfolio.html';
+      if (hero.orbit_badges) {
+        if (hero.orbit_badges[0] && document.getElementById('hero_orbit_1')) document.getElementById('hero_orbit_1').value = hero.orbit_badges[0].text || '';
+        if (hero.orbit_badges[1] && document.getElementById('hero_orbit_2')) document.getElementById('hero_orbit_2').value = hero.orbit_badges[1].text || '';
+        if (hero.orbit_badges[2] && document.getElementById('hero_orbit_3')) document.getElementById('hero_orbit_3').value = hero.orbit_badges[2].text || '';
+      }
+      if (hero.metrics_bar) {
+        if (document.getElementById('hero_reach_number')) document.getElementById('hero_reach_number').value = hero.metrics_bar.reach_number || '1,284,300';
+        if (document.getElementById('hero_reach_label')) document.getElementById('hero_reach_label').value = hero.metrics_bar.reach_label || 'PEOPLE REACHED FOR CLIENTS THIS MONTH';
+        if (document.getElementById('hero_reviews_score')) document.getElementById('hero_reviews_score').value = hero.metrics_bar.reviews_score || '4.9';
+        if (document.getElementById('hero_reviews_count')) document.getElementById('hero_reviews_count').value = hero.metrics_bar.reviews_count || '128 client reviews';
+        if (document.getElementById('hero_reviews_sub')) document.getElementById('hero_reviews_sub').value = hero.metrics_bar.reviews_subtext || '140+ brands grown';
+      }
+
+      // 3. Radar
+      const rad = hpState.radar || {};
+      if (document.getElementById('radar_kicker')) document.getElementById('radar_kicker').value = rad.kicker || 'OUR SERVICES';
+      if (document.getElementById('radar_head_1')) document.getElementById('radar_head_1').value = rad.heading_line1 || 'Digital Solutions';
+      if (document.getElementById('radar_head_pill')) document.getElementById('radar_head_pill').value = rad.heading_highlight || 'For Your Business.';
+      if (document.getElementById('radar_desc')) document.getElementById('radar_desc').value = rad.description || '';
+      if (document.getElementById('radar_center_num')) document.getElementById('radar_center_num').value = rad.center_number || '16+';
+      if (document.getElementById('radar_center_lbl')) document.getElementById('radar_center_lbl').value = rad.center_label || 'Active Deliveries';
+
+      // 4. Services
+      const srv = hpState.services || {};
+      if (document.getElementById('srv_kicker')) document.getElementById('srv_kicker').value = srv.kicker || '(02) Services';
+      if (document.getElementById('srv_title_1')) document.getElementById('srv_title_1').value = srv.title_line1 || 'Six core services.';
+      if (document.getElementById('srv_title_hi')) document.getElementById('srv_title_hi').value = srv.title_highlight || 'One';
+      if (document.getElementById('srv_title_2')) document.getElementById('srv_title_2').value = srv.title_line2 || 'elite partner.';
+      if (document.getElementById('srv_subtext')) document.getElementById('srv_subtext').value = srv.subtitle || '';
+      renderServicesCardsEditor(srv.items || []);
+
+      // 5. Featured Work
+      const fw = hpState.featured_work || {};
+      if (document.getElementById('fw_kicker')) document.getElementById('fw_kicker').value = fw.kicker || '(03) Featured Work';
+      if (document.getElementById('fw_title_1')) document.getElementById('fw_title_1').value = fw.title_line1 || 'Crafted for Impact.';
+      if (document.getElementById('fw_title_hi')) document.getElementById('fw_title_hi').value = fw.title_highlight || 'Engineered for Scale.';
+      if (document.getElementById('fw_subtext')) document.getElementById('fw_subtext').value = fw.subtitle || '';
+      if (document.getElementById('fw_cta_label')) document.getElementById('fw_cta_label').value = fw.cta_label || 'All Projects';
+      if (document.getElementById('fw_cta_url')) document.getElementById('fw_cta_url').value = fw.cta_url || 'portfolio.html';
+      renderFeaturedWorkCardsEditor();
+
+      // 6. Case Studies
+      const cs = hpState.case_studies || {};
+      if (document.getElementById('cs_kicker')) document.getElementById('cs_kicker').value = cs.kicker || '(04) Case Studies';
+      if (document.getElementById('cs_title_1')) document.getElementById('cs_title_1').value = cs.title_line1 || 'Technology That Delivers.';
+      if (document.getElementById('cs_title_hi')) document.getElementById('cs_title_hi').value = cs.title_highlight || 'Results That Matter.';
+      if (document.getElementById('cs_subtext')) document.getElementById('cs_subtext').value = cs.subtitle || '';
+      renderCaseStudiesEditor(cs.items || []);
+
+      // 7. How We Work
+      const hww = hpState.how_we_work || {};
+      if (document.getElementById('hww_kicker')) document.getElementById('hww_kicker').value = hww.kicker || '(04) How we work';
+      if (document.getElementById('hww_title_1')) document.getElementById('hww_title_1').value = hww.title_line1 || 'From attention';
+      if (document.getElementById('hww_title_hi')) document.getElementById('hww_title_hi').value = hww.title_highlight || 'clients.';
+      if (document.getElementById('hww_subtext')) document.getElementById('hww_subtext').value = hww.subtitle || '';
+      renderHowWeWorkStagesEditor(hww.steps || []);
+
+      // 8. Next Steps
+      const ns = hpState.next_steps || {};
+      if (document.getElementById('ns_kicker')) document.getElementById('ns_kicker').value = ns.kicker || '(05) Next Steps';
+      if (document.getElementById('ns_heading')) document.getElementById('ns_heading').value = ns.heading || 'Have a Technology Challenge?';
+      if (document.getElementById('ns_desc')) document.getElementById('ns_desc').value = ns.description || '';
+      if (document.getElementById('ns_cta_label')) document.getElementById('ns_cta_label').value = ns.cta_label || 'Discuss Your Project';
+      if (document.getElementById('ns_cta_url')) document.getElementById('ns_cta_url').value = ns.cta_url || 'contact.html';
+      if (document.getElementById('ns_phone')) document.getElementById('ns_phone').value = ns.phone || '+91 94286 92198';
+      if (document.getElementById('ns_email')) document.getElementById('ns_email').value = ns.email || 'info@baadam.com';
+
+      // 9. Footer
+      const ft = hpState.footer || {};
+      if (document.getElementById('ft_brand_desc')) document.getElementById('ft_brand_desc').value = ft.brand_desc || '';
+      if (document.getElementById('ft_headquarters')) document.getElementById('ft_headquarters').value = ft.headquarters || 'Ahmedabad, Gujarat, India';
+      if (document.getElementById('ft_email')) document.getElementById('ft_email').value = ft.email || 'info@baadam.com';
+      if (document.getElementById('ft_hours')) document.getElementById('ft_hours').value = ft.hours || 'Mon – Sat: 9:30 AM – 6:30 PM';
+      if (document.getElementById('ft_linkedin')) document.getElementById('ft_linkedin').value = ft.social_linkedin || 'https://linkedin.com';
+      if (document.getElementById('ft_instagram')) document.getElementById('ft_instagram').value = ft.social_instagram || 'https://instagram.com';
+
+      bindImagePickers();
+    }
+
+    // Render Header Nav Links
+    function renderHeaderNavLinks(links) {
+      const container = document.getElementById('hdr_nav_links_container');
+      if (!container) return;
+      const defaultLinks = [
+        { label: 'Home', url: 'index.html' },
+        { label: 'Services', url: 'services.html' },
+        { label: 'Portfolio', url: 'portfolio.html' },
+        { label: 'About Us', url: 'about.html' },
+        { label: 'Contact', url: 'contact.html' }
+      ];
+      const list = (links && links.length >= 5) ? links : defaultLinks;
+      container.innerHTML = list.map((l, idx) => `
+        <div style="display:flex; gap:12px; align-items:center; margin-bottom:10px;">
+          <span style="width:28px; font-weight:700; color:#E7192D; font-size:12px;">#${idx + 1}</span>
+          <input type="text" class="form-control form-control-sm hdr-nav-label" value="${l.label || ''}" placeholder="Label" style="flex:1;">
+          <input type="text" class="form-control form-control-sm hdr-nav-url" value="${l.url || ''}" placeholder="URL (e.g. index.html)" style="flex:1.5;">
+        </div>
+      `).join('');
+    }
+
+    // Render Header Mega Menu
+    function renderHeaderMegaMenu(cards) {
+      const container = document.getElementById('hdr_portfolio_mega_container');
+      if (!container) return;
+      const defaultCards = [
+        { title: 'Web & Websites', url: 'portfolio.html?filter=web', image: 'assets/mega-web-services.jpg' },
+        { title: 'Mobile Applications', url: 'portfolio.html?filter=mobile', image: 'assets/mega-mobile-apps.jpg' },
+        { title: 'Enterprise Software & ERP', url: 'portfolio.html?filter=enterprise', image: 'assets/mega-service-software.jpg' }
+      ];
+      const list = (cards && cards.length >= 3) ? cards : defaultCards;
+      container.innerHTML = list.map((c, idx) => `
+        <div class="admin-subcard">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; font-size:13px; color:#1E293B;">Mega Menu Card #${idx + 1}</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" style="font-size:11px;">Card Title</label>
+              <input type="text" class="form-control form-control-sm hdr-mega-title" value="${c.title || ''}">
+            </div>
+            <div class="form-group" style="margin:0;">
+              <label class="form-label" style="font-size:11px;">Filter URL</label>
+              <input type="text" class="form-control form-control-sm hdr-mega-url" value="${c.url || ''}">
+            </div>
+            <div class="form-group" style="grid-column:1/-1; margin:0;">
+              <label class="form-label" style="font-size:11px;">Preview Image Asset</label>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <img id="hdr_mega_prev_${idx}" src="/${(c.image || '').replace(/^\//, '')}" style="width:48px; height:32px; object-fit:cover; border-radius:4px; border:1px solid #CBD5E1;">
+                <input type="text" id="hdr_mega_img_${idx}" class="form-control form-control-sm hdr-mega-image" value="${c.image || ''}">
+                <button type="button" class="btn btn-sm btn-secondary" data-image-picker="hdr_mega_img_${idx}" data-image-preview="hdr_mega_prev_${idx}">Browse</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Services Cards Editor (6 cards)
+    function renderServicesCardsEditor(items) {
+      const container = document.getElementById('services-cards-editor-container');
+      if (!container) return;
+      if (!items || items.length === 0) return;
+
+      container.innerHTML = items.map((item, idx) => {
+        const feats = Array.isArray(item.features) ? item.features : [];
+        return `
+          <div class="admin-subcard" id="srv-card-${idx}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge" style="background:#E7192D; color:#FFFFFF; font-weight:800;">${item.num || ('0' + (idx + 1))}</span>
+                <span style="font-weight:800; font-size:15px; color:#0F172A;">${item.title || 'Service ' + (idx + 1)}</span>
+              </div>
+              <span class="badge badge-published">${item.tag || 'Active'}</span>
+            </div>
+
+            <div class="form-grid" style="margin-bottom:12px;">
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Service Title</label>
+                <input type="text" class="form-control srv-item-title" value="${item.title || ''}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Service Tag / Sublabel</label>
+                <input type="text" class="form-control srv-item-tag" value="${item.tag || ''}">
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label" style="font-size:11px;">Pitch Paragraph</label>
+                <textarea class="form-control srv-item-pitch" rows="3">${item.pitch || ''}</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Mockup Search Query Headline</label>
+                <input type="text" class="form-control srv-item-mockup" value="${item.mockup_query || ''}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Starting Price</label>
+                <input type="text" class="form-control srv-item-price" value="${item.starting_price || ''}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Performance Metric Value</label>
+                <input type="text" class="form-control srv-item-metric-val" value="${item.metric_value || ''}">
+              </div>
+              <div class="form-group">
+                <label class="form-label" style="font-size:11px;">Performance Metric Label</label>
+                <input type="text" class="form-control srv-item-metric-lbl" value="${item.metric_label || ''}">
+              </div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:12px;">
+              <div style="font-size:11px; font-weight:700; color:#475569; margin-bottom:8px;">DELIVERABLES &amp; CAPABILITIES (BULLETS)</div>
+              <div class="srv-deliverables-wrap" data-card-idx="${idx}">
+                <div class="deliverable-input-row"><input type="text" class="form-control form-control-sm srv-deliv-item" value="${feats[0] || ''}" placeholder="Deliverable 1"></div>
+                <div class="deliverable-input-row"><input type="text" class="form-control form-control-sm srv-deliv-item" value="${feats[1] || ''}" placeholder="Deliverable 2"></div>
+                <div class="deliverable-input-row"><input type="text" class="form-control form-control-sm srv-deliv-item" value="${feats[2] || ''}" placeholder="Deliverable 3"></div>
+                <div class="deliverable-input-row"><input type="text" class="form-control form-control-sm srv-deliv-item" value="${feats[3] || ''}" placeholder="Deliverable 4"></div>
+                <div class="deliverable-input-row"><input type="text" class="form-control form-control-sm srv-deliv-item" value="${feats[4] || ''}" placeholder="Deliverable 5"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Featured Work Cards
+    function renderFeaturedWorkCardsEditor() {
+      const container = document.getElementById('featured_work_cards_container');
+      if (!container) return;
+      const defaultShowcase = [
+        { num: '01', title: 'KP E-Services', cat: 'FinTech Platform', url: 'projects/kp-e-services/', desc: 'Comprehensive loan operations platform guiding applications from lead intake to disbursement.', tags: 'React.js, Node.js, Digital Wallets' },
+        { num: '02', title: 'Chick N Go', cat: 'Mobile & Web App', url: 'projects/chick-n-go/', desc: 'Multi-tenant online food ordering platform and kitchen dispatch admin.', tags: 'Flutter / PWA, React.js, Payment Gateway' },
+        { num: '03', title: 'Dodani ERP', cat: 'Enterprise ERP', url: 'projects/dodani-erp/', desc: 'Internal brokerage operations workspace orchestrating properties, offers, and escrow stages.', tags: 'Python / Django, PostgreSQL, AWS Vault' }
+      ];
+      container.innerHTML = defaultShowcase.map((p, idx) => `
+        <div class="admin-subcard">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; font-size:13px; color:#1E293B;">Showcase Project #${p.num}</span>
+            <span class="badge badge-published">${p.cat}</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Project Title</label>
+              <input type="text" class="form-control form-control-sm fw-card-title" value="${p.title}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Category Tag</label>
+              <input type="text" class="form-control form-control-sm fw-card-cat" value="${p.cat}">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" style="font-size:11px;">Card Description</label>
+              <textarea class="form-control form-control-sm fw-card-desc" rows="2">${p.desc}</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Tech Tags (Comma-separated)</label>
+              <input type="text" class="form-control form-control-sm fw-card-tags" value="${p.tags}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Project URL</label>
+              <input type="text" class="form-control form-control-sm fw-card-url" value="${p.url}">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Case Studies Items
+    function renderCaseStudiesEditor(items) {
+      const container = document.getElementById('case_studies_items_container');
+      if (!container) return;
+      if (!items || items.length === 0) return;
+
+      container.innerHTML = items.map((item, idx) => `
+        <div class="admin-subcard" id="cs-card-${idx}">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid #E2E8F0; padding-bottom:8px;">
+            <span style="font-weight:800; font-size:14px; color:#0F172A;">Case #${idx + 1}: ${item.client_name || ''}</span>
+            <span class="badge" style="background:#F1F5F9; color:#334155; font-weight:700;">${item.category || ''}</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Client Name / Tab</label>
+              <input type="text" class="form-control cs-item-client" value="${item.client_name || ''}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Category Tag</label>
+              <input type="text" class="form-control cs-item-cat" value="${item.category || ''}">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" style="font-size:11px;">Challenge Statement</label>
+              <textarea class="form-control cs-item-chal" rows="2">${item.challenge || ''}</textarea>
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" style="font-size:11px;">Solution Statement</label>
+              <textarea class="form-control cs-item-sol" rows="2">${item.solution || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Result Highlight Metric</label>
+              <input type="text" class="form-control cs-item-res" value="${item.result || ''}">
+            </div>
+            <div class="form-group">
+              <label class="form-label" style="font-size:11px;">Metric Badge Text</label>
+              <input type="text" class="form-control cs-item-badge" value="${item.metric_badge || ''}">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label" style="font-size:11px;">Case Media Asset</label>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <img id="cs_prev_${idx}" src="/${(item.image || '').replace(/^\//, '')}" style="width:60px; height:40px; object-fit:cover; border-radius:4px; border:1px solid #CBD5E1;">
+                <input type="text" id="cs_img_${idx}" class="form-control cs-item-img" value="${item.image || ''}">
+                <button type="button" class="btn btn-sm btn-secondary" data-image-picker="cs_img_${idx}" data-image-preview="cs_prev_${idx}">Browse</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      bindImagePickers();
+    }
+
+    // Render How We Work Stages
+    function renderHowWeWorkStagesEditor(stages) {
+      const container = document.getElementById('how_we_work_stages_container');
+      if (!container) return;
+      if (!stages || stages.length === 0) return;
+
+      container.innerHTML = stages.map((s, idx) => `
+        <div class="admin-subcard">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; font-size:13px; color:#1E293B;">Stage ${s.num || ('0' + (idx + 1))}: ${s.title || ''}</span>
+            <input type="text" class="form-control form-control-sm hww-stage-metric" value="${s.metric || ''}" style="width:200px; font-size:11px;" placeholder="Timeline (e.g. WEEK 1)">
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" style="font-size:11px;">Stage Title</label>
+            <input type="text" class="form-control hww-stage-title" value="${s.title || ''}">
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label class="form-label" style="font-size:11px;">Description</label>
+            <textarea class="form-control hww-stage-desc" rows="2">${s.desc || ''}</textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Gather section form data into hpState[sectionKey]
+    function gatherSectionData(secKey) {
+      if (secKey === 'header') {
+        const navLabels = document.querySelectorAll('.hdr-nav-label');
+        const navUrls = document.querySelectorAll('.hdr-nav-url');
+        const navLinks = [];
+        for (let i = 0; i < navLabels.length; i++) {
+          navLinks.push({
+            label: navLabels[i].value.trim(),
+            url: navUrls[i].value.trim()
+          });
+        }
+
+        const megaTitles = document.querySelectorAll('.hdr-mega-title');
+        const megaUrls = document.querySelectorAll('.hdr-mega-url');
+        const megaImgs = document.querySelectorAll('.hdr-mega-image');
+        const megaMenu = [];
+        for (let i = 0; i < megaTitles.length; i++) {
+          megaMenu.push({
+            title: megaTitles[i].value.trim(),
+            url: megaUrls[i].value.trim(),
+            image: megaImgs[i].value.trim()
+          });
+        }
+
+        hpState.header = {
+          logo_text: document.getElementById('hdr_logo_text').value.trim(),
+          logo_sub: document.getElementById('hdr_logo_sub').value.trim(),
+          logo_img: document.getElementById('hdr_logo_img').value.trim(),
+          nav_links: navLinks,
+          cta_button: {
+            label: document.getElementById('hdr_cta_label').value.trim(),
+            url: document.getElementById('hdr_cta_url').value.trim()
+          },
+          portfolio_mega_menu: megaMenu
+        };
+      } else if (secKey === 'hero') {
+        hpState.hero = {
+          kicker: document.getElementById('hero_kicker').value.trim(),
+          title_main: document.getElementById('hero_title_main').value.trim(),
+          title_highlight: document.getElementById('hero_title_highlight').value.trim(),
+          description: document.getElementById('hero_description').value.trim(),
+          cta_primary: {
+            label: document.getElementById('hero_cta_p_label').value.trim(),
+            url: document.getElementById('hero_cta_p_url').value.trim()
+          },
+          cta_secondary: {
+            label: document.getElementById('hero_cta_s_label').value.trim(),
+            url: document.getElementById('hero_cta_s_url').value.trim()
+          },
+          orbit_badges: [
+            { text: document.getElementById('hero_orbit_1').value.trim(), icon: 'heart' },
+            { text: document.getElementById('hero_orbit_2').value.trim(), icon: 'star' },
+            { text: document.getElementById('hero_orbit_3').value.trim(), icon: 'pin' }
+          ],
+          metrics_bar: {
+            reach_number: document.getElementById('hero_reach_number').value.trim(),
+            reach_label: document.getElementById('hero_reach_label').value.trim(),
+            channels: ["01 Website", "02 Apps", "03 Marketing", "04 E-Commerce"],
+            reviews_score: document.getElementById('hero_reviews_score').value.trim(),
+            reviews_count: document.getElementById('hero_reviews_count').value.trim(),
+            reviews_subtext: document.getElementById('hero_reviews_sub').value.trim()
+          }
+        };
+      } else if (secKey === 'radar') {
+        hpState.radar = {
+          kicker: document.getElementById('radar_kicker').value.trim(),
+          heading_line1: document.getElementById('radar_head_1').value.trim(),
+          heading_highlight: document.getElementById('radar_head_pill').value.trim(),
+          description: document.getElementById('radar_desc').value.trim(),
+          center_number: document.getElementById('radar_center_num').value.trim(),
+          center_label: document.getElementById('radar_center_lbl').value.trim()
+        };
+      } else if (secKey === 'services') {
+        const cardTitles = document.querySelectorAll('.srv-item-title');
+        const cardTags = document.querySelectorAll('.srv-item-tag');
+        const cardPitches = document.querySelectorAll('.srv-item-pitch');
+        const cardMockups = document.querySelectorAll('.srv-item-mockup');
+        const cardPrices = document.querySelectorAll('.srv-item-price');
+        const cardMetricVals = document.querySelectorAll('.srv-item-metric-val');
+        const cardMetricLbls = document.querySelectorAll('.srv-item-metric-lbl');
+
+        const items = [];
+        for (let i = 0; i < cardTitles.length; i++) {
+          const wrap = document.querySelector(`.srv-deliverables-wrap[data-card-idx="${i}"]`);
+          const feats = wrap ? Array.from(wrap.querySelectorAll('.srv-deliv-item')).map(inp => inp.value.trim()).filter(Boolean) : [];
+          items.push({
+            id: `serv-0${i + 1}`,
+            num: `0${i + 1}`,
+            title: cardTitles[i].value.trim(),
+            tag: cardTags[i].value.trim(),
+            pitch: cardPitches[i].value.trim(),
+            mockup_query: cardMockups[i].value.trim(),
+            features: feats,
+            starting_price: cardPrices[i].value.trim(),
+            metric_value: cardMetricVals[i].value.trim(),
+            metric_label: cardMetricLbls[i].value.trim()
+          });
+        }
+
+        hpState.services = {
+          kicker: document.getElementById('srv_kicker').value.trim(),
+          title_line1: document.getElementById('srv_title_1').value.trim(),
+          title_highlight: document.getElementById('srv_title_hi').value.trim(),
+          title_line2: document.getElementById('srv_title_2').value.trim(),
+          subtitle: document.getElementById('srv_subtext').value.trim(),
+          items
+        };
+      } else if (secKey === 'featured_work') {
+        hpState.featured_work = {
+          kicker: document.getElementById('fw_kicker').value.trim(),
+          title_line1: document.getElementById('fw_title_1').value.trim(),
+          title_highlight: document.getElementById('fw_title_hi').value.trim(),
+          subtitle: document.getElementById('fw_subtext').value.trim(),
+          cta_label: document.getElementById('fw_cta_label').value.trim(),
+          cta_url: document.getElementById('fw_cta_url').value.trim()
+        };
+      } else if (secKey === 'case_studies') {
+        const csClients = document.querySelectorAll('.cs-item-client');
+        const csCats = document.querySelectorAll('.cs-item-cat');
+        const csChals = document.querySelectorAll('.cs-item-chal');
+        const csSols = document.querySelectorAll('.cs-item-sol');
+        const csResults = document.querySelectorAll('.cs-item-res');
+        const csBadges = document.querySelectorAll('.cs-item-badge');
+        const csImgs = document.querySelectorAll('.cs-item-img');
+
+        const items = [];
+        for (let i = 0; i < csClients.length; i++) {
+          items.push({
+            id: `case-0${i + 1}`,
+            tab_name: csClients[i].value.trim(),
+            client_name: csClients[i].value.trim(),
+            category: csCats[i].value.trim(),
+            challenge: csChals[i].value.trim(),
+            solution: csSols[i].value.trim(),
+            result: csResults[i].value.trim(),
+            metric_badge: csBadges[i].value.trim(),
+            image: csImgs[i].value.trim()
+          });
+        }
+
+        hpState.case_studies = {
+          kicker: document.getElementById('cs_kicker').value.trim(),
+          title_line1: document.getElementById('cs_title_1').value.trim(),
+          title_highlight: document.getElementById('cs_title_hi').value.trim(),
+          subtitle: document.getElementById('cs_subtext').value.trim(),
+          items
+        };
+      } else if (secKey === 'how_we_work') {
+        const titles = document.querySelectorAll('.hww-stage-title');
+        const descs = document.querySelectorAll('.hww-stage-desc');
+        const metrics = document.querySelectorAll('.hww-stage-metric');
+        const steps = [];
+        for (let i = 0; i < titles.length; i++) {
+          steps.push({
+            num: `0${i + 1}`,
+            title: titles[i].value.trim(),
+            desc: descs[i].value.trim(),
+            metric: metrics[i].value.trim()
+          });
+        }
+
+        hpState.how_we_work = {
+          kicker: document.getElementById('hww_kicker').value.trim(),
+          title_line1: document.getElementById('hww_title_1').value.trim(),
+          title_highlight: document.getElementById('hww_title_hi').value.trim(),
+          subtitle: document.getElementById('hww_subtext').value.trim(),
+          steps
+        };
+      } else if (secKey === 'next_steps') {
+        hpState.next_steps = {
+          kicker: document.getElementById('ns_kicker').value.trim(),
+          heading: document.getElementById('ns_heading').value.trim(),
+          description: document.getElementById('ns_desc').value.trim(),
+          cta_label: document.getElementById('ns_cta_label').value.trim(),
+          cta_url: document.getElementById('ns_cta_url').value.trim(),
+          phone: document.getElementById('ns_phone').value.trim(),
+          email: document.getElementById('ns_email').value.trim()
+        };
+      } else if (secKey === 'footer') {
+        hpState.footer = {
+          brand_desc: document.getElementById('ft_brand_desc').value.trim(),
+          headquarters: document.getElementById('ft_headquarters').value.trim(),
+          email: document.getElementById('ft_email').value.trim(),
+          hours: document.getElementById('ft_hours').value.trim(),
+          social_linkedin: document.getElementById('ft_linkedin').value.trim(),
+          social_instagram: document.getElementById('ft_instagram').value.trim()
+        };
+      }
+    }
+
+    // Save Section (Draft or Publish)
+    async function saveSection(secKey, publish = false) {
+      gatherSectionData(secKey);
+      const payload = hpState[secKey];
+
+      try {
+        const res = await fetch(`/api/admin/homepage/${secKey}`, {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showToast(data.error || 'Failed to save section draft', 'error');
+          return;
+        }
+
+        if (publish) {
+          const pubRes = await fetch(`/api/admin/homepage/${secKey}/publish`, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: getAuthHeaders()
+          });
+          const pubData = await pubRes.json();
+          if (pubData.success) {
+            showToast(`🚀 Section "${secKey}" published live successfully!`);
+            await loadAllHomepageData();
+          } else {
+            showToast(pubData.error || 'Failed to publish section', 'error');
+          }
+        } else {
+          showToast(`Draft saved for section "${secKey}".`);
+          const badge = document.getElementById(`badge-${secKey}`);
+          if (badge) {
+            badge.className = 'badge badge-draft';
+            badge.textContent = 'Draft Changes';
+          }
+          const tabDot = document.getElementById(`tab-status-${secKey}`);
+          if (tabDot) tabDot.className = 'hp-tab-status draft';
+          const hubBadge = document.getElementById(`hub-badge-${secKey}`);
+          if (hubBadge) {
+            hubBadge.className = 'badge badge-draft';
+            hubBadge.textContent = 'Draft';
+          }
+        }
+      } catch (err) {
+        showToast('Error saving section: ' + err.message, 'error');
+      }
+    }
+
+    // Revert Section
+    async function revertSection(secKey) {
+      if (!confirm(`Revert unsaved draft changes for "${secKey}" back to live published content?`)) return;
+      try {
+        const res = await fetch(`/api/admin/homepage/${secKey}/revert`, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: getAuthHeaders()
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Reverted section "${secKey}" back to published.`);
+          await loadAllHomepageData();
+        } else {
+          showToast(data.error || 'Failed to revert', 'error');
+        }
+      } catch (err) {
+        showToast('Error reverting: ' + err.message, 'error');
+      }
+    }
+
+    // Publish All Sections
+    async function publishAllSections() {
+      // Gather all current form data
+      const sections = ['header', 'hero', 'radar', 'services', 'featured_work', 'case_studies', 'how_we_work', 'next_steps', 'footer'];
+      sections.forEach(s => gatherSectionData(s));
+
+      try {
+        // Save drafts first
+        await Promise.all(sections.map(s => fetch(`/api/admin/homepage/${s}`, {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(hpState[s])
+        })));
+
+        // Publish all
+        const res = await fetch('/api/admin/homepage/publish-all', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: getAuthHeaders()
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`🎉 All 9 homepage sections published live! (v${data.version})`);
+          await loadAllHomepageData();
+        } else {
+          showToast(data.error || 'Failed to publish all sections', 'error');
+        }
+      } catch (err) {
+        showToast('Error publishing all: ' + err.message, 'error');
+      }
+    }
+
+    // Open Live Preview
+    function openHomepagePreview() {
+      window.open('/?preview=draft', '_blank');
+    }
+
+    // Initialize Page
+    function initHomepageAdmin() {
+      if (window.location.hash) {
+        const h = window.location.hash.replace('#', '').replace(/-/g, '_');
+        const valid = ['header', 'hero', 'radar', 'services', 'featured_work', 'case_studies', 'how_we_work', 'next_steps', 'footer', 'overview'];
+        if (valid.includes(h)) {
+          switchSectionTab(h);
+        }
+      }
+      loadAllHomepageData();
+    }
+
+    window.addEventListener('hashchange', () => {
+      const h = window.location.hash.replace('#', '').replace(/-/g, '_');
+      if (['header', 'hero', 'radar', 'services', 'featured_work', 'case_studies', 'how_we_work', 'next_steps', 'footer', 'overview'].includes(h)) {
+        switchSectionTab(h);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initHomepageAdmin);
+  </script>
+</body>
+</html>
+
